@@ -36,10 +36,13 @@ This repository outlines my active skillset across pentesting, incident response
 - **Network Protocols**: FTP, TELNET, Kerberos, NTLM, OSPF, SIP
 - **Steganography**
 
-### 🧱 Active Directory (OSCP in Progress)
-- **Attacks**: NetNTLM Relay, AS-REP Roasting, LDAP Passback, PXE Boot Extraction
-- **Enumeration**: Kerberos/SMB/User Enumeration
-- **Post-Exploitation**: Credential Dumping, Lateral Movement, Remote Shells
+### 🔐 Active Directory Pentester (OSCP in Progress)
+- **Breaching AD**: NetNTLM Relay, AS-REP Roasting, LDAP Passback, PXE Boot Extraction
+- **Enumerating AD**: Kerberos/SMB/User Enumeration
+- **Lateral Movement and Pivoting**: Credential Dumping, Pass-the-Ticket
+- **Exploiting AD**: Kerberoasting, AS-REP Roasting
+- **Persisting AD**: Golden Ticket Persistence, Silver Ticket Persistence
+- **Credentials Harvesting**: Credential Dumping, Lateral Movement, Remote Shells
 
 ---
 
