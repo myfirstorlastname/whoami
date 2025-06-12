@@ -1,6 +1,6 @@
 # 🕶️ whoami
 
-> _Skills, tools, and traces of a ghost in the shell._
+> Anonymous operator with hands-on experience in cyber defense and attack.
 
 ---
 
@@ -15,49 +15,49 @@ This repository outlines my active skillset across pentesting, incident response
 ## ⚔️ Core Skill Domains
 
 ### 🕷️ Web Pentesting
-- **Tools**: Kali Linux, Burp Suite, Nmap, SQLmap, WireShark, Httpx, Subfinder, Shortscan, Nuclei, Waymore, Tlsx
-- **Techniques**: OWASP Top 10 (XSS, SSRF, SQLi, RCE, CSRF, IDOR, JWT bypass, WebSocket attacks, DOM-based, HTTP Request Smuggling, GraphQL attacks, etc.)
+- **Tools**: Kali Linux, Burp Suite, Nmap, SQLmap, Wireshark, Httpx, Subfinder, Shortscan, Nuclei, Waymore, Tlsx  
+- **Techniques**: OWASP Top 10 (XSS, SSRF, SQLi, RCE, CSRF, IDOR, JWT bypass, WebSocket attacks, DOM-based, HTTP Request Smuggling, GraphQL attacks, etc.)  
 - **Approach**: Recon > Discovery > Exploitation > Chaining > Reporting
 
 ### 🎯 SOC Analyst (N1/N2)
-- **Frameworks**: MITRE ATT&CK, D3FEND, Cyber Kill Chain
-- **CTI & Threat Hunting**: YARA, OpenCTI, MISP, Sigma, Aurora, Abuse.ch
-- **Network Monitoring**: Snort, Zeek, NetworkMiner, Brim, Wireshark
-- **Endpoints**: Wazuh, Sysmon, Windows Event Logs
-- **SIEMs**: Elastic, Kibana, Splunk, SOAR
-- **Forensics**: Volatility, Redline, KAPE, Velociraptor, Autopsy, TheHive
+- **Frameworks**: MITRE ATT&CK, D3FEND, Cyber Kill Chain  
+- **CTI & Threat Hunting**: YARA, OpenCTI, MISP, Sigma, Aurora, Abuse.ch  
+- **Network Monitoring**: Snort, Zeek, NetworkMiner, Brim, Wireshark  
+- **Endpoints**: Wazuh, Sysmon, Windows Event Logs  
+- **SIEMs**: Elastic, Kibana, Splunk, SOAR  
+- **Forensics**: Volatility, Redline, KAPE, Velociraptor, Autopsy, TheHive  
 - **Operations**: Incident Response, Malware Analysis, Phishing Response
 
 ### 💣 System & Script Pentesting
-- **System Exploits**: Buffer Overflows, Format String Bugs, Race Conditions
-- **Script Attacks**: Command Injection, Powershell Secure Strings, Jail Breakouts, Agent Hijacking
-- **Cracking**: Ghidra, Keygen techniques
-- **Crypto**: Hashing, AES, RSA, Encoding
-- **Network Protocols**: FTP, TELNET, Kerberos, NTLM, OSPF, SIP
+- **System Exploits**: Buffer Overflows, Format String Bugs, Race Conditions  
+- **Script Attacks**: Command Injection, Powershell Secure Strings, Jail Breakouts, Agent Hijacking  
+- **Cracking**: Ghidra, Keygen techniques  
+- **Crypto**: Hashing, AES, RSA, Encoding  
+- **Network Protocols**: FTP, TELNET, Kerberos, NTLM, OSPF, SIP  
 - **Steganography**
 
 ### 🔐 Active Directory Pentester (OSCP in Progress)
-- **Breaching AD**: NetNTLM Relay, AS-REP Roasting, LDAP Passback, PXE Boot Extraction
-- **Enumerating AD**: Kerberos/SMB/User Enumeration
-- **Lateral Movement and Pivoting**: Credential Dumping, Pass-the-Ticket
-- **Exploiting AD**: Kerberoasting, AS-REP Roasting
-- **Persisting AD**: Golden Ticket Persistence, Silver Ticket Persistence
+- **Breaching AD**: NetNTLM Relay, AS-REP Roasting, LDAP Passback, PXE Boot Extraction  
+- **Enumerating AD**: Kerberos/SMB/User Enumeration  
+- **Lateral Movement and Pivoting**: Credential Dumping, Pass-the-Ticket  
+- **Exploiting AD**: Kerberoasting, AS-REP Roasting  
+- **Persisting AD**: Golden Ticket Persistence, Silver Ticket Persistence  
 - **Credentials Harvesting**: Credential Dumping, Lateral Movement, Remote Shells
 
 ---
 
 ## 👨‍💻 Development Toolbox
 
-- **Languages**: Python, JavaScript, Java, C, PHP, SQL
-- **Web**: HTML, CSS, GraphQL, PostgreSQL
-- **Systems**: Linux, Windows
+- **Languages**: Python, JavaScript, Java, C, PHP, SQL  
+- **Web**: HTML, CSS, GraphQL, PostgreSQL  
+- **Systems**: Linux, Windows  
 - **Tools**: GitHub, Docker, Bash scripting
 
 ---
 
-## 📡 Veille Technologique
+## 📡 Technology Watch
 
-> _Where the ghost stays up to date._
+> Staying current in a fast-evolving landscape.
 
 #### 📺 YouTube Channels
 - `rs0n_live` – Vuln research, CTFs, and automation  
@@ -89,16 +89,28 @@ This repository outlines my active skillset across pentesting, incident response
 
 ---
 
-### 🎓 Formations & CTF Achievements
+## 🏆 CTF Rankings & Hands-On Achievements
 
-| Platform       | Since      | Specialty / Rank                            |
-|----------------|------------|--------------------------------------------|
-| **PortSwigger** | May 2024   | Web Pentesting Labs                        |
-| **WebHacking**  | Apr 2024   | Web Pentesting - Top 0.1% (Rank 85 / 66,000) |
-| **TryHackMe**   | Jan 2024   | SOC Analyst N1/N2 Training                  |
-| **RootMe**      | 2022       | Cybersecurity - Top 0.4% (Rank 1140 / 303,000) |
+> _Validated expertise through competitive platforms and real-world simulations._
 
-> _All platforms focused on practical, hands-on cybersecurity challenges and real-world scenarios._
+- 🥇 **WebHacking.kr** — **Top 0.1%** (Rank **85** out of 66,000)  
+  🔍 Focused on advanced web exploitation, logic-based puzzles  
+  🔗 [View Profile](https://example.com/webhacking)
+
+- 🥈 **RootMe** — **Top 0.4%** (Rank **1140** out of 303,000)  
+  💻 Covers full-spectrum cybersecurity: web, reverse, crypto, network  
+  🔗 [View Profile](https://example.com/rootme)
+
+- 🚀 **TryHackMe** — **Top 3%** of global users  
+  🛰️ Started with blue team training (SOC N1/N2), pivoted to red team labs on Active Directory attacks  
+  🎯 Approach: targeted upskilling over linear progression  
+  🔗 [View Profile](https://example.com/tryhackme)
+
+- 🧪 **PortSwigger Web Security Academy**  
+  🕷️ Progressing through expert-level labs | Practical web hacking  
+  🔗 [View Profile](https://example.com/portswigger)
+
+> _These rankings reflect skill, consistency, and hands-on commitment — not just badge collection._
 
 ---
 
@@ -109,6 +121,13 @@ This repository outlines my active skillset across pentesting, incident response
 - I automate first, ask questions later  
 - I value small tools that do one thing well  
 - My threat model includes the recruiter, the resume filter, and the APT  
+
+---
+
+## 🧾 Footnote
+
+> All data here is accurate — the identity is intentionally not.  
+> Contact available via issue or encrypted channel upon request.
 
 ---
 
