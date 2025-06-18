@@ -71,14 +71,15 @@
   </style>
 </head>
 <body>
-  <h1>🕶️ OSCP journey</h1>
+  <h1>🕶️ My OSCP Journey: From Curiosity to Offensive Security</h1>
   <blockquote>Anonymous cyber passionate on his journey to the OSCP</blockquote>
   <hr />
 
   <h2>🧠 About</h2>
   <p>I'm a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design.<br />
-  This article outlines my journey from Zero to OSCP.<br />
-  <strong>No certificate. Just tenacity.</strong></p>
+  Welcome!</br>
+    This page outlines my self-driven journey toward becoming an Offensive Security Certified Professional (OSCP). It showcases the progression of my technical skills—from entry-level hacking labs to Active Directory exploitation—designed for recruiters and cybersecurity professionals who want a clear picture of my dedication and capabilities.<br />
+  </p>
   <hr />
 
   <h2>🛰️ Philosophy</h2>
@@ -92,61 +93,58 @@
 
   <h2>Roadmap to OSCP</h2>
   <blockquote>From Zero to OSCP : What to do without prior experience ?</blockquote>
+  <h3>Getting Started: CTF Foundations (RootMe)</h3>
   <ul>
-    <li>To be honnest : I was not starting from Zero, I had some basic knowledge from engineering school and a first blue team experience as an intern.</li>
-    <li>But those experiences gave me no deep technical/theoretical understanding of the red team world.</li>
-    <li>I considered myself a true beginner.</li>
+    <li>In late 2022, I began exploring Capture the Flag (CTF) platforms with little prior knowledge. I chose RootMe.org as my primary training ground due to its wide range of challenges. Over several months:</li>
+    <ul>
+      <li>I built strong foundations in Linux, HTTP protocols, file permissions, and command-line exploitation.</li>
+      <li>I consistently avoided hints to push myself further and better simulate real-world problem solving.</li>
+      <li>Eventually, I ranked in the top 1% globally, a milestone that validated my early learning process.</li>
+    </ul>
   </ul>
-  <h3>The first step : CTFs</h3>
+  <h3>Specializing in Web Security</h3>
   <ul>
-    <li>My first real step into hacking was to give myself time : time to learn.</li>
-    <li>I first learned how much of a beginner I was : everything was new to me, I had some basic knowledge on a few things, but that's it.</li>
-    <li>How did I learn this lesson ? I challenged the CTFs on RootMe in no specific order.</li>
+    <li>Recognizing a strong interest in web vulnerabilities, I deepened my skills through multiple structured platforms:</li>
+    <ul>
+      <li>Webhacking.kr: I completed most challenges without walkthroughs, gaining exposure to XSS, SQLi, and logic flaws.</li>
+      <li>PortSwigger Web Security Academy: Completed over 75% of labs, covering advanced topics like server-side request forgery (SSRF), deserialization, and HTTP smuggling.</li>
+    </ul>
+    <li>This phase sharpened my understanding of real-world attack vectors and strengthened my debugging and automation skills.</li>
   </ul>
+  <h3>Bug Bounty Practice on HackerOne</h3>
   <ul>
-    <li>After some time, I sharpened my skills to find where the flags are hidden, but that's no hacking.</li>
-    <li>After one year I had some good rank on the RootMe website, so I decided to move on with something new.</li>
-    <li>During that year I realised that web was easier than systems and such, so I decided to specialize myself in web.</li>
+    <li>To apply my web skills in live environments, I began practicing on HackerOne’s public programs. Although I didn't secure financial rewards, the experience was valuable:</li>
+    <ul>
+      <li>I submitted multiple reports; several were valid but marked as duplicates.</li>
+      <li>I used tools like Burp Suite Pro, ffuf, and ParamSpider to identify potential issues.</li>
+      <li>The key takeaway: learning to identify subtle logic vulnerabilities and read between the lines of complex web apps.</li>
+    </ul>
+    <li>This hands-on exposure helped me better understand the bounty ecosystem and report-writing expectations.</li>
   </ul>
-  <h3>The second step : Specialization</h3>
+  <h3>Blue Team Insight: SOC Level Training</h3>
   <ul>
-    <li>This step was imposed to me as I couldn't solve any more CTFs on RootMe (too hard).</li>
-    <li>I searched on the internet a new CTF-like website specialized in web hacking for beginners, I found : webhacking.kr</li>
-    <li>There, I learned what is OWASP top 10. In two months I finished almost all the CTFs on this site, it was a real fast scale-up of my skills.</li>
+    <li>To round out my skill set, I explored the defensive side of cybersecurity:</li>
+    <ul>
+      <li>Enrolled in TryHackMe's “SOC Level 1” path and am progressing toward Level 2.</li>
+      <li>Learned to navigate SIEMs, analyze Windows Event Logs, and detect common attacks like brute force, malware execution, and privilege escalation.</li>
+      <li>Practiced correlating logs, creating alerts, and simulating investigations from start to finish.</li>
+    </ul>
+    <li>Understanding the defender’s perspective has significantly improved my ability to design realistic offensive strategies.</li>
   </ul>
+  <h3>Toward OSCP: Active Directory, Buffer Overflows & More</h3>
   <ul>
-    <li>Once done with webhacking.kr, and following jobs interviewers' advice (as I was refused to many pentest jobs), I started my real work on OWASP : PortSwigger</li>
-    <li>PortSwigger was developped by the OWASP Foundation, they also developped THE web tool : Burp Suite.</li>
-    <li>I spent months on these labs : XSS, SQLi, CSRF, HTTP Request Smuggling, to finally get an overall understanding of the background mechanisms on the web.</li>
-    <li>I got a good understanding of Client-side browsers, Server-side requests, Front-end/Back-end Servers, Web Application Firewalls, Databases.</li>
+    <li>In preparation for the OSCP, I shifted focus to realistic enterprise scenarios:</li>
+    <ul>
+      <li>Completed dozens of TryHackMe labs focusing on Active Directory (AD), Kerberoasting, AS-REP Roasting, and BloodHound enumeration.</li>
+      <li>Practiced buffer overflows, Windows privilege escalation, and pivoting techniques in lab environments.</li>
+      <li>Developed a methodical approach to enumeration, privesc, and post-exploitation reporting.</li>
+    </ul>
+    <li>I'm currently deepening my knowledge on pivoting through networks and custom payload creation, two key components of the OSCP exam.</li>
   </ul>
-  <h3>The third step : Real-world</h3>
+  <h3>What’s Next?</h3>
   <ul>
-    <li>This step was imposed to me as I still had no income, I chose to work as a freelance bug bounty hunter on HackerOne.</li>
-    <li>I found some small vulnerabilites that I reported with exploits, but these gave me no income as they were duplicates : $0.</li>
-    <li>The only way to get paid is to be on an old program already 99.9% secure, and still find the small vulnerability hidden. But honestly even if you find one, the small bounty isn't worse the time.</li>
-    <li>However I learnt some valuable skills : automation, R&D, how to use Burp Suite more efficiently...</li>
+    <li>I plan to take the OSCP exam in the coming months. My current focus: refining my workflow and improving time management during engagements.</li>
+    <li>My ultimate goal is to join a Red Team or penetration testing role where I can continue learning, breaking things, and contributing to real-world security improvements.</li>
   </ul>
-  <h3>The fourth step : Blue team</h3>
-  <ul>
-    <li>As I still had no income two years after my engineer graduation (and persistently applying for every red team opportunity), I decided to go back to blue team.</li>
-    <li>To have a chance in a SOC environment (after two years), I had to rebuild my blue team skillset from scratch without a proper env.</li>
-    <li>That's how I discovered TryHackMe labs. Their labs are great and really well documented. Lots of forums on THM labs.</li>
-    <li>I passed the SOC N1 cert delivered by THM, and began the N2 course.</li>
-    <li>With this SOC knowledge, I decided to apply to every blue team opportunity. (and still applied to red team)</li>
-  </ul>
-  <h3>The fifth step : OSCP ?</h3>
-  <ul>
-    <li>I already heard of the OSCP and other certs such as Burp Suite cert, but never asked myself : Why would I not attempt it ?</li>
-    <li>Often some interviewer gave me the advice to get the OSCP. During these times, I had really good technical knowledge on web (but I suppose there's always someone better for the job...)</li>
-    <li>Seeing my limitations : I had the skills, but still couldn't get a job ; I decided to invest time specifically for preparing the OSCP.</li>
-    <li>What is OSCP ?</li>
-    <li>It's a certification delivered by Offsec that says : This guy has basic professionnal red team skills.</li>
-    <li>It's focused on Active Directory (AD) and with some web hacking parts.</li>
-    <li>I was specialized in web hacking, but had no skills on AD, so I turned to TryHackme.</li>
-    <li>TryHackMe has some really good red team courses : I began immediatly with the AD labs.</li>
-    <li>I started with Attacktive Directory, then Breaching AD, Enumerating AD, ...</li>
-    <li>That's where I'm at today.</li>
-  </ul>
-  <h3>The last step : get the OSCP and a job !</h3>
+  
 </hr>
