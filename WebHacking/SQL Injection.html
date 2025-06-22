@@ -127,11 +127,9 @@
         <li>SELECT * FROM table_name WHERE EXISTS (SELECT column_name FROM table_name WHERE condition);</li>
       </ul>
       <p><strong>Corresponding application code:</strong></p>
-        <pre><code class="language-python">
-          user_id = input("Enter user ID: ")
-          query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"
-          cursor.execute(query)
-        </code></pre>
+        <pre><code class="language-python">user_id = input("Enter user ID: ")
+query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"
+cursor.execute(query)</code></pre>
         <blockquote>The injection occurs within the WHERE clause, due to unsanitized input concatenated directly into the SQL query.</blockquote>
         <li>The vulnerability is coming from the python application code and is executed afterwards in the SQL env.</li>
       </ul>
