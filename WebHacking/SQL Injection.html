@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SQL Injection</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f6f8fa;
+    }
+    /* Emoji style to align nicely */
+    .emoji {
+      font-size: 1.2em;
+      margin-right: 0.3em;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 SQL Injection : Course</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward BSCP (Burp Suite Certified Practitioner).</blockquote>
+  <hr>
 
+  <h2>🧠 About</h2>
+  <p>I'm a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design.<br />
+     BSCP (Burp Suite Certified Practitioner) is a hands-on certification by PortSwigger that validates expertise in web application security and offensive testing using Burp Suite.</br>
+     This page is a course I made for myself to further my own mastery over the basics of SQL Injection. It showcases the different types of SQL Injection. This page is designed for cybersecurity enthusiasts.<br />
+     <a href="https://portswigger.net/web-security/sql-injection" target="_blank" rel="noopener noreferrer">SQL injection</a> (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. This can allow an attacker to view data that they are not normally able to retrieve. This might include data that belongs to other users, or any other data that the application can access. In many cases, an attacker can modify or delete this data, causing persistent changes to the application's content or behavior.
+  </p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Slow and steady wins the prize."</blockquote>
+  <ul>
+    <li>I believe web-offensive security is not about being the smartest person in the room—it’s about practice, deep comprehension of infrastructures, and method. I treat working as a web bug bounty hunter as a craft: recon, exploit, report, repeat. My learning philosophy includes:
+      <ul>
+        <li>Try → Fail → Learn: I embrace discomfort as a sign of growth.</li>
+        <li>Consistency over bursts: A few focused hours every day beats weekend marathons.</li>
+        <li>Depth over tools: I master concepts, not just tools.</li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
+  <h2>🛢️ Roadmap to SQL server</h2>
+  <blockquote>From basic knowledge to SQL Injection mastery</blockquote>
+  <h3>🛠️ Structured Query Language (Previously named: Sequel)</h3>
+  <ul>
+    <li>SQL is THE database language, it's used absolutely everywhere.
+      <ul>
+        <li>SQL is a language used to communicate with a database server.</li>
+        <li>We can perform some requests : queries that ask the server to :
+          <ul>
+            <li>Retrieve a specific data in the database ;</li>
+            <li>Update a certain data ;</li>
+            <li>Delete a certain data ;</li>
+          </ul>
+        </li>
+        <li>We can do more complex queries, such as crossing data by joining different tables.</li>
+        <li>A database is the building, while the tables are the floors, each floor contains rooms: these rooms are the data.</li>
+        <li>The tables are structured by columns, each column represent a caracteristic of the data: its value, its length, type, use.</li>
+        <li>There are different types of databases :
+          <ul>
+            <li>Object relational database: PostgreSQL</li>
+            <li>Purely relational database: SQL</li>
+          </ul>
+        </li>
+        <li>But the SQL language doesn't change, only specific functions are different depending on the database: Oracle, MySQL, PostgreSQL, MongoDB.</li>
+      </ul>
+    </li>
+    <li>SQL is language, and here are some examples of queries we use often:
+      <ul>Where Clause
+        <li>SELECT column1, column2 FROM table_name WHERE condition;</li>
+        <li>SELECT * FROM table_name WHERE condition1 AND condition2;</li>
+        <li>SELECT * FROM table_name WHERE condition1 OR condition2;</li>
+        <li>SELECT * FROM table_name WHERE condition1 AND (condition2 OR condition3);</li>
+        <li>SELECT * FROM table_name WHERE EXISTS (SELECT column_name FROM table_name WHERE condition);</li>
+      </ul>
+      <ul>Real example
+        <li>user_id = input("Enter user ID: ")  # User types something</br>
+            query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"</br>
+            cursor.execute(query)</li>
+        <blockquote>It's in the WHERE Clause that the injection is happening</blockquote>
+        <li>The vulnerability is coming from the python application code and is executed afterwards in the SQL env.</li>
+      </ul>
+    </li>
+    <li><a href="https://fr.wikipedia.org/wiki/Structured_Query_Language" target="_blank" rel="noopener noreferrer">Structured Query Language</a>fait partie de la même famille que les langages ALPHA (dont il est le descendant), SQUARE, QUEL (intégré à Ingres) ou QBE (Zloof). Il a été appelé SEQUEL à sa naissance, mais ce nom a été changé en SQL parce que SEQUEL était une marque déposée de l'avionneur Hawker-Siddeley.</li>
+  </ul>
+  <hr>
+  <h3>💉 SQL Injection</h3>
+  <h4>Detection</h4>
+  To detect the vulnerability, one has to trigger and check for error messages coming from the SQL server.
+  To do so, an ethical hacker can inject a single quote (apostrophe) to check wether the code application is correctly written.
+  <h4>Exploitation</h4>
+  <ul>
+    <li><a href="https://portswigger.net/web-security/sql-injection" target="_blank" rel="noopener noreferrer">SQL injection</a> (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. This can allow an attacker to view data that they are not normally able to retrieve. This might include data that belongs to other users, or any other data that the application can access. In many cases, an attacker can modify or delete this data, causing persistent changes to the application's content or behavior.</li>
+    <li>I practiced and understood key concepts of SQL Injection by challenging PortSwigger labs.</li>
+    <li>To exploit such a vulnerability, one needs to inject an apostrophe in the user input field.</li>
+    <li>The apostrophe will close the query input field, here's an example:
+      <ul>
+        <li>Here's the application code : </br>
+            query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"
+        </li>
+        <li>Here's what the code becomes with an expected user input such as 42 :</br>
+            query = "SELECT username, password FROM users WHERE id = '42'"
+        </li>
+        <li>Here's what the code becomes with a malicious injection such as <strong>42'; DROP TABLE users; --</strong></br>
+            query = "SELECT username, password FROM users WHERE id = '42'; DROP TABLE users; --'"</br>
+            This changes the one query into two queries :</br>
+              - The first remains the same ;</br>
+              - The second is malicious as it <strong>deletes the entire users table.</strong></br>
+            The ending -- will tell the database to ignore what comes after.
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
+  <h3>💉💥 Types of SQL Injection</h3>
+  <blockquote>This section is a raw list of PortSwigger labs.</blockquote>
+  <ul>
+    <li>SQL injection vulnerability in WHERE clause allowing retrieval of hidden data</li>
+    <li>SQL injection vulnerability allowing login bypass</li>
+    <li>SQL injection attack, querying the database type and version on Oracle</li>
+    <li>SQL injection attack, querying the database type and version on MySQL and Microsoft</li>
+    <li>SQL injection attack, listing the database contents on non-Oracle databases</li>
+    <li>SQL injection attack, listing the database contents on Oracle</li>
+    <li>SQL injection UNION attack, determining the number of columns returned by the query</li>
+    <li>SQL injection UNION attack, finding a column containing text</li>
+    <li>SQL injection UNION attack, retrieving data from other tables</li>
+    <li>SQL injection UNION attack, retrieving multiple values in a single column</li>
+    <li>Blind SQL injection with conditional responses</li>
+    <li>Blind SQL injection with conditional errors</li>
+    <li>Visible error-based SQL injection</li>
+    <li>Blind SQL injection with time delays</li>
+    <li>Blind SQL injection with time delays and information retrieval</li>
+    <li>Blind SQL injection with out-of-band interaction</li>
+    <li>Blind SQL injection with out-of-band data exfiltration</li>
+    <li>SQL injection with filter bypass via XML encoding</li>
+  </ul>
+  <hr>
+  <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
