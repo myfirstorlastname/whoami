@@ -78,7 +78,7 @@
   <h2>🧠 About</h2>
   <p>I'm a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design.<br />
      BSCP (Burp Suite Certified Practitioner) is a hands-on certification by PortSwigger that validates expertise in web application security and offensive testing using Burp Suite.<br />
-     This page is a course I made for myself to further my own mastery over the basics of SQL Injection. It showcases the different types of SQL Injection. This page is designed for cybersecurity enthusiasts.<br />
+     This page documents a course I created for self-study to further my own mastery over the basics of SQL Injection. It showcases the different types of SQL Injection. This page is designed for cybersecurity enthusiasts.<br />
      <a href="https://portswigger.net/web-security/sql-injection" target="_blank" rel="noopener noreferrer">SQL injection</a> (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. This can allow an attacker to view data that they are not normally able to retrieve. This might include data that belongs to other users, or any other data that the application can access. In many cases, an attacker can modify or delete this data, causing persistent changes to the application's content or behavior.
   </p>
   <hr>
@@ -98,8 +98,9 @@
   <h2>🛢️ Roadmap to SQL server</h2>
   <blockquote>From basic knowledge to SQL Injection mastery</blockquote>
   <h3>🛠️ Structured Query Language (Previously named: Sequel)</h3>
+  <p>SQL is the foundational language used to manage and interact with relational databases. Its widespread adoption makes it a critical component of most modern applications.</p>
   <ul>
-    <li>SQL is THE database language, it's used absolutely everywhere.
+    <li>
       <ul>
         <li>SQL is a language used to communicate with a database server.</li>
         <li>We can perform some requests : queries that ask the server to :
@@ -111,14 +112,9 @@
         </li>
         <li>We can do more complex queries, such as crossing data by joining different tables.</li>
         <li>A database is the building, while the tables are the floors, each floor contains rooms: these rooms are the data.</li>
-        <li>The tables are structured by columns, each column represent a caracteristic of the data: its value, its length, type, use.</li>
-        <li>There are different types of databases :
-          <ul>
-            <li>Object relational database: PostgreSQL</li>
-            <li>Purely relational database: SQL</li>
-          </ul>
-        </li>
-        <li>But the SQL language doesn't change, only specific functions are different depending on the database: Oracle, MySQL, PostgreSQL, MongoDB.</li>
+        <li>The tables are structured by columns, each column represents a characteristic of the data: its value, its length, type, use.</li>
+        <li>Examples of relational database systems include PostgreSQL, MySQL, and Oracle. Some databases like PostgreSQL support object-relational features.</li>
+        <li>But the SQL language doesn't change, only specific functions are different depending on the database: Oracle, MySQL, PostgreSQL.</li>
       </ul>
     </li>
     <li>Here are some common queries:
@@ -131,11 +127,12 @@
         <li>SELECT * FROM table_name WHERE EXISTS (SELECT column_name FROM table_name WHERE condition);</li>
       </ul>
       <p><strong>Corresponding application code:</strong></p>
-      <ul>
-        <li>user_id = input("Enter user ID: ")  # User types something<br />
-            query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"<br />
-            cursor.execute(query)</li>
-        <blockquote>It's in the WHERE Clause that the injection is happening</blockquote>
+        <pre><code class="language-python">
+          user_id = input("Enter user ID: ")  # User types something
+          query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"
+          cursor.execute(query)
+        </code></pre>
+        <blockquote>The injection occurs within the WHERE clause, due to unsanitized input concatenated directly into the SQL query.</blockquote>
         <li>The vulnerability is coming from the python application code and is executed afterwards in the SQL env.</li>
       </ul>
     </li>
@@ -156,10 +153,10 @@
         <li>Here's the application code : <br />
             query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"
         </li>
-        <li>Here's what the code becomes with an expected user input such as 42 :<br />
+        <li>When an expected user input (such as 42) is submitted, the query becomes :<br />
             query = "SELECT username, password FROM users WHERE id = '42'"
         </li>
-        <li>Here's what the code becomes with a malicious injection such as <strong>42'; DROP TABLE users; --</strong><br />
+        <li>When a malicious input (such as <strong>42'; DROP TABLE users; --</strong>) is used, the query becomes: <br />
             query = "SELECT username, password FROM users WHERE id = '42'; DROP TABLE users; --'"<br />
             This changes the one query into two queries :<br />
               - The first remains the same ;<br />
