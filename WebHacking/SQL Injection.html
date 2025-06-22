@@ -121,7 +121,7 @@
         <li>But the SQL language doesn't change, only specific functions are different depending on the database: Oracle, MySQL, PostgreSQL, MongoDB.</li>
       </ul>
     </li>
-    <li>Here are some examples of queries we use often:
+    <li>Here are some common queries:
       <ul>Where Clause
         <li>SELECT column1, column2 FROM table_name WHERE condition;</li>
         <li>SELECT * FROM table_name WHERE condition1 AND condition2;</li>
@@ -129,7 +129,7 @@
         <li>SELECT * FROM table_name WHERE condition1 AND (condition2 OR condition3);</li>
         <li>SELECT * FROM table_name WHERE EXISTS (SELECT column_name FROM table_name WHERE condition);</li>
       </ul>
-      <ul>Real example
+      <ul>Corresponding application code
         <li>user_id = input("Enter user ID: ")  # User types something</br>
             query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"</br>
             cursor.execute(query)</li>
