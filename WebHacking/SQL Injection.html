@@ -77,7 +77,7 @@
 
   <h2>🧠 About</h2>
   <p>I'm a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design.<br />
-     BSCP (Burp Suite Certified Practitioner) is a hands-on certification by PortSwigger that validates expertise in web application security and offensive testing using Burp Suite.</br>
+     BSCP (Burp Suite Certified Practitioner) is a hands-on certification by PortSwigger that validates expertise in web application security and offensive testing using Burp Suite.<br />
      This page is a course I made for myself to further my own mastery over the basics of SQL Injection. It showcases the different types of SQL Injection. This page is designed for cybersecurity enthusiasts.<br />
      <a href="https://portswigger.net/web-security/sql-injection" target="_blank" rel="noopener noreferrer">SQL injection</a> (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. This can allow an attacker to view data that they are not normally able to retrieve. This might include data that belongs to other users, or any other data that the application can access. In many cases, an attacker can modify or delete this data, causing persistent changes to the application's content or behavior.
   </p>
@@ -122,16 +122,18 @@
       </ul>
     </li>
     <li>Here are some common queries:
-      <ul>Where Clause
+      <p><strong>Where Clause:</strong></p>
+      <ul>
         <li>SELECT column1, column2 FROM table_name WHERE condition;</li>
         <li>SELECT * FROM table_name WHERE condition1 AND condition2;</li>
         <li>SELECT * FROM table_name WHERE condition1 OR condition2;</li>
         <li>SELECT * FROM table_name WHERE condition1 AND (condition2 OR condition3);</li>
         <li>SELECT * FROM table_name WHERE EXISTS (SELECT column_name FROM table_name WHERE condition);</li>
       </ul>
-      <ul>Corresponding application code
-        <li>user_id = input("Enter user ID: ")  # User types something</br>
-            query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"</br>
+      <p><strong>Corresponding application code:</strong></p>
+      <ul>
+        <li>user_id = input("Enter user ID: ")  # User types something<br />
+            query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"<br />
             cursor.execute(query)</li>
         <blockquote>It's in the WHERE Clause that the injection is happening</blockquote>
         <li>The vulnerability is coming from the python application code and is executed afterwards in the SQL env.</li>
@@ -151,17 +153,17 @@
     <li>To exploit such a vulnerability, one needs to inject an apostrophe in the user input field.</li>
     <li>The apostrophe will close the query input field, here's an example:
       <ul>
-        <li>Here's the application code : </br>
+        <li>Here's the application code : <br />
             query = "SELECT username, password FROM users WHERE id = '" + user_id + "'"
         </li>
-        <li>Here's what the code becomes with an expected user input such as 42 :</br>
+        <li>Here's what the code becomes with an expected user input such as 42 :<br />
             query = "SELECT username, password FROM users WHERE id = '42'"
         </li>
-        <li>Here's what the code becomes with a malicious injection such as <strong>42'; DROP TABLE users; --</strong></br>
-            query = "SELECT username, password FROM users WHERE id = '42'; DROP TABLE users; --'"</br>
-            This changes the one query into two queries :</br>
-              - The first remains the same ;</br>
-              - The second is malicious as it <strong>deletes the entire users table.</strong></br>
+        <li>Here's what the code becomes with a malicious injection such as <strong>42'; DROP TABLE users; --</strong><br />
+            query = "SELECT username, password FROM users WHERE id = '42'; DROP TABLE users; --'"<br />
+            This changes the one query into two queries :<br />
+              - The first remains the same ;<br />
+              - The second is malicious as it <strong>deletes the entire users table.</strong><br />
             The ending -- will tell the database to ignore what comes after.
         </li>
       </ul>
