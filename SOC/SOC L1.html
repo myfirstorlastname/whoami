@@ -85,7 +85,7 @@
   <h2>🛰️ Philosophy</h2>
   <blockquote>"Slow and steady wins the prize."</blockquote>
   <ul>
-    <li>I believe offensive security is not about being the smartest person in the room—it’s about practice, deep comprehension of infrastructures, and method. I treat working as an AD Pentester as a craft: Initial Access, Enumeration, Adaptability, Repeat. My learning philosophy includes:
+    <li>I believe defensive security is not about being the smartest person in the room—it’s about reactivity, foresight, and method. I treat working in a SOC as a craft: search, reflect, repeat. My learning philosophy includes:
       <ul>
         <li>Try → Fail → Learn: I embrace discomfort as a sign of growth.</li>
         <li>Consistency over bursts: A few focused hours every day beats weekend marathons.</li>
@@ -94,37 +94,116 @@
     </li>
   </ul>
   <hr>
-  <h2>🛠️ Roadmap to basic Pentest tools</h2>
-  <blockquote>From basic knowledge to Meterpreter</blockquote>
-  <h3>Active Directory</h3>
-  <p>Windows is the most common used OS in the world, it's also the OS mostly used in Active Directories.</p>
-  <p>90% of entreprises have an Active Directory, it's almost as widespread as websites.</p>
-  <p>Those two subjects represent almost 100% of pentesters' missions.</p>
-  <p>I began my journey into offensive cybersecurity with a fundamental question: How can I transition into a professional offensive security role?</p>
+  <h2>🛠️ Roadmap to basic SOC Analysis</h2>
+  <blockquote>From basic knowledge to SOC L1</blockquote>
+  <h3>What is a SOC L1 role ?</h3>
+  <p>In the Junior Security Analyst role, you will be a Triage Specialist. You will spend a significant portion of your time triaging or monitoring the event logs and alerts.</p>
+  <p>The responsibilities of a Junior Security Analyst or Tier 1 SOC Analyst include the following:</p>
   <ul>
-    <li>The answer is to gain experience on these two subjects.</li>
-    <li>At this time period, I already mastered web-offensive security basics.</li>
-    <li>My last step towards OSCP is Active Directory offensive security.</li>
+    <li>Monitor and investigate alerts (most of the time, it's a 24x7 SOC operations environment)</li>
+    <li>Configure and manage security tools</li>
+    <li>Develop and implement IDS signatures</li>
+    <li>Escalate the security incidents to the Tier 2 and Team Lead if needed</li>
   </ul>
-  <p>A directory is a hierarchical structure that stores information about objects on a network. A directory service, such as <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview" target="_blank" rel="noopener noreferrer">Active Directory Domain Services (AD DS)</a>, provides the methods for storing directory data and making this data available to network users and administrators. For example, AD DS stores information about user accounts, such as names, passwords, phone numbers, and so on. AD DS also provides a way for authorized users on the same network to access this information.</p>
   <hr>
-  <h3><a href="https://tryhackme.com/module/hacking-windows-1" target="_blank" rel="noopener noreferrer">Windows Exploitation Basics (55% completion)</a></h3>
-  <p>Hacking Windows is often daunting. Grasp the fundamentals of core Windows concepts and Active Directory vulnerabilities.</p>
-  <p>Windows is the most popular operating system, used by both individuals and within corporate environments. Windows systems are often linked together to create networks, which are used in most enterprises around the world. This module will explore everything from getting started with using Windows, to attacking common flaws that are found in common Windows systems.</p>
-  <h4><a href="https://tryhackme.com/room/windowsfundamentals1xbx" target="_blank" rel="noopener noreferrer">Windows Fundamentals 1 (100% completion)</a></h4>
-  <p>In part 1 of the Windows Fundamentals module, we'll start our journey learning about the Windows desktop, the NTFS file system, UAC, the Control Panel, and more.</p>
-  <h4><a href="https://tryhackme.com/room/windowsfundamentals2x0x" target="_blank" rel="noopener noreferrer">Windows Fundamentals 2 (100% completion)</a></h4>
-  <p>In part 2 of the Windows Fundamentals module, discover more about System Configuration, UAC Settings, Resource Monitoring, the Windows Registry and more.</p>
-  <h4><a href="https://tryhackme.com/room/winadbasics" target="_blank" rel="noopener noreferrer">Active Directory Basics (100% completion)</a></h4>
-  <p>Microsoft's Active Directory is the backbone of the corporate world. It simplifies the management of devices and users within a corporate environment. In this room, we'll take a deep dive into the essential components of Active Directory.</p>
-  <h4><a href="https://tryhackme.com/room/metasploitintro" target="_blank" rel="noopener noreferrer">Metasploit: Introduction (100% completion)</a></h4>
-  <p>Metasploit is the most widely used exploitation framework. Metasploit is a powerful tool that can support all phases of a penetration testing engagement, from information gathering to post-exploitation.</p>
-  <h4><a href="https://tryhackme.com/room/metasploitexploitation" target="_blank" rel="noopener noreferrer">Metasploit: Exploitation (0% completion)</a></h4>
-  <p>In this room, we will learn how to use Metasploit for vulnerability scanning and exploitation. We will also cover how the database feature makes it easier to manage penetration testing engagements with a broader scope. Finally, we will look at generating payloads with msfvenom and how to start a Meterpreter session on most target platforms.</p>
-  <h4><a href="https://tryhackme.com/room/meterpreter" target="_blank" rel="noopener noreferrer">Metasploit: Meterpreter (0% completion)</a></h4>
-  <p>Meterpreter is a Metasploit payload that supports the penetration testing process with many valuable components. Meterpreter will run on the target system and act as an agent within a command and control architecture. You will interact with the target operating system and files and use Meterpreter's specialized commands.</p>
-  <h4><a href="https://tryhackme.com/room/blue" target="_blank" rel="noopener noreferrer">Blue (0% completion)</a></h4>
-  <p>Deploy & hack into a Windows machine, leveraging common misconfigurations issues.</p>
+  <h3><a href="https://tryhackme.com/path/outline/soclevel1" target="_blank" rel="noopener noreferrer">SOC L1 (100% completion)</a></h3>
+  <p>The core function of a SOC (Security Operations Center) is to investigate, monitor, prevent, and respond to threats in the cyber realm 24/7 or around the clock. Per McAfee's definition of a SOC,  "Security operations teams are charged with monitoring and protecting many assets, such as intellectual property, personnel data, business systems, and brand integrity. As the implementation component of an organisation's overall cyber security framework, security operations teams act as the central point of collaboration in coordinated efforts to monitor, assess, and defend against cyberattacks". The number of people working in the SOC can vary depending on the organisation's size. </p>
+  <h4>Cyber Defence Frameworks</h4>
+  <ul>
+    <li>Junior Security Analyst Intro</li>
+    <li>Pyramid of Pain</li>
+    <li>Cyber Kill Chain</li>
+    <li>Unified Kill Chain</li>
+    <li>Diamond Model</li>
+    <li>Mitre</li>
+    <li>Summit</li>
+    <li>Eviction</li>
+  </ul>
+  <h4>Cyber Threat Intelligence</h4>
+  <ul>
+    <li>Intro to Cyber Threat Intel</li>
+    <li>Threat Intelligence Tools</li>
+    <li>Yara</li>
+    <li>OpenCTI</li>
+    <li>MISP</li>
+    <li>Friday Overtime</li>
+    <li>Trooper</li>
+  </ul>
+  <h4>Network Security and Traffic Analysis</h4>
+  <ul>
+    <li>Traffic Analysis Essentials</li>
+    <li>Snort</li>
+    <li>Snort Challenge - The Basics</li>
+    <li>Snort Challenge - Live Attacks</li>
+    <li>NetworkMiner</li>
+    <li>Zeek</li>
+    <li>Zeek Exercices</li>
+    <li>Brim</li>
+    <li>Wireshark: The Basics</li>
+    <li>Wireshark: Packet Operations</li>
+    <li>Wireshark: Traffic Analysis</li>
+    <li>TShark: The Basics</li>
+    <li>TShark: CLI Wireshark Features</li>
+    <li>TShark Challenge I: Teamwork</li>
+    <li>TShark Challenge II: Directory</li>
+  </ul>
+  <h4>Endpoint Security Monitoring</h4>
+  <ul>
+    <li>Intro to Endpoint Security</li>
+    <li>Core Windows Processes</li>
+    <li>Sysinternals</li>
+    <li>Windows Event Logs</li>
+    <li>Sysmon</li>
+    <li>Osquery: The Basics</li>
+    <li>Wazuh</li>
+    <li>Monday Monitor</li>
+    <li>Retracted</li>
+  </ul>
+  <h4>Security Information and Event Management</h4>
+  <ul>
+    <li>Introduction to SIEM</li>
+    <li>Investingating with ELK101</li>
+    <li>ItsyBitsy</li>
+    <li>Splunk: Basics</li>
+    <li>Incident handling with splunk</li>
+    <li>Investigating with Splunk</li>
+    <li>Benign</li>
+  </ul>
+  <h4>Digital Forensics and Incident Response</h4>
+  <ul>
+    <li>DFIR: An Introduction</li>
+    <li>Windows Forensics 1</li>
+    <li>Windows Forensics 2</li>
+    <li>Linux Forensics</li>
+    <li>Autopsy</li>
+    <li>Redline</li>
+    <li>KAPE</li>
+    <li>Volatility</li>
+    <li>Velociraptor</li>
+    <li>TheHive Project</li>
+    <li>Intro to Malware Analysis</li>
+    <li>Unattended</li>
+    <li>Disgruntled</li>
+    <li>Critical</li>
+    <li>Secret Recipe</li>
+  </ul>
+  <h4>Phishing</h4>
+  <ul>
+    <li>Phishing Analysis Fundamentals</li>
+    <li>Phishing Emails in Action</li>
+    <li>Phishing Analysis Tools</li>
+    <li>Phishing Prevention</li>
+    <li>The Greenholt Phish</li>
+    <li>Snapped Phish-ing line</li>
+  </ul>
+  <h4>SOC Level 1 Capstone Challenges</h4>
+  <ul>
+    <li>Tempest</li>
+    <li>Boogeyman 1</li>
+    <li>Boogeyman 2</li>
+    <li>Boogeyman 3</li>
+  </ul>
+  <p>My certifiacte is visible on my LinkedIn profile.</p>
   <hr>
   <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
     For context and contact, please refer to the CV associated with this GitHub profile.
