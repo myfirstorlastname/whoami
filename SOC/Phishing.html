@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phishing Analysis</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>📩 Phishing Analysis</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward CySA+ (CS0-003).</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page covers the <strong>Phishing Analysis</strong> module from the <a href="https://tryhackme.com/path/outline/soclevel1" target="_blank" rel="noopener noreferrer">SOC Level 1</a> learning path on TryHackMe.<br />
+     It focuses on the identification, investigation, and prevention of phishing emails — one of the most common attack vectors in enterprise environments. The module trains both technical analysis (headers, payloads, URLs) and contextual investigation.</p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"A single click can breach a network. A trained eye can stop it."</blockquote>
+  <ul>
+    <li>Phishing isn't just about spam detection — it's about context, intent, and deception.</li>
+    <li>As an analyst, knowing how to dissect a suspicious email is key to:
+      <ul>
+        <li>Identifying threats early</li>
+        <li>Improving user awareness</li>
+        <li>Protecting broader infrastructure</li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
+
+  <h2>📘 Topics and Labs Covered</h2>
+  <blockquote>From fake invoices to malware loaders</blockquote>
+
+  <h3>📧 Phishing Analysis Fundamentals</h3>
+  <ul>
+    <li>Types of phishing: credential harvesting, malicious attachments, spear phishing, whaling</li>
+    <li>How attackers craft convincing lures and evade detection</li>
+    <li>Email header structure and spoofing techniques</li>
+  </ul>
+
+  <h3>🔬 Phishing Emails in Action</h3>
+  <ul>
+    <li>Hands-on analysis of real-world phishing samples</li>
+    <li>Extracting indicators from headers and content</li>
+    <li>Identifying obfuscation techniques and social engineering clues</li>
+  </ul>
+
+  <h3>🛠️ Phishing Analysis Tools</h3>
+  <ul>
+    <li>Using:
+      <ul>
+        <li><code>email-header-analyzer</code> and <code>phish.tool</code></li>
+        <li>VirusTotal and URLScan for link checking</li>
+        <li>OLETools for attachment analysis (Office macros)</li>
+        <li>CyberChef for decoding or deobfuscating payloads</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>🛡️ Phishing Prevention</h3>
+  <ul>
+    <li>SPF, DKIM, DMARC — how email authentication works</li>
+    <li>Security awareness tips to reduce user-level risk</li>
+    <li>Technical countermeasures (sandboxing, filtering, quarantining)</li>
+  </ul>
+
+  <h3>🎯 Phishing Challenges</h3>
+  <ul>
+    <li><strong>The Greenholt Phish</strong> – Full investigation of a phishing case: headers, links, attachment, and campaign context</li>
+    <li><strong>Snapped Phish-ing Line</strong> – A challenge in reconstructing attacker intent from partial evidence</li>
+  </ul>
+
+  <hr>
+  <h2>🎯 Key Takeaways</h2>
+  <ul>
+    <li>I’m now comfortable breaking down and analyzing phishing attempts end-to-end</li>
+    <li>I can identify spoofing, encoding tricks, and track threat actors via recurring patterns</li>
+    <li>I understand how to combine technical analysis with human context (intent, timing, language)</li>
+    <li>I see phishing not just as an attack, but as an opportunity to educate and defend</li>
+  </ul>
+
+  <p>Next step: build detection rules based on email telemetry, and simulate spear phishing in a test environment for defensive drills.</p>
+  <hr>
+</body>
+
+<footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+  For context and contact, please refer to the CV associated with this GitHub profile.
+</footer>
+</html>
