@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Security and Traffic Analysis</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🖧 Network Security and Traffic Analysis</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward CySA+ (CS0-003).</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page summarizes my experience with the <strong>Network Security and Traffic Analysis</strong> module from the <a href="https://tryhackme.com/path/outline/soclevel1" target="_blank" rel="noopener noreferrer">SOC Level 1</a> learning path on TryHackMe.<br />
+     This module covers the tools, techniques, and mindset needed to analyze and interpret network traffic. From packet-level visibility to IDS/IPS rule creation, it’s a key skill for any blue teamer.</p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Packets don’t lie. The network is the ground truth."</blockquote>
+  <ul>
+    <li>As a SOC analyst, understanding what's happening on the wire is non-negotiable.
+      <ul>
+        <li>Logs tell you what a system *thinks* is happening</li>
+        <li>Network data tells you what *actually* happened</li>
+      </ul>
+    </li>
+    <li>This module helped reinforce my ability to spot threats, investigate incidents, and build better detection logic at the network layer.</li>
+  </ul>
+  <hr>
+
+  <h2>📘 Topics and Tools Covered</h2>
+  <blockquote>From raw packets to IDS logic</blockquote>
+
+  <h3>📡 Traffic Analysis Essentials</h3>
+  <ul>
+    <li>Introduction to PCAPs, protocol dissection, and traffic capture techniques</li>
+    <li>Hands-on with TCP, UDP, DNS, HTTP, TLS, and ICMP analysis</li>
+  </ul>
+
+  <h3>🚨 IDS/IPS with Snort</h3>
+  <ul>
+    <li>Snort rule writing and signature logic</li>
+    <li>Testing and tuning Snort alerts for:
+      <ul>
+        <li>Port scans</li>
+        <li>Suspicious payloads</li>
+        <li>Exploit attempts</li>
+      </ul>
+    </li>
+    <li>Live traffic challenges to simulate real attack patterns</li>
+  </ul>
+
+  <h3>🔍 Packet Analysis with Wireshark</h3>
+  <ul>
+    <li>Using filters, following TCP streams, and decoding payloads</li>
+    <li>Recognizing lateral movement, beaconing, and file exfiltration patterns</li>
+    <li>Practical Wireshark challenges for investigation skills</li>
+  </ul>
+
+  <h3>🔧 CLI Network Forensics with TShark</h3>
+  <ul>
+    <li>Learning TShark for automated or headless analysis</li>
+    <li>Using command-line filters and field extraction</li>
+    <li>Challenges for analyzing large PCAP datasets efficiently</li>
+  </ul>
+
+  <h3>🛠️ Zeek & NetworkMiner</h3>
+  <ul>
+    <li>Generating logs from raw traffic with Zeek (formerly Bro)</li>
+    <li>Extracting files, metadata, and behaviors from packet captures</li>
+    <li>Using NetworkMiner to reconstruct sessions and artifacts</li>
+  </ul>
+
+  <h3>🌊 Brim: Graphical Flow Analysis</h3>
+  <ul>
+    <li>Visualizing network data and searching with ZQL</li>
+    <li>Powerful pivoting across Zeek logs</li>
+  </ul>
+
+  <hr>
+  <h2>🎯 Takeaways</h2>
+  <ul>
+    <li>I now feel confident working with PCAPs and correlating events at packet level</li>
+    <li>Snort and Zeek give complementary detection capabilities: signature vs behavior</li>
+    <li>TShark and Wireshark are my go-to tools for triage and deep investigation</li>
+    <li>This module is a must for any SOC analyst, threat hunter, or IR responder</li>
+  </ul>
+
+  <p>Next step: integrate Zeek and Suricata into live monitoring labs and tune alerting rules using real-world TTPs.</p>
+  <hr>
+</body>
+
+<footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+  For context and contact, please refer to the CV associated with this GitHub profile.
+</footer>
+</html>
