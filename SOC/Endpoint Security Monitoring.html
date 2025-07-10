@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Endpoint Security Monitoring</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🖥️ Endpoint Security Monitoring</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward CySA+ (CS0-003).</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page presents my progress through the <strong>Endpoint Security Monitoring</strong> module of the <a href="https://tryhackme.com/path/outline/soclevel1" target="_blank" rel="noopener noreferrer">SOC Level 1</a> learning path on TryHackMe.<br />
+     The focus here is on host-based monitoring: understanding what happens on endpoints, how to capture telemetry, and how to correlate local activity with broader attack chains. This is critical knowledge for anyone working in detection engineering or incident response.</p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"The endpoint is where the compromise becomes real."</blockquote>
+  <ul>
+    <li>In many attacks, the endpoint is where:
+      <ul>
+        <li>Persistence is established</li>
+        <li>Credentials are stolen</li>
+        <li>Payloads are executed</li>
+      </ul>
+    </li>
+    <li>Understanding host telemetry allows analysts to detect subtle and persistent behaviors that firewalls or network sensors may miss.</li>
+  </ul>
+  <hr>
+
+  <h2>📘 Topics and Tools Covered</h2>
+  <blockquote>Visibility begins with the endpoint</blockquote>
+
+  <h3>🧭 Introduction to Endpoint Security</h3>
+  <ul>
+    <li>Foundations of EDR (Endpoint Detection and Response)</li>
+    <li>Importance of monitoring both user and kernel-space activity</li>
+  </ul>
+
+  <h3>🪟 Core Windows Processes</h3>
+  <ul>
+    <li>Exploring processes like <code>lsass.exe</code>, <code>svchost.exe</code>, <code>explorer.exe</code></li>
+    <li>Understanding normal vs abnormal parent-child process relationships</li>
+  </ul>
+
+  <h3>⚙️ Sysinternals Suite</h3>
+  <ul>
+    <li>Using <code>Process Explorer</code>, <code>Autoruns</code>, and <code>TCPView</code> for real-time investigation</li>
+    <li>Identifying persistence, open network connections, and injected DLLs</li>
+  </ul>
+
+  <h3>📄 Windows Event Logs</h3>
+  <ul>
+    <li>Key event IDs for monitoring:
+      <ul>
+        <li>Logon events (4624, 4625)</li>
+        <li>Process creation (4688)</li>
+        <li>Scheduled tasks, registry changes, PowerShell usage</li>
+      </ul>
+    </li>
+    <li>Parsing logs with built-in tools and visualization platforms</li>
+  </ul>
+
+  <h3>🔍 Sysmon</h3>
+  <ul>
+    <li>Installing and configuring Sysmon for advanced telemetry</li>
+    <li>Monitoring:
+      <ul>
+        <li>Process execution chains</li>
+        <li>Network connections</li>
+        <li>File creation and registry changes</li>
+      </ul>
+    </li>
+    <li>Best practices for tuning rulesets</li>
+  </ul>
+
+  <h3>🧮 Osquery</h3>
+  <ul>
+    <li>Using SQL queries to monitor and audit endpoint state</li>
+    <li>Detecting anomalies across process lists, users, crontabs, kernel modules</li>
+  </ul>
+
+  <h3>🛡️ Wazuh</h3>
+  <ul>
+    <li>Installing Wazuh agent and connecting to SIEM</li>
+    <li>Using Wazuh for file integrity monitoring and rule-based alerting</li>
+  </ul>
+
+  <h3>📆 Labs and Challenges</h3>
+  <ul>
+    <li><strong>Monday Monitor</strong> – Endpoint anomaly detection</li>
+    <li><strong>Retracted</strong> – Practical challenge applying Windows monitoring knowledge</li>
+  </ul>
+
+  <hr>
+  <h2>🎯 Key Takeaways</h2>
+  <ul>
+    <li>Understanding Windows internals is essential for endpoint monitoring</li>
+    <li>Sysmon + Event Logs + EDR tools create a strong visibility stack</li>
+    <li>I feel more confident writing detection logic based on process behavior</li>
+    <li>Tools like Osquery bring precision and flexibility to cross-platform monitoring</li>
+  </ul>
+
+  <p>Next step: simulate endpoint attacks in lab environments and refine detection logic using Sysmon and Osquery data.</p>
+  <hr>
+</body>
+
+<footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+  For context and contact, please refer to the CV associated with this GitHub profile.
+</footer>
+</html>
