@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Forensics and Incident Response</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🕵🏻 Digital Forensics and Incident Response</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward CySA+ (CS0-003).</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page presents my work on the <strong>Digital Forensics and Incident Response (DFIR)</strong> module of the <a href="https://tryhackme.com/path/outline/soclevel1" target="_blank" rel="noopener noreferrer">SOC Level 1</a> learning path on TryHackMe.<br />
+     This module dives into real-world post-compromise analysis — how to investigate infected machines, recover evidence, and understand attacker TTPs. It mixes forensic thinking with structured incident response methodology.</p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Don’t just ask what happened. Ask how and why."</blockquote>
+  <ul>
+    <li>DFIR teaches patience, precision, and process:
+      <ul>
+        <li>What data is relevant?</li>
+        <li>Where can evidence be found?</li>
+        <li>What timeline does the attacker’s activity follow?</li>
+      </ul>
+    </li>
+    <li>This mindset complements live SOC work: we move from alert triage to root cause and full narrative reconstruction.</li>
+  </ul>
+  <hr>
+
+  <h2>📘 Topics and Tools Explored</h2>
+  <blockquote>From volatile memory to disk artifacts</blockquote>
+
+  <h3>🧩 DFIR Foundations</h3>
+  <ul>
+    <li>What defines forensics vs incident response</li>
+    <li>Phases of IR: preparation, detection, containment, eradication, recovery</li>
+    <li>Data types: volatile vs non-volatile, memory vs disk, artifacts vs indicators</li>
+  </ul>
+
+  <h3>🖥️ Windows Forensics</h3>
+  <ul>
+    <li>Analyzing system artifacts:
+      <ul>
+        <li>Prefetch, ShimCache, AmCache</li>
+        <li>Registry hives (SAM, SYSTEM, NTUSER.DAT)</li>
+        <li>Event logs (Security, System, Application)</li>
+      </ul>
+    </li>
+    <li>Timeline reconstruction from multiple sources</li>
+  </ul>
+
+  <h3>🐧 Linux Forensics</h3>
+  <ul>
+    <li>Working with Bash history, cron jobs, SSH configs, logs in <code>/var/log</code></li>
+    <li>Checking persistence mechanisms and user activity</li>
+  </ul>
+
+  <h3>🧠 Memory Forensics</h3>
+  <ul>
+    <li>Using <strong>Volatility</strong> to extract:
+      <ul>
+        <li>Running processes and injected code</li>
+        <li>Network connections and open sockets</li>
+        <li>Command history and loaded DLLs</li>
+      </ul>
+    </li>
+    <li>Practical malware analysis from live memory dumps</li>
+  </ul>
+
+  <h3>🔬 Disk and File System Analysis</h3>
+  <ul>
+    <li>Using <strong>Autopsy</strong> and <strong>KAPE</strong> for:
+      <ul>
+        <li>File recovery and integrity checks</li>
+        <li>Deleted files and alternate data streams</li>
+        <li>Correlating file system timelines</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>🛡️ Incident Management Tools</h3>
+  <ul>
+    <li><strong>Redline</strong> – memory and host artifact triage</li>
+    <li><strong>Velociraptor</strong> – live collection and remote hunting</li>
+    <li><strong>TheHive</strong> – case and workflow management</li>
+  </ul>
+
+  <h3>🧪 DFIR Challenge Labs</h3>
+  <ul>
+    <li><strong>Unattended</strong> – Windows IR and registry analysis</li>
+    <li><strong>Disgruntled</strong> – Insider threat and file recovery</li>
+    <li><strong>Critical</strong> – Multi-source forensic correlation</li>
+    <li><strong>Secret Recipe</strong> – Reverse-engineering attacker behavior</li>
+  </ul>
+
+  <hr>
+  <h2>🎯 Key Takeaways</h2>
+  <ul>
+    <li>I can now lead a structured IR process and collect forensic artifacts safely</li>
+    <li>Memory forensics has become one of my strongest assets in malware investigation</li>
+    <li>I'm confident using forensic toolkits and correlating indicators across time and layers</li>
+    <li>DFIR is both technical and narrative: it’s about understanding, not just detecting</li>
+  </ul>
+
+  <p>Next step: simulate targeted attacks in lab VMs and build full DFIR cases using TheHive and Volatility.</p>
+  <hr>
+</body>
+
+<footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+  For context and contact, please refer to the CV associated with this GitHub profile.
+</footer>
+</html>
