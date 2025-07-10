@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Security Information and Event Management</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>📊 Security Information and Event Management</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward CySA+ (CS0-003).</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page summarizes my experience working through the <strong>Security Information and Event Management (SIEM)</strong> module of the <a href="https://tryhackme.com/path/outline/soclevel1" target="_blank" rel="noopener noreferrer">SOC Level 1</a> learning path on TryHackMe.<br />
+     This module focuses on mastering SIEM platforms such as Splunk and the ELK stack, learning how to write detection queries, analyze logs, and triage security incidents. It bridges theory and practice in the daily operations of a SOC analyst.</p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Logs are the breadcrumbs of compromise — SIEM is the map."</blockquote>
+  <ul>
+    <li>SIEM platforms allow analysts to:
+      <ul>
+        <li>Correlate events from multiple sources</li>
+        <li>Detect malicious patterns and behaviors</li>
+        <li>Investigate, respond, and document incidents</li>
+      </ul>
+    </li>
+    <li>This module taught me not only the tools, but the thought process behind an effective detection pipeline.</li>
+  </ul>
+  <hr>
+
+  <h2>📘 Topics and Labs Covered</h2>
+  <blockquote>From log ingestion to alert correlation</blockquote>
+
+  <h3>🔧 Introduction to SIEM</h3>
+  <ul>
+    <li>What makes a SIEM platform: log aggregation, parsing, normalization, correlation, alerting</li>
+    <li>Comparison of traditional vs next-gen SIEMs</li>
+    <li>Real-world examples of attack chains reconstructed via SIEM</li>
+  </ul>
+
+  <h3>🔍 ELK Stack (Elasticsearch, Logstash, Kibana)</h3>
+  <ul>
+    <li>Hands-on with <strong>ELK101</strong>: querying logs, filtering fields, identifying IOC matches</li>
+    <li>Visualizing patterns with dashboards and time-series analysis</li>
+    <li>Using Kibana Discover and Timeline views for incident triage</li>
+  </ul>
+
+  <h3>🔐 Splunk Basics</h3>
+  <ul>
+    <li>Introduction to Splunk interface: search, dashboards, alerting</li>
+    <li>Using <code>tstats</code> and <code>eval</code> for log correlation</li>
+    <li>Writing detection logic for login anomalies, PowerShell misuse, lateral movement</li>
+  </ul>
+
+  <h3>🎯 Hands-On Challenges</h3>
+  <ul>
+    <li><strong>Investigating with ELK</strong> – Threat hunting based on specific indicators</li>
+    <li><strong>ItsyBitsy</strong> – Correlating multiple sources to reconstruct a phishing-to-malware incident</li>
+    <li><strong>Incident Handling with Splunk</strong> – Interactive triage and escalation based on alerting logic</li>
+    <li><strong>Investigating with Splunk</strong> – Discovering signs of compromise and persistent access</li>
+    <li><strong>Benign</strong> – Practical scenario focusing on separating false positives from real threats</li>
+  </ul>
+
+  <hr>
+  <h2>🎯 Key Takeaways</h2>
+  <ul>
+    <li>I can now pivot through logs in Splunk and ELK efficiently</li>
+    <li>I understand how alerts are triggered, what logic sits behind them, and how to validate or dismiss them</li>
+    <li>Correlation of host and network logs is key to comprehensive analysis</li>
+    <li>I’m comfortable writing custom queries to hunt for known TTPs and threat behaviors</li>
+  </ul>
+
+  <p>Next step: build custom detection content in Splunk using MITRE techniques, and automate enrichment using SOAR tools.</p>
+  <hr>
+</body>
+
+<footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+  For context and contact, please refer to the CV associated with this GitHub profile.
+</footer>
+</html>
