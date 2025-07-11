@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Active Directory – OSCP Journey</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0 auto;
+      padding: 0 1rem;
+      max-width: 1100px;
+      line-height: 1.6;
+      background-color: #fefefe;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 700px;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #f0f8ff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .toc-list, .toc-list ul, .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
+    }
+
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+
+    .sub-list {
+      margin-left: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+
+<ul class="toc-list">
+  <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/" class="current">Active Directory</a>
+    <ul class="sub-list">
+      <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/Windows%20Exploitation%20Basics">Windows Exploitation Basics</a></li>
+    </ul>
+  </li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+</ul>
+
+<body>
+  <header>
+    <h1>🏋️‍♂️ Active Directory: Offensive & Defensive Training</h1>
+    <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
+  </header>
+
+  <section>
+    <h2>🧠 About</h2>
+    <p>This page outlines my self-driven journey toward mastering Active Directory security and exploitation, in preparation for OSCP. It bridges offensive (Red Team) and defensive (Blue Team) skills across multiple training paths.</p>
+  </section>
+
+  <section>
+    <h2>🛰️ Philosophy</h2>
+    <blockquote>"I prefer stealth over spectacle."</blockquote>
+    <ul>
+      <li>I treat pentesting as a craft: solve, reflect, repeat.</li>
+      <li>Try → Fail → Learn: I embrace discomfort as a sign of growth.</li>
+      <li>Consistency over bursts: Daily focused effort beats weekend sprints.</li>
+      <li>Depth over tools: I master concepts, not just commands.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>💥 TryHackMe – Red Team Courses</h2>
+    <div class="grid-container">
+      <a class="card" href="https://tryhackme.com/module/hacking-windows-1" target="_blank">
+        <h3>🧨 Windows Exploitation Basics</h3>
+        <p>Core Windows concepts, Metasploit, AD fundamentals</p>
+      </a>
+      <a class="card" href="https://tryhackme.com/module/breakingwindows" target="_blank">
+        <h3>💣💣 Breaking Windows</h3>
+        <p>Compromising real Windows AD environments</p>
+      </a>
+      <a class="card" href="https://tryhackme.com/module/hacking-active-directory" target="_blank">
+        <h3>☢️☢️☢️ Compromising AD</h3>
+        <p>Breaching, enumerating, persisting in AD networks</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>🛡️ TryHackMe – Blue Team Courses</h2>
+    <div class="grid-container">
+      <a class="card" href="https://tryhackme.com/module/incident-response-and-forensics" target="_blank">
+        <h3>🛡️ Incident Response & Forensics</h3>
+        <p>Windows forensics, Autopsy, Volatility</p>
+      </a>
+      <a class="card" href="https://tryhackme.com/room/activedirectoryhardening" target="_blank">
+        <h3>🛡️🛡️ AD Hardening</h3>
+        <p>Group policy, Least Privilege, Attack mitigation</p>
+      </a>
+      <a class="card" href="https://tryhackme.com/room/recoveringactivedirectory" target="_blank">
+        <h3>💎💎💎 Recovering AD</h3>
+        <p>Post-compromise recovery & analysis</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
