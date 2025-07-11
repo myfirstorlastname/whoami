@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Windows Exploitation Basics</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0 auto;
+      padding: 0 1rem;
+      max-width: 1100px;
+      line-height: 1.6;
+      background-color: #fefefe;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 700px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Cards grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #f0f8ff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .toc-list,
+    .toc-list ul,
+    .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-list p {
+      margin: 0.4rem 0;
+    }
+
+    .toc-list a {
+      color: #0366d6;
+      text-decoration: none;
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+
+    .sub-list {
+      margin-left: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <ul class="toc-list">
+    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a>
+      <ul class="sub-list">
+        <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/Windows Exploitation Basics" class="current">Windows Exploitation Basics</a></li>
+      </ul>
+    </li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+  </ul>
+
+  <header>
+    <h1>📝 Windows Exploitation Basics</h1>
+    <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
+  </header>
+
+  <section>
+    <h2>🧠 About</h2>
+    <p>I'm a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design.<br />
+      This page documents my hands-on learning path toward Active Directory exploitation via Windows environments—essential for becoming OSCP-certified.
+    </p>
+  </section>
+
+  <section>
+    <h2>🛰️ Philosophy</h2>
+    <blockquote>"I prefer stealth over spectacle."</blockquote>
+    <ul>
+      <li>I believe AD Pentesting is not about brute force—it’s about comprehension and adaptation.</li>
+      <li>My learning philosophy:
+        <ul>
+          <li>Try → Fail → Learn: Discomfort is growth.</li>
+          <li>Consistency over intensity: Daily effort beats all-nighters.</li>
+          <li>Concepts over commands: Depth wins.</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>💣 Windows Exploitation Basics (TryHackMe)</h2>
+    <p>Hacking Windows is often daunting. This module builds up confidence through concrete, structured labs. I’ve completed 55% so far.</p>
+    <div class="grid-container">
+      <a href="https://tryhackme.com/room/windowsfundamentals1xbx" class="card">
+        <h3>🪟 Windows Fundamentals 1</h3>
+        <p>NTFS, UAC, Control Panel – Get to know the OS layer.</p>
+      </a>
+      <a href="https://tryhackme.com/room/windowsfundamentals2x0x" class="card">
+        <h3>🧰 Windows Fundamentals 2</h3>
+        <p>Registry, Resource Monitoring, SysConfig – Dig deeper.</p>
+      </a>
+      <a href="https://tryhackme.com/room/winadbasics" class="card">
+        <h3>🏛️ Active Directory Basics</h3>
+        <p>AD structure, domains, objects – Foundation of corp networks.</p>
+      </a>
+      <a href="https://tryhackme.com/room/metasploitintro" class="card">
+        <h3>💡 Metasploit: Introduction</h3>
+        <p>Core concepts, modules, and terminology.</p>
+      </a>
+      <a href="https://tryhackme.com/room/metasploitexploitation" class="card">
+        <h3>🚀 Metasploit: Exploitation</h3>
+        <p>Vulnerability scanning, payloads, msfvenom.</p>
+      </a>
+      <a href="https://tryhackme.com/room/meterpreter" class="card">
+        <h3>🕶️ Meterpreter</h3>
+        <p>Post-exploitation agent: shells, pivoting, persistence.</p>
+      </a>
+      <a href="https://tryhackme.com/room/blue" class="card">
+        <h3>💥 Blue</h3>
+        <p>Hack into a vulnerable Windows machine with EternalBlue.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+
+</body>
+</html>
