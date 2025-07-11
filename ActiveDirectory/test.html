@@ -35,6 +35,10 @@
       max-width: 700px;
     }
 
+    section {
+      margin-bottom: 3rem;
+    }
+
     h2 {
       font-size: 1.5rem;
       margin-top: 2rem;
@@ -57,10 +61,9 @@
       text-decoration: underline;
     }
 
-    /* Cards grid */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
     }
@@ -94,15 +97,6 @@
       color: #444;
     }
 
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #666;
-      text-align: center;
-      border-top: 1px solid #ddd;
-      padding-top: 1rem;
-    }
-
     .toc-list {
       background-color: #f4f4f4;
       border: 1px solid #ddd;
@@ -113,25 +107,19 @@
       font-size: 0.95rem;
     }
 
-    .toc-list,
-    .toc-list ul,
-    .toc-list li {
+    .toc-list, .toc-list ul, .toc-list li {
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
-    .toc-list p {
-      margin: 0.4rem 0;
-    }
-
     .toc-list a {
-      color: #0366d6;
-      text-decoration: none;
       display: block;
       padding: 0.3rem 0.5rem;
       border-radius: 4px;
       transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
     }
 
     .toc-list a:hover {
@@ -148,23 +136,31 @@
     .sub-list {
       margin-left: 1rem;
     }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
   </style>
 </head>
-<body>
 
-  <ul class="toc-list">
-    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
-    <li>
-      <a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a>
-      <ul class="sub-list">
-        <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/Windows Exploitation Basics" class="current">Windows Exploitation Basics</a></li>
-      </ul>
-    </li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
-  </ul>
+<ul class="toc-list">
+  <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+  <li>
+    <a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a>
+    <ul class="sub-list">
+      <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/Windows%20Exploitation%20Basics" class="current">Windows Exploitation Basics</a></li>
+    </ul>
+  </li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+</ul>
 
   <header>
     <h1>📝 Windows Exploitation Basics</h1>
