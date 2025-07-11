@@ -49,7 +49,7 @@
     }
 
     h3 {
-      margin-top: 1.5rem;
+      margin-top: 1.2rem;
       margin-bottom: 0.5rem;
       font-size: 1.2rem;
       color: #111;
@@ -77,6 +77,7 @@
       padding-top: 1rem;
     }
 
+    /* Sidebar */
     .toc-list {
       background-color: #f4f4f4;
       border: 1px solid #ddd;
@@ -118,6 +119,43 @@
     .sub-list {
       margin-left: 1rem;
     }
+
+    /* Card Grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #f0f8ff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
   </style>
 </head>
 
@@ -131,6 +169,7 @@
 </ul>
 
 <body>
+
   <header>
     <h1>🕶️ whoami</h1>
     <blockquote>Anonymous operator with hands-on experience in cyber defense and attack.</blockquote>
@@ -138,9 +177,7 @@
 
   <section>
     <h2>🧠 About</h2>
-    <p>I'm a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design.<br />
-    This portfolio outlines my active skillset across pentesting, incident response, SOC operations, development, and continuous learning.<br />
-    <strong>No identity. Just capability.</strong></p>
+    <p>I’m a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design. This portfolio outlines my active skillset across pentesting, incident response, SOC operations, development, and continuous learning. <strong>No identity. Just capability.</strong></p>
   </section>
 
   <section>
@@ -155,55 +192,50 @@
 
   <section>
     <h2>🏆 Achievements & Certifications</h2>
-    <ul>
-      <li>🥈 <strong>PortSwigger Web Security Academy</strong> — 75% completion (268 labs)<br />
-        Advanced OWASP lab mastery.<br />
-        <a href="https://portswigger.net/web-security/all-labs" target="_blank">View Labs</a></li>
-      <li>🥈 <strong>RootMe</strong> — Top 0.4% (Rank 1165 / 303,000)<br />
-        Full-spectrum CTF challenges.<br />
-        <a href="https://www.root-me.org/lfbr78" target="_blank">View Profile</a></li>
-      <li>🥈 <strong>TryHackMe</strong> — Top 3%<br />
-        Blue team to red team progression.<br />
-        <a href="https://tryhackme.com/p/lfbr78" target="_blank">View Profile</a></li>
-      <li>🥇 <strong>WebHacking.kr</strong> — Top 0.1% (Rank 106 / 66,000)<br />
-        Advanced web logic & exploitation.<br />
-        <a href="https://webhacking.kr/rank.php?page=4#:~:text=lfbr78" target="_blank">View Profile</a></li>
-      <li>🥇 <strong>Hacker101</strong> — 254 pts / 273<br />
-        Practical bug bounty CTF by HackerOne.<br />
-        <a href="https://ctf.hacker101.com/" target="_blank">View CTF</a></li>
-    </ul>
+    <div class="grid-container">
+      <a href="https://portswigger.net/web-security/all-labs" class="card" target="_blank">
+        <h3>🥈 PortSwigger Academy</h3>
+        <p>75% completion – OWASP Top 10 labs</p>
+      </a>
+      <a href="https://www.root-me.org/lfbr78" class="card" target="_blank">
+        <h3>🥈 RootMe</h3>
+        <p>Top 0.4% – Full-spectrum CTF</p>
+      </a>
+      <a href="https://tryhackme.com/p/lfbr78" class="card" target="_blank">
+        <h3>🥈 TryHackMe</h3>
+        <p>Top 3% – Red & Blue Team labs</p>
+      </a>
+      <a href="https://webhacking.kr/rank.php?page=4#:~:text=lfbr78" class="card" target="_blank">
+        <h3>🥇 WebHacking.kr</h3>
+        <p>Top 0.1% – Advanced web logic puzzles</p>
+      </a>
+      <a href="https://ctf.hacker101.com/" class="card" target="_blank">
+        <h3>🥇 Hacker101 CTF</h3>
+        <p>254/273 pts – Practical web CTF</p>
+      </a>
+    </div>
   </section>
 
   <section>
     <h2>⚔️ Core Skill Domains</h2>
-
-    <h3>🕷️ <a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Bug Bounty</a></h3>
-    <ul>
-      <li><strong>Tools:</strong> Burp, Nmap, Nuclei, Subfinder, Waymore, SQLmap...</li>
-      <li><strong>Techniques:</strong> OWASP Top 10, JWT bypass, HTTP Smuggling, GraphQL, etc.</li>
-      <li><strong>Approach:</strong> Recon → Discovery → Exploitation → Reporting</li>
-    </ul>
-
-    <h3>🛡️ <a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC Analyst (N1/N2)</a></h3>
-    <ul>
-      <li>Frameworks: MITRE ATT&CK, Kill Chain, Diamond Model</li>
-      <li>Tools: YARA, MISP, Zeek, Sysmon, Wazuh, Splunk, Velociraptor</li>
-      <li>Skills: Threat Hunting, Malware Triage, Phishing Analysis</li>
-    </ul>
-
-    <h3>💣 <a href="https://myfirstorlastname.github.io/whoami/System/">System & Script Pentesting</a></h3>
-    <ul>
-      <li>Privilege Escalation: Sudo configs, SUID, race conditions</li>
-      <li>Script Attacks: Bash, PowerShell, secure strings</li>
-      <li>Reverse Engineering & Exploits: Ghidra, BOFs, FSBs</li>
-    </ul>
-
-    <h3>🔐 <a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory Pentester</a></h3>
-    <ul>
-      <li>Attack Paths: AS-REP Roasting, Kerberoasting, NTLM relay</li>
-      <li>Persistence: Golden/Silver Tickets, Pivoting, Shells</li>
-      <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">Part of my OSCP prep</a></li>
-    </ul>
+    <div class="grid-container">
+      <a href="https://myfirstorlastname.github.io/whoami/WebHacking/" class="card">
+        <h3>🕷️ Web Bug Bounty</h3>
+        <p>Recon, OWASP Top 10, chaining & reporting</p>
+      </a>
+      <a href="https://myfirstorlastname.github.io/whoami/SOC/" class="card">
+        <h3>🛡️ SOC Analyst (N1/N2)</h3>
+        <p>Threat hunting, SIEM, DFIR, phishing, CTI</p>
+      </a>
+      <a href="https://myfirstorlastname.github.io/whoami/System/" class="card">
+        <h3>💣 System & Scripting</h3>
+        <p>PE, race conditions, command injection</p>
+      </a>
+      <a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/" class="card">
+        <h3>🔐 Active Directory</h3>
+        <p>AS-REP, Kerberoasting, pivoting, persistence</p>
+      </a>
+    </div>
   </section>
 
   <section>
@@ -222,9 +254,9 @@
       <li>rs0n_live, John Hammond, NahamSec, InsiderPhD, Micode</li>
     </ul>
 
-    <h3>🌐 Websites & Blogs</h3>
+    <h3>🌐 Blogs & Sites</h3>
     <ul>
-      <li>HackTricks, Exploit-DB, OWASP, PayloadsAllTheThings, PentestMonkey</li>
+      <li>HackTricks, Exploit-DB, PayloadsAllTheThings, OWASP</li>
     </ul>
 
     <h3>🏛️ Institutions</h3>
