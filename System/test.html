@@ -180,54 +180,44 @@
   </section>
 
   <section>
-    <h2>🛰️ Philosophy</h2>
-    <blockquote>"I prefer stealth over spectacle."</blockquote>
-    <ul>
-      <li>I embrace discomfort as a sign of growth.</li>
-      <li>Consistency over bursts: daily focused hours beat weekend marathons.</li>
-      <li>I master concepts, not just commands or tools.</li>
-    </ul>
-  </section>
-
-  <section>
     <h2>🔓 Linux Privilege Escalation Techniques</h2>
-    <h3>🔎 Enumeration first: linPEAS & manual analysis</h3>
-    <ul>
-      <li>linPEAS to uncover SUIDs, cron jobs, kernel exploits, writable paths</li>
-      <li>Manual: <code>sudo -l</code>, <code>find / -perm -4000</code>, <code>ps aux</code>, <code>env</code>, etc.</li>
-    </ul>
-
-    <h3>🔥 Sudo / Cron Misconfigurations</h3>
-    <ul>
-      <li>Sudo NOPASSWD: use GTFOBins, shell escapes, <code>sudo vi</code>, <code>sudo less</code></li>
-      <li>Cron: PATH injection, world-writable scripts</li>
-    </ul>
-
-    <h3>🧨 Exploiting SUID Binaries</h3>
-    <ul>
-      <li>Use <code>strings</code>, <code>ltrace</code>, GTFOBins</li>
-      <li>Hijack insecure system calls</li>
-    </ul>
-
-    <h3>💣 Environment & PATH Exploits</h3>
-    <ul>
-      <li>Hijack binary execution via <code>$PATH</code> or preload libraries</li>
-    </ul>
-
-    <h3>🔐 Credentials & SSH Hijacking</h3>
-    <ul>
-      <li>Reuse leaked credentials or abuse <code>.ssh</code> config</li>
-    </ul>
-
-    <h3>☣️ Plaintext Attack (e.g. bkcrack)</h3>
-    <ul>
-      <li>Use known plaintext to recover ZIP keys → escalate</li>
-    </ul>
-
-    <h3>☢️ Kernel Exploits (Last Resort)</h3>
-    <ul>
-      <li>DirtyPipe, DirtyCow, OverlayFS if kernel vulnerable</li>
-    </ul>
+    <div class="grid-container">
+      <a class="card" href="#enumeration">
+        <h3>🔎 Enumeration First</h3>
+        <p>Start by collecting system information using linPEAS and manual tools like <code>sudo -l</code>, <code>find</code>, and <code>env</code>.</p>
+        <p>Enumeration builds the context to recognize misconfigurations or privilege vectors before acting.</p>
+      </a>
+      <a class="card" href="#sudo-cron">
+        <h3>🔥 Sudo & Cron Misconfigs</h3>
+        <p>Abuse <code>sudo</code> NOPASSWD entries or insecure cron jobs to escalate privileges via command injection or script replacement.</p>
+        <p>These are often the fastest and most overlooked paths to root in real-world systems.</p>
+      </a>
+      <a class="card" href="#suid">
+        <h3>🧨 SUID Binary Abuse</h3>
+        <p>Exploit misconfigured SUID binaries that execute as root to hijack execution flow or invoke system tools insecurely.</p>
+        <p>Paired with <code>ltrace</code>, <code>strings</code>, and GTFOBins, this technique is extremely effective.</p>
+      </a>
+      <a class="card" href="#env-path">
+        <h3>💣 Environment & PATH Exploits</h3>
+        <p>Leverage environment variables and manipulate <code>$PATH</code> to hijack how scripts or binaries are resolved and executed.</p>
+        <p>Especially powerful when used with custom binaries or poorly secured scripts.</p>
+      </a>
+      <a class="card" href="#credentials">
+        <h3>🔐 Credentials & SSH Hijacking</h3>
+        <p>Reuse passwords, SSH keys, or misconfigured access controls to pivot or elevate privileges.</p>
+        <p>Static credentials are a common weak point in dev, test, or legacy environments.</p>
+      </a>
+      <a class="card" href="#plaintext">
+        <h3>☣️ Plaintext Attacks</h3>
+        <p>Exploit legacy ZIP encryption using known-plaintext recovery tools like <code>bkcrack</code> to extract root-level secrets.</p>
+        <p>Efficient against predictable file content like README files or static headers.</p>
+      </a>
+      <a class="card" href="#kernel">
+        <h3>☢️ Kernel Exploits</h3>
+        <p>Exploit vulnerable Linux kernels using DirtyCow, DirtyPipe, or OverlayFS for full system compromise.</p>
+        <p>This is a last resort—use only if safer privilege vectors are unavailable.</p>
+      </a>
+    </div>
   </section>
 
   <footer>
