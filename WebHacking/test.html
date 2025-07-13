@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PortSwigger</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0 auto;
+      padding: 0 1rem;
+      max-width: 1100px;
+      line-height: 1.6;
+      background-color: #fefefe;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 700px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    a.card {
+      display: block;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: all 0.2s ease-in-out;
+      text-decoration: none;
+    }
+
+    a.card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #f0f8ff;
+    }
+
+    a.card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: #111;
+    }
+
+    a.card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .toc-list, .toc-list ul, .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
+    }
+
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+
+    .sub-list {
+      margin-left: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+
+<ul class="toc-list">
+  <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a>
+    <ul class="sub-list">
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/PortSwigger" class="current">↳ PortSwigger</a></li>
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/SQL Injection">↳ SQL Injection</a></li>
+    </ul>
+  </li>
+</ul>
+
+<body>
+  <header>
+    <h1>🏋️‍♂️ PortSwigger : Training</h1>
+    <blockquote>Pseudonymous cybersecurity enthusiast progressing toward BSCP (Burp Suite Certified Practitioner).</blockquote>
+  </header>
+
+  <section>
+    <h2>🧠 About</h2>
+    <p>This page outlines my self-driven journey toward becoming a Burp Suite Certified Practitioner (BSCP). It showcases my progression from beginner-level hacking to OWASP mastery.</p>
+  </section>
+
+  <section>
+    <h2>🛰️ Philosophy</h2>
+    <blockquote>"I prefer stealth over spectacle."</blockquote>
+    <ul>
+      <li>I embrace discomfort as a sign of growth.</li>
+      <li>Consistency over bursts: daily focused hours beat weekend marathons.</li>
+      <li>I master concepts, not just writeups or tools.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🎯 PortSwigger Labs</h2>
+    <blockquote>From basic knowledge to OWASP mastery</blockquote>
+    <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem;">
+      <a class="card" href="SQL Injection.html"><h3>SQL Injection</h3><p>16 / 18</p></a>
+      <a class="card" href="#"><h3>Cross Site Scripting</h3><p>29 / 30</p></a>
+      <a class="card" href="#"><h3>Cross Site Request Forgery</h3><p>12 / 12</p></a>
+      <a class="card" href="#"><h3>Clickjacking</h3><p>5 / 5</p></a>
+      <a class="card" href="#"><h3>DOM-based vulnerabilities</h3><p>7 / 7</p></a>
+      <a class="card" href="#"><h3>Cross Origin Resource Sharing</h3><p>3 / 3</p></a>
+      <a class="card" href="#"><h3>XML External Entity Injection</h3><p>7 / 9</p></a>
+      <a class="card" href="#"><h3>Server Side Request Forgery</h3><p>5 / 7</p></a>
+      <a class="card" href="#"><h3>HTTP Request Smuggling</h3><p>21 / 21</p></a>
+      <a class="card" href="#"><h3>OS Command Injection</h3><p>3 / 5</p></a>
+      <a class="card" href="#"><h3>Server Side Template Injection</h3><p>7 / 7</p></a>
+      <a class="card" href="#"><h3>Path Traversal</h3><p>6 / 6</p></a>
+      <a class="card" href="#"><h3>Access Control vulnerabilities</h3><p>13 / 13</p></a>
+      <a class="card" href="#"><h3>Authentication</h3><p>14 / 14</p></a>
+      <a class="card" href="#"><h3>WebSockets</h3><p>3 / 3</p></a>
+      <a class="card" href="#"><h3>Web Cache Poisoning</h3><p>13 / 13</p></a>
+      <a class="card" href="#"><h3>Insecure Deserialization</h3><p>5 / 10 (in progress)</p></a>
+      <a class="card" href="#"><h3>Information Disclosure</h3><p>5 / 5</p></a>
+      <a class="card" href="#"><h3>Business Logic vulnerabilities</h3><p>12 / 12</p></a>
+      <a class="card" href="#"><h3>HTTP Host Header Attacks</h3><p>0 / 7</p></a>
+      <a class="card" href="#"><h3>OAuth authentication</h3><p>0 / 6</p></a>
+      <a class="card" href="#"><h3>File Upload vulnerabilities</h3><p>7 / 7</p></a>
+      <a class="card" href="#"><h3>JWT</h3><p>7 / 7</p></a>
+      <a class="card" href="#"><h3>Essential Skills</h3><p>0 / 2</p></a>
+      <a class="card" href="#"><h3>Prototype Pollution</h3><p>0 / 10</p></a>
+      <a class="card" href="#"><h3>GraphQL API vulnerabilities</h3><p>0 / 5 (next one on my "Todo" list)</p></a>
+      <a class="card" href="#"><h3>Race Conditions</h3><p>0 / 6</p></a>
+      <a class="card" href="#"><h3>NoSQL injection</h3><p>0 / 4</p></a>
+      <a class="card" href="#"><h3>API testing</h3><p>0 / 5</p></a>
+      <a class="card" href="#"><h3>Web LLM Attacks</h3><p>0 / 4</p></a>
+      <a class="card" href="#"><h3>Web Cache Deception</h3><p>0 / 5</p></a>
+    </div>
+  </section>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
