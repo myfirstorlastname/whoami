@@ -55,42 +55,39 @@
 
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
       margin-top: 1rem;
     }
-
-    a.card {
-      display: block;
-      background: #fafafa;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 1rem;
-      color: inherit;
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 0.8rem;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-      transition: all 0.2s ease-in-out;
+      transition: transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
+      color: #222;
+      min-height: 100px;
     }
-
-    a.card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      background: #f0f8ff;
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-color: #0366d6;
     }
-
-    a.card h3 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-      color: #111;
-    }
-
-    a.card p {
-      margin: 0;
+    .card h3 {
+      margin: 0 0 0.5rem;
       font-size: 0.95rem;
-      color: #444;
     }
-
+    .card p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #555;
+    }
     .toc-list {
       background-color: #f4f4f4;
       border: 1px solid #ddd;
@@ -178,42 +175,41 @@
   </section>
 
   <section>
-    <h2>🎯 PortSwigger Labs</h2>
-    <blockquote>From basic knowledge to OWASP mastery</blockquote>
-    <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem;">
-      <a class="card" href="SQL Injection.html"><h3>SQL Injection</h3><p>16 / 18</p></a>
-      <a class="card" href="#"><h3>Cross Site Scripting</h3><p>29 / 30</p></a>
-      <a class="card" href="#"><h3>Cross Site Request Forgery</h3><p>12 / 12</p></a>
-      <a class="card" href="#"><h3>Clickjacking</h3><p>5 / 5</p></a>
-      <a class="card" href="#"><h3>DOM-based vulnerabilities</h3><p>7 / 7</p></a>
-      <a class="card" href="#"><h3>Cross Origin Resource Sharing</h3><p>3 / 3</p></a>
-      <a class="card" href="#"><h3>XML External Entity Injection</h3><p>7 / 9</p></a>
-      <a class="card" href="#"><h3>Server Side Request Forgery</h3><p>5 / 7</p></a>
-      <a class="card" href="#"><h3>HTTP Request Smuggling</h3><p>21 / 21</p></a>
-      <a class="card" href="#"><h3>OS Command Injection</h3><p>3 / 5</p></a>
-      <a class="card" href="#"><h3>Server Side Template Injection</h3><p>7 / 7</p></a>
-      <a class="card" href="#"><h3>Path Traversal</h3><p>6 / 6</p></a>
-      <a class="card" href="#"><h3>Access Control vulnerabilities</h3><p>13 / 13</p></a>
-      <a class="card" href="#"><h3>Authentication</h3><p>14 / 14</p></a>
-      <a class="card" href="#"><h3>WebSockets</h3><p>3 / 3</p></a>
-      <a class="card" href="#"><h3>Web Cache Poisoning</h3><p>13 / 13</p></a>
-      <a class="card" href="#"><h3>Insecure Deserialization</h3><p>5 / 10 (in progress)</p></a>
-      <a class="card" href="#"><h3>Information Disclosure</h3><p>5 / 5</p></a>
-      <a class="card" href="#"><h3>Business Logic vulnerabilities</h3><p>12 / 12</p></a>
-      <a class="card" href="#"><h3>HTTP Host Header Attacks</h3><p>0 / 7</p></a>
-      <a class="card" href="#"><h3>OAuth authentication</h3><p>0 / 6</p></a>
-      <a class="card" href="#"><h3>File Upload vulnerabilities</h3><p>7 / 7</p></a>
-      <a class="card" href="#"><h3>JWT</h3><p>7 / 7</p></a>
-      <a class="card" href="#"><h3>Essential Skills</h3><p>0 / 2</p></a>
-      <a class="card" href="#"><h3>Prototype Pollution</h3><p>0 / 10</p></a>
-      <a class="card" href="#"><h3>GraphQL API vulnerabilities</h3><p>0 / 5 (next one on my "Todo" list)</p></a>
-      <a class="card" href="#"><h3>Race Conditions</h3><p>0 / 6</p></a>
-      <a class="card" href="#"><h3>NoSQL injection</h3><p>0 / 4</p></a>
-      <a class="card" href="#"><h3>API testing</h3><p>0 / 5</p></a>
-      <a class="card" href="#"><h3>Web LLM Attacks</h3><p>0 / 4</p></a>
-      <a class="card" href="#"><h3>Web Cache Deception</h3><p>0 / 5</p></a>
-    </div>
-  </section>
+  <h2>🌐 OWASP Top 10 & Categories</h2>
+  <div class="grid-container">
+    <a class="card" href="SQL Injection.html"><h3>💉 SQL Injection</h3><p>16 / 18</p></a>
+    <a class="card" href="#"><h3>💥 Cross Site Scripting</h3><p>29 / 30</p></a>
+    <a class="card" href="#"><h3>🔐 Cross Site Request Forgery</h3><p>12 / 12</p></a>
+    <a class="card" href="#"><h3>🛡️ Clickjacking</h3><p>5 / 5</p></a>
+    <a class="card" href="#"><h3>🔍 DOM-based vulnerabilities</h3><p>7 / 7</p></a>
+    <a class="card" href="#"><h3>🌍 CORS</h3><p>3 / 3</p></a>
+    <a class="card" href="#"><h3>📂 XXE</h3><p>7 / 9</p></a>
+    <a class="card" href="#"><h3>🚫 SSRF</h3><p>5 / 7</p></a>
+    <a class="card" href="#"><h3>⚠️ HTTP Smuggling</h3><p>21 / 21</p></a>
+    <a class="card" href="#"><h3>🖥️ Command Injection</h3><p>3 / 5</p></a>
+    <a class="card" href="#"><h3>🧩 SSTI</h3><p>7 / 7</p></a>
+    <a class="card" href="#"><h3>🧭 Path Traversal</h3><p>6 / 6</p></a>
+    <a class="card" href="#"><h3>🚧 Access Control</h3><p>13 / 13</p></a>
+    <a class="card" href="#"><h3>🔒 Authentication</h3><p>14 / 14</p></a>
+    <a class="card" href="#"><h3>📡 WebSockets</h3><p>3 / 3</p></a>
+    <a class="card" href="#"><h3>🗑️ Cache Poisoning</h3><p>13 / 13</p></a>
+    <a class="card" href="#"><h3>🧰 Insecure Deserialisation</h3><p>5 / 10</p></a>
+    <a class="card" href="#"><h3>📰 Info Disclosure</h3><p>5 / 5</p></a>
+    <a class="card" href="#"><h3>💸 Business Logic</h3><p>12 / 12</p></h3></a>
+    <a class="card" href="#"><h3>🧩 Host Header Attacks</h3><p>0 / 7</p></a>
+    <a class="card" href="#"><h3>🔑 OAuth Auth</h3><p>0 / 6</p></a>
+    <a class="card" href="#"><h3>📤 File Upload</h3><p>7 / 7</p></a>
+    <a class="card" href="#"><h3>🧾 JWT</h3><p>7 / 7</p></a>
+    <a class="card" href="#"><h3>🎯 Essential Skills</h3><p>0 / 2</p></a>
+    <a class="card" href="#"><h3>🔧 Prototype Pollution</h3><p>0 / 10</p></a>
+    <a class="card" href="#"><h3>📊 GraphQL Vulns</h3><p>0 / 5</p></a>
+    <a class="card" href="#"><h3>⏱️ Race Conditions</h3><p>0 / 6</p></a>
+    <a class="card" href="#"><h3>🔍 NoSQL Injection</h3><p>0 / 4</p></a>
+    <a class="card" href="#"><h3>🧪 API Testing</h3><p>0 / 5</p></a>
+    <a class="card" href="#"><h3>🤖 Web LLM Attacks</h3><p>0 / 4</p></a>
+    <a class="card" href="#"><h3>🚦 Cache Deception</h3><p>0 / 5</p></a>
+  </div>
+</section>
 
   <footer>
     For context and contact, please refer to the CV associated with this GitHub profile.
