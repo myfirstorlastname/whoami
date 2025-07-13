@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Introduction to Web Hacking</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0 auto;
+      padding: 0 1rem;
+      max-width: 1100px;
+      line-height: 1.6;
+      background-color: #fefefe;
+      color: #222;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1, h2, h3 {
+      font-weight: bold;
+      color: #111;
+      margin-top: 2rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+
+    blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f9f9f9;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .toc-list, .toc-list ul, .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
+    }
+
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <ul class="toc-list">
+    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a>
+      <ul class="sub-list">
+        <li><a href="https://myfirstorlastname.github.io/whoami/OSCP/Jr Penetration Tester">↳ Jr Penetration Tester</a></li>
+      </ul>
+    </li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+    <li><a href="#" class="current">↳ Introduction to Web Hacking</a></li>
+  </ul>
+
+  <h1>🌐 Introduction to Web Hacking</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.<br><strong>“I prefer stealth over spectacle.”</strong></blockquote>
+
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page documents my experience with the <strong>“Introduction to Web Hacking”</strong> module from TryHackMe’s <a href="https://tryhackme.com/path/outline/jrpenetrationtester" target="_blank">Jr Penetration Tester</a> learning path.</p>
+  <p>Although I’m already beyond the junior level, I completed this module as part of a structured review. It offers one of the clearest hands-on introductions to web vulnerabilities and offensive logic.</p>
+
+  <hr>
+
+  <h2>📘 Module Summary</h2>
+  <ul>
+    <li>🎯 Fundamentals of how HTTP and web servers operate</li>
+    <li>🔍 Basic enumeration using browser tools and CLI (e.g., <code>curl</code>)</li>
+    <li>🧪 Exploitation of common vulnerabilities:
+      <ul>
+        <li>Directory traversal</li>
+        <li>Command injection</li>
+        <li>File upload bypasses</li>
+        <li>Authentication bypass</li>
+        <li>Intro to SQL injection</li>
+      </ul>
+    </li>
+    <li>🔧 Intro to Burp Suite for request inspection and tampering</li>
+  </ul>
+
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Method beats speed. Stealth beats noise."</blockquote>
+  <ul>
+    <li>💡 Learn through iteration: <strong>Try → Fail → Learn</strong></li>
+    <li>🧭 Master ideas, not tools. Focus on what's happening behind the scenes.</li>
+    <li>🛠️ Avoid automation at first. Solve manually, then scale.</li>
+  </ul>
+
+  <hr>
+
+  <h2>🧪 What I appreciated as an advanced learner</h2>
+  <ul>
+    <li>Each room progressively builds skills — the structure is pedagogically sound.</li>
+    <li>Many challenges require analytical reasoning, not just following instructions.</li>
+    <li>Minimal tool reliance: much can be done with a browser or <code>curl</code>.</li>
+    <li>It surfaces common development mistakes that become entry points for attackers.</li>
+  </ul>
+
+  <hr>
+
+  <h2>🎓 Who should try this?</h2>
+  <ul>
+    <li>Students entering the world of web security.</li>
+    <li>Developers who want to understand how their own input handling might backfire.</li>
+    <li>OSCP aspirants looking to master the mindset and workflow of real-world web testing.</li>
+  </ul>
+
+  <hr>
+
+  <h2>🛠️ Personal Tips</h2>
+  <ul>
+    <li>⚠️ Never trust user input. Exploit every field: POST, GET, file uploads.</li>
+    <li>📡 Use Burp Suite Repeater to methodically probe behavior.</li>
+    <li>🔄 Replay and tweak until the application reveals a mistake.</li>
+    <li>🧪 File upload? Try polyglot extensions like <code>.php.jpg</code>.</li>
+    <li>🧼 Look for verbose errors, status codes, and headers. They leak info.</li>
+  </ul>
+
+  <hr>
+
+  <h2>✅ Completion Status</h2>
+  <ul>
+    <li><strong>✅ Module completed: 100%</strong></li>
+    <li>📌 This module is a great warm-up before diving into more advanced rooms like OWASP Top 10, or writing custom exploits.</li>
+  </ul>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
