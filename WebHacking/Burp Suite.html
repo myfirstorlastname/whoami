@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burp Suite</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .toc-list, .toc-list ul, .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
+    }
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+    .sub-list {
+      margin-left: 1rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<ul class="toc-list">
+  <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a>
+    <ul class="sub-list">
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/PortSwigger">↳ PortSwigger</a></li>
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/SQL Injection">↳ SQL Injection</a></li>
+      <li><a href="https://myfirstorlastname.github.io/whoami/OSCP/Introduction to Web Hacking">↳ Introduction to Web Hacking</a></li>
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/Burp Suite" class="current">↳ Burp Suite</a></li>
+    </ul>
+  </li>
+</ul>
+<body>
+  <h1>🧰 Burp Suite</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page documents my experience with the <a href="https://tryhackme.com/module/burpsuite" target="_blank" rel="noopener noreferrer">Burp Suite module</a> in TryHackMe's Jr Penetration Tester path. It focuses on practical use of Burp Suite for intercepting, analyzing, and manipulating HTTP traffic to uncover vulnerabilities in web applications.</p>
+  <p>As someone already comfortable with manual testing and tool chaining, I approached this module as an opportunity to refine my workflow and learn tips specific to Burp's ecosystem.</p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Visibility is power. Interception reveals logic."</blockquote>
+  <ul>
+    <li>Burp Suite isn't just a scanner—it's a microscope for HTTP traffic. I use it as a controlled lab to:
+      <ul>
+        <li>Replay, analyze, and manipulate requests manually.</li>
+        <li>Chain together passive and active testing.</li>
+        <li>Build minimal, focused workflows to reduce noise.</li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Learning Outcomes: Burp Suite</h2>
+  <blockquote>Master the foundation of intercepting proxies for web application testing.</blockquote>
+
+  <h3>📘 Module Summary</h3>
+  <ul>
+    <li>Learn how Burp intercepts and logs HTTP(S) traffic</li>
+    <li>Configure browsers with Burp's CA certificate and proxy settings</li>
+    <li>Use key Burp tools effectively:
+      <ul>
+        <li><strong>Target</strong>: define scope and analyze site structure</li>
+        <li><strong>Proxy</strong>: intercept and modify live traffic</li>
+        <li><strong>Repeater</strong>: replay and test parameter logic</li>
+        <li><strong>Intruder</strong>: brute-force or fuzz inputs</li>
+        <li><strong>Decoder</strong>: decode/encode Base64, hex, URL, etc.</li>
+      </ul>
+    </li>
+    <li>Apply these tools in practical labs covering:
+      <ul>
+        <li>Login bypass via manipulated POST body</li>
+        <li>Directory traversal by modifying GET parameters</li>
+        <li>Cookie tampering</li>
+        <li>Header injection</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>🧪 What I appreciated as an advanced learner</h3>
+  <ul>
+    <li>Burp Suite’s interface encourages exploration—it’s like a web shell for HTTP logic.</li>
+    <li>Intruder’s payload automation is powerful when chained with custom wordlists.</li>
+    <li>The module introduces hotkeys and workflow tips often missed by beginners.</li>
+    <li>Hands-on examples align with real-world scenarios (dev login forms, path manipulation, etc).</li>
+  </ul>
+
+  <h3>🎓 Who I recommend this to</h3>
+  <ul>
+    <li>Beginners looking to move beyond passive enumeration tools.</li>
+    <li>Bug bounty hunters wanting to sharpen manual testing skills.</li>
+    <li>Red Teamers who want full control over payload delivery and response analysis.</li>
+  </ul>
+
+  <h3>🛠️ My Personal Tips</h3>
+  <ul>
+    <li>Define your scope early—avoid noisy logs by restricting what Burp captures.</li>
+    <li>Use Repeater and Intruder in tandem: identify logic manually, then automate testing.</li>
+    <li>Right-click everywhere: Burp’s context menus are incredibly rich.</li>
+    <li>Set hotkeys for toggling interception or forwarding—save time when testing logins.</li>
+    <li>Use Burp Collaborator to explore advanced attack surfaces (OAST, SSRF, etc.).</li>
+  </ul>
+
+  <h3>✅ Completion Status</h3>
+  <ul>
+    <li><strong>Module completed: 100%</strong></li>
+    <li><strong>Final thoughts:</strong> Burp Suite is more than a tool—it’s a core skill. This module is a must before tackling advanced paths like Web Pentesting or PortSwigger Pro Labs.</li>
+  </ul>
+
+  <hr>
+</body>
+
+<footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+  For context and contact, please refer to the CV associated with this GitHub profile.
+</footer>
+</html>
