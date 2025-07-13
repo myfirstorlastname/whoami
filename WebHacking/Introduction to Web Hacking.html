@@ -34,11 +34,6 @@
       padding-left: 1rem;
       background: #f9f9f9;
     }
-    .container {
-      display: flex;
-      align-items: flex-start;
-      gap: 2rem;
-    }
     ul {
       padding-left: 1.2rem;
     }
@@ -55,69 +50,23 @@
       border-radius: 3px;
       font-family: monospace;
     }
-    .toc-list {
-      position: sticky;
-      top: 2rem;
-      min-width: 210px;
-      max-width: 240px;
-      background-color: #f4f4f4;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-      font-size: 0.95rem;
-      margin-left: -2rem;
-    }
-    .toc-list, .toc-list ul, .toc-list li {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .toc-list a {
-      display: block;
-      padding: 0.3rem 0.5rem;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      color: #0366d6;
-    }
-    .toc-list a:hover {
-      background-color: #e0e0e0;
-    }
-    .toc-list a.current {
-      font-weight: bold;
-      color: #111;
-      background-color: #d6ebff;
-      border-left: 4px solid #0366d6;
-    }
-    .sub-list {
-      margin-left: 1rem;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #666;
-      text-align: center;
-      border-top: 1px solid #ddd;
-      padding-top: 1rem;
-    }
   </style>
 </head>
-<body>
-  <div class="container">
-    <ul class="toc-list">
-      <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
-      <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
-      <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
-      <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
-      <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
-      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a>
-        <ul class="sub-list">
-          <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/PortSwigger">↳ PortSwigger</a></li>
-          <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/SQL Injection">↳ SQL Injection</a></li>
-          <li><a href="https://myfirstorlastname.github.io/whoami/OSCP/Introduction to Web Hacking" class="current">↳ Introduction to Web Hacking</a></li>
-        </ul>
-      </li>
+<ul class="toc-list">
+  <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a>
+    <ul class="sub-list">
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/PortSwigger">↳ PortSwigger</a></li>
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/SQL Injection">↳ SQL Injection</a></li>
+      <li><a href="https://myfirstorlastname.github.io/whoami/OSCP/Introduction to Web Hacking" class="current">↳ Introduction to Web Hacking</a></li>
     </ul>
+  </li>
+</ul>
+<body>
   <h1>🌐 Introduction to Web Hacking</h1>
   <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
   <hr>
@@ -196,7 +145,6 @@
   </ul>
 
   <hr>
-  </div>
 </body>
 
 <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
