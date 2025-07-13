@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Hacking</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0 auto;
+      padding: 0 1rem;
+      max-width: 1100px;
+      line-height: 1.6;
+      background-color: #fefefe;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 700px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    a.card {
+      display: block;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: all 0.2s ease-in-out;
+    }
+
+    a.card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #f0f8ff;
+    }
+
+    a.card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    a.card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .toc-list, .toc-list ul, .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
+    }
+
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+
+    .sub-list {
+      margin-left: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+
+<ul class="toc-list">
+  <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/" class="current">Web Hacking</a>
+    <ul class="sub-list">
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/PortSwigger">↳ PortSwigger</a></li>
+      <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/SQL Injection">↳ SQL Injection</a></li>
+    </ul>
+  </li>
+</ul>
+
+<body>
+  <header>
+    <h1>🏋️‍♂️ Web Hacking</h1>
+    <blockquote>Pseudonymous cybersecurity enthusiast progressing toward BSCP (Burp Suite Certified Practitioner).</blockquote>
+  </header>
+
+  <section>
+    <h2>🧠 About</h2>
+    <p>This page outlines my self-driven journey toward becoming a Burp Suite Certified Practitioner (BSCP). It showcases my progression from beginner-level hacking to OWASP mastery. This learning path is based on hands-on training, CTFs, and real-world challenges.</p>
+  </section>
+
+  <section>
+    <h2>🛰️ Philosophy</h2>
+    <blockquote>"I prefer stealth over spectacle."</blockquote>
+    <ul>
+      <li>I embrace discomfort as a sign of growth.</li>
+      <li>Consistency over bursts: daily focused hours beat weekend marathons.</li>
+      <li>I master concepts, not just tools or writeups.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🎯 Learning Platforms & Progress</h2>
+    <div class="grid-container">
+      <a class="card" href="https://www.root-me.org/lfbr78" target="_blank">
+        <h3>RootMe</h3>
+        <p>CTF-style challenges with categories like Web - Client/Server. Rank: Top 1200. 70% web server completion.</p>
+      </a>
+      <a class="card" href="https://webhacking.kr/rank.php?page=4#:~:text=lfbr78" target="_blank">
+        <h3>Webhacking.kr</h3>
+        <p>Korean web challenge platform focused on OWASP Top 10. 84% completion, Rank #106.</p>
+      </a>
+      <a class="card" href="https://portswigger.net/web-security/all-labs" target="_blank">
+        <h3>PortSwigger Academy</h3>
+        <p>Deep-dive into web vulns with hands-on labs. 75% completion rate. Targeting BSCP certification.</p>
+      </a>
+    </div>
+    <p style="margin-top: 1rem;">→ <strong><a href="https://myfirstorlastname.github.io/whoami/WebHacking/PortSwigger" target="_blank">See detailed PortSwigger progression</a></strong></p>
+  </section>
+
+  <section>
+    <h2>💼 Real-World Practice: Bug Bounty</h2>
+    <p>I practiced on live targets through platforms like <a href="https://hackerone.com" target="_blank">HackerOne</a>, applying what I learned in labs to real-world applications: recon, exploitation, chaining, and reporting.</p>
+    <p>Despite the competitive environment, I submitted valid reports and gained operational experience in live web hacking.</p>
+  </section>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
