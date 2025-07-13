@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Security</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fefefe;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      background: #f9f9f9;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .toc-list, .toc-list ul, .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
+    }
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+    .sub-list {
+      margin-left: 1rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<ul class="toc-list">
+  <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+  <li><a href="https://myfirstorlastname.github.io/whoami/Network/">Network</a>
+    <ul class="sub-list">
+      <li><a href="https://myfirstorlastname.github.io/whoami/Network/Network Security" class="current">↳ Network Security</a></li>
+    </ul>
+  </li>
+</ul>
+<body>
+  <h1>🌐 Network Security</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>This page summarizes my work on the <a href="https://tryhackme.com/module/network-security" target="_blank" rel="noopener noreferrer">Network Security</a> module from TryHackMe’s Jr Penetration Tester path. It introduces fundamental network concepts and offensive tactics used to discover and analyze network services.</p>
+  <p>Though I have real-world experience with network enumeration, this module offered a structured recap that aligns well with early red team training and OSCP prep.</p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Enumeration is half the battle."</blockquote>
+  <ul>
+    <li>I treat network layers as puzzles: scan, observe, deduce.
+      <ul>
+        <li>Focus on behavior over banners—how do services respond to edge cases?</li>
+        <li>Every port has a reason. Understand the service before trying to break it.</li>
+        <li>Go wide (discovery) before going deep (exploitation).</li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Learning Outcomes: Network Security</h2>
+  <blockquote>Understand how attackers scan and map networks to find vulnerabilities.</blockquote>
+
+  <h3>📘 Module Summary</h3>
+  <ul>
+    <li>Basics of TCP/IP, ports, and protocols</li>
+    <li>ICMP, TCP, UDP scanning techniques</li>
+    <li>Tooling:
+      <ul>
+        <li><code>nmap</code> — discover hosts, ports, versions, and OS</li>
+        <li><code>netcat</code> — banner grabbing and manual connections</li>
+        <li><code>Wireshark</code> — protocol analysis (introduction)</li>
+      </ul>
+    </li>
+    <li>Scanning lab: identify open ports, infer OS, fingerprint services</li>
+    <li>Firewall and IDS concepts (briefly covered)</li>
+  </ul>
+
+  <h3>🧪 What I appreciated as an advanced learner</h3>
+  <ul>
+    <li>Good coverage of the difference between TCP connect vs SYN scan</li>
+    <li>Hands-on challenge involving timing, port state, and service inference</li>
+    <li>Reinforces discipline: never assume results without validation</li>
+    <li>The module encourages testing hypotheses using different flags and scanning techniques</li>
+  </ul>
+
+  <h3>🎓 Who I recommend this to</h3>
+  <ul>
+    <li>Anyone starting in offensive security, before diving into exploitation</li>
+    <li>Blue teamers who want to understand how attackers see their network</li>
+    <li>Students aiming to build a solid mental model of services and exposure</li>
+  </ul>
+
+  <h3>🛠️ My Personal Tips</h3>
+  <ul>
+    <li>Use <code>-sV</code>, <code>-sC</code>, <code>-O</code> in <code>nmap</code> only when needed. Avoid noise on real targets.</li>
+    <li>Learn to read <code>nmap</code> output critically—know what's accurate, what's guessed.</li>
+    <li>Don’t overlook UDP—it’s noisy and slow, but often ignored by defenders too.</li>
+    <li>Always verify findings manually. Banners lie.</li>
+    <li>Use versioned scans to trigger defensive systems in a lab and watch how they behave.</li>
+  </ul>
+
+  <h3>✅ Completion Status</h3>
+  <ul>
+    <li><strong>Module completed: 100%</strong></li>
+    <li><strong>Final thoughts:</strong> This module is foundational. It teaches the observation mindset essential for both Red and Blue teams. Master this before moving to privilege escalation or lateral movement.</li>
+  </ul>
+
+  <hr>
+</body>
+
+<footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+  For context and contact, please refer to the CV associated with this GitHub profile.
+</footer>
+</html>
