@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Infrastructure</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      background: #fefefe;
+      color: #222;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      color: #111;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1.5rem 0;
+    }
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .toc-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #0366d6;
+      transition: background 0.2s;
+    }
+    .toc-list a.current {
+      background: #d6ebff;
+      font-weight: bold;
+      border-left: 4px solid #0366d6;
+    }
+    .sub-list {
+      margin-left: 1rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <ul class="toc-list">
+    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/Network/">Network</a>
+      <ul class="sub-list">
+        <li><a href="Network%20Security.html">↳ Network Security</a></li>
+        <li><a href="Network%20Tools.html">↳ Network Tools</a></li>
+        <li><a href="Network%20Course.html">↳ Network Course</a></li>
+        <li><a href="Network%20Infrastructure.html" class="current">↳ Network Infrastructure</a></li>
+      </ul>
+    </li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+  </ul>
+
+  <h1>🏗️ Network Infrastructure</h1>
+  <blockquote>Understanding modern network infrastructure: complexity, components, protocols, and defense layers.</blockquote>
+
+  <h2>📌 What Is Network Infrastructure?</h2>
+  <p>Network infrastructure encompasses all the hardware, software, and services required to support network connectivity, operations, communication, and management of an enterprise network.</p>
+  <p>It's not limited to routers and switches: it includes physical cabling, wireless systems, virtual networks, security perimeters, and the control logic that maintains availability, performance, and segmentation.</p>
+
+  <h2>🧱 Core Physical Components</h2>
+  <ul>
+    <li><strong>Routers:</strong> Interconnect different networks and route traffic based on IP addressing.</li>
+    <li><strong>Switches:</strong> Forward packets within LANs using MAC addresses. Core of internal network communication.</li>
+    <li><strong>Firewalls:</strong> Enforce access policies at the perimeter (network, host-based, next-gen).</li>
+    <li><strong>Access Points:</strong> Provide wireless connectivity, often centrally managed via controllers.</li>
+    <li><strong>Cabling:</strong> Copper (CAT5e/CAT6), Fiber optics (Single/Multi mode), patch panels, and structured cabling design.</li>
+    <li><strong>Patch Panels & Racks:</strong> Physical organization of cabling and equipment.</li>
+    <li><strong>Servers:</strong> Host DNS, DHCP, web, mail, authentication (LDAP/AD), or application services.</li>
+    <li><strong>Clients:</strong> Any end-user device: laptops, phones, printers, IoT, etc.</li>
+  </ul>
+
+  <h2>🧠 Logical & Virtual Components</h2>
+  <ul>
+    <li><strong>VLANs:</strong> Virtual LANs isolate logical groups within the same switch infrastructure.</li>
+    <li><strong>VRFs:</strong> Virtual Routing and Forwarding for multi-tenant routing.</li>
+    <li><strong>SDN (Software Defined Networking):</strong> Control plane is decoupled from the data plane (e.g., OpenFlow).</li>
+    <li><strong>VPN:</strong> Secure tunnels across untrusted networks (IPSec, SSL VPN, WireGuard).</li>
+    <li><strong>Overlay networks:</strong> VXLAN, GRE — encapsulate traffic over Layer 3 for scalability.</li>
+    <li><strong>Network Address Translation (NAT):</strong> Hides internal addressing; enables Internet access.</li>
+  </ul>
+
+  <h2>🛡️ Network Security Infrastructure</h2>
+  <ul>
+    <li><strong>Firewalls (L3–L7):</strong> Stateful filtering, Deep Packet Inspection, App-layer rules.</li>
+    <li><strong>WAF (Web Application Firewall):</strong> Protects web apps from XSS, SQLi, CSRF, etc.</li>
+    <li><strong>IDS/IPS:</strong> Intrusion Detection/Prevention Systems (e.g., Snort, Suricata).</li>
+    <li><strong>Proxy Servers:</strong> Filter and control outbound HTTP/HTTPS traffic.</li>
+    <li><strong>Zero Trust Architecture:</strong> No implicit trust across any perimeter, often enforced by microsegmentation.</li>
+    <li><strong>AAA Services:</strong> Authentication, Authorization, and Accounting (RADIUS, TACACS+).</li>
+    <li><strong>SIEM Integration:</strong> Aggregates logs from routers, firewalls, and servers (Splunk, ELK, etc.).</li>
+  </ul>
+
+  <h2>☁️ Cloud & Hybrid Infrastructures</h2>
+  <ul>
+    <li><strong>Cloud Networking:</strong> AWS VPCs, Azure VNets, GCP networks (with routing tables, subnets, security groups).</li>
+    <li><strong>Transit Gateways & Peering:</strong> Connect multiple cloud networks or hybrid setups securely.</li>
+    <li><strong>Virtual Firewalls & Load Balancers:</strong> Cloud-native defense mechanisms and traffic distribution (e.g., AWS NLB, Azure FrontDoor).</li>
+    <li><strong>Cloud WAF/CDN:</strong> Services like Cloudflare, Akamai, AWS Shield protect and accelerate traffic.</li>
+  </ul>
+
+  <h2>⚙️ Management, Monitoring & Automation</h2>
+  <ul>
+    <li><strong>SNMP:</strong> Network monitoring protocol used by tools like PRTG or Zabbix.</li>
+    <li><strong>NetFlow/sFlow:</strong> Collects flow data for analytics and anomaly detection.</li>
+    <li><strong>Syslog:</strong> Log transmission for audit and troubleshooting.</li>
+    <li><strong>Ansible/Nornir:</strong> Automate configuration deployments to Cisco/Juniper devices.</li>
+    <li><strong>RMM/Config Backup:</strong> Ensure version control of router/switch/firewall configurations.</li>
+  </ul>
+
+  <h2>🎛️ Protocols at Play</h2>
+  <ul>
+    <li><strong>ARP / DHCP / DNS:</strong> Foundational for network operation and resolution.</li>
+    <li><strong>OSPF / BGP:</strong> Dynamic routing protocols for internal/external path selection.</li>
+    <li><strong>Spanning Tree Protocol (STP):</strong> Loop prevention on switches.</li>
+    <li><strong>LLDP/CDP:</strong> Device discovery protocols.</li>
+    <li><strong>802.1X:</strong> Network access control protocol, often combined with NAC systems.</li>
+  </ul>
+
+  <h2>💬 Why It’s Complex</h2>
+  <p>Networks evolve. Modern environments span physical, virtual, cloud, and containerized ecosystems. Traffic encryption, segmentation, high availability, policy enforcement, user mobility, and cloud-native patterns all increase operational difficulty. Security teams must not only understand packet flow but enforce business logic, threat models, compliance, and performance — across layers, devices, vendors, and topologies.</p>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
