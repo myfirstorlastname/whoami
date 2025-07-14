@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Tools</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      background: #fefefe;
+      color: #222;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      color: #111;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1rem 0 2rem;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    .toc-list {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .toc-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #0366d6;
+      transition: background 0.2s;
+    }
+    .toc-list a.current {
+      background: #d6ebff;
+      font-weight: bold;
+      border-left: 4px solid #0366d6;
+    }
+    .sub-list {
+      margin-left: 1rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="toc-list">
+    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/Network/">Network</a>
+      <ul class="sub-list">
+        <li><a href="Network%20Security.html">↳ Network Security</a></li>
+        <li><a href="Network%20Tools.html" class="current">↳ Network Tools</a></li>
+        <li><a href="Network%20Course.html">↳ Network Course</a></li>
+        <li><a href="Network%20Infrastructure.html">↳ Network Infrastructure</a></li>
+      </ul>
+    </li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+  </ul>
+
+  <h1>🛠️ Network Tools</h1>
+  <blockquote>Essential tools used for network monitoring, analysis, and investigation in both offensive and defensive security.</blockquote>
+
+  <h2>🧠 About</h2>
+  <p>Network tools are critical for security professionals, sysadmins, and blue teamers. They help inspect traffic, identify anomalies, analyze packets, and trace malicious activities across the network.</p>
+  <p>This page summarizes my experience and use cases with some of the most common and powerful tools for network inspection and investigation.</p>
+
+  <h2>🔬 Packet Analysis Tools</h2>
+  <ul>
+    <li><strong>Wireshark</strong>: GUI-based packet analyzer. Perfect for dissecting protocols visually and in-depth.</li>
+    <li><strong>tshark</strong>: Terminal version of Wireshark. Ideal for headless systems or scripting.</li>
+    <li><strong>tcpdump</strong>: Lightweight command-line sniffer. Great for quick captures or scripting with <code>grep</code>, <code>awk</code>, etc.</li>
+  </ul>
+
+  <h2>🧪 Diagnostic & Traffic Tools</h2>
+  <ul>
+    <li><strong>Netcat</strong>: The “Swiss Army knife” of networking. Can create reverse shells, transfer files, or test ports.</li>
+    <li><strong>nmap</strong>: For scanning and enumerating hosts, open ports, services, and OS versions.</li>
+    <li><strong>ss</strong> / <strong>netstat</strong>: For viewing open sockets and established connections.</li>
+    <li><strong>iftop</strong> / <strong>iptraf-ng</strong>: Real-time bandwidth monitoring tools.</li>
+  </ul>
+
+  <h2>🔍 SOC/Blue Team Usage</h2>
+  <ul>
+    <li>Traffic filtering to detect suspicious payloads.</li>
+    <li>PCAP review during incident response or triage.</li>
+    <li>Correlating IP, ports, protocols, and timestamps from captured sessions.</li>
+    <li>Validating alerts from IDS/IPS systems (like Suricata or Snort).</li>
+  </ul>
+
+  <h2>🎓 My Recommendations</h2>
+  <ul>
+    <li>Always test tools in isolated lab environments first. Learn syntax and output.</li>
+    <li>Use <code>tcpdump -nn -i eth0 port 80</code> to quickly see HTTP traffic.</li>
+    <li>Combine <code>tshark</code> with <code>grep</code> or Python scripts for automated workflows.</li>
+    <li>Build your own PCAPs and analyze them. It’s the best way to learn traffic patterns.</li>
+  </ul>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
