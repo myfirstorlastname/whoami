@@ -1,1 +1,219 @@
-Coming Soon !
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0 auto;
+      padding: 0 1rem;
+      max-width: 1100px;
+      line-height: 1.6;
+      background-color: #fefefe;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 700px;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #111;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: all 0.2s ease-in-out;
+      display: block;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #f0f8ff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .image-container {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .toc-list, .toc-list ul, .toc-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #0366d6;
+    }
+
+    .toc-list a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .toc-list a.current {
+      font-weight: bold;
+      color: #111;
+      background-color: #d6ebff;
+      border-left: 4px solid #0366d6;
+    }
+
+    .sub-list {
+      margin-left: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <ul class="toc-list">
+    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/Network/" class="current">Network</a>
+      <ul class="sub-list">
+        <li><a href="https://myfirstorlastname.github.io/whoami/Network/Network%20Security">↳ Network Security</a></li>
+        <li><a href="https://myfirstorlastname.github.io/whoami/Network/Network%20Tools">↳ Network Tools</a></li>
+        <li><a href="https://myfirstorlastname.github.io/whoami/Network/Network%20Course">↳ Network Course</a></li>
+        <li><a href="https://myfirstorlastname.github.io/whoami/Network/Network%20Infrastructure%20Course">↳ Network Infrastructure Course</a></li>
+      </ul>
+    </li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+  </ul>
+
+  <header>
+    <h1>🌐 Network</h1>
+    <blockquote>"Everything begins with the network."</blockquote>
+  </header>
+
+  <section>
+    <h2>📖 What is a Network?</h2>
+    <p><strong>Professional definition (Cisco):</strong><br>
+    “<a href="https://www.cisco.com/site/us/en/learn/topics/networking/what-is-computer-networking.html">Computer networking</a> refers to connected computing devices (such as laptops, desktops, servers, smartphones, and tablets) and an ever-expanding array of IoT devices (such as cameras, door locks, doorbells, refrigerators, audio/visual systems, thermostats, and various sensors) that communicate with one another.”</p>
+
+    <p><strong>In plain English:</strong></p>
+    <ul>
+      <li>A network is a group of computers and devices that talk to each other.</li>
+      <li>It’s what lets your phone access the internet or send emails.</li>
+      <li>It connects your laptop to your printer, or your office to a cloud service.</li>
+      <li>Big companies use large networks to control how data flows securely between departments and systems.</li>
+    </ul>
+
+    <div class="image-container">
+      <!-- Replace this image with a suitable one if you prefer -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Computer_Network_Diagram.svg/1200px-Computer_Network_Diagram.svg.png" alt="Basic computer network diagram">
+      <p style="font-size: 0.85rem; color: #666;">Example of a simple computer network (source: Wikimedia Commons)</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>📚 Subsections</h2>
+    <div class="grid-container">
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/Network/Network%20Security">
+        <h3>🔐 Network Security</h3>
+        <p>TryHackMe module covering enumeration, scanning, and basic exploits on network services.</p>
+      </a>
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/Network/Network%20Tools">
+        <h3>🛠️ Network Tools</h3>
+        <p>Notes on Wireshark, Tshark, tcpdump, and other tools for packet inspection and traffic analysis.</p>
+      </a>
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/Network/Network%20Course">
+        <h3>🎓 Network Course</h3>
+        <p>Personal network fundamentals course based on my university background (Cisco Systems focused).</p>
+      </a>
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/Network/Network%20Infrastructure%20Course">
+        <h3>🏗️ Network Infrastructure Course</h3>
+        <p>Study of infrastructures: routers, firewalls, WAFs, clients and servers. Practical understanding of traffic flows.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
