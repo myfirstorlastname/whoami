@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Course (Cisco CLI)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      background: #fefefe;
+      color: #222;
+    }
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      color: #111;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1.5rem 0;
+    }
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .toc-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #0366d6;
+      transition: background 0.2s;
+    }
+    .toc-list a.current {
+      background: #d6ebff;
+      font-weight: bold;
+      border-left: 4px solid #0366d6;
+    }
+    .sub-list {
+      margin-left: 1rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="toc-list">
+    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/Network/">Network</a>
+      <ul class="sub-list">
+        <li><a href="Network%20Security.html">↳ Network Security</a></li>
+        <li><a href="Network%20Tools.html">↳ Network Tools</a></li>
+        <li><a href="Network%20Course.html" class="current">↳ Network Course</a></li>
+        <li><a href="Network%20Infrastructure.html">↳ Network Infrastructure</a></li>
+      </ul>
+    </li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+  </ul>
+
+  <h1>📚 Network Course (Cisco CLI)</h1>
+  <blockquote>Fundamentals of network configuration using Cisco IOS command-line interface. Based on university-level lab environments.</blockquote>
+
+  <h2>1. Initial Setup & Access</h2>
+  <ul>
+    <li>Enter privileged EXEC mode: <code>enable</code></li>
+    <li>Enter global config mode: <code>configure terminal</code></li>
+    <li>Set device hostname: <code>hostname Router1</code></li>
+    <li>Set privileged mode password:
+      <pre><code>enable secret strongpassword</code></pre>
+    </li>
+    <li>Encrypt plaintext passwords: <code>service password-encryption</code></li>
+  </ul>
+
+  <h2>2. Interface Configuration</h2>
+  <ul>
+    <li>Access interface: <code>interface FastEthernet0/0</code></li>
+    <li>Set IP and mask: <code>ip address 192.168.1.1 255.255.255.0</code></li>
+    <li>Enable interface: <code>no shutdown</code></li>
+    <li>Exit interface: <code>exit</code></li>
+  </ul>
+
+  <h2>3. Static Routing</h2>
+  <ul>
+    <li>Add static route:
+      <pre><code>ip route 192.168.2.0 255.255.255.0 10.0.0.2</code></pre>
+    </li>
+    <li>Default route:
+      <pre><code>ip route 0.0.0.0 0.0.0.0 192.168.1.254</code></pre>
+    </li>
+  </ul>
+
+  <h2>4. VLANs & Trunking (Switch)</h2>
+  <ul>
+    <li>Create VLAN: <code>vlan 10</code></li>
+    <li>Name VLAN: <code>name HR</code></li>
+    <li>Assign interface to VLAN:
+      <pre><code>
+interface FastEthernet0/1
+switchport mode access
+switchport access vlan 10
+      </code></pre>
+    </li>
+    <li>Configure trunk:
+      <pre><code>
+interface FastEthernet0/24
+switchport mode trunk
+      </code></pre>
+    </li>
+  </ul>
+
+  <h2>5. DHCP Configuration</h2>
+  <ul>
+    <li>Exclude IPs:
+      <pre><code>ip dhcp excluded-address 192.168.1.1 192.168.1.10</code></pre>
+    </li>
+    <li>DHCP pool config:
+      <pre><code>
+ip dhcp pool LAN
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+dns-server 8.8.8.8
+      </code></pre>
+    </li>
+  </ul>
+
+  <h2>6. NAT Configuration</h2>
+  <ul>
+    <li>Define inside/outside interfaces:
+      <pre><code>
+interface fa0/0
+ip nat inside
+interface fa0/1
+ip nat outside
+      </code></pre>
+    </li>
+    <li>Set up source NAT:
+      <pre><code>
+access-list 1 permit 192.168.1.0 0.0.0.255
+ip nat inside source list 1 interface fa0/1 overload
+      </code></pre>
+    </li>
+  </ul>
+
+  <h2>7. ACL (Access Control List)</h2>
+  <ul>
+    <li>Standard ACL (inbound block):
+      <pre><code>
+access-list 1 deny 192.168.1.50
+access-list 1 permit any
+interface fa0/0
+ip access-group 1 in
+      </code></pre>
+    </li>
+    <li>Extended ACL (block port 80):
+      <pre><code>
+access-list 100 deny tcp any any eq 80
+access-list 100 permit ip any any
+interface fa0/0
+ip access-group 100 in
+      </code></pre>
+    </li>
+  </ul>
+
+  <h2>8. Useful Show & Save Commands</h2>
+  <ul>
+    <li><code>show ip interface brief</code> – check IP assignments</li>
+    <li><code>show running-config</code> – current config</li>
+    <li><code>copy running-config startup-config</code> – save to NVRAM</li>
+    <li><code>show vlan brief</code> – list VLANs</li>
+    <li><code>show ip route</code> – verify routing table</li>
+    <li><code>show version</code> – check IOS version and hardware info</li>
+  </ul>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
