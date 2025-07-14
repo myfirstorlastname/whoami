@@ -7,6 +7,7 @@ body {
   line-height: 1.6;
   background-color: #fefefe;
   color: #222;
+  margin-left: 270px; /* Décalage pour la TOC */
 }
 
 /* === HEADER === */
@@ -188,4 +189,33 @@ footer {
   text-align: center;
   border-top: 1px solid #ddd;
   padding-top: 1rem;
+}
+
+/* === RESPONSIVE TOC BEHAVIOR === */
+@media (max-width: 800px) {
+  body {
+    margin-left: 0;
+  }
+
+  .toc-list {
+    position: static;
+    width: auto;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .sub-list {
+    position: static;
+    display: block !important;
+    box-shadow: none;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+  }
+
+  .toc-wrapper {
+    width: 100%;
+  }
 }
