@@ -110,9 +110,7 @@ code {
   font-size: 0.95rem;
   z-index: 1000;
 }
-.toc-list,
-.toc-list ul,
-.toc-list li {
+.toc-list ul, .toc-list li {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -134,7 +132,16 @@ code {
   background-color: #d6ebff;
   border-left: 4px solid #0366d6;
 }
-
+.toc-section {
+  position: relative;
+}
+.toc-section:hover .sub-list {
+  display: block;
+}
+.toc-rank-label {
+  font-weight: bold;
+  color: #000;
+}
 /* === TOC RANK TITLES === */
 .toc-list li[data-rank="expert"] > a::before {
   content: "👑 Expert: ";
@@ -150,7 +157,7 @@ code {
 }
 
 /* === INTERACTIVE SUB-TOC ON HOVER === */
-.sub-toc {
+.sub-list {
   display: none;
   position: fixed;
   top: 1rem;
@@ -164,15 +171,12 @@ code {
   width: 200px;
   z-index: 999;
 }
-.toc-list li:hover .sub-toc {
-  display: block;
-}
-.sub-toc a {
+.sub-list a {
   display: block;
   margin-bottom: 0.3rem;
   color: #0366d6;
 }
-.sub-toc a:hover {
+.sub-list a:hover {
   text-decoration: underline;
 }
 
