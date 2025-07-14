@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Protocols</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+      background: #fefefe;
+      color: #222;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      color: #111;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      background: #f4f4f4;
+      border-left: 4px solid #ccc;
+      padding: 1rem;
+      margin: 1.5rem 0;
+    }
+    .toc-list {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 240px;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .toc-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .toc-list a {
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #0366d6;
+      transition: background 0.2s;
+    }
+    .toc-list a.current {
+      background: #d6ebff;
+      font-weight: bold;
+      border-left: 4px solid #0366d6;
+    }
+    .sub-list {
+      margin-left: 1rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <ul class="toc-list">
+    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/Network/">Network</a>
+      <ul class="sub-list">
+        <li><a href="Network%20Security.html">↳ Network Security</a></li>
+        <li><a href="Network%20Tools.html">↳ Network Tools</a></li>
+        <li><a href="Network%20Course.html">↳ Network Course</a></li>
+        <li><a href="Network%20Infrastructure.html">↳ Network Infrastructure</a></li>
+        <li><a href="Network%20Protocols.html" class="current">↳ Network Protocols</a></li>
+      </ul>
+    </li>
+    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
+  </ul>
+
+  <h1>🛰️ Network Protocols</h1>
+  <blockquote>The invisible language of the internet — protocols shape every layer, every byte, and every interaction across the global web.</blockquote>
+
+  <h2>📌 What Are Network Protocols?</h2>
+  <p>A network protocol is a standardized set of rules that determine how data is transmitted between devices in a network. Protocols govern syntax, semantics, synchronization, and error handling across physical, transport, and application layers.</p>
+  <p>Without protocols, devices couldn’t understand or trust the communication they receive — there would be no web, email, streaming, or VPNs.</p>
+
+  <h2>🧱 Protocols by OSI Layer</h2>
+
+  <h3>📶 Layer 1 – Physical</h3>
+  <ul>
+    <li><strong>Ethernet (IEEE 802.3):</strong> Electrical/optical signaling and data transmission over copper or fiber.</li>
+    <li><strong>DSL / DOCSIS / Fiber Channel:</strong> Define line coding, modulation, and channel bandwidth.</li>
+  </ul>
+
+  <h3>🔗 Layer 2 – Data Link</h3>
+  <ul>
+    <li><strong>MAC (Media Access Control):</strong> Addressing and access to shared media.</li>
+    <li><strong>ARP (Address Resolution Protocol):</strong> Maps IP → MAC within the same LAN.</li>
+    <li><strong>LLDP / CDP:</strong> Device discovery protocols (vendor-neutral and Cisco-specific).</li>
+    <li><strong>PPP / HDLC:</strong> Used on serial links and WAN lines.</li>
+  </ul>
+
+  <h3>🌍 Layer 3 – Network</h3>
+  <ul>
+    <li><strong>IPv4 / IPv6:</strong> Logical addressing, fragmentation, and routing.</li>
+    <li><strong>ICMP / ICMPv6:</strong> Diagnostics, error reporting (e.g., <code>ping</code>, <code>traceroute</code>).</li>
+    <li><strong>OSPF / EIGRP / BGP:</strong> Dynamic routing protocols:
+      <ul>
+        <li><strong>OSPF:</strong> Link-state; builds a full map of the network.</li>
+        <li><strong>BGP:</strong> Border Gateway Protocol; core of the Internet routing table.</li>
+        <li><strong>EIGRP:</strong> Cisco-proprietary hybrid routing.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>📦 Layer 4 – Transport</h3>
+  <ul>
+    <li><strong>TCP:</strong> Reliable, ordered delivery. Implements congestion and flow control.</li>
+    <li><strong>UDP:</strong> Lightweight, connectionless. Used for streaming, DNS, SNMP.</li>
+    <li><strong>SCTP:</strong> Multi-stream, message-oriented transport protocol. Mostly used in telecom (e.g., 5G).</li>
+  </ul>
+
+  <h3>📨 Layer 5-6 – Session & Presentation</h3>
+  <ul>
+    <li><strong>SSL / TLS:</strong> Encrypts sessions at higher layers. TLS 1.3 is now standard.</li>
+    <li><strong>NetBIOS:</strong> Legacy session management protocol (Windows networks).</li>
+    <li><strong>MIME:</strong> Encodes multimedia (emails, HTTP payloads).</li>
+  </ul>
+
+  <h3>🌐 Layer 7 – Application</h3>
+  <ul>
+    <li><strong>HTTP / HTTPS:</strong> Web communication protocols. RESTful APIs ride on top.</li>
+    <li><strong>DNS:</strong> Resolves hostnames to IPs (critical for every network app).</li>
+    <li><strong>SMTP / IMAP / POP3:</strong> Email protocols for sending/receiving.</li>
+    <li><strong>FTP / SFTP / TFTP:</strong> File transfer protocols (plaintext vs. encrypted).</li>
+    <li><strong>SSH:</strong> Secure remote access. Often used for tunneling and automation.</li>
+    <li><strong>SNMP:</strong> Monitor and manage network devices.</li>
+    <li><strong>DHCP:</strong> Assigns dynamic IPs, gateways, and DNS configurations to clients.</li>
+    <li><strong>LDAP:</strong> Directory-based authentication (used in AD and enterprise SSO).</li>
+  </ul>
+
+  <h2>🧠 Specialized Protocols</h2>
+  <ul>
+    <li><strong>VXLAN:</strong> Overlay networking in data centers. Encapsulates Layer 2 over Layer 3.</li>
+    <li><strong>GRE:</strong> Encapsulates many protocols (including IP-in-IP).</li>
+    <li><strong>IPSec:</strong> Secure tunneling at IP layer. Used in VPNs.</li>
+    <li><strong>mDNS:</strong> Zeroconf protocol for local device discovery (e.g., printers).</li>
+    <li><strong>RADIUS / TACACS+:</strong> Centralized authentication, especially for network devices.</li>
+    <li><strong>MQTT / AMQP / CoAP:</strong> Lightweight messaging protocols in IoT ecosystems.</li>
+  </ul>
+
+  <h2>⚙️ Protocol Stack Complexity</h2>
+  <p>Protocols often overlap and coexist in layered stacks. A single HTTPS request may involve:</p>
+  <ul>
+    <li>Ethernet (L2)</li>
+    <li>IPv6 (L3)</li>
+    <li>TCP (L4)</li>
+    <li>TLS 1.3 (L5–6)</li>
+    <li>HTTP/2 (L7)</li>
+  </ul>
+  <p>And this is just for a browser loading a webpage. Add authentication (LDAP, RADIUS), cloud firewall inspection (WAF), load balancers, and DNS resolution, and the stack becomes a labyrinth of encapsulated protocols and state machines.</p>
+
+  <h2>🔐 Protocols and Security</h2>
+  <ul>
+    <li><strong>SSL stripping, downgrade attacks:</strong> Exploit protocol negotiation flaws.</li>
+    <li><strong>DNS poisoning, spoofing:</strong> Breaks name resolution trust.</li>
+    <li><strong>Malformed packets:</strong> Trigger parsing bugs in protocol stacks (e.g., IPv6 extension headers).</li>
+    <li><strong>Protocol tunneling:</strong> Hide traffic inside allowed protocols (DNS tunneling, ICMP tunneling).</li>
+  </ul>
+
+  <footer>
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+</body>
+</html>
