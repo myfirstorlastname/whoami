@@ -94,6 +94,10 @@ code {
 }
 
 /* === TOC MAIN (LEFT) === */
+.toc-wrapper {
+  position: relative;
+  width: 260px;
+}
 .toc-list {
   position: fixed;
   top: 1rem;
