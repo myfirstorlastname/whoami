@@ -4,96 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Network Infrastructure</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      line-height: 1.6;
-      background: #fefefe;
-      color: #222;
-    }
-    h1, h2, h3 {
-      font-weight: 700;
-      color: #111;
-      margin-top: 2rem;
-      margin-bottom: 0.8rem;
-    }
-    code {
-      background: #eee;
-      padding: 2px 5px;
-      border-radius: 3px;
-      font-family: monospace;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
-    blockquote {
-      font-style: italic;
-      color: #555;
-      background: #f4f4f4;
-      border-left: 4px solid #ccc;
-      padding: 1rem;
-      margin: 1.5rem 0;
-    }
-    .toc-list {
-      background-color: #f4f4f4;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-      max-width: 240px;
-      margin-bottom: 2rem;
-      font-size: 0.95rem;
-    }
-    .toc-list ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .toc-list a {
-      display: block;
-      padding: 0.3rem 0.5rem;
-      border-radius: 4px;
-      text-decoration: none;
-      color: #0366d6;
-      transition: background 0.2s;
-    }
-    .toc-list a.current {
-      background: #d6ebff;
-      font-weight: bold;
-      border-left: 4px solid #0366d6;
-    }
-    .sub-list {
-      margin-left: 1rem;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #666;
-      text-align: center;
-      border-top: 1px solid #ddd;
-      padding-top: 1rem;
-    }
-  </style>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
-  <ul class="toc-list">
-    <li><a href="https://myfirstorlastname.github.io/whoami/">Whoami</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/OSCP">OSCP</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/">Active Directory</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/System/">System</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/SOC/">SOC</a></li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/Network/">Network</a>
-      <ul class="sub-list">
-        <li><a href="Network%20Security.html">↳ Network Security</a></li>
-        <li><a href="Network%20Tools.html">↳ Network Tools</a></li>
-        <li><a href="Network%20Course.html">↳ Network Course</a></li>
-        <li><a href="Network%20Infrastructure.html" class="current">↳ Network Infrastructure</a></li>
-      </ul>
-    </li>
-    <li><a href="https://myfirstorlastname.github.io/whoami/WebHacking/">Web Hacking</a></li>
-  </ul>
+  <div id="toc-container"></div>
+  <script>
+    fetch("https://myfirstorlastname.github.io/whoami/toc.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("toc-container").innerHTML = data;
+      });
+  </script>
 
   <h1>🏗️ Network Infrastructure</h1>
   <blockquote>Understanding modern network infrastructure: complexity, components, protocols, and defense layers.</blockquote>
