@@ -221,3 +221,14 @@ footer {
     width: 100%;
   }
 }
+.toc-list a,
+.toc-list a:visited,
+.toc-list a:active {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+.toc-list a:hover {
+  color: #000 !important;
+  text-decoration: underline;
+}
