@@ -146,17 +146,22 @@ code {
   color: #000;
 }
 /* === TOC RANK TITLES === */
-.toc-list li[data-rank="expert"] > a::before {
-  content: "👑 Expert: ";
+.toc-rank-label::after {
+  font-size: 1rem;
+  margin-left: 0.4em;
 }
-.toc-list li[data-rank="master"] > a::before {
-  content: "🥇 Master: ";
+
+[data-rank="expert"] > .toc-rank-label::after {
+  content: " 👑";
 }
-.toc-list li[data-rank="advanced"] > a::before {
-  content: "🥈 Advanced: ";
+[data-rank="master"] > .toc-rank-label::after {
+  content: " 🥇";
 }
-.toc-list li[data-rank="good"] > a::before {
-  content: "🥉 Good: ";
+[data-rank="advanced"] > .toc-rank-label::after {
+  content: " 🥈";
+}
+[data-rank="good"] > .toc-rank-label::after {
+  content: " 🥉";
 }
 
 /* === INTERACTIVE SUB-TOC ON HOVER === */
