@@ -168,7 +168,7 @@ code {
 .sub-list {
   display: none;
   position: fixed;
-  top: 0; /* aligné en haut pour l’instant */
+  top: 0rem;
   left: 245px;
   background-color: #fafafa;
   border: 1px solid #ccc;
