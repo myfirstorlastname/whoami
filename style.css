@@ -168,8 +168,9 @@ code {
 .sub-list {
   display: none;
   position: absolute;
-  top: 0rem;
-  left: 230px;
+  top: 0;
+  left: 100%; /* S'aligne juste à droite du bloc parent */
+  margin-left: 8px; /* Petit espace entre TOC principale et sous-TOC */
   background-color: #fafafa;
   border: 1px solid #ccc;
   padding: 1rem;
