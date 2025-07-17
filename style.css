@@ -167,7 +167,7 @@ code {
 /* === INTERACTIVE SUB-TOC ON HOVER === */
 .sub-list {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 0rem;
   left: 245px;
   background-color: #fafafa;
