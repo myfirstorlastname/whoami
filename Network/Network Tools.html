@@ -9,12 +9,29 @@
 <body>
   <div id="toc-container"></div>
   <script>
-    fetch("https://myfirstorlastname.github.io/whoami/toc.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("toc-container").innerHTML = data;
+  fetch("https://myfirstorlastname.github.io/whoami/toc.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("toc-container").innerHTML = data;
+
+      // === Ajout logique "current" après injection de la TOC ===
+      const currentUrl = window.location.href;
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      tocLinks.forEach(link => {
+        if (link.href === currentUrl) {
+          link.classList.add('current');
+
+          // Si le lien est dans une sous-liste, rendre la sous-liste visible
+          const subList = link.closest('.sub-list');
+          if (subList) {
+            subList.style.display = 'block';
+            subList.classList.add("open");
+          }
+        }
       });
-  </script>
+    });
+</script>
 
   <h1>🛠️ Network Tools</h1>
   <blockquote>Essential tools used for network monitoring, analysis, and investigation in both offensive and defensive security.</blockquote>
