@@ -7,7 +7,7 @@ body {
   line-height: 1.6;
   background-color: #fefefe;
   color: #222;
-  margin-left: 270px; /* Décalage pour la TOC */
+  margin-left: 440px; /* Décalage pour la TOC */
 }
 
 /* === HEADER === */
@@ -169,7 +169,7 @@ code {
   display: none;
   position: absolute;
   top: 0rem;
-  left: 245px;
+  left: 200px;
   background-color: #fafafa;
   border: 1px solid #ccc;
   padding: 1rem;
