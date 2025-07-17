@@ -97,7 +97,7 @@ code {
 /* === TOC MAIN (LEFT) === */
 .toc-wrapper {
   position: relative;
-  width: 260px;
+  width: 430px;
 }
 .toc-list {
   position: fixed;
@@ -107,7 +107,7 @@ code {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
-  width: 230px;
+  width: 400px;
   font-size: 0.95rem;
   z-index: 1000;
 }
