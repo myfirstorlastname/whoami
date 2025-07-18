@@ -99,6 +99,7 @@ code {
   position: relative;
   width: 430px;
 }
+
 .toc-list {
   position: fixed;
   top: 1rem;
@@ -110,6 +111,21 @@ code {
   width: 400px;
   font-size: 0.95rem;
   z-index: 1000;
+
+  max-height: 95vh;       /* Scroll interne pour TOC longue */
+  overflow-y: auto;
+}
+
+/* Scrollbar design */
+.toc-list::-webkit-scrollbar {
+  width: 6px;
+}
+.toc-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+.toc-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 .toc-list ul, .toc-list li {
   list-style: none;
