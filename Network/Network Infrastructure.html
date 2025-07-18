@@ -22,16 +22,15 @@
         if (link.href === currentUrl) {
           link.classList.add('current');
 
-          // Si le lien est dans une sous-liste, rendre la sous-liste visible
-          const subList = link.closest('.sub-list');
-          if (subList) {
-            subList.style.display = 'block';
-            subList.classList.add("open");
+          const subListItem = link.closest('li');
+          if (subListItem) {
+            subListItem.classList.add('current-only');
           }
         }
       });
     });
 </script>
+
 
   <h1>🏗️ Network Infrastructure</h1>
   <blockquote>Understanding modern network infrastructure: complexity, components, protocols, and defense layers.</blockquote>
