@@ -111,8 +111,7 @@ code {
   width: 400px;
   font-size: 0.95rem;
   z-index: 1000;
-
-  max-height: 95vh;       /* Scroll interne pour TOC longue */
+  max-height: 95vh;
   overflow-y: auto;
 }
 
@@ -127,60 +126,62 @@ code {
 .toc-list::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .toc-list ul, .toc-list li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.toc-list a {
+
+.toc-list a,
+.toc-list a:visited,
+.toc-list a:active {
   display: block;
   padding: 0.3rem 0.5rem;
   border-radius: 4px;
   transition: all 0.2s ease;
   text-decoration: none;
-  color: #0366d6;
+  color: #000 !important;
 }
+
 .toc-list a:hover {
   background-color: #e0e0e0;
+  text-decoration: underline;
 }
+
 .toc-list a.current {
   font-weight: bold;
-  color: #111;
   background-color: #d6ebff;
   border-left: 4px solid #0366d6;
+  color: #111 !important;
 }
+
 .toc-section {
   position: relative;
   display: flex;
   flex-direction: column;
 }
+
 .toc-section:hover .sub-list {
   display: block;
 }
+
 .toc-rank-label {
   font-weight: bold;
   color: #000;
 }
+
 /* === TOC RANK TITLES === */
 .toc-rank-label::after {
   font-size: 1rem;
   margin-left: 0.4em;
 }
+[data-rank="expert"] > .toc-rank-label::after { content: " 👑"; }
+[data-rank="master"] > .toc-rank-label::after { content: " 🥇"; }
+[data-rank="advanced"] > .toc-rank-label::after { content: " 🥈"; }
+[data-rank="good"] > .toc-rank-label::after { content: " 🥉"; }
 
-[data-rank="expert"] > .toc-rank-label::after {
-  content: " 👑";
-}
-[data-rank="master"] > .toc-rank-label::after {
-  content: " 🥇";
-}
-[data-rank="advanced"] > .toc-rank-label::after {
-  content: " 🥈";
-}
-[data-rank="good"] > .toc-rank-label::after {
-  content: " 🥉";
-}
-
-/* === INTERACTIVE SUB-TOC ON HOVER === */
+/* === INTERACTIVE SUB-TOC ON HOVER + CURRENT === */
 .sub-list {
   display: none;
   position: absolute;
@@ -195,10 +196,20 @@ code {
   width: 200px;
   z-index: 10;
 }
+
+.sub-list li {
+  display: none;
+}
+.toc-section:hover .sub-list li {
+  display: block;
+}
+.sub-list li.current-only {
+  display: block;
+}
+
 .sub-list a {
   display: block;
   margin-bottom: 0.3rem;
-  color: #0366d6;
 }
 .sub-list a:hover {
   text-decoration: underline;
@@ -207,6 +218,7 @@ code {
   display: block;
   z-index: 1;
 }
+
 /* === FOOTER === */
 footer {
   margin-top: 3rem;
@@ -230,6 +242,8 @@ footer {
     background: none;
     padding: 0;
     margin-bottom: 2rem;
+    max-height: none;
+    overflow-y: visible;
   }
 
   .sub-list {
@@ -244,15 +258,8 @@ footer {
   .toc-wrapper {
     width: 100%;
   }
-}
-.toc-list a,
-.toc-list a:visited,
-.toc-list a:active {
-  color: #000 !important;
-  text-decoration: none;
-}
 
-.toc-list a:hover {
-  color: #000 !important;
-  text-decoration: underline;
+  .sub-list li {
+    display: block !important;
+  }
 }
