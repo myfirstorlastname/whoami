@@ -8,30 +8,6 @@
 </head>
 <body>
   <div id="toc-container"></div>
-  <script>
-  fetch("https://myfirstorlastname.github.io/whoami/toc.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("toc-container").innerHTML = data;
-
-      // === Ajout logique "current" après injection de la TOC ===
-      const currentUrl = window.location.href;
-      const tocLinks = document.querySelectorAll('.toc-list a');
-
-      tocLinks.forEach(link => {
-        if (link.href === currentUrl) {
-          link.classList.add('current');
-
-          // Si le lien est dans une sous-liste, rendre la sous-liste visible
-          const subList = link.closest('.sub-list');
-          if (subList) {
-            subList.style.display = 'block';
-            subList.classList.add("open");
-          }
-        }
-      });
-    });
-</script>
 
   <h1>📚 Network Course (Cisco CLI)</h1>
   <blockquote>Fundamentals of network configuration using Cisco IOS command-line interface. Based on university-level lab environments.</blockquote>
@@ -150,5 +126,6 @@ ip access-group 100 in
   <footer>
     For context and contact, please refer to the CV associated with this GitHub profile.
   </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
