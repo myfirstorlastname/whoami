@@ -9,7 +9,7 @@
 <body>
   <div id="toc-container"></div>
   <script>
-  fetch("https://myfirstorlastname.github.io/whoami/test.html")
+  fetch("https://myfirstorlastname.github.io/whoami/toc.html")
     .then(response => response.text())
     .then(data => {
       document.getElementById("toc-container").innerHTML = data;
@@ -22,11 +22,9 @@
         if (link.href === currentUrl) {
           link.classList.add('current');
 
-          // Si le lien est dans une sous-liste, rendre la sous-liste visible
-          const subList = link.closest('.sub-list');
-          if (subList) {
-            subList.style.display = 'block';
-            subList.classList.add("open");
+          const subListItem = link.closest('li');
+          if (subListItem) {
+            subListItem.classList.add('current-only');
           }
         }
       });
