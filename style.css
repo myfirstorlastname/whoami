@@ -263,12 +263,23 @@ footer {
     display: block !important;
   }
 }
-#toc-toggle-btn {
-  background-color: #eee;
-  border: 1px solid #bbb;
+.toc-toggle-btn-container {
+  position: fixed;
+  top: 0.5rem;
+  left: 1rem;
+  z-index: 1500;
+}
+
+#toggleTocBtn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  background-color: #0366d6;
+  color: white;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-#toc-toggle-btn:hover {
-  background-color: #ddd;
+#toggleTocBtn:hover {
+  background-color: #024ea2;
 }
