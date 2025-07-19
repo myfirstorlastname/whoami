@@ -1,4 +1,4 @@
-let currentTOC = "themes"; // Initial TOC
+let currentTOC = "themes"; // "themes" ou "origin"
 
 function loadTOC(mode) {
   const tocUrl = mode === "themes"
@@ -8,15 +8,9 @@ function loadTOC(mode) {
   fetch(tocUrl)
     .then(response => response.text())
     .then(data => {
-      // Inject TOC + bouton de bascule
-      const toggleButton = `
-        <button id="toc-toggle-btn" style="margin-bottom: 1rem; padding: 5px 10px; font-size: 0.9rem;">
-          Switch to ${mode === "themes" ? "Origin View" : "Thematic View"}
-        </button>
-      `;
-      document.getElementById("toc-container").innerHTML = toggleButton + data;
+      document.getElementById("toc-container").innerHTML = data;
 
-      // Highlight current page
+      // Marquage du lien courant
       const currentUrl = window.location.href;
       const tocLinks = document.querySelectorAll('.toc-list a');
       tocLinks.forEach(link => {
@@ -29,11 +23,14 @@ function loadTOC(mode) {
         }
       });
 
-      // Setup toggle
-      document.getElementById("toc-toggle-btn").onclick = () => {
-        currentTOC = currentTOC === "themes" ? "origin" : "themes";
-        loadTOC(currentTOC);
-      };
+      // Branche le bouton (après injection dynamique)
+      const toggleBtn = document.getElementById("toc-toggle-btn");
+      if (toggleBtn) {
+        toggleBtn.onclick = () => {
+          currentTOC = currentTOC === "themes" ? "origin" : "themes";
+          loadTOC(currentTOC);
+        };
+      }
     });
 }
 
