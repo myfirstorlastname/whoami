@@ -263,3 +263,12 @@ footer {
     display: block !important;
   }
 }
+#toc-toggle-btn {
+  background-color: #eee;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#toc-toggle-btn:hover {
+  background-color: #ddd;
+}
