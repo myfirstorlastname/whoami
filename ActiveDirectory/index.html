@@ -30,39 +30,19 @@
   </section>
 
   <section>
-    <h2>💥 TryHackMe – Red Team Courses</h2>
-    <div class="grid-container">
-      <a class="card" href="https://tryhackme.com/module/hacking-windows-1" target="_blank">
-        <h3>🧨 Windows Exploitation Basics</h3>
-        <p>Core Windows concepts, Metasploit, AD fundamentals</p>
-      </a>
-      <a class="card" href="https://tryhackme.com/module/breakingwindows" target="_blank">
-        <h3>💣💣 Breaking Windows</h3>
-        <p>Compromising real Windows AD environments</p>
-      </a>
-      <a class="card" href="https://tryhackme.com/module/hacking-active-directory" target="_blank">
-        <h3>☢️☢️☢️ Compromising AD</h3>
-        <p>Breaching, enumerating, persisting in AD networks</p>
-      </a>
-    </div>
-  </section>
-
-  <section>
-    <h2>🛡️ TryHackMe – Blue Team Courses</h2>
-    <div class="grid-container">
-      <a class="card" href="https://tryhackme.com/module/incident-response-and-forensics" target="_blank">
-        <h3>🛡️ Incident Response & Forensics</h3>
-        <p>Windows forensics, Autopsy, Volatility</p>
-      </a>
-      <a class="card" href="https://tryhackme.com/room/activedirectoryhardening" target="_blank">
-        <h3>🛡️🛡️ AD Hardening</h3>
-        <p>Group policy, Least Privilege, Attack mitigation</p>
-      </a>
-      <a class="card" href="https://tryhackme.com/room/recoveringactivedirectory" target="_blank">
-        <h3>💎💎💎 Recovering AD</h3>
-        <p>Post-compromise recovery & analysis</p>
-      </a>
-    </div>
+  <h2>🔐 Overview</h2>
+  <p>
+    Active Directory (AD) is Microsoft's centralized identity and access management system used in most enterprise environments. It controls authentication, user roles, group policies, and access to resources across the domain.
+  </p>
+  <p>
+    <strong>Defensive Perspective:</strong> Securing AD involves implementing strong Group Policies (GPOs), enforcing tiered administration, auditing critical changes, and monitoring for anomalous behaviors. Modern environments also integrate multifactor authentication (MFA) and privileged access management (PAM).
+  </p>
+  <p>
+    <strong>Red Team Perspective:</strong> AD is often the prime target for attackers. Typical goals include credential harvesting, lateral movement, and domain privilege escalation. Tools like BloodHound and SharpHound assist in <strong>AD enumeration</strong>, identifying misconfigurations and privilege paths that can be abused to reach Domain Admin—a full compromise of identity infrastructure.
+  </p>
+  <p>
+    Understanding both attack and defense in AD is essential for securing enterprise-scale environments.
+  </p>
   </section>
 
   <footer>
