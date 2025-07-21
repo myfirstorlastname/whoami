@@ -160,19 +160,6 @@ code {
   color: #111 !important;
 }
 
-.toc-title {
-  font-size: 1rem;
-  font-weight: bold;
-  display: block;
-  margin: 0.8rem 0 0.2rem 0rem;
-  color: #000;
-  text-decoration: none;
-}
-
-.toc-title:hover {
-  text-decoration: underline;
-}
-
 /* Sous-titres (ex: Red Team, Blue Team) */
 .toc-subtitle {
   font-size: 1rem;
