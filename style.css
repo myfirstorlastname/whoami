@@ -10,13 +10,6 @@ body {
   margin-left: 440px; /* Décalage pour la TOC */
 }
 
-.toc-subtitle {
-  font-size: 0.85rem;
-  font-weight: bold;
-  margin: 0.8rem 0 0.2rem 0.5rem;
-  color: #555;
-}
-
 /* === HEADER === */
 header {
   text-align: center;
@@ -120,6 +113,13 @@ code {
   z-index: 1000;
   max-height: 95vh;
   overflow-y: auto;
+}
+
+.toc-subtitle {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 0.8rem 0 0.2rem 0.5rem;
+  color: #555;
 }
 
 /* Scrollbar design */
