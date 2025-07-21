@@ -94,7 +94,7 @@ code {
   color: #444;
 }
 
-/* === TOC MAIN (LEFT) === */
+/* === TOC (TABLE OF CONTENTS) === */
 .toc-wrapper {
   position: relative;
   width: 430px;
@@ -115,13 +115,6 @@ code {
   overflow-y: auto;
 }
 
-.toc-subtitle {
-  font-size: 0.85rem;
-  font-weight: bold;
-  margin: 0.8rem 0 0.2rem 0.5rem;
-  color: #555;
-}
-
 /* Scrollbar design */
 .toc-list::-webkit-scrollbar {
   width: 6px;
@@ -134,35 +127,47 @@ code {
   background: transparent;
 }
 
+/* TOC STRUCTURE */
 .toc-list ul, .toc-list li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+/* TOC Elements (<a> and <p>) */
 .toc-list a,
-.toc-list a:visited,
-.toc-list a:active {
+.toc-list p.toc-rank-label {
   display: block;
   padding: 0.3rem 0.5rem;
   border-radius: 4px;
   transition: all 0.2s ease;
-  text-decoration: none;
   color: #000 !important;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.toc-list a:hover {
+.toc-list a:hover,
+.toc-list p.toc-rank-label:hover {
   background-color: #e0e0e0;
   text-decoration: underline;
 }
 
+/* TOC active page */
 .toc-list a.current {
-  font-weight: bold;
   background-color: #d6ebff;
   border-left: 4px solid #0366d6;
   color: #111 !important;
 }
 
+/* Sous-titres (ex: Red Team, Blue Team) */
+.toc-subtitle {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 0.8rem 0 0.2rem 0.5rem;
+  color: #555;
+}
+
+/* TOC Section */
 .toc-section {
   position: relative;
   display: flex;
@@ -173,16 +178,7 @@ code {
   display: block;
 }
 
-.toc-rank-label {
-  font-weight: bold;
-  color: #000;
-  display: block;
-  padding: 0.3rem 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-/* === TOC RANK TITLES === */
+/* TOC Rank Icons */
 .toc-rank-label::after {
   font-size: 1rem;
   margin-left: 0.4em;
@@ -192,7 +188,7 @@ code {
 [data-rank="advanced"] > .toc-rank-label::after { content: " 🥈"; }
 [data-rank="good"] > .toc-rank-label::after { content: " 🥉"; }
 
-/* === INTERACTIVE SUB-TOC ON HOVER + CURRENT === */
+/* === SUB-LIST === */
 .sub-list {
   display: none;
   position: absolute;
@@ -207,7 +203,6 @@ code {
   width: 200px;
   z-index: 10;
 }
-
 .sub-list li {
   display: none;
 }
@@ -217,7 +212,6 @@ code {
 .sub-list li.current-only {
   display: block;
 }
-
 .sub-list a {
   display: block;
   margin-bottom: 0.3rem;
@@ -238,6 +232,28 @@ footer {
   text-align: center;
   border-top: 1px solid #ddd;
   padding-top: 1rem;
+}
+
+/* === TOC TOGGLE BUTTON (Fixed position) === */
+.toc-toggle-btn-container {
+  position: fixed;
+  top: 0.5rem;
+  left: 1rem;
+  z-index: 1500;
+}
+
+#toggleTocBtn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  background-color: #0366d6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+#toggleTocBtn:hover {
+  background-color: #024ea2;
 }
 
 /* === RESPONSIVE TOC BEHAVIOR === */
@@ -273,24 +289,9 @@ footer {
   .sub-list li {
     display: block !important;
   }
-}
-.toc-toggle-btn-container {
-  position: fixed;
-  top: 0.5rem;
-  left: 1rem;
-  z-index: 1500;
-}
 
-#toggleTocBtn {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.9rem;
-  background-color: #0366d6;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-#toggleTocBtn:hover {
-  background-color: #024ea2;
+  .toc-toggle-btn-container {
+    position: static;
+    margin-bottom: 1rem;
+  }
 }
