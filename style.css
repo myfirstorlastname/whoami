@@ -113,6 +113,7 @@ code {
   z-index: 1000;
   max-height: 95vh;
   overflow-y: auto;
+  color: #000;
 }
 
 /* Scrollbar design */
