@@ -176,6 +176,10 @@ code {
 .toc-rank-label {
   font-weight: bold;
   color: #000;
+  display: block;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
 /* === TOC RANK TITLES === */
