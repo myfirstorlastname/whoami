@@ -1,4 +1,5 @@
-let currentTOC = "themes"; // "themes" ou "origin"
+// Vérifie s'il existe déjà un TOC stocké dans localStorage
+let currentTOC = localStorage.getItem("tocMode") || "themes";
 
 function loadTOC(mode) {
   const tocUrl = mode === "themes"
@@ -23,16 +24,18 @@ function loadTOC(mode) {
         }
       });
 
-      // Branche le bouton (après injection dynamique)
+      // Bouton de bascule après injection dynamique
       const toggleBtn = document.getElementById("toc-toggle-btn");
       if (toggleBtn) {
         toggleBtn.onclick = () => {
+          // Alterne le mode
           currentTOC = currentTOC === "themes" ? "origin" : "themes";
-          loadTOC(currentTOC);
+          localStorage.setItem("tocMode", currentTOC); // Sauvegarde du choix
+          loadTOC(currentTOC); // Recharge avec le nouveau mode
         };
       }
     });
 }
 
-// Appel initial
+// Chargement initial de la TOC (mémorisée)
 loadTOC(currentTOC);
