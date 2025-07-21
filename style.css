@@ -114,6 +114,7 @@ code {
   max-height: 95vh;
   overflow-y: auto;
   color: #000;
+  padding-bottom: 2rem;
 }
 
 /* Scrollbar design */
