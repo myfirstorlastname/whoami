@@ -111,7 +111,7 @@ code {
   width: 400px;
   font-size: 0.95rem;
   z-index: 1000;
-  max-height: 95vh;
+  bottom: 1rem;
   overflow-y: auto;
   color: #000;
   padding-bottom: 7rem;
