@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Communication en SOC N1</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Communication en environnement SOC N1</h1>
+    <blockquote>"I prefer stealth over spectacle."</blockquote>
+  </header>
+
+  <h2>1. Pourquoi la communication est cruciale en SOC ?</h2>
+  <p>
+    Dans un Security Operations Center (SOC), la communication est un pilier fondamental pour assurer la continuité des opérations, le bon traitement des incidents et la collaboration efficace entre les analystes.
+  </p>
+  <p>
+    L’analyste N1, bien que débutant dans la hiérarchie technique, est souvent le premier point de contact avec l’alerte. Il doit donc :
+  </p>
+  <ul>
+    <li>Comprendre rapidement le contexte d’une alerte</li>
+    <li>La documenter de façon claire et actionnable</li>
+    <li>La transmettre efficacement à l’équipe, au shift suivant ou à un niveau supérieur</li>
+  </ul>
+
+  <h2>2. Communication opérationnelle au quotidien</h2>
+  <p>Voici les types de communication attendus au quotidien dans un SOC :</p>
+
+  <h3>📋 Tickets & Outils ITSM</h3>
+  <ul>
+    <li><strong>Outils :</strong> ServiceNow, Jira, GLPI, TheHive, etc.</li>
+    <li><strong>Bonnes pratiques :</strong>
+      <ul>
+        <li>Titre clair : <code>[SIEM] Possible Brute-force on OWA</code></li>
+        <li>Horodatage des événements clés (UTC + locale)</li>
+        <li>Description brève mais complète : source, détection, type d’alerte</li>
+        <li>Preuves jointes : log, capture, ID d’alerte</li>
+        <li>Actions déjà réalisées : recherches, whois, enrichissements</li>
+        <li>Proposition de sévérité et d’escalade</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>🧠 Passation de shift & communication interne</h3>
+  <ul>
+    <li>Brief matinal ou réunion de prise de poste : état des incidents, escalades en cours</li>
+    <li>Documentation des alertes encore ouvertes, avec statut clair : <code>en analyse</code>, <code>en attente réponse N2</code>, etc.</li>
+    <li>Utilisation d’un canal Slack, Mattermost ou MS Teams pour échanges rapides</li>
+  </ul>
+
+  <h3>📤 Escalade vers N2/N3</h3>
+  <p>Lorsqu’un incident dépasse le scope du N1, il doit être escaladé sans ambiguïté. Voici ce que doit contenir une bonne escalade :</p>
+  <ul>
+    <li>Résumé : <em>“Tentative de connexion brute-force avec IP suspecte persistante malgré blocage.”</em></li>
+    <li>Preuves : logs, captures, détails SIEM, ID de l'alerte</li>
+    <li>Contexte : fréquence, répétition, impact</li>
+    <li>Attentes : confirmation, intervention N2/N3, blocage firewall, etc.</li>
+  </ul>
+
+  <h2>3. Communication écrite professionnelle</h2>
+  <ul>
+    <li>Préférer un style simple, clair, neutre (éviter les jugements)</li>
+    <li>Utiliser des phrases courtes, sujet + verbe + complément</li>
+    <li>Structurer visuellement (puces, paragraphes, sauts de ligne)</li>
+    <li>Utiliser des sigles et abréviations standard (IOC, IP, SIEM, MITRE, etc.)</li>
+  </ul>
+
+  <h2>4. Communication orale</h2>
+  <p>
+    En tant que N1, vous devrez aussi intervenir à l’oral lors de :
+  </p>
+  <ul>
+    <li>Briefs d’équipe (stand-up meetings)</li>
+    <li>Debriefs d’incidents ou post-mortems</li>
+    <li>Éventuellement, présentations face à un responsable sécurité</li>
+  </ul>
+  <p>
+    Le ton doit être posé, précis, factuel. Il faut être capable d’expliquer une alerte technique en des termes simples mais justes.
+  </p>
+
+  <h2>5. Exemple synthétique de ticket N1</h2>
+  <pre><code>
+[Titre] : [SIEM] Brute-force SSH sur bastion - IP russe
+
+[Horodatage] : 2025-07-15 09:42 UTC
+
+[Source] : Alerté par Splunk (use-case bruteforce_ssh)
+
+[Description] :
+Plus de 80 tentatives de connexion SSH en 10 minutes sur le bastion d'administration (IP interne : 10.10.0.1).
+Adresse source : 185.202.X.X (ASN OVH - RU)
+
+[Preuves] : logs Splunk, capture écran de la corrélation, enrichissement VirusTotal (suspicious)
+
+[Actions N1] :
+- Identifié l'IP comme malveillante
+- Aucune connexion réussie
+- Pas d'autres alertes associées à cet hôte
+
+[Escalade] : proposition de blocage firewall (règle temporaire)
+  </code></pre>
+
+  <h2>Conclusion</h2>
+  <p>
+    Être un bon analyste SOC N1 ne se limite pas à comprendre les alertes. Il faut aussi les retransmettre clairement, sans déformation, à ses collègues ou à l’encadrement. Une bonne communication permet d’anticiper les risques, d’éviter les erreurs et de fluidifier toute la chaîne de réponse aux incidents.
+  </p>
+
+  <footer>
+    Pour plus de contenus SOC, visitez la section <a href="https://myfirstorlastname.github.io/whoami/SOC/">Blue Team / SOC</a>.
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
