@@ -102,13 +102,21 @@ code {
   text-align: center;
 }
 
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 300px >= 250px badge + espace */
+  gap: 2rem; /* espace entre les badges */
+  justify-items: center;
+  padding: 2rem;
+}
+
 .badge-grid a {
   display: block;
   text-decoration: none;
 }
 
 .badge-grid img {
-  width: 200px;
+  width: 250px;
   height: auto;
   transition: transform 0.2s ease;
 }
