@@ -15,72 +15,72 @@
   </header>
 
   <h2>Introduction</h2>
-  <p>Dans le contexte du bug bounty, le rapport est la clé de votre reconnaissance et de votre récompense. Ce n'est pas un document formel comme dans un pentest, mais un compte-rendu concis, clair et reproductible à 100% pour les équipes de tri et de sécurité du programme.</p>
+  <p>In the bug bounty world, the report is the key to recognition and reward. It’s not a formal document like in a pentest, but a concise, clear, and 100% reproducible write-up for triagers and program security teams.</p>
 
-  <h2>Spécificités d’un rapport de bug bounty</h2>
+  <h2>Key Characteristics of a Bug Bounty Report</h2>
   <ul>
-    <li>Il s’adresse à des triagers techniques, souvent surchargés</li>
-    <li>Il doit être clair, vérifiable rapidement et bien structuré</li>
-    <li>La priorité (ou sévérité) peut être discutée après soumission</li>
-    <li>Un bon rapport augmente les chances de duplication évitée (et donc d’avoir la prime)</li>
+    <li>It targets technical triagers, often under time pressure</li>
+    <li>It must be clear, quickly verifiable, and well-structured</li>
+    <li>Severity can be discussed after submission</li>
+    <li>A strong report helps avoid duplicates (increasing reward chances)</li>
   </ul>
 
-  <h2>Structure recommandée</h2>
+  <h2>Recommended Structure</h2>
 
-  <h3>1. Titre explicite</h3>
-  <p>Exemples : <em>Stored XSS on user profile page</em>, <em>IDOR on /api/user/export endpoint</em>.</p>
+  <h3>1. Clear Title</h3>
+  <p>Examples: <em>Stored XSS on user profile page</em>, <em>IDOR on /api/user/export endpoint</em>.</p>
 
-  <h3>2. Impact immédiat</h3>
-  <p>Dans une ou deux phrases : quel est le risque ? Est-ce que des données sensibles sont accessibles ? Peut-on escalader ? Gagner des privilèges ?</p>
+  <h3>2. Immediate Impact</h3>
+  <p>In one or two sentences: what’s at risk? Are sensitive data exposed? Can privileges be escalated?</p>
 
-  <h3>3. Description du contexte</h3>
+  <h3>3. Context Description</h3>
   <ul>
-    <li>Quelle application / URL / paramètre est concerné ?</li>
-    <li>Quel est le rôle de l’utilisateur utilisé ?</li>
-    <li>Quelle est la fonctionnalité visée ?</li>
+    <li>Which app / URL / parameter is affected?</li>
+    <li>What user role was used?</li>
+    <li>Which feature is being targeted?</li>
   </ul>
 
-  <h3>4. Étapes de reproduction (Step-by-Step)</h3>
-  <p>Cette section est <strong>essentielle</strong> : elle doit permettre à l’équipe sécurité de reproduire votre faille sans interprétation.</p>
+  <h3>4. Step-by-Step Reproduction</h3>
+  <p>This section is <strong>critical</strong>: it must let the security team reproduce the bug without guessing.</p>
   <ul>
-    <li>1. Se connecter avec un compte standard</li>
-    <li>2. Aller sur <code>/profile/settings</code></li>
-    <li>3. Modifier le champ <code>bio</code> avec du JavaScript : <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></li>
-    <li>4. Aller sur le profil public — l’alerte s’exécute</li>
+    <li>1. Log in with a standard account</li>
+    <li>2. Go to <code>/profile/settings</code></li>
+    <li>3. Edit the <code>bio</code> field and inject JavaScript: <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></li>
+    <li>4. Visit the public profile — the alert is triggered</li>
   </ul>
 
-  <h3>5. POC visuel (captures d’écran / vidéos)</h3>
-  <p>Ajoutez une ou deux captures (ou un lien vers un fichier vidéo), en floutant les infos sensibles.</p>
+  <h3>5. Visual POC (Screenshots / Videos)</h3>
+  <p>Attach 1–2 annotated screenshots or a link to a short video (blur any sensitive data).</p>
 
-  <h3>6. Gravité estimée</h3>
-  <p>Vous pouvez estimer un niveau de gravité selon les critères OWASP ou CVSS, mais restez humble : l'équipe peut ajuster cette valeur.</p>
+  <h3>6. Estimated Severity</h3>
+  <p>You can suggest a severity level (using OWASP or CVSS), but stay humble — the team may adjust it.</p>
 
-  <h3>7. Recommandation</h3>
-  <p>Expliquez brièvement comment le problème peut être résolu. Exemples :</p>
+  <h3>7. Remediation</h3>
+  <p>Briefly explain how to fix the issue. For example:</p>
   <ul>
-    <li>Utiliser <code>Content Security Policy (CSP)</code></li>
-    <li>Échapper les entrées utilisateur côté client et serveur</li>
-    <li>Vérifier l’ownership des ressources côté serveur</li>
+    <li>Implement a <code>Content Security Policy (CSP)</code></li>
+    <li>Sanitize and encode user input both client- and server-side</li>
+    <li>Verify resource ownership server-side</li>
   </ul>
 
-  <h2>Bonnes pratiques pour un bon rapport</h2>
+  <h2>Best Practices for Writing</h2>
   <ul>
-    <li>Soignez votre anglais (c’est souvent la langue utilisée)</li>
-    <li>Numérotez les étapes et illustrez-les si possible</li>
-    <li>Restez factuel, pas de jugement ni de langage agressif</li>
-    <li>Évitez les suppositions techniques : testez et montrez</li>
+    <li>Write in clear English (it’s often the expected language)</li>
+    <li>Number steps and include visuals where relevant</li>
+    <li>Stay objective — no judgment or aggressive tone</li>
+    <li>Avoid assumptions — test and demonstrate</li>
   </ul>
 
-  <h2>Exemple de plateforme</h2>
+  <h2>Common Platforms</h2>
   <ul>
-    <li><strong>HackerOne</strong> — standard de l’industrie</li>
-    <li><strong>Bugcrowd</strong> — programmes publics et privés</li>
-    <li><strong>YesWeHack</strong> — en croissance (français + anglais)</li>
-    <li><strong>Intigriti</strong> — focus sur qualité des programmes</li>
+    <li><strong>HackerOne</strong> — Industry standard</li>
+    <li><strong>Bugcrowd</strong> — Public and private programs</li>
+    <li><strong>YesWeHack</strong> — Growing platform (French & English)</li>
+    <li><strong>Intigriti</strong> — Focus on program quality</li>
   </ul>
 
-  <h2>À venir</h2>
-  <p>Des exemples réels de rapports (anonymisés) seront ajoutés pour illustrer ces conseils et aider à s’autoévaluer.</p>
+  <h2>Coming Soon</h2>
+  <p>Real-world anonymized report examples will be added to help illustrate these principles and support self-assessment.</p>
 
   <footer>
     For context and contact, please refer to the CV associated with this GitHub profile.
