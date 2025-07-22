@@ -94,6 +94,35 @@ code {
   color: #444;
 }
 
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.badge-grid a {
+  display: block;
+  text-decoration: none;
+}
+
+.badge-grid img {
+  width: 100px;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+.badge-grid img:hover {
+  transform: scale(1.08);
+}
+
+.badge-title {
+  font-size: 0.9rem;
+  color: #222;
+  margin-top: 0.5rem;
+}
+
 /* === TOC (TABLE OF CONTENTS) === */
 .toc-wrapper {
   position: relative;
