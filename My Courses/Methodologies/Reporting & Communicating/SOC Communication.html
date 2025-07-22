@@ -1,116 +1,116 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Communication en SOC N1</title>
+  <title>Communication in SOC Level 1</title>
   <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
 
   <header>
-    <h1>Communication en environnement SOC N1</h1>
+    <h1>Communication in SOC Level 1</h1>
     <blockquote>"I prefer stealth over spectacle."</blockquote>
   </header>
 
-  <h2>1. Pourquoi la communication est cruciale en SOC ?</h2>
+  <h2>1. Why Communication Is Crucial in a SOC</h2>
   <p>
-    Dans un Security Operations Center (SOC), la communication est un pilier fondamental pour assurer la continuité des opérations, le bon traitement des incidents et la collaboration efficace entre les analystes.
+    In a Security Operations Center (SOC), communication is a fundamental pillar to ensure operational continuity, proper incident handling, and effective collaboration between analysts.
   </p>
   <p>
-    L’analyste N1, bien que débutant dans la hiérarchie technique, est souvent le premier point de contact avec l’alerte. Il doit donc :
+    A Level 1 (L1) analyst, though junior in the technical hierarchy, is often the first responder to an alert. They must:
   </p>
   <ul>
-    <li>Comprendre rapidement le contexte d’une alerte</li>
-    <li>La documenter de façon claire et actionnable</li>
-    <li>La transmettre efficacement à l’équipe, au shift suivant ou à un niveau supérieur</li>
+    <li>Quickly understand the context of an alert</li>
+    <li>Document it clearly and actionably</li>
+    <li>Efficiently relay it to the team, the next shift, or upper levels</li>
   </ul>
 
-  <h2>2. Communication opérationnelle au quotidien</h2>
-  <p>Voici les types de communication attendus au quotidien dans un SOC :</p>
+  <h2>2. Day-to-Day Operational Communication</h2>
+  <p>Here are the main forms of communication expected daily in a SOC:</p>
 
-  <h3>📋 Tickets & Outils ITSM</h3>
+  <h3>📋 Tickets & ITSM Tools</h3>
   <ul>
-    <li><strong>Outils :</strong> ServiceNow, Jira, GLPI, TheHive, etc.</li>
-    <li><strong>Bonnes pratiques :</strong>
+    <li><strong>Common tools:</strong> ServiceNow, Jira, GLPI, TheHive, etc.</li>
+    <li><strong>Best practices:</strong>
       <ul>
-        <li>Titre clair : <code>[SIEM] Possible Brute-force on OWA</code></li>
-        <li>Horodatage des événements clés (UTC + locale)</li>
-        <li>Description brève mais complète : source, détection, type d’alerte</li>
-        <li>Preuves jointes : log, capture, ID d’alerte</li>
-        <li>Actions déjà réalisées : recherches, whois, enrichissements</li>
-        <li>Proposition de sévérité et d’escalade</li>
+        <li>Clear title: <code>[SIEM] Possible Brute-force on OWA</code></li>
+        <li>Timestamp all key events (UTC + local)</li>
+        <li>Concise yet complete description: source, detection method, alert type</li>
+        <li>Attach evidence: logs, screenshots, alert ID</li>
+        <li>Document actions taken: lookups, whois, enrichment</li>
+        <li>Propose severity level and escalation if needed</li>
       </ul>
     </li>
   </ul>
 
-  <h3>🧠 Passation de shift & communication interne</h3>
+  <h3>🧠 Shift Handover & Internal Communication</h3>
   <ul>
-    <li>Brief matinal ou réunion de prise de poste : état des incidents, escalades en cours</li>
-    <li>Documentation des alertes encore ouvertes, avec statut clair : <code>en analyse</code>, <code>en attente réponse N2</code>, etc.</li>
-    <li>Utilisation d’un canal Slack, Mattermost ou MS Teams pour échanges rapides</li>
+    <li>Daily briefings or handover meetings: current incidents, escalations</li>
+    <li>Document ongoing alerts with clear status: <code>under analysis</code>, <code>waiting for N2 response</code>, etc.</li>
+    <li>Use instant channels like Slack, Mattermost, or MS Teams</li>
   </ul>
 
-  <h3>📤 Escalade vers N2/N3</h3>
-  <p>Lorsqu’un incident dépasse le scope du N1, il doit être escaladé sans ambiguïté. Voici ce que doit contenir une bonne escalade :</p>
+  <h3>📤 Escalation to N2/N3</h3>
+  <p>When an incident is beyond L1's scope, it must be escalated clearly. A good escalation includes:</p>
   <ul>
-    <li>Résumé : <em>“Tentative de connexion brute-force avec IP suspecte persistante malgré blocage.”</em></li>
-    <li>Preuves : logs, captures, détails SIEM, ID de l'alerte</li>
-    <li>Contexte : fréquence, répétition, impact</li>
-    <li>Attentes : confirmation, intervention N2/N3, blocage firewall, etc.</li>
+    <li>Summary: <em>“SSH brute-force attempt from persistent suspicious IP despite blocking.”</em></li>
+    <li>Evidence: logs, screenshots, SIEM details, alert ID</li>
+    <li>Context: frequency, repetition, potential impact</li>
+    <li>Expectations: confirmation, action from N2/N3, firewall block, etc.</li>
   </ul>
 
-  <h2>3. Communication écrite professionnelle</h2>
+  <h2>3. Professional Written Communication</h2>
   <ul>
-    <li>Préférer un style simple, clair, neutre (éviter les jugements)</li>
-    <li>Utiliser des phrases courtes, sujet + verbe + complément</li>
-    <li>Structurer visuellement (puces, paragraphes, sauts de ligne)</li>
-    <li>Utiliser des sigles et abréviations standard (IOC, IP, SIEM, MITRE, etc.)</li>
+    <li>Use a simple, clear, neutral tone (avoid judgment)</li>
+    <li>Favor short sentences: subject + verb + object</li>
+    <li>Structure visually: bullet points, paragraphs, spacing</li>
+    <li>Use standard acronyms (IOC, IP, SIEM, MITRE, etc.)</li>
   </ul>
 
-  <h2>4. Communication orale</h2>
+  <h2>4. Verbal Communication</h2>
   <p>
-    En tant que N1, vous devrez aussi intervenir à l’oral lors de :
+    As an L1 analyst, you will also be involved in verbal interactions such as:
   </p>
   <ul>
-    <li>Briefs d’équipe (stand-up meetings)</li>
-    <li>Debriefs d’incidents ou post-mortems</li>
-    <li>Éventuellement, présentations face à un responsable sécurité</li>
+    <li>Team briefings (stand-up meetings)</li>
+    <li>Incident debriefs or post-mortems</li>
+    <li>Occasionally, presenting findings to a security manager</li>
   </ul>
   <p>
-    Le ton doit être posé, précis, factuel. Il faut être capable d’expliquer une alerte technique en des termes simples mais justes.
+    Your tone should be calm, precise, and factual. You should be able to explain a technical alert in simple, accurate terms.
   </p>
 
-  <h2>5. Exemple synthétique de ticket N1</h2>
+  <h2>5. Example: L1 Incident Ticket</h2>
   <pre><code>
-[Titre] : [SIEM] Brute-force SSH sur bastion - IP russe
+[Title] : [SIEM] SSH Brute-force on Bastion - Russian IP
 
-[Horodatage] : 2025-07-15 09:42 UTC
+[Timestamp] : 2025-07-15 09:42 UTC
 
-[Source] : Alerté par Splunk (use-case bruteforce_ssh)
+[Source] : Alert triggered by Splunk (use-case: bruteforce_ssh)
 
 [Description] :
-Plus de 80 tentatives de connexion SSH en 10 minutes sur le bastion d'administration (IP interne : 10.10.0.1).
-Adresse source : 185.202.X.X (ASN OVH - RU)
+Over 80 SSH login attempts within 10 minutes on the admin bastion (internal IP: 10.10.0.1).
+Source IP: 185.202.X.X (ASN OVH - RU)
 
-[Preuves] : logs Splunk, capture écran de la corrélation, enrichissement VirusTotal (suspicious)
+[Evidence] : Splunk logs, correlation screenshot, VirusTotal lookup (suspicious)
 
-[Actions N1] :
-- Identifié l'IP comme malveillante
-- Aucune connexion réussie
-- Pas d'autres alertes associées à cet hôte
+[Actions Taken by L1] :
+- Identified IP as malicious
+- No successful login
+- No other alerts on that host
 
-[Escalade] : proposition de blocage firewall (règle temporaire)
+[Escalation] : Suggested temporary firewall block
   </code></pre>
 
   <h2>Conclusion</h2>
   <p>
-    Être un bon analyste SOC N1 ne se limite pas à comprendre les alertes. Il faut aussi les retransmettre clairement, sans déformation, à ses collègues ou à l’encadrement. Une bonne communication permet d’anticiper les risques, d’éviter les erreurs et de fluidifier toute la chaîne de réponse aux incidents.
+    Being a good SOC Level 1 analyst goes beyond understanding alerts. It's about relaying them clearly, without distortion, to teammates or higher levels. Strong communication helps anticipate risks, avoid mistakes, and streamline incident response workflows.
   </p>
 
   <footer>
-    Pour plus de contenus SOC, visitez la section <a href="https://myfirstorlastname.github.io/whoami/SOC/">Blue Team / SOC</a>.
+    For more SOC-related content, visit the <a href="https://myfirstorlastname.github.io/whoami/SOC/">Blue Team / SOC</a> section.
   </footer>
 
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
