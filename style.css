@@ -108,19 +108,13 @@ code {
 }
 
 .badge-grid img {
-  width: 100px;
+  width: 200px;
   height: auto;
   transition: transform 0.2s ease;
 }
 
 .badge-grid img:hover {
-  transform: scale(1.08);
-}
-
-.badge-title {
-  font-size: 0.9rem;
-  color: #222;
-  margin-top: 0.5rem;
+  transform: scale(1.3);
 }
 
 /* === TOC (TABLE OF CONTENTS) === */
