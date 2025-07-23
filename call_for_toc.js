@@ -12,20 +12,23 @@ function loadTOC(mode) {
       document.getElementById("toc-container").innerHTML = data;
 
       // Marquage du lien courant
+      // Mark current link and parent section if needed
       const currentUrl = window.location.href;
       const tocLinks = document.querySelectorAll('.toc-list a');
+      
       tocLinks.forEach(link => {
         if (link.href === currentUrl) {
           link.classList.add('current');
-        
+      
           const subListItem = link.closest('li');
-          if (subListItem) {
-            subListItem.classList.add('current-only');
-          }
-        
-          const sectionLi = link.closest('.toc-section');
-          if (sectionLi) {
-            sectionLi.classList.add('current-is-in');
+          const parentSection = link.closest('.toc-section');
+      
+          // If current page is a sub-page, mark the parent section
+          if (subListItem && parentSection) {
+            const parentLink = parentSection.querySelector('.toc-rank-label');
+            if (parentLink && parentLink !== link) {
+              parentLink.classList.add('current-is-in');
+            }
           }
         }
       });
