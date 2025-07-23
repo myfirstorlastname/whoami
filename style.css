@@ -192,6 +192,12 @@ code {
   color: #111 !important;
 }
 
+.toc-section.current-is-in > .toc-rank-label {
+  background-color: #ffeeba;
+  border-left: 4px solid #e0a800;
+  color: #111;
+}
+
 /* Sous-titres (ex: Red Team, Blue Team) */
 .toc-subtitle {
   font-size: 1rem;
