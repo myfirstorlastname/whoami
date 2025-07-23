@@ -17,9 +17,15 @@ function loadTOC(mode) {
       tocLinks.forEach(link => {
         if (link.href === currentUrl) {
           link.classList.add('current');
+        
           const subListItem = link.closest('li');
           if (subListItem) {
             subListItem.classList.add('current-only');
+          }
+        
+          const sectionLi = link.closest('.toc-section');
+          if (sectionLi) {
+            sectionLi.classList.add('current-is-in');
           }
         }
       });
