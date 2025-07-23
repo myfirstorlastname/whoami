@@ -185,17 +185,18 @@ code {
   text-decoration: underline;
 }
 
-/* TOC active page */
+/* 🔷 Current page (section or subpage) */
 .toc-list a.current {
   background-color: #d6ebff;
   border-left: 4px solid #0366d6;
   color: #111 !important;
 }
 
-.toc-section.current-is-in > .toc-rank-label {
-  background-color: #ffeeba;
-  border-left: 4px solid #e0a800;
-  color: #111;
+/* 🟡 Section that contains current sub-page */
+.toc-list .toc-rank-label.current-is-in {
+  background-color: #fff9dc;
+  border-left: 4px solid #e1c542;
+  color: #333 !important;
 }
 
 /* Sous-titres (ex: Red Team, Blue Team) */
