@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Introduction to Web Hacking (TryHackMe : PT1 path)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🌐 Introduction to Web Hacking (TryHackMe : PT1 path)</h1>
+  <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>I'm a pseudonymous cybersecurity professional with expertise in offensive security, SOC analysis, and secure system design.<br />
+     This page summarizes my experience with TryHackMe's <a href="https://tryhackme.com/module/introduction-to-web-hacking" target="_blank" rel="noopener noreferrer">"Introduction to Web Hacking"</a> module, which is part of the <em>Jr Penetration Tester</em> path. Though I’m beyond the junior level, I completed this module as a structured review and found it to be a very well-crafted learning tool. I recommend it to students and aspiring penetration testers looking for a strong introduction to web vulnerabilities.<br />
+  </p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Slow and steady wins the prize."</blockquote>
+  <ul>
+    <li>I believe offensive security is not about being the smartest person in the room—it’s about resilience, curiosity, and method. I treat pen-testing like a craft: solve, reflect, repeat. My learning philosophy includes:
+      <ul>
+        <li>Try → Fail → Learn: I embrace discomfort as a sign of growth.</li>
+        <li>Consistency over bursts: A few focused hours every day beats weekend marathons.</li>
+        <li>Depth over tools: I master concepts, not just commands.</li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Learning Outcomes: Introduction to Web Hacking</h2>
+  <blockquote>A beginner-friendly yet technically sound introduction to real-world web exploitation</blockquote>
+
+  <h3>📘 Module Summary</h3>
+  <ul>
+    <li>This module covers the foundational concepts of web exploitation, including:
+      <ul>
+        <li>Understanding how web servers and clients interact</li>
+        <li>Basic enumeration techniques using browser and CLI tools</li>
+        <li>Finding and exploiting common vulnerabilities such as:
+          <ul>
+            <li>Directory traversal</li>
+            <li>Command injection</li>
+            <li>File upload abuse</li>
+            <li>Authentication bypass</li>
+            <li>Basic SQL injection</li>
+          </ul>
+        </li>
+        <li>Using Burp Suite for interception and manipulation</li>
+      </ul>
+    </li>
+    <li>While basic, it reinforces key methodology: information gathering → manual testing → exploitation → post-exploitation.</li>
+  </ul>
+
+  <h3>🧪 What I appreciated as an advanced learner</h3>
+  <ul>
+    <li>Well-paced delivery of concepts, each room builds upon the last.</li>
+    <li>The labs are not overly guided: the user is expected to think and test hypotheses.</li>
+    <li>Encourages minimal tool dependency. Many tasks can be solved with <code>curl</code>, browser, or basic scripting.</li>
+    <li>Common developer mistakes are highlighted with practical examples.</li>
+  </ul>
+
+  <h3>🎓 Who I recommend this to</h3>
+  <ul>
+    <li>University students starting cybersecurity and looking for hands-on challenges.</li>
+    <li>Developers aiming to understand how their applications can be misused.</li>
+    <li>Anyone pursuing OSCP, as it teaches a precise and methodical approach that matches exam expectations.</li>
+  </ul>
+
+  <h3>🛠️ My Personal Tips</h3>
+  <ul>
+    <li>Don't rush. Take time to test every user input field—even GET parameters.</li>
+    <li>Burp Suite's Repeater is your best friend: replay and modify requests systematically.</li>
+    <li>When exploiting uploads, always check for file extensions and bypass techniques (e.g., <code>file.php.jpg</code>).</li>
+    <li>Always analyze server responses: a 403 or 500 error is a clue, not a blocker.</li>
+    <li>Use <code>curl -I</code> or <code>curl -v</code> to view HTTP headers and spot potential weaknesses.</li>
+  </ul>
+
+  <h3>✅ Completion Status</h3>
+  <ul>
+    <li><strong>Module completed: 100%</strong></li>
+    <li><strong>Final thoughts:</strong> This is the perfect gateway to more advanced modules like <em>OWASP Top 10</em> or <em>Web Pentesting</em>. A solid warm-up before tackling real CTFs or OSCP-level machines.</li>
+  </ul>
+
+  <hr>
+  <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+    For context and contact, please refer to the CV associated with this GitHub profile.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
