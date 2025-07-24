@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How the Web Works (TryHackMe)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>How the Web Works</h1>
+    <blockquote>"I prefer stealth over spectacle."</blockquote>
+  </header>
+
+  <nav>
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#dns">1. DNS</a></li>
+      <li><a href="#http">2. HTTP</a></li>
+      <li><a href="#html">3. HTML</a></li>
+    </ul>
+  </nav>
+
+  <section id="dns">
+    <h2>1. DNS – Domain Name System</h2>
+    <p>
+      DNS is the address book of the internet. It translates human-readable domain names
+      (like <code>tryhackme.com</code>) into IP addresses (like <code>104.21.21.45</code>).
+    </p>
+    <p>Key steps of a DNS lookup:</p>
+    <ul>
+      <li>User types <code>tryhackme.com</code> into the browser.</li>
+      <li>The system queries the local DNS resolver.</li>
+      <li>If not cached, the resolver contacts a root server, then TLD server (<code>.com</code>), then authoritative server.</li>
+      <li>Eventually, the IP address is returned and the browser connects to it.</li>
+    </ul>
+    <p>This resolution process is mostly invisible but crucial to web communication.</p>
+  </section>
+
+  <section id="http">
+    <h2>2. HTTP – HyperText Transfer Protocol</h2>
+    <p>
+      HTTP is the protocol used to transfer data between the client (browser) and the server (website).
+      It defines how requests and responses are structured.
+    </p>
+    <p>Basic HTTP request example:</p>
+    <pre><code>
+GET /index.html HTTP/1.1
+Host: tryhackme.com
+User-Agent: Firefox
+    </code></pre>
+    <p>Basic HTTP response:</p>
+    <pre><code>
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1024
+
+&lt;html&gt; ... &lt;/html&gt;
+    </code></pre>
+    <p>
+      HTTP methods like <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> define the intent of a request.
+    </p>
+  </section>
+
+  <section id="html">
+    <h2>3. HTML – HyperText Markup Language</h2>
+    <p>
+      HTML is the language used to structure content on the web. It's interpreted by browsers to render pages visually.
+    </p>
+    <p>Simple HTML example:</p>
+    <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Web Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome&lt;/h1&gt;
+    &lt;p&gt;This is a paragraph.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p>
+      HTML works in combination with CSS (styling) and JavaScript (interactivity) to build modern web applications.
+    </p>
+  </section>
+
+  <section id="flow">
+  <h2>4. Full Web Request Flow (Challenge Recap)</h2>
+  <p>
+    At the end of the module, TryHackMe provides an excellent step-by-step challenge: sorting the real-world flow of a typical web request — from the moment you type a domain to the moment the website is displayed.
+  </p>
+
+  <ol>
+    <li>1. Request <code>tryhackme.com</code> in your browser</li>
+    <li>2. Check Local Cache for IP Address</li>
+    <li>3. Check your recursive DNS server for Address</li>
+    <li>4. Query Root Server to find authoritative DNS Server</li>
+    <li>5. Authoritative DNS Server advises the IP address for the Website</li>
+    <li>6. Request passes through a Web Application Firewall (WAF)</li>
+    <li>7. Request passes through a Load Balancer</li>
+    <li>8. Connect to Web Server on port 80 or 443</li>
+    <li>9. Web Server receives the GET request</li>
+    <li>10. Web Application talks to the Database</li>
+    <li>11. Your browser renders the HTML into a viewable website</li>
+  </ol>
+
+  <p>
+    This ordered process helps build a mental model of how different layers (DNS, networking, web infrastructure, backend) interact in real-world web browsing.
+  </p>
+</section>
+
+
+  <footer>
+    <p>
+      Learn more about the path: <a href="https://myfirstorlastname.github.io/whoami/TryHackMe/Red Team/Web Fundamentals/">Web Fundamentals overview</a>.
+    </p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
