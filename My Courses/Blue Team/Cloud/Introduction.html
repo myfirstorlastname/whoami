@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Introduction to Cloud & Infrastructure</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Introduction to Cloud & Infrastructure</h1>
+    <blockquote>Security in the cloud starts with understanding what's beneath it.</blockquote>
+  </header>
+
+  <section>
+  <h2>Network Infrastructure vs Cloud Infrastructure</h2>
+  <p>
+    Before diving into cloud concepts, it's important to distinguish between <strong>network infrastructure</strong> and <strong>cloud infrastructure</strong>. While both are foundational, they serve different purposes and operate at different levels.
+  </p>
+
+  <h3>Network Infrastructure</h3>
+  <p>
+    This refers to the hardware and software components that enable communication between devices. It includes:
+  </p>
+  <ul>
+    <li>Routers, switches, firewalls</li>
+    <li>Local networks (LAN), VLANs, VPNs</li>
+    <li>Routing tables, NAT, DNS, DMZ zones</li>
+    <li>Traffic inspection and segmentation</li>
+  </ul>
+  <p>
+    Network infrastructure is usually physical or virtualized on-premise, and is managed by system/network administrators.
+  </p>
+
+  <h3>Cloud Infrastructure</h3>
+  <p>
+    Cloud infrastructure builds on top of networking and adds abstraction layers to offer services through virtualized environments:
+  </p>
+  <ul>
+    <li>Virtual networks (VPC, VNet) created on demand</li>
+    <li>Compute resources (VMs, containers) provisioned instantly</li>
+    <li>Storage buckets and databases available via API</li>
+    <li>IAM controls, resource tagging, and automation pipelines</li>
+  </ul>
+  <p>
+    Unlike traditional infrastructure, cloud infrastructure is elastic, abstracted, and integrated with security and management tools by design.
+  </p>
+
+  <h3>Key Differences</h3>
+  <ul>
+    <li><strong>Control:</strong> On-prem networks give full control. Cloud is managed through provider APIs.</li>
+    <li><strong>Scalability:</strong> Network infra is hardware-bound. Cloud infra scales elastically.</li>
+    <li><strong>Responsibility:</strong> On-prem = full responsibility. Cloud = shared responsibility.</li>
+    <li><strong>Visibility:</strong> Network tools (Wireshark, SNMP) vs Cloud logs & dashboards (CloudTrail, Azure Monitor)</li>
+  </ul>
+
+  <p>
+    Cloud doesn't replace network infrastructure — it builds upon it with agility, scalability, and new security paradigms.
+  </p>
+</section>
+
+
+  <section>
+    <h2>What is Cloud Infrastructure?</h2>
+    <p>
+      Cloud infrastructure is the combination of hardware, virtualization, networking, and storage that powers cloud computing. Major cloud providers (like AWS, Azure, and GCP) offer virtualized access to this infrastructure on-demand.
+    </p>
+    <p>
+      According to <a href="https://aws.amazon.com/what-is-cloud-computing/" target="_blank">AWS</a>: <em>"Cloud computing is the on-demand delivery of IT resources over the Internet with pay-as-you-go pricing."</em>
+    </p>
+    <p>Cloud infrastructure includes:</p>
+    <ul>
+      <li><strong>Compute</strong>: Virtual Machines, containers, auto-scaling groups</li>
+      <li><strong>Storage</strong>: Object storage (e.g., S3), block storage, archival services</li>
+      <li><strong>Networking</strong>: Virtual networks (VPCs), subnets, gateways, firewalls</li>
+      <li><strong>Security Services</strong>: IAM, logging, monitoring, key management</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The Shared Responsibility Model</h2>
+    <p>
+      Security in the cloud is based on a shared model. The provider handles the security "of" the cloud, while the customer is responsible for the security "in" the cloud.
+    </p>
+    <p>
+      <strong>Provider responsibilities:</strong>
+    </p>
+    <ul>
+      <li>Physical data centers</li>
+      <li>Network hardware</li>
+      <li>Hypervisors and base infrastructure</li>
+    </ul>
+    <p>
+      <strong>Customer responsibilities:</strong>
+    </p>
+    <ul>
+      <li>Operating systems, applications, data</li>
+      <li>Access control & user management (IAM)</li>
+      <li>Security configurations, network segmentation</li>
+    </ul>
+    <p>This model varies slightly between IaaS, PaaS, and SaaS services.</p>
+  </section>
+
+  <section>
+    <h2>From On-Premise to Hybrid Environments</h2>
+    <p>
+      Many organizations operate in hybrid environments: part of the infrastructure remains on-premise (legacy servers, internal apps), while the rest migrates to the cloud.
+    </p>
+    <p>This introduces new challenges:</p>
+    <ul>
+      <li>Log collection across distributed systems</li>
+      <li>Unifying access control and audit mechanisms</li>
+      <li>Detecting lateral movement between environments</li>
+    </ul>
+    <p>
+      Security teams must bridge the visibility gap between traditional perimeter-based security and cloud-native controls.
+    </p>
+  </section>
+
+  <section>
+    <h2>Cloud Threat Surfaces</h2>
+    <p>New services bring new risks. Common attack vectors in cloud environments include:</p>
+    <ul>
+      <li><strong>Misconfigurations</strong> – Public S3 buckets, overly permissive IAM roles</li>
+      <li><strong>Credential leakage</strong> – Exposed API keys, secrets in code repositories</li>
+      <li><strong>Unmonitored services</strong> – Unused but accessible endpoints</li>
+      <li><strong>Privilege escalation</strong> – Abuse of trust relationships or role chaining</li>
+      <li><strong>Insecure APIs</strong> – Lack of authentication or input validation</li>
+    </ul>
+    <p>
+      Defensive teams should focus on minimizing the attack surface through hardening, monitoring, and least privilege.
+    </p>
+  </section>
+
+  <section>
+    <h2>Blue Team Monitoring Capabilities</h2>
+    <p>Cloud platforms offer native logging and detection tools. Understanding and enabling them is key to effective monitoring:</p>
+    <ul>
+      <li><strong>Identity & Access Logs</strong> – Who accessed what, and how?</li>
+      <li><strong>Audit Trails</strong> – Resource changes, login events, API calls</li>
+      <li><strong>Network Flow Logs</strong> – Detect suspicious traffic patterns</li>
+      <li><strong>Alerts and Rules</strong> – Triggered on anomalous activity (e.g., login from new country)</li>
+    </ul>
+    <p>
+      Tools like AWS CloudTrail, Azure Monitor, and GCP Cloud Audit Logs are native ways to gain observability.
+    </p>
+  </section>
+
+  <section>
+    <h2>Core Concepts to Master</h2>
+    <ul>
+      <li>Virtual networking: subnets, routing tables, gateways</li>
+      <li>Access control: IAM roles, policies, trust relationships</li>
+      <li>Storage security: encryption, lifecycle, access permissions</li>
+      <li>Service hardening: disabling defaults, monitoring config drift</li>
+      <li>Cloud incident response: log correlation, role misuse detection</li>
+    </ul>
+    <p>
+      These concepts form the foundation of both proactive defense and incident response in the cloud.
+    </p>
+  </section>
+
+  <footer>
+    The cloud reshapes the perimeter, but not the responsibility. Know your architecture, monitor your assets, and defend every layer.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
