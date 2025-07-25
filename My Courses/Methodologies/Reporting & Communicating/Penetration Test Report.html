@@ -15,71 +15,71 @@
   </header>
 
   <h2>Introduction</h2>
-  <p>Le rapport de pentest est le livrable final d’une mission offensive. C’est la seule trace que le client conservera une fois la mission terminée. Un bon rapport doit être lisible, structuré, pédagogique et exploitable par des profils techniques comme non techniques.</p>
+  <p>The penetration test report is the final deliverable of an offensive engagement. It’s the only artifact the client will retain after the mission ends. A good report must be readable, well-structured, educational, and actionable — by both technical and non-technical audiences.</p>
 
-  <h2>Étapes clés pour rédiger un rapport de pentest</h2>
+  <h2>Key Steps to Writing a Penetration Test Report</h2>
 
-  <h3>1. Page de garde</h3>
+  <h3>1. Cover Page</h3>
   <ul>
-    <li>Nom du client, de l’entreprise prestataire</li>
-    <li>Type de test (Blackbox, Greybox, Whitebox)</li>
-    <li>Date de la mission</li>
-    <li>Nom(s) du pentester ou de l’équipe</li>
-    <li>Confidentialité : "Strictly Confidential", "Internal Use Only"…</li>
+    <li>Client name and testing company name</li>
+    <li>Type of test (Blackbox, Greybox, Whitebox)</li>
+    <li>Test date or engagement window</li>
+    <li>Names of the tester(s) or team</li>
+    <li>Confidentiality label: “Strictly Confidential”, “Internal Use Only”, etc.</li>
   </ul>
 
-  <h3>2. Table des matières</h3>
-  <p>Utilisez un sommaire cliquable avec les liens internes pour faciliter la navigation.</p>
+  <h3>2. Table of Contents</h3>
+  <p>Use a clickable table of contents with internal links for easier navigation.</p>
 
-  <h3>3. Executive Summary (non technique)</h3>
+  <h3>3. Executive Summary (Non-Technical)</h3>
   <ul>
-    <li>Objectifs de la mission</li>
-    <li>Résumé des découvertes critiques</li>
-    <li>Score global (CVSS, score de risque, matrice)</li>
-    <li>Recommandations générales</li>
+    <li>Mission objectives</li>
+    <li>Summary of critical findings</li>
+    <li>Global score (CVSS, risk rating, or matrix)</li>
+    <li>General recommendations</li>
   </ul>
-  <p>Cette section est destinée au management : évitez les termes trop techniques.</p>
+  <p>This section is intended for management — avoid deep technical jargon.</p>
 
-  <h3>4. Méthodologie</h3>
+  <h3>4. Methodology</h3>
   <ul>
-    <li>Phases : reconnaissance, scanning, exploitation, post-exploitation, reporting</li>
-    <li>Outils utilisés</li>
-    <li>Standards suivis (OWASP, PTES, NIST…)</li>
-  </ul>
-
-  <h3>5. Portée et contraintes</h3>
-  <ul>
-    <li>Plage IP autorisée</li>
-    <li>Comptes fournis</li>
-    <li>Périmètre exact (infra, applicatif, cloud...)</li>
-    <li>Limitations techniques ou juridiques</li>
+    <li>Phases: reconnaissance, scanning, exploitation, post-exploitation, reporting</li>
+    <li>Tools used</li>
+    <li>Frameworks and standards (OWASP, PTES, NIST...)</li>
   </ul>
 
-  <h3>6. Résultats techniques détaillés</h3>
-  <p>Présentez une faille par section, avec la structure suivante :</p>
+  <h3>5. Scope and Constraints</h3>
   <ul>
-    <li><strong>Nom de la faille</strong></li>
-    <li><strong>Gravité</strong> (Critique / Haute / Moyenne / Faible / Info)</li>
-    <li><strong>Description</strong> claire et concise</li>
-    <li><strong>Preuve de concept (PoC)</strong> : commande, capture écran, logs</li>
-    <li><strong>Impact</strong> métier et technique</li>
-    <li><strong>Recommandation</strong> (concrète, technique ou organisationnelle)</li>
-    <li><strong>Références</strong> (CVE, CWE, OWASP, guides de remédiation)</li>
+    <li>Authorized IP range</li>
+    <li>Credentials or accounts provided</li>
+    <li>Exact perimeter (infra, application, cloud, etc.)</li>
+    <li>Technical or legal limitations</li>
+  </ul>
+
+  <h3>6. Detailed Technical Findings</h3>
+  <p>Present one vulnerability per section using the following structure:</p>
+  <ul>
+    <li><strong>Finding title</strong></li>
+    <li><strong>Severity</strong> (Critical / High / Medium / Low / Informational)</li>
+    <li><strong>Clear and concise description</strong></li>
+    <li><strong>Proof of Concept (PoC)</strong>: command, screenshot, log excerpt</li>
+    <li><strong>Impact</strong> — both business and technical</li>
+    <li><strong>Recommendation</strong> — practical, technical or organizational fix</li>
+    <li><strong>References</strong> (CVE, CWE, OWASP, remediation guides)</li>
   </ul>
 
   <h3>7. Conclusion</h3>
-  <p>Résumez les risques majeurs, soulignez les points positifs, et encouragez à la mise en place des correctifs. Cette partie peut aussi inclure des perspectives pour un nouveau test ou un re-test.</p>
+  <p>Summarize the key risks, highlight positive aspects, and encourage implementation of mitigations. You may also include suggestions for follow-up tests or retesting sessions.</p>
 
-  <h2>Conseils de rédaction</h2>
+  <h2>Writing Tips</h2>
   <ul>
-    <li>Évitez le jargon technique non expliqué</li>
-    <li>Soignez la grammaire et la lisibilité</li>
-    <li>Utilisez un modèle professionnel (Word, LaTeX, Markdown converti en PDF)</li>
-    <li>Adaptez la gravité des failles au contexte métier du client</li>
+    <li>Avoid unexplained technical jargon</li>
+    <li>Use proper grammar and aim for clarity</li>
+    <li>Use a clean and professional format (Word, LaTeX, or Markdown to PDF)</li>
+    <li>Adjust vulnerability severity based on the client’s business context</li>
   </ul>
 
-  <h2>À venir</h2>
-  <p>Prochainement, une page contiendra des exemples de rapports fictifs, en version PDF, pour illustrer les bonnes pratiques.</p>
+  <h2>Coming Soon</h2>
+  <p>A future page will provide fictional report samples (PDF format) to illustrate best practices.</p>
 
   <footer>
     Clear, concise, and contextual — your ability to communicate findings determines their real-world value.<br>
