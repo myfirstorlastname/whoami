@@ -3,64 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PrivEsc Techniques</title>
+  <title>Linux Privilege Escalation Techniques</title>
   <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
+  
   <header>
-    <h1>🏋️‍♂️ PrivEsc Techniques</h1>
-    <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
+    <h1>🏋️‍♂️ Linux Privilege Escalation Techniques</h1>
+    <blockquote>Privilege escalation is not a trick — it's a process. Learn it, practice it, master it.</blockquote>
   </header>
 
   <section>
-    <h2>🧠 About</h2>
-    <p>This page outlines my journey in mastering Linux privilege escalation. It details practical techniques I studied, tested, and used in CTFs or emulated labs. My goal: gain root from any foothold, systematically and stealthily.</p>
+    <h2>🔍 What is Privilege Escalation?</h2>
+    <p>
+      In the context of Linux systems, <strong>privilege escalation</strong> refers to the act of obtaining higher access rights than initially granted. In Red Team operations or penetration tests, this means moving from a basic shell (non-privileged user) to full root access.
+    </p>
+    <p>
+      These techniques are critical for understanding system misconfigurations, weak controls, or overlooked vectors that attackers may exploit. As a pentester, they are essential in post-exploitation phases.
+    </p>
   </section>
 
   <section>
-    <h2>🔓 Linux Privilege Escalation Techniques</h2>
+    <h2>🧱 The Process: Enumerate → Identify → Exploit</h2>
+    <p>
+      Privilege escalation is rarely about luck. It begins with <strong>context-aware enumeration</strong>, continues with analysis of potential vectors, and finishes with a targeted, tested exploit — ideally with minimal footprint.
+    </p>
+    <p>
+      Below are the main categories of techniques used in Linux environments.
+    </p>
+  </section>
+
+  <section>
+    <h2>🧰 Core Techniques</h2>
     <div class="grid-container">
+
       <a class="card" href="#enumeration">
         <h3>🔎 Enumeration First</h3>
-        <p>Start by collecting system information using linPEAS and manual tools like <code>sudo -l</code>, <code>find</code>, and <code>env</code>.</p>
-        <p>Enumeration builds the context to recognize misconfigurations or privilege vectors before acting.</p>
+        <p>Use tools like <code>linPEAS</code>, <code>pspy</code>, or manual checks (<code>sudo -l</code>, <code>id</code>, <code>env</code>) to gather context.</p>
+        <p>Everything starts here. Without context, exploitation is blind.</p>
       </a>
+
       <a class="card" href="#sudo-cron">
-        <h3>🔥 Sudo & Cron Misconfigs</h3>
-        <p>Abuse <code>sudo</code> NOPASSWD entries or insecure cron jobs to escalate privileges via command injection or script replacement.</p>
-        <p>These are often the fastest and most overlooked paths to root in real-world systems.</p>
+        <h3>🔥 Sudo & Cron Misconfigurations</h3>
+        <p>Abuse <code>sudo</code> permissions or insecure <code>cron</code> jobs to run arbitrary code as root.</p>
+        <p>Classic and reliable if configurations are lax.</p>
       </a>
+
       <a class="card" href="#suid">
         <h3>🧨 SUID Binary Abuse</h3>
-        <p>Exploit misconfigured SUID binaries that execute as root to hijack execution flow or invoke system tools insecurely.</p>
-        <p>Paired with <code>ltrace</code>, <code>strings</code>, and GTFOBins, this technique is extremely effective.</p>
+        <p>Search for vulnerable binaries with the SUID bit set (e.g., <code>find / -perm -4000</code>).</p>
+        <p>Then use <a href="https://gtfobins.github.io/" target="_blank">GTFOBins</a> to weaponize them.</p>
       </a>
+
       <a class="card" href="#env-path">
         <h3>💣 Environment & PATH Exploits</h3>
-        <p>Leverage environment variables and manipulate <code>$PATH</code> to hijack how scripts or binaries are resolved and executed.</p>
-        <p>Especially powerful when used with custom binaries or poorly secured scripts.</p>
+        <p>Hijack environment variables or manipulate <code>$PATH</code> to redirect execution to custom payloads.</p>
+        <p>Especially common in poorly written scripts.</p>
       </a>
+
       <a class="card" href="#credentials">
         <h3>🔐 Credentials & SSH Hijacking</h3>
-        <p>Reuse passwords, SSH keys, or misconfigured access controls to pivot or elevate privileges.</p>
-        <p>Static credentials are a common weak point in dev, test, or legacy environments.</p>
+        <p>Look for stored passwords, SSH keys, reused creds, or exposed tokens in files like <code>.bash_history</code> or <code>config</code>.</p>
+        <p>Leverage them to switch users or pivot laterally.</p>
       </a>
+
       <a class="card" href="#plaintext">
-        <h3>☣️ Plaintext Attacks</h3>
-        <p>Exploit legacy ZIP encryption using known-plaintext recovery tools like <code>bkcrack</code> to extract root-level secrets.</p>
-        <p>Efficient against predictable file content like README files or static headers.</p>
+        <h3>☣️ Plaintext Extraction</h3>
+        <p>Recover sensitive data from plaintext zip archives or known file patterns (e.g., README.txt in /root).</p>
+        <p>Tools like <code>bkcrack</code> or <code>strings</code> are helpful.</p>
       </a>
+
       <a class="card" href="#kernel">
         <h3>☢️ Kernel Exploits</h3>
-        <p>Exploit vulnerable Linux kernels using DirtyCow, DirtyPipe, or OverlayFS for full system compromise.</p>
-        <p>This is a last resort—use only if safer privilege vectors are unavailable.</p>
+        <p>If the kernel is outdated, known exploits like DirtyPipe or DirtyCow can be used to escalate.</p>
+        <p>Verify kernel version with <code>uname -a</code> and cross-check on <a href="https://www.exploit-db.com/" target="_blank">Exploit-DB</a>.</p>
       </a>
     </div>
   </section>
 
+  <section>
+    <h2>🧪 Practice & Detection Tips</h2>
+    <ul>
+      <li>Use custom labs (e.g., <code>VulnHub</code>, <code>TryHackMe</code>, or <code>HackTheBox</code>) to test techniques safely.</li>
+      <li>Always validate the impact of a method in a non-production environment before using it professionally.</li>
+      <li>Leave minimal traces. Remove tools, clean logs, and avoid irreversible actions.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🧠 Learn Before You Launch</h2>
+    <p>
+      Each technique has specific prerequisites and detection risks. Before launching an exploit:
+    </p>
+    <ul>
+      <li>Ask: What are the consequences if this fails?</li>
+      <li>Test on a local VM or CTF clone if unsure.</li>
+      <li>Respect the target scope and environment.</li>
+    </ul>
+  </section>
+
   <footer>
-    For context and contact, please refer to the CV associated with this GitHub profile.
+    Privilege escalation is about method, not magic. Understand the system. Choose the quietest path. Stay stealthy.
   </footer>
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
