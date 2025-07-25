@@ -8,56 +8,89 @@
 </head>
 <body>
   <div id="toc-container"></div>
+  
   <header>
     <h1>🏋️‍♂️ Active Directory</h1>
-    <blockquote>Pseudonymous cybersecurity enthusiast progressing toward OSCP certification.</blockquote>
+    <blockquote>Mastering Active Directory is mastering the keys to the corporate kingdom.</blockquote>
   </header>
 
   <section>
-    <h2>🧠 About</h2>
-    <p>This page outlines my self-driven journey toward mastering Active Directory security and exploitation, in preparation for OSCP. It bridges offensive (Red Team) and defensive (Blue Team) skills across multiple training paths.</p>
+    <h2>🧠 About the Course</h2>
+    <p>
+      This course introduces offensive concepts related to <strong>Active Directory (AD)</strong>, Microsoft's centralized identity and access management system. AD is a prime target during internal penetration tests and Red Team engagements due to its critical role in enterprise environments.
+    </p>
+    <p>
+      You’ll explore domain enumeration, privilege escalation, credential abuse, and post-exploitation techniques — all essential for offensive operators in Windows enterprise infrastructures.
+    </p>
   </section>
 
   <section>
-    <h2>🛰️ Philosophy</h2>
-    <blockquote>"I prefer stealth over spectacle."</blockquote>
+    <h2>🎯 Objectives</h2>
     <ul>
-      <li>I treat pentesting as a craft: solve, reflect, repeat.</li>
-      <li>Try → Fail → Learn: I embrace discomfort as a sign of growth.</li>
-      <li>Consistency over bursts: Daily focused effort beats weekend sprints.</li>
-      <li>Depth over tools: I master concepts, not just commands.</li>
+      <li>Understand the structure and components of Active Directory</li>
+      <li>Identify and exploit common misconfigurations</li>
+      <li>Enumerate AD using built-in tools and custom scripts</li>
+      <li>Escalate privileges and move laterally through the domain</li>
+      <li>Abuse certificate services and maintain persistence</li>
     </ul>
   </section>
 
   <section>
-  <h2>🔐 Overview</h2>
-  <p>
-    Active Directory (AD) is Microsoft's centralized identity and access management system used in most enterprise environments. It controls authentication, user roles, group policies, and access to resources across the domain.
-  </p>
-  <p>
-    <strong>Defensive Perspective:</strong> Securing AD involves implementing strong Group Policies (GPOs), enforcing tiered administration, auditing critical changes, and monitoring for anomalous behaviors. Modern environments also integrate multifactor authentication (MFA) and privileged access management (PAM).
-  </p>
-  <p>
-    <strong>Red Team Perspective:</strong> AD is often the prime target for attackers. Typical goals include credential harvesting, lateral movement, and domain privilege escalation. Tools like BloodHound and SharpHound assist in <strong>AD enumeration</strong>, identifying misconfigurations and privilege paths that can be abused to reach Domain Admin—a full compromise of identity infrastructure.
-  </p>
-  <p>
-    Understanding both attack and defense in AD is essential for securing enterprise-scale environments.
-  </p>
-  </section>
-
-  <section>
-    <h2>Follow my learning path</h2>
+    <h2>🧩 Course Topics</h2>
     <div class="grid-container">
-      <a class="card" href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/My Learning Path" target="_blank">
-        <h3>My Learning Path</h3>
-        <p>Active Directory, Windows Exploitation, AD Hardening</p>
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/Enumeration">
+        <h3>🔍 Enumeration Techniques</h3>
+        <p>Gather domain info, users, SPNs, trust relationships, GPOs, and permissions.</p>
+      </a>
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/Exploitation">
+        <h3>💥 Exploitation & Lateral Movement</h3>
+        <p>Use techniques like pass-the-hash, Kerberoasting, overpass-the-hash, and more.</p>
+      </a>
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/PostExploitation">
+        <h3>🛠️ Post-Exploitation</h3>
+        <p>Dump credentials, maintain persistence, extract secrets and elevate access further.</p>
+      </a>
+      <a class="card" href="https://myfirstorlastname.github.io/whoami/ActiveDirectory/Certificates">
+        <h3>🏅 AD CS & Certificate Abuse</h3>
+        <p>Abuse misconfigured certificate templates and privilege escalation paths in AD CS.</p>
       </a>
     </div>
   </section>
 
+  <section>
+    <h2>🧱 Offensive AD Skill Blocks</h2>
+    <div class="grid-container">
+      <div class="card">
+        <h3>🚪 Initial Access</h3>
+        <p>Get into the network via phishing, rogue devices, leaked credentials, or VPN entry points.</p>
+      </div>
+      <div class="card">
+        <h3>🔎 Enumeration</h3>
+        <p>Use LDAP, Kerberos, SMB, RPC, and more to map out the domain and locate privilege paths.</p>
+      </div>
+      <div class="card">
+        <h3>🔐 Credential Abuse</h3>
+        <p>Dump LSASS, reuse NTLM hashes, crack SPNs, perform pass-the-hash or pass-the-ticket attacks.</p>
+      </div>
+      <div class="card">
+        <h3>🏃‍♂️ Lateral Movement</h3>
+        <p>Move across systems using PsExec, WinRM, RDP, WMI, or DCOM techniques.</p>
+      </div>
+      <div class="card">
+        <h3>🏆 Domain Privilege Escalation</h3>
+        <p>Abuse ACLs, GPOs, constrained delegation, or misconfigurations to reach Domain Admin.</p>
+      </div>
+      <div class="card">
+        <h3>🎖️ Certificate Attacks</h3>
+        <p>Use ESC1–ESC8 techniques to escalate privileges or persist via AD Certificate Services.</p>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    For context and contact, please refer to the CV associated with this GitHub profile.
+    Active Directory is both a fortress and a maze — mastering it empowers you to breach with precision.
   </footer>
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
+
