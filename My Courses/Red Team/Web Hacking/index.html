@@ -10,53 +10,104 @@
   <div id="toc-container"></div>
   
   <header>
-    <h1>🏋️‍♂️ Web Hacking</h1>
-    <blockquote>Pseudonymous cybersecurity enthusiast progressing toward BSCP (Burp Suite Certified Practitioner).</blockquote>
+    <h1>💻 Web Hacking</h1>
+    <blockquote>Web is the front door to the internet. Know how to open it… or break it.</blockquote>
   </header>
 
   <section>
-    <h2>🧠 About</h2>
-    <p>This page outlines my self-driven journey toward becoming a Burp Suite Certified Practitioner (BSCP). It showcases my progression from beginner-level hacking to OWASP mastery. This learning path is based on hands-on training, CTFs, and real-world challenges.</p>
+    <h2>🔍 Introduction</h2>
+    <p>
+      Web Hacking focuses on identifying and exploiting security flaws in web applications, APIs, and client-server interactions. From URL manipulation to authentication bypass and logic flaws, web applications remain a high-value target in Red Team and Bug Bounty operations.
+    </p>
+    <p>
+      This course explores offensive web techniques, aligned with OWASP Top 10 risks and real-world testing methodologies.
+    </p>
   </section>
 
   <section>
-    <h2>🛰️ Philosophy</h2>
-    <blockquote>"I prefer stealth over spectacle."</blockquote>
+    <h2>🧰 Why Web Security Matters</h2>
+    <p>
+      Web applications are among the most exposed components of modern infrastructure. Misconfigurations, logic bugs, outdated components, and broken access controls are all entry points for attackers.
+    </p>
+    <p>
+      As a Red Teamer or Bug Bounty hunter, mastering web hacking allows you to:
+    </p>
     <ul>
-      <li>I embrace discomfort as a sign of growth.</li>
-      <li>Consistency over bursts: daily focused hours beat weekend marathons.</li>
-      <li>I master concepts, not just tools or writeups.</li>
+      <li>Identify and exploit common and obscure web vulnerabilities</li>
+      <li>Understand how browsers interpret and render web content</li>
+      <li>Bypass authentication, extract data, and take control of session flows</li>
+      <li>Deliver impactful reports to clients or bug bounty programs</li>
     </ul>
   </section>
 
   <section>
-  <h2>🕸️ Overview</h2>
-  <p>
-    The Application & Web domain focuses on securing and assessing the software layer of modern systems—especially web applications, APIs, and client-side logic. Web security is a dynamic field, as it often represents the most exposed attack surface.
-  </p>
-  <p>
-    <strong>Defensive Perspective:</strong> Effective protection involves secure software development practices (SDLC), thorough code review, and the use of automated tools such as SAST, DAST, and WAFs. Authentication hardening, proper session management, and input validation are pillars of a secure application.
-  </p>
-  <p>
-    <strong>Red Team Perspective:</strong> Web penetration testing focuses on identifying vulnerabilities such as injection flaws, access control issues, and logic bugs. Knowledge of the OWASP Top 10 is fundamental. In bug bounty and offensive testing, chaining subtle issues (e.g. CSP bypass + token leak) often leads to impactful findings.
-  </p>
-  <p>
-    Mastery in this area means understanding both the browser's behavior and backend infrastructure, to defend or to exploit accordingly.
-  </p>
+    <h2>🧱 Foundations You Should Know</h2>
+    <p>Before diving into offensive web testing, make sure you're comfortable with:</p>
+    <ul>
+      <li>HTTP protocol (methods, headers, status codes)</li>
+      <li>HTML/CSS/JS and how browsers parse content</li>
+      <li>Cookies, tokens, sessions, and CORS</li>
+      <li>Basic networking (IP, DNS, ports, TLS)</li>
+    </ul>
   </section>
 
   <section>
-    <h2>🎯 My Learning Path</h2>
+    <h2>💥 Core Skills in Offensive Web Testing</h2>
     <div class="grid-container">
-      <a class="card" href="https://myfirstorlastname.github.io/whoami/WebHacking/WH : My Learning Path" target="_blank">
-        <h3>Web Hacking</h3>
-        <p>OWASP top 10 Vulnerabilities, Web Bug Bounty, CTF platforms</p>
-      </a>
+      <div class="card">
+        <h3>🔍 Information Gathering</h3>
+        <p>Passive and active recon, subdomain enumeration, WAF detection, tech stack fingerprinting.</p>
+      </div>
+
+      <div class="card">
+        <h3>🧪 Input Testing & Injection</h3>
+        <p>Test parameters, HTTP methods, file uploads. Spot and exploit XSS, SQLi, SSTI, and more.</p>
+      </div>
+
+      <div class="card">
+        <h3>🧱 Authentication Bypass</h3>
+        <p>Bypass login forms using logic flaws, token mismanagement, or OAuth manipulation.</p>
+      </div>
+
+      <div class="card">
+        <h3>🔐 Access Control Testing</h3>
+        <p>Test for IDOR, broken object-level auth (BOLA), privilege escalation in roles and functions.</p>
+      </div>
+
+      <div class="card">
+        <h3>📦 Business Logic Attacks</h3>
+        <p>Break workflows, abuse overlooked flows like discount abuse, race conditions, or logic chaining.</p>
+      </div>
+
+      <div class="card">
+        <h3>🧠 Exploiting Misconfigurations</h3>
+        <p>From CORS misconfigurations to exposed admin panels and dangerous debug endpoints.</p>
+      </div>
+
+      <div class="card">
+        <h3>🛠️ Tools of the Trade</h3>
+        <p>Master Burp Suite, browser dev tools, ffuf, nuclei, and custom scripts.</p>
+      </div>
+
+      <div class="card">
+        <h3>🧾 Reporting</h3>
+        <p>Document clearly: reproduction steps, impact, PoC, and remediation tips for each finding.</p>
+      </div>
     </div>
   </section>
 
+  <section>
+    <h2>📚 Further Study Areas</h2>
+    <ul>
+      <li>Client-Side Attacks (DOM-based XSS, CSP bypass)</li>
+      <li>API Security Testing</li>
+      <li>Bug Bounty Platforms & Responsible Disclosure</li>
+      <li>Web CTFs & Challenges (HackTheBox, PortSwigger, etc.)</li>
+    </ul>
+  </section>
+
   <footer>
-    For context and contact, please refer to the CV associated with this GitHub profile.
+    Web hacking is a discipline of logic, curiosity, and precision. Learn how the web works, then learn how to make it work for you.
   </footer>
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
