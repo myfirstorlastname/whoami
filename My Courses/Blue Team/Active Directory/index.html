@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Active Directory Hardening</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>🛡️ Active Directory Hardening</h1>
+    <blockquote>Defending the kingdom means securing its keys, gates, and messengers.</blockquote>
+  </header>
+
+  <section>
+    <h2>🧠 About This Course</h2>
+    <p>
+      This course introduces core defensive concepts related to <strong>Active Directory (AD)</strong> security. AD is the backbone of identity and access management in Windows-based enterprise environments, protecting it is a critical duty of any Blue Team.
+    </p>
+    <p>
+      You'll learn how to harden configurations, monitor for suspicious activity, and respond to common attacks like Kerberoasting, DC syncs, and credential theft.
+    </p>
+  </section>
+
+  <section>
+    <h2>🎯 Key Objectives</h2>
+    <ul>
+      <li>Understand the AD architecture and common attack surfaces</li>
+      <li>Apply group policy settings for enhanced security</li>
+      <li>Monitor key AD logs and events</li>
+      <li>Detect known attack techniques (e.g., DCSync, pass-the-hash)</li>
+      <li>Respond to suspicious behavior in hybrid and on-prem environments</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🔐 Course Sections</h2>
+    <div class="grid-container">
+      <a class="card" href="https://adsecurity.org" target="_blank">
+        <h3>🛠️ AD Security Baselines</h3>
+        <p>Understand Microsoft's security baselines, default trusts, and tiering models.</p>
+      </a>
+      <a class="card" href="https://learn.microsoft.com/en-us/windows-server/identity/securing-active-directory" target="_blank">
+        <h3>📘 Hardening Practices</h3>
+        <p>Apply secure GPOs, enforce admin tiering, and reduce attack surface.</p>
+      </a>
+      <a class="card" href="https://learn.microsoft.com/en-us/defender-for-identity/" target="_blank">
+        <h3>📊 Monitoring & Detection</h3>
+        <p>Use Windows logs, Sysmon, and Defender for Identity to detect malicious activity.</p>
+      </a>
+      <a class="card" href="https://attack.mitre.org/" target="_blank">
+        <h3>📂 MITRE ATT&CK Techniques</h3>
+        <p>Map threats to real-world techniques like credential dumping, DCSync, and privilege escalation.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>⚔️ Key Blue Team Skills</h2>
+    <div class="grid-container">
+      <div class="card">
+        <h3>🔍 Monitoring Domain Events</h3>
+        <p>Track logins, account lockouts, SID history changes, and LDAP queries.</p>
+      </div>
+      <div class="card">
+        <h3>🧱 Group Policy Management</h3>
+        <p>Lock down AD with secure GPOs and enforce least privilege access.</p>
+      </div>
+      <div class="card">
+        <h3>🔐 Privileged Access Management</h3>
+        <p>Control admin rights using tiered access, LAPS, and just-in-time elevation.</p>
+      </div>
+      <div class="card">
+        <h3>📉 Attack Surface Reduction</h3>
+        <p>Disable unnecessary services, clean up stale accounts, and review trusts.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Detection Engineering</h3>
+        <p>Create alerts for common AD attacks and test them using Red Team simulations.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    A secure Active Directory isn’t built in silence, it’s maintained by vigilance, knowledge, and continuous review.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
