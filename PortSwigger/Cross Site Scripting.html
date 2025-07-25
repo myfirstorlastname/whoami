@@ -3,18 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SQL Injection</title>
+  <title>Cross Site Scripting</title>
   <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
   
-  <h1>💉 SQL Injection</h1>
+  <h1>💥 Cross Site Scripting (XSS)</h1>
   <blockquote>Every input is a question. Every response is a clue. Learn to ask the right questions.</blockquote>
   <hr>
 
+  <h2>🧠 What is XSS?</h2>
+  <p>
+    Cross-Site Scripting (XSS) is a client-side injection vulnerability that allows attackers to execute arbitrary JavaScript in a victim’s browser. It can be used to steal session cookies, deface pages, perform phishing attacks, and hijack accounts.
+  </p>
+  <p>
+    XSS is ranked in the OWASP Top 10 and remains prevalent in modern web applications due to dynamic content rendering and complex frontend logic.
+  </p>
+
   <h2>🧪 My Lab Progress</h2>
-  <p>I completed <strong>29 / 30</strong> XSS labs on PortSwigger Academy. (Need the Pro version of Burp Suite to validate the last lab)</p>
+  <p>I completed <strong>29 / 30</strong> XSS labs on PortSwigger Academy. (The last lab requires the Burp Suite Pro version.)</p>
   <ul>
     <li>Reflected XSS into HTML context with nothing encoded</li>
     <li>Stored XSS into HTML context with nothing encoded</li>
@@ -25,7 +33,7 @@
     <li>Reflected XSS into attribute with angle brackets HTML-encoded</li>
     <li>Stored XSS into anchor href attribute with double quotes HTML-encoded</li>
     <li>Reflected XSS into a JavaScript string with angle brackets HTML encoded</li>
-    <li>DOM XSS in document.write sink using source location.search inside a select element</li>
+    <li>DOM XSS in document.write sink using location.search inside a select element</li>
     <li>DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded</li>
     <li>Reflected DOM XSS</li>
     <li>Stored DOM XSS</li>
@@ -47,8 +55,44 @@
     <li>Reflected XSS protected by CSP, with CSP bypass</li>
   </ul>
 
+  <h2>🔍 Types of XSS</h2>
+  <ul>
+    <li><strong>Reflected XSS</strong>: The payload is reflected immediately in the server response. Triggered via links.</li>
+    <li><strong>Stored XSS</strong>: The payload is stored in the backend (e.g., database) and served to future users.</li>
+    <li><strong>DOM-Based XSS</strong>: The vulnerability exists in frontend JavaScript (no server involvement).</li>
+  </ul>
+
+  <h2>⚔️ Real-World Use Cases</h2>
+  <p>
+    In real attacks, XSS is rarely the end goal. Instead, it becomes a powerful pivot:
+  </p>
+  <ul>
+    <li>Hijack session tokens to impersonate users or admins</li>
+    <li>Perform actions on behalf of victims (CSRF or account takeover)</li>
+    <li>Inject keyloggers, exfiltrate sensitive input, or deploy phishing pages</li>
+    <li>Escalate XSS to full RCE via stored payloads + admin panel compromise</li>
+  </ul>
+  <p>
+    Combined with misconfigured CSP or weak input filtering, even restricted contexts (like SVG or JSON) become viable attack surfaces.
+  </p>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li>Use Burp Suite’s Repeater to test inputs in different contexts (HTML, JS, attribute)</li>
+    <li><code>xsser</code> or <code>Dalfox</code> can help automate payload testing</li>
+    <li>Use polyglot payloads to detect filtering and bypass restrictions</li>
+    <li>Observe the DOM and JS sinks directly in DevTools or browser console</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>XSS is more than just <code>alert(1)</code> — think persistence, privilege, and pivoting</li>
+    <li>Know your injection context: HTML, attribute, script, event handler, or URL</li>
+    <li>Well-implemented CSP can mitigate exploitation, but CSP bypasses exist</li>
+    <li>DOM-based XSS is common in modern SPAs and React/Angular/Vue apps</li>
+  </ul>
+
   <hr />
-  
   <footer>
     Web hacking is a discipline of logic, curiosity, and precision. Learn how the web works, then learn how to make it work for you.
   </footer>
