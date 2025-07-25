@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enumerating</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>🔎 Enumerating</h1>
+    <blockquote>To compromise the crown, you must first map the kingdom.</blockquote>
+  </header>
+
+  <section>
+    <h2>🧠 What is BloodHound?</h2>
+    <p>
+      <strong>BloodHound</strong> is a powerful tool used to visualize and analyze relationships within Active Directory environments. It allows Red Teamers and pentesters to identify attack paths to privileged accounts and high-value targets by leveraging legitimate AD features and permissions.
+    </p>
+    <p>
+      BloodHound uses graph theory to represent objects like users, computers, groups, and their relations : uncovering hidden paths to Domain Admin rights.
+    </p>
+  </section>
+
+  <section>
+    <h2>📦 Components</h2>
+    <ul>
+      <li><strong>SharpHound</strong>: Data collector, typically run from a domain-joined machine</li>
+      <li><strong>Neo4j</strong>: Graph database used to store AD objects and relations</li>
+      <li><strong>BloodHound GUI</strong>: The interface for querying and visualizing attack paths</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>⚙️ Collection Techniques</h2>
+    <p>SharpHound supports different collection methods:</p>
+    <ul>
+      <li><code>All</code> : default mode (everything except ACLs by default)</li>
+      <li><code>Session</code> : active user sessions on machines</li>
+      <li><code>GroupMembership</code> : group relationships</li>
+      <li><code>LocalAdmin</code> : who has local admin rights where</li>
+      <li><code>ACL</code> : detailed object permissions (optional)</li>
+      <li><code>Trusts</code> : domain trust relationships</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🚀 Basic Usage</h2>
+    <pre><code>SharpHound.exe -c All</code></pre>
+    <p>
+      This collects all supported information and generates JSON `.zip` files for ingestion into BloodHound.
+    </p>
+
+    <p>
+      Once collected:
+      <ol>
+        <li>Start Neo4j and launch BloodHound</li>
+        <li>Ingest the `.zip` files</li>
+        <li>Query the graph (e.g., <code>Find Shortest Path to Domain Admins</code>)</li>
+      </ol>
+    </p>
+  </section>
+
+  <section>
+    <h2>🧩 Common Attack Paths</h2>
+    <p>BloodHound identifies paths that are often overlooked by defenders, including:</p>
+    <ul>
+      <li><strong>Kerberoastable Users</strong> → crackable tickets → escalation</li>
+      <li><strong>Local Admin access</strong> → lateral movement</li>
+      <li><strong>GenericAll / GenericWrite</strong> → full control over objects</li>
+      <li><strong>WriteDACL</strong> → modify permissions (privilege escalation)</li>
+      <li><strong>AdminTo</strong> / <strong>HasSession</strong> → token theft</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📊 Query Examples</h2>
+    <ul>
+      <li><code>Shortest paths to domain admins</code></li>
+      <li><code>Users with foreign group memberships</code></li>
+      <li><code>Computers with sessions from high-priv users</code></li>
+      <li><code>Objects with unconstrained delegation</code></li>
+    </ul>
+    <p>These queries help prioritize targets and identify escalation paths in real-world assessments.</p>
+  </section>
+
+  <section>
+    <h2>📚 Recommended Practice</h2>
+    <div class="grid-container">
+      <div class="card">
+        <h3>🧪 Lab Environment</h3>
+        <p>Use AD lab environments (e.g., AttackDefense, TryHackMe, HackTheBox) to simulate real-world AD topologies.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Blue Team Countermeasures</h3>
+        <p>Understand how defenders detect SharpHound collection via Sysmon, Defender for Identity, and audit logs.</p>
+      </div>
+      <div class="card">
+        <h3>🎯 Sharpen Graph Thinking</h3>
+        <p>Explore paths involving ACL abuse, constrained delegation, or nested group membership escalation.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    BloodHound doesn’t create paths : it reveals the ones already there. Understand AD’s logic, and you'll find the path to domination.
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
