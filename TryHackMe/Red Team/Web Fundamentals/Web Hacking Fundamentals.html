@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Hacking Fundamentals (TryHackMe : Web Fundamentals path)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🕷️ Web Hacking Fundamentals (TryHackMe : Web Fundamentals path)</h1>
+  <blockquote>Every input is a question. Every response is a clue. Learn to ask the right questions.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    This page presents a structured breakdown of the <a href="https://tryhackme.com/module/web-hacking-fundamentals" target="_blank" rel="noopener noreferrer">"Web Hacking Fundamentals"</a> module from TryHackMe’s <em>Jr Penetration Tester</em> path.
+    As a continuation of <strong>Introduction to Web Hacking</strong>, this module deepens your understanding of how websites can be abused—and secured—by applying methodical offensive thinking. Despite being categorized as “fundamentals”, this module introduces impactful, real-world attack scenarios with low barriers to entry and high educational value.
+  </p>
+  <hr>
+
+  <h2>📘 Module Summary</h2>
+  <ul>
+    <li>Reinforces and expands foundational knowledge:
+      <ul>
+        <li>HTTP request/response manipulation</li>
+        <li>Directory brute-forcing and fuzzing</li>
+        <li>Bypassing authentication mechanisms</li>
+        <li>Session management weaknesses</li>
+        <li>Practical file upload abuse and basic shell access</li>
+      </ul>
+    </li>
+    <li>Focuses on techniques relevant to CTFs and real-world testing scenarios.</li>
+    <li>Encourages hands-on experimentation over theory-heavy content.</li>
+  </ul>
+
+  <h2>🔍 Skills Reinforced</h2>
+  <ul>
+    <li>Manual enumeration using Burp Suite, browser, and CLI tools</li>
+    <li>Authentication bypass logic (e.g., parameter tampering, weak password checks)</li>
+    <li>Session hijacking fundamentals</li>
+    <li>Discovering hidden files and directories using <code>ffuf</code> and <code>dirb</code></li>
+    <li>Understanding server-side logic behind basic access controls</li>
+    <li>Weaponizing file uploads and gaining foothold</li>
+  </ul>
+
+  <h2>🧪 What I Found Valuable</h2>
+  <ul>
+    <li>The fuzzing section is a great entry point to using wordlists strategically.</li>
+    <li>The exercise on tampering with parameters highlights the importance of manual testing, even in automated contexts.</li>
+    <li>Exploit paths are intentionally simple yet demonstrate real-world principles clearly.</li>
+    <li>Excellent lab design: clean, reproducible, and minimal guesswork.</li>
+  </ul>
+
+  <h2>🎓 Who Should Take This Module</h2>
+  <ul>
+    <li>Those who completed the previous module and want to build toward shell access and deeper logic bugs.</li>
+    <li>Students preparing for beginner-level CTFs or certifications like eJPT or OSCP.</li>
+    <li>Anyone who wants to practice and internalize the fundamentals before tackling OWASP Top 10 vulnerabilities in depth.</li>
+  </ul>
+
+  <h2>🛠️ Tips for Learners</h2>
+  <ul>
+    <li>Try the manual way first before using automated tools—it sharpens your understanding of request flows.</li>
+    <li>Use <code>Burp Repeater</code> to manipulate requests and observe server-side logic changes.</li>
+    <li>Always check the HTTP status codes—they’re breadcrumbs that lead to useful behavior (e.g., 403 vs 401 vs 302).</li>
+    <li>For brute-forcing, understand what you’re looking for before running tools blindly.</li>
+  </ul>
+
+  <h2>✅ Completion Status</h2>
+  <ul>
+    <li><strong>Module completed: 100%</strong></li>
+    <li><strong>Final thoughts:</strong> This module serves as the first real "pivot point" where web challenges begin to resemble actual exploitation logic. Highly recommended as a bridge between beginner web learning and real-world hacking.</li>
+  </ul>
+
+  <hr />
+  <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+    Web hacking is a discipline of logic, curiosity, and precision. Learn how the web works, then learn how to make it work for you.
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
