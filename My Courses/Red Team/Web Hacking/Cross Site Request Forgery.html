@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cross-Site Request Forgery (CSRF)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🎯 Cross-Site Request Forgery (CSRF)</h1>
+  <blockquote>Web is built on trust. CSRF abuses it silently.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    CSRF (Cross-Site Request Forgery) is a client-side vulnerability that allows an attacker to trick a victim into submitting unwanted actions on a web application in which they’re authenticated.
+    It targets the browser’s implicit trust in session cookies or authentication headers and can lead to unauthorized actions such as data modification, account deletion, or privilege escalation.
+  </p>
+
+  <h2>🔍 How CSRF Works</h2>
+  <p>
+    When a victim visits a malicious website while being authenticated on a target site, the attacker can craft a request to the target using the victim’s session. Since the request comes from the browser, all cookies (including the session token) are automatically included.
+  </p>
+
+  <h2>🧨 Example Attack</h2>
+  <h3>1. CSRF Attack via Auto-submitting Form</h3>
+  <pre><code>
+  &lt;form action="https://bank.example.com/transfer" method="POST"&gt;
+    &lt;input type="hidden" name="amount" value="1000"&gt;
+    &lt;input type="hidden" name="to" value="attacker_account"&gt;
+    &lt;input type="submit" value="Click"&gt;
+  &lt;/form&gt;
+  &lt;script&gt;document.forms[0].submit();&lt;/script&gt;
+  </code></pre>
+  <p>
+    If the user is logged into their bank, the transfer is executed without their knowledge.
+  </p>
+
+  <h2>🔒 Common Defenses</h2>
+  <table>
+    <thead>
+      <tr><th>Technique</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CSRF Tokens</td><td>Unique, unpredictable values included in every form submission and verified server-side.</td></tr>
+      <tr><td>SameSite Cookies</td><td>Restricts cookies from being sent with cross-origin requests (<code>Strict</code>, <code>Lax</code>, or <code>None</code>).</td></tr>
+      <tr><td>Referer / Origin Header Validation</td><td>Checks request origin to ensure it's from the same domain (bypassable, but useful in defense-in-depth).</td></tr>
+      <tr><td>Double Submit Cookie</td><td>Sends a CSRF token both as a cookie and form value, and checks for consistency.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>🔧 Testing Tips</h2>
+  <ul>
+    <li>Use Burp Suite to intercept authenticated POST requests and test them in a standalone form or script.</li>
+    <li>Remove CSRF tokens manually and observe if the request still goes through.</li>
+    <li>Try changing request methods (GET, POST, PUT) to bypass SameSite policies.</li>
+    <li>Check if <code>Referer</code> or <code>Origin</code> headers are validated.</li>
+  </ul>
+
+  <h2>💥 Real-World Scenarios</h2>
+  <ul>
+    <li>Changing email or password from a malicious site while user is logged in</li>
+    <li>Triggering admin actions (e.g. user deletion, permission change) via authenticated session</li>
+    <li>Creating backdoor users or injecting persistent data (XSS, SSRF payloads) through CSRF</li>
+  </ul>
+
+  <h2>🛠️ Tools</h2>
+  <ul>
+    <li>Burp Suite (CSRF PoC Generator)</li>
+    <li>OWASP CSRF Tester</li>
+    <li>CSRF-POC-Generator scripts on GitHub</li>
+    <li>Browser DevTools to inspect request headers and cookies</li>
+  </ul>
+
+  <h2>🧬 CSRF in Attack Chains</h2>
+  <p>
+    CSRF is rarely an end goal, but when combined with other flaws (IDOR, open redirect, XSS), it becomes extremely dangerous.
+  </p>
+
+  <h3>With IDOR</h3>
+  <p>An attacker forces a victim to access another user's resource, exploiting insecure access controls.</p>
+
+  <h3>With XSS</h3>
+  <p>If the attacker already has XSS, they can forge requests silently in the background using <code>fetch</code> or <code>XMLHttpRequest</code>.</p>
+
+  <h3>With Weak SameSite Configuration</h3>
+  <p>
+    Many web apps incorrectly use <code>SameSite=Lax</code> on sensitive endpoints that respond to <code>POST</code> or <code>PUT</code>.
+    This enables attacks using JavaScript redirects or method override tricks.
+  </p>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>CSRF abuses browser trust — not authentication weakness.</li>
+      <li>Defense should be layered: tokens, headers, and SameSite attributes.</li>
+      <li>All state-changing requests must include explicit proof of user intent.</li>
+      <li>Modern browsers mitigate CSRF by default, but misconfigurations are common.</li>
+    </ul>
+  </div>
+
+  <hr />
+  <footer>
+    Web applications must verify intent — not just identity. CSRF reminds us that trust without control leads to exploitation.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
