@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cross Site Request Forgery</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🎯 Cross Site Request Forgery (CSRF)</h1>
+  <blockquote>Trust is the weakest link. CSRF exploits it.</blockquote>
+  <hr>
+
+  <h2>🧠 What is CSRF?</h2>
+  <p>
+    Cross-Site Request Forgery (CSRF) is a vulnerability that allows an attacker to force a victim's browser to perform actions on a web application in which the victim is authenticated — without their consent or awareness.
+  </p>
+  <p>
+    It exploits implicit trust between the browser and server, especially in apps that rely only on session cookies for authentication without additional safeguards (e.g., CSRF tokens).
+  </p>
+
+  <h2>🧪 My Lab Progress</h2>
+  <p>I completed <strong>12 / 12</strong> CSRF labs on PortSwigger Academy.</p>
+  <ul>
+    <li>CSRF vulnerability with no defenses</li>
+    <li>CSRF where token validation depends on request method</li>
+    <li>CSRF where token validation depends on token being present</li>
+    <li>CSRF where token is not tied to user session</li>
+    <li>CSRF where token is tied to non-session cookie</li>
+    <li>CSRF where token is duplicated in cookie</li>
+    <li>SameSite Lax bypass via method override</li>
+    <li>SameSite Strict bypass via client-side redirect</li>
+    <li>SameSite Strict bypass via sibling domain</li>
+    <li>SameSite Lax bypass via cookie refresh</li>
+    <li>CSRF where Referer validation depends on header being present</li>
+    <li>CSRF with broken Referer validation</li>
+  </ul>
+
+  <h2>🛡️ Common CSRF Defenses</h2>
+  <ul>
+    <li><strong>CSRF tokens</strong>: Unique, user-specific, and session-bound tokens in forms or headers</li>
+    <li><strong>SameSite cookie attribute</strong>: Prevents browsers from sending cookies with cross-origin requests</li>
+    <li><strong>Referer / Origin header validation</strong>: Helps ensure request legitimacy (not foolproof)</li>
+    <li><strong>CAPTCHA</strong>: Slows down automated attacks but doesn’t replace token validation</li>
+  </ul>
+
+  <h2>⚔️ Real-World Use Cases</h2>
+  <p>
+    CSRF may seem “invisible” to users but can have severe impact:
+  </p>
+  <ul>
+    <li>Change account settings (email, password, 2FA)</li>
+    <li>Perform financial actions (e.g., wire transfers, purchase orders)</li>
+    <li>Delete accounts, modify permissions, or create new users</li>
+    <li>Escalate to account takeover when combined with XSS or open redirect</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li>Use Burp Suite to intercept the vulnerable request and generate a CSRF POC</li>
+    <li>Use <code>CSRF-POC-Generator</code> scripts to auto-generate exploit forms</li>
+    <li>Check for weak SameSite or missing CSRF tokens on sensitive actions (POST, PUT)</li>
+    <li>Look for token reuse or absence of token validation in JavaScript</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>CSRF abuses **trust** in the browser, not flaws in authentication itself</li>
+    <li>Defense requires **explicit validation** of user intent (e.g., token or double submit)</li>
+    <li>Modern browsers with <code>SameSite=Lax</code> cookies offer good default protection — but not full coverage</li>
+    <li>Combine CSRF with IDOR or XSS for powerful chained attacks</li>
+  </ul>
+
+  <hr />
+  <footer>
+    Web applications must distinguish legitimate intent from background noise. CSRF proves that implicit trust is never enough.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
