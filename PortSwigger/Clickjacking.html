@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clickjacking</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🖱️ Clickjacking</h1>
+  <blockquote>The UI can lie. Clickjacking makes it a weapon.</blockquote>
+  <hr>
+
+  <h2>🧠 What is Clickjacking?</h2>
+  <p>
+    Clickjacking (UI redress attack) tricks users into clicking something different from what they see, by layering a
+    legitimate page inside an invisible or partially transparent <code>&lt;iframe&gt;</code> above decoy content. 
+    The victim believes they click a harmless button, but actually performs a sensitive action (e.g., changing settings, approving a transaction).
+  </p>
+  <p>
+    It abuses the browser’s rendering of framed content, not the authentication mechanism itself—making it particularly dangerous on pages
+    where the user is already authenticated.
+  </p>
+
+  <h2>🧪 My Lab Progress</h2>
+  <p>I completed <strong>5 / 5</strong> Clickjacking labs on PortSwigger Academy.</p>
+  <ul>
+    <li>Basic clickjacking with CSRF token protection</li>
+    <li>Clickjacking with form input data prefilled from a URL parameter</li>
+    <li>Clickjacking with a frame buster script</li>
+    <li>Exploiting clickjacking vulnerability to trigger DOM-based XSS</li>
+    <li>Multistep clickjacking</li>
+  </ul>
+
+  <h2>🛡️ Common Defenses</h2>
+  <ul>
+    <li><strong>X-Frame-Options</strong>: Set to <code>DENY</code> or <code>SAMEORIGIN</code> to prevent framing.</li>
+    <li><strong>Content-Security-Policy (CSP) frame-ancestors</strong>: Modern, fine-grained control over allowed parent frames.</li>
+    <li><strong>Frame-busting scripts</strong>: JS to detect/escape framing (helpful, but historically bypassable).</li>
+    <li><strong>Re-auth / Confirm UI</strong>: Require explicit re-authentication or secondary confirmation for critical actions.</li>
+    <li><strong>UI randomization</strong>: Reduce predictable alignment for click targets (defense-in-depth).</li>
+  </ul>
+
+  <h2>⚔️ Real-World Use Cases</h2>
+  <ul>
+    <li>Changing account email/password invisibly to attackers’ values</li>
+    <li>Authorizing payments or transfers in banking portals</li>
+    <li>Enabling webcam/microphone permissions via disguised prompts</li>
+    <li>Triggering admin-only actions (e.g., “Delete user”, “Promote to admin”)</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li>Try embedding target pages in an <code>&lt;iframe&gt;</code> to test if framing is allowed.</li>
+    <li>Use simple HTML PoCs (opacity/positioning) to align a lure with the hidden button.</li>
+    <li>Inspect responses for <code>X-Frame-Options</code> and CSP <code>frame-ancestors</code> headers.</li>
+    <li>In Burp Suite, verify whether sensitive endpoints are protected or re-check authenticated state.</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>Clickjacking exploits <strong>UI trust</strong>, not credentials directly.</li>
+    <li>Proper headers (<code>X-Frame-Options</code> / <code>frame-ancestors</code>) are the primary mitigation.</li>
+    <li>Combine with CSRF or social engineering to increase impact and reliability.</li>
+    <li>For high-risk actions, require explicit user intent (re-auth, step-up verification).</li>
+  </ul>
+
+  <hr />
+  <footer>
+    Web security isn’t just about code — it’s also about perception. If the UI can be faked, the trust can be broken.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
