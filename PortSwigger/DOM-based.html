@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOM-Based Vulnerabilities</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🧬 DOM-Based Vulnerabilities</h1>
+  <blockquote>The browser is its own execution environment — control the DOM, control the app.</blockquote>
+  <hr>
+
+  <h2>🧠 What Are DOM-Based Vulnerabilities?</h2>
+  <p>
+    DOM-Based vulnerabilities occur entirely in the client-side code, when insecure JavaScript manipulates the Document Object Model (DOM) 
+    with untrusted user input. The data never reaches the server — exploitation happens directly in the browser.
+  </p>
+  <p>
+    These vulnerabilities often result from unsafe handling of URL fragments, messages between frames, or HTML element properties. 
+    They can lead to Cross-Site Scripting (XSS), open redirection, cookie manipulation, or even bypass of server-side security.
+  </p>
+
+  <h2>🧪 My Lab Progress</h2>
+  <p>I completed <strong>7 / 7</strong> DOM-Based labs on PortSwigger Academy.</p>
+  <ul>
+    <li>DOM XSS using web messages</li>
+    <li>DOM XSS using web messages and a JavaScript URL</li>
+    <li>DOM XSS using web messages and JSON.parse</li>
+    <li>DOM-based open redirection</li>
+    <li>DOM-based cookie manipulation</li>
+    <li>Exploiting DOM clobbering to enable XSS</li>
+    <li>Clobbering DOM attributes to bypass HTML filters</li>
+  </ul>
+
+  <h2>🛡️ Common Defenses</h2>
+  <ul>
+    <li>Validate and sanitize any data read from <code>location</code>, <code>postMessage</code>, cookies, or DOM elements before use.</li>
+    <li>Use safe DOM methods (e.g., <code>textContent</code>, <code>setAttribute</code>) instead of <code>innerHTML</code> or <code>document.write</code>.</li>
+    <li>For web messaging, explicitly validate the <code>origin</code> and structure of incoming messages.</li>
+    <li>Apply a strict Content Security Policy (CSP) to reduce impact of potential XSS.</li>
+    <li>Limit use of client-side redirects; validate target URLs strictly.</li>
+  </ul>
+
+  <h2>⚔️ Real-World Use Cases</h2>
+  <ul>
+    <li>Exploiting DOM XSS to steal session tokens from authenticated users.</li>
+    <li>Redirecting victims to phishing pages via DOM-based open redirection.</li>
+    <li>Modifying cookies client-side to escalate privileges or bypass controls.</li>
+    <li>Using DOM clobbering to override critical element properties and execute malicious code.</li>
+    <li>Combining DOM-based flaws with CSRF or IDOR to increase attack impact.</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li>Use browser DevTools to inspect the DOM, set breakpoints, and track data flow from source to sink.</li>
+    <li>Search the JavaScript code for dangerous sinks (<code>innerHTML</code>, <code>eval</code>, <code>document.write</code>, etc.).</li>
+    <li>Test <code>postMessage</code> handlers with controlled payloads and fake origins.</li>
+    <li>In Burp Suite, use the DOM Invader extension to automate detection of DOM-based vulnerabilities.</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>DOM-Based vulnerabilities never touch the server — traditional server-side filtering won’t stop them.</li>
+    <li>They rely on unsafe handling of untrusted data in JavaScript.</li>
+    <li>Mitigation requires secure coding practices and safe DOM APIs.</li>
+    <li>DOM flaws can be chained with other client or server vulnerabilities for more severe impact.</li>
+  </ul>
+
+  <hr />
+  <footer>
+    Client-side security is just as critical as server-side. The DOM is part of the attack surface — defend it accordingly.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
