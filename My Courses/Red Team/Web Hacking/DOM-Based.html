@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOM-Based Vulnerabilities</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🧬 DOM-Based Vulnerabilities</h1>
+  <blockquote>The browser is an execution environment. Control the DOM, control the app.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    DOM-Based vulnerabilities occur entirely in the browser, when insecure JavaScript manipulates the Document Object Model (DOM) 
+    using untrusted user input. Unlike traditional vulnerabilities, the malicious data may never reach the server — the exploitation 
+    happens directly in the client.
+  </p>
+  <p>
+    These flaws are dangerous because they bypass server-side defenses and can be exploited via URLs, postMessage calls, cookies, or 
+    any other client-side data sources.
+  </p>
+
+  <h2>📚 What is the DOM?</h2>
+  <p>
+    The <strong>Document Object Model</strong> is the browser’s internal tree representation of the HTML page. 
+    JavaScript uses it to dynamically update content, styles, and behavior.
+  </p>
+  <p>
+    When developers insert untrusted data into the DOM without sanitization, they create an opportunity for attackers to inject 
+    malicious code or alter application behavior.
+  </p>
+
+  <h2>🔍 How DOM-Based Vulnerabilities Happen</h2>
+  <p>
+    Any time JavaScript reads untrusted data from a <em>source</em> and writes it to a dangerous <em>sink</em> without validation, 
+    there’s a potential vulnerability.
+  </p>
+  <table>
+    <thead>
+      <tr><th>Source</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>location.hash</code></td><td>Fragment identifier in the URL</td></tr>
+      <tr><td><code>postMessage</code></td><td>Data sent between frames or windows</td></tr>
+      <tr><td><code>document.cookie</code></td><td>Client-side cookies</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr><th>Sink</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>innerHTML</code></td><td>Injecting HTML directly into the page</td></tr>
+      <tr><td><code>document.write</code></td><td>Writing untrusted scripts</td></tr>
+      <tr><td><code>eval()</code></td><td>Executing arbitrary JS code</td></tr>
+    </tbody>
+  </table>
+
+  <h2>🧨 Common Types of DOM-Based Vulnerabilities</h2>
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>DOM XSS</td><td>Injecting malicious scripts via unsafe DOM updates.</td></tr>
+      <tr><td>Open Redirection</td><td>Client-side navigation to attacker-controlled URLs.</td></tr>
+      <tr><td>Cookie Manipulation</td><td>Changing cookies to alter application state.</td></tr>
+      <tr><td>DOM Clobbering</td><td>Overwriting DOM properties/IDs to influence logic flow.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>DOM-Based flaws bypass server-side input validation.</li>
+      <li>Always sanitize before writing to the DOM.</li>
+      <li>Validate the origin of any <code>postMessage</code> events.</li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>🔧 Testing Tips</h3>
+    <ul>
+      <li>Search for dangerous sinks in JS code (<code>innerHTML</code>, <code>eval</code>).</li>
+      <li>Modify <code>location.hash</code> or <code>search</code> parameters to inject HTML/JS.</li>
+      <li>Test <code>postMessage</code> with custom origins and payloads.</li>
+    </ul>
+  </div>
+
+  <h2>🧪 Practical Examples from PortSwigger Labs</h2>
+
+  <h3>1. DOM XSS using web messages</h3>
+  <p>
+    A page listens for <code>postMessage</code> events and directly injects the received data into <code>innerHTML</code>. 
+    Sending a message with <code>&lt;script&gt;alert(1)&lt;/script&gt;</code> triggers XSS.
+  </p>
+
+  <h3>2. DOM XSS via web messages and <code>javascript:</code> URLs</h3>
+  <p>
+    A link’s <code>href</code> is set to unvalidated message content. By sending <code>javascript:alert(1)</code>, 
+    the attacker executes arbitrary JS when the link is clicked.
+  </p>
+
+  <h3>3. DOM XSS with web messages and <code>JSON.parse</code></h3>
+  <p>
+    A message is parsed from JSON and written to the DOM. Injecting a malicious string property leads to execution.
+  </p>
+
+  <h3>4. DOM-Based Open Redirection</h3>
+  <p>
+    A <code>window.location</code> assignment uses <code>location.hash</code> without validation. 
+    Setting it to <code>//evil.com</code> causes a redirect to an attacker domain.
+  </p>
+
+  <h3>5. DOM-Based Cookie Manipulation</h3>
+  <p>
+    JavaScript reads a URL parameter and sets <code>document.cookie</code>. By injecting crafted cookie values, 
+    the attacker can escalate privileges.
+  </p>
+
+  <h3>6. DOM Clobbering to Enable XSS</h3>
+  <p>
+    By adding elements with certain <code>id</code> or <code>name</code> attributes, attackers overwrite DOM variables 
+    and gain code execution.
+  </p>
+
+  <h3>7. Clobbering DOM Attributes to Bypass HTML Filters</h3>
+  <p>
+    Altering DOM attributes (e.g., <code>src</code> on an image) can bypass sanitization logic and inject scripts.
+  </p>
+
+  <h2>🔒 Prevention Techniques</h2>
+  <ul>
+    <li>Use <code>textContent</code> or <code>setAttribute</code> instead of <code>innerHTML</code> for untrusted data.</li>
+    <li>Strictly validate and whitelist URLs for redirects.</li>
+    <li>Check <code>event.origin</code> when handling <code>postMessage</code> data.</li>
+    <li>Enforce CSP (Content Security Policy) to limit script execution.</li>
+  </ul>
+
+  <h2>🛠️ Tools</h2>
+  <ul>
+    <li>Burp Suite + DOM Invader</li>
+    <li>Browser DevTools (breakpoints, DOM inspection)</li>
+    <li>Custom JavaScript fuzzers</li>
+  </ul>
+
+  <h2>🧬 DOM-Based Vulnerabilities in Real-World Attack Chains</h2>
+  <p>
+    DOM-Based flaws often serve as a first step to greater compromise. 
+    For example, DOM XSS can steal cookies, perform CSRF attacks, or pivot into internal systems when used in admin panels.
+  </p>
+  <ul>
+    <li>Stealing JWT tokens from localStorage</li>
+    <li>Triggering actions in authenticated contexts</li>
+    <li>Bypassing MFA or session validation</li>
+  </ul>
+
+  <div class="takeaway-box">
+    <h3>🛠️ Key Mindset</h3>
+    <ul>
+      <li>Always map the data flow: source → sink.</li>
+      <li>Consider the browser as an attack surface equal to the server.</li>
+      <li>Defend both ends — server-side and client-side.</li>
+    </ul>
+  </div>
+
+  <hr />
+  
+  <footer>
+    Web hacking is not only about servers. The client-side DOM can be just as exploitable — and just as powerful.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
