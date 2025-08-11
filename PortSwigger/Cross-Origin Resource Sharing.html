@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CORS Vulnerabilities</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🌐 Cross-Origin Resource Sharing (CORS) Vulnerabilities</h1>
+  <blockquote>Cross-domain trust is a privilege — never a default.</blockquote>
+  <hr>
+
+  <h2>🧠 What is CORS?</h2>
+  <p>
+    Cross-Origin Resource Sharing (CORS) is a mechanism that allows web applications to request resources from a different domain than their own.
+    While it is essential for modern web functionality, a misconfigured CORS policy can let attackers access sensitive data or perform actions on behalf of a victim.
+  </p>
+  <p>
+    CORS issues often stem from overly permissive <code>Access-Control-Allow-Origin</code> headers, or trusting origins that can be controlled or spoofed by an attacker.
+  </p>
+
+  <h2>🧪 My Lab Progress</h2>
+  <p>I completed <strong>3 out of 3</strong> CORS labs on PortSwigger Academy.</p>
+  <ul>
+    <li>CORS vulnerability with basic origin reflection</li>
+    <li>CORS vulnerability with trusted null origin</li>
+    <li>CORS vulnerability with trusted insecure protocols</li>
+  </ul>
+
+  <h2>🧩 Real-World Applications</h2>
+  <p>
+    CORS vulnerabilities are rarely the main entry point in an attack chain but can have significant impact when combined with other flaws such as XSS, session fixation, or weak authentication.
+    In a real-world scenario, exploiting misconfigured CORS can allow:
+  </p>
+  <ul>
+    <li>Reading sensitive API responses from a victim’s authenticated session</li>
+    <li>Stealing personal data or internal configuration information</li>
+    <li>Bypassing same-origin policy to pivot into private APIs</li>
+    <li>Combining with XSS to exfiltrate data cross-domain</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>Never use <code>Access-Control-Allow-Origin: *</code> with credentials allowed.</li>
+    <li>Validate and strictly define trusted origins — avoid reflection of user input.</li>
+    <li>Be cautious with <code>null</code> origins (common in sandboxed iframes and local files).</li>
+    <li>Secure endpoints with proper authentication and CSRF protections, even with CORS restrictions.</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li>Use Burp Suite to intercept requests and manipulate <code>Origin</code> headers.</li>
+    <li>Test for <code>Access-Control-Allow-Credentials: true</code> combined with permissive origins.</li>
+    <li>Leverage browser DevTools to observe CORS errors and debug policy behavior.</li>
+    <li>Automate origin fuzzing to detect weak validation logic.</li>
+  </ul>
+
+  <hr />
+  
+  <footer>
+    CORS is a gatekeeper between domains — configure it with the same caution as you would a firewall.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
