@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XML External Entity (XXE) Injection</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>📂 XML External Entity (XXE) Injection</h1>
+  <blockquote>Every parser has a voice. Learn to make it speak for you.</blockquote>
+  <hr>
+
+  <h2>🧠 What is XXE?</h2>
+  <p>
+    XML External Entity (XXE) injection is a vulnerability that occurs when an XML parser processes input containing references to external entities.  
+    This can allow an attacker to:
+  </p>
+  <ul>
+    <li>Read local files on the server</li>
+    <li>Perform Server-Side Request Forgery (SSRF)</li>
+    <li>Exfiltrate data via out-of-band channels</li>
+    <li>Potentially achieve remote code execution (depending on the environment)</li>
+  </ul>
+
+  <h2>🧪 My Lab Progress</h2>
+  <p>
+    I completed <strong>7 out of 9</strong> XXE labs on PortSwigger Academy.  
+    (The two blind XXE labs requiring Burp Suite Professional remain unsolved.)
+  </p>
+  <ul>
+    <li>Exploiting XXE using external entities to retrieve files</li>
+    <li>Exploiting XXE to perform SSRF attacks</li>
+    <li>Blind XXE with out-of-band interaction (❌ - Pro required)</li>
+    <li>Blind XXE with out-of-band interaction via XML parameter entities (❌ - Pro required)</li>
+    <li>Exploiting blind XXE to exfiltrate data using a malicious external DTD</li>
+    <li>Exploiting blind XXE to retrieve data via error messages</li>
+    <li>Exploiting XInclude to retrieve files</li>
+    <li>Exploiting XXE via image file upload</li>
+    <li>Exploiting XXE to retrieve data by repurposing a local DTD</li>
+  </ul>
+
+  <h2>🧩 Real-World Applications</h2>
+  <p>
+    XXE vulnerabilities are especially dangerous in environments where:
+  </p>
+  <ul>
+    <li>Applications parse user-supplied XML without disabling external entities</li>
+    <li>Legacy SOAP, SAML, or XML-based APIs are in use</li>
+    <li>File uploads or content imports are processed via XML parsers</li>
+  </ul>
+  <p>
+    Attackers can:
+  </p>
+  <ul>
+    <li>Steal sensitive files like <code>/etc/passwd</code> or application config files</li>
+    <li>Pivot into internal networks via SSRF payloads</li>
+    <li>Trigger remote interactions with malicious DTDs for blind exfiltration</li>
+    <li>Abuse XML extensions such as <code>XInclude</code> to bypass filters</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>Always disable external entity resolution in XML parsers.</li>
+    <li>Validate and sanitize all uploaded files, including content type and internal structure.</li>
+    <li>Be aware of alternative XML features (like XInclude) that can be abused when XXE is patched.</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li>Use Burp Suite Repeater for controlled XML payload testing.</li>
+    <li>Leverage <code>requestbin</code> or <code>Burp Collaborator</code> for detecting blind XXE via OAST.</li>
+    <li>Check for XML parsing in unexpected inputs (file uploads, rich text fields, etc.).</li>
+    <li>Remember that base64 encoding can help bypass naive content filters.</li>
+  </ul>
+
+  <hr />
+  
+  <footer>
+    PortSwigger Academy teaches that XML is more than a markup language—it's a potential gateway into the heart of an application. Understanding XXE means knowing where trust breaks down between data and code.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
