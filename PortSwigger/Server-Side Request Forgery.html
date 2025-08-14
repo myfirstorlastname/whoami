@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Server-Side Request Forgery (SSRF)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>📡 Server-Side Request Forgery (SSRF)</h1>
+  <blockquote>When the server makes requests on your behalf, make it browse where you want.</blockquote>
+  <hr>
+
+  <h2>🧠 What is SSRF?</h2>
+  <p>
+    Server-Side Request Forgery (SSRF) lets an attacker make the server send HTTP/HTTPS (and sometimes other protocol) 
+    requests to arbitrary destinations. Impact ranges from <strong>internal network scanning</strong> and <strong>cloud metadata access</strong> 
+    to <strong>credential leakage</strong> and, in some cases, <strong>remote code execution</strong>.
+  </p>
+
+  <h2>🧪 My Lab Progress</h2>
+  <p>I completed <strong>5 out of 7</strong> SSRF labs on PortSwigger Academy. (Two labs require Burp Suite Pro for OAST.)</p>
+  <ul>
+    <li>Basic SSRF against the local server — <strong>Solved</strong></li>
+    <li>Basic SSRF against another back-end system — <strong>Solved</strong></li>
+    <li>Blind SSRF with out-of-band detection — <strong>Not solved (Pro needed)</strong></li>
+    <li>SSRF with blacklist-based input filter — <strong>Solved</strong></li>
+    <li>SSRF with filter bypass via open redirection vulnerability — <strong>Solved</strong></li>
+    <li>Blind SSRF with Shellshock exploitation — <strong>Not solved (Pro needed)</strong></li>
+    <li>SSRF with whitelist-based input filter — <strong>Solved</strong></li>
+  </ul>
+
+  <h2>🧩 Real-World Applications</h2>
+  <ul>
+    <li><strong>Internal pivoting:</strong> Reach services not exposed to the internet (e.g., <code>http://127.0.0.1</code>, <code>http://10.0.0.0/8</code>, admin panels).</li>
+    <li><strong>Cloud metadata theft:</strong> Access instance metadata endpoints (e.g., <code>http://169.254.169.254/</code>) to steal temporary credentials.</li>
+    <li><strong>Service fingerprinting:</strong> Use response codes, timings, and banners to map internal services.</li>
+    <li><strong>Protocol smuggling:</strong> Occasionally abuse URL parsers or SSRF gadgets to hit non-HTTP services.</li>
+    <li><strong>RCE chains:</strong> Combine SSRF with vulnerable internal apps (e.g., Jenkins, Redis) to reach code execution.</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>Don’t stop at <code>http://localhost</code>; try <code>127.0.0.1</code>, <code>0</code>, <code>2130706433</code> (decimal), IPv6 forms, and DNS tricks.</li>
+    <li>Filters are fragile: blacklist/whitelist bypasses via URL schemas, redirects, DNS rebinding, or URL-encoded payloads are common.</li>
+    <li>Open redirect bugs are powerful SSRF helpers to pivot to internal hosts.</li>
+    <li>Blind SSRF requires OAST/collaborator to confirm DNS/HTTP callbacks.</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li><strong>Burp Suite</strong> Repeater/Intruder for crafted requests; Collaborator (Pro) for blind SSRF.</li>
+    <li>Try alternate notations: <code>http://127.1</code>, integer IPs, hex IPs, IPv6 (<code>[::1]</code>), mixed-encoded URLs.</li>
+    <li>Abuse <strong>redirect chains</strong> (open-redirect endpoints) to reach forbidden targets.</li>
+    <li>Test <strong>scheme confusion</strong>: some apps mishandle <code>http://</code> vs <code>https://</code>; rarely <code>file://</code> or <code>gopher://</code> are possible in older stacks.</li>
+    <li>Enumerate metadata paths for AWS/Azure/GCP once internal access is confirmed.</li>
+  </ul>
+
+  <h2>🧪 PortSwigger-Style Examples</h2>
+
+  <h3>1) Basic SSRF to local server</h3>
+  <p>
+    A product image fetcher accepts a URL. Point it to <code>http://127.0.0.1/admin</code> to access a private panel. If blocked, try IPv6 or decimal IP variants.
+  </p>
+
+  <h3>2) SSRF to another back-end system</h3>
+  <p>
+    Target internal hostnames (e.g., <code>http://stock.warehouse.local/</code>). Use the server’s vantage point to reach networks you can’t directly access.
+  </p>
+
+  <h3>3) Bypass blacklist filters</h3>
+  <p>
+    If <code>localhost</code> is blocked, use <code>127.1</code>, <code>0</code>, <code>2130706433</code>, or even <code>http://localhost@evil.tld@127.0.0.1/</code> depending on parser quirks.
+  </p>
+
+  <h3>4) Bypass via open redirect</h3>
+  <p>
+    Supply a benign domain that immediately 302-redirects to the internal target. The application follows the redirect and hits the forbidden host.
+  </p>
+
+  <h3>5) Whitelist evasion</h3>
+  <p>
+    If only <code>https://images.example.com</code> is allowed, try subdomain tricks (<code>images.example.com.evil.tld</code>), embedded creds, or DNS rebinding. Some validators only check string prefixes.
+  </p>
+
+  <hr />
+  <footer>
+    PortSwigger Academy rewards precision, persistence, and creativity. Climb the ranks not just by solving challenges, but by understanding the web behind them.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
