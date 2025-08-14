@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Server-Side Request Forgery (SSRF)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>📡 Server-Side Request Forgery (SSRF)</h1>
+  <blockquote>Web is the front door to the internet. Know how to open it… or make the server open it for you.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    Server-Side Request Forgery (SSRF) occurs when an application fetches a URL supplied by the user and the server makes the request on the user’s behalf. 
+    If the app doesn’t strictly validate destinations, an attacker can force the server to contact <strong>internal services</strong>, access <strong>cloud metadata</strong>, or pivot inside the network.
+    This page summarizes the concept and gives practical, PortSwigger-style examples and defenses.
+  </p>
+
+  <h2>🌐 What is happening under the hood?</h2>
+  <p>
+    Many apps offer “fetch this URL” features: product image preview, PDF import, webhooks, URL validators, etc. The backend issues a request like:
+  </p>
+  <pre><code class="language-pseudocode">
+# Pseudocode
+url = user_input("imageUrl")
+resp = http.get(url)       # Server-side request with elevated reach
+return resp.content
+  </code></pre>
+  <p>
+    If <code>url</code> is not validated, an attacker can target <em>internal-only</em> hosts reachable from the server (e.g., <code>127.0.0.1</code>,
+    <code>10.0.0.0/8</code>, Docker networks, admin panels), or special IPs like <code>169.254.169.254</code> (cloud instance metadata).
+  </p>
+
+  <h2>🧨 SSRF Variants</h2>
+  <table>
+    <thead><tr><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Basic SSRF</strong></td>
+        <td>Directly request internal resources (e.g., <code>http://127.0.0.1/admin</code>) from a user-controlled URL parameter.</td>
+      </tr>
+      <tr>
+        <td><strong>Blind SSRF</strong></td>
+        <td>No immediate response to attacker. Use OAST/Collaborator to detect DNS/HTTP callbacks or infer via timing/errors.</td>
+      </tr>
+      <tr>
+        <td><strong>Filter Bypass</strong></td>
+        <td>Bypass blacklist/whitelist using alternate IP notations, redirects, DNS tricks, or protocol/URL parser quirks.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>SSRF leverages the server’s network position &amp; trust, not the client’s.</li>
+      <li>Impact ranges from internal recon to data theft and even RCE through reachable services.</li>
+      <li>Filters are fragile. Always test alternate IP forms, redirects, and DNS behavior.</li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>🔧 Testing Tips</h3>
+    <ul>
+      <li>Try internal targets: <code>http://127.0.0.1</code>, <code>http://localhost</code>, <code>http://[::1]/</code>, <code>http://10.0.0.1</code>.</li>
+      <li>Attempt alternate IP encodings: decimal (<code>2130706433</code>), octal/hex (older parsers), short IPv4 (<code>127.1</code>), IPv6.</li>
+      <li>Abuse redirects: start with a benign domain that 302-redirects to the internal endpoint.</li>
+      <li>For blind SSRF, use an out-of-band interaction server (Burp Collaborator / OAST) or observe timing side-channels.</li>
+      <li>Probe cloud metadata: <code>http://169.254.169.254/</code> (AWS/Azure/GCP variants), respecting legal/ethical boundaries.</li>
+    </ul>
+  </div>
+
+  <h2>🧪 Practical Examples (inspired by PortSwigger labs)</h2>
+
+  <h3>1) Basic SSRF against the local server</h3>
+  <p>
+    A “fetch product image” feature accepts a URL. Supply:
+  </p>
+  <pre><code>http://127.0.0.1/admin</code></pre>
+  <p>
+    If the app returns the response body or status, you can enumerate admin endpoints or sensitive panels. 
+    If it blocks <code>localhost</code>, try <code>127.1</code> or the decimal form <code>2130706433</code>.
+  </p>
+
+  <h3>2) SSRF to another back-end system</h3>
+  <p>
+    Some apps communicate with an internal stock or billing service (e.g., <code>http://stock.warehouse.local/</code>).
+    Point the fetcher there to query internal APIs that shouldn’t be internet-facing.
+  </p>
+
+  <h3>3) Bypassing a blacklist filter</h3>
+  <p>
+    If the server filters strings like <em>“localhost”</em> or <em>“169.254.169.254”</em>, use alternate encodings or embedded credentials:
+  </p>
+  <ul>
+    <li><code>http://127.1/</code>, <code>http://0/</code>, <code>http://2130706433/</code></li>
+    <li><code>http://localhost@evil.tld@127.0.0.1/</code> (parser quirks)</li>
+    <li>DNS tricks (if name resolution is weakly validated)</li>
+  </ul>
+
+  <h3>4) Open redirect as an SSRF trampoline</h3>
+  <p>
+    If only <code>https://images.safe.com</code> is allowed, but there is an open redirect at 
+    <code>https://images.safe.com/redirect?to=&lt;target&gt;</code>, the backend may follow the 302 and hit your internal target.
+  </p>
+
+  <h3>5) Whitelist-based filter bypass</h3>
+  <p>
+    When a whitelist checks only string prefixes (e.g., must start with <code>https://img.example.com</code>), try:
+  </p>
+  <ul>
+    <li><code>https://img.example.com.evil.tld/</code> (host suffix trick)</li>
+    <li>DNS rebinding (domain resolves to allowed IP first, then to internal IP)</li>
+    <li>Embed userinfo or ports if parser is lax</li>
+  </ul>
+
+  <h3>6) Blind SSRF</h3>
+  <p>
+    You get no useful response in the UI. Use OAST/Collaborator to detect DNS/HTTP callbacks. 
+    If you see a hit, you’ve verified SSRF even without visible content.
+  </p>
+
+  <h3>7) Cloud metadata access</h3>
+  <p>
+    In cloud environments, try metadata endpoints:
+  </p>
+  <pre><code># Common path (varies by cloud)
+http://169.254.169.254/latest/meta-data/
+  </code></pre>
+  <p>
+    If reachable, credentials or instance details may leak. (Modern defenses: IMDSv2 on AWS, firewall egress rules, strict app validation.)
+  </p>
+
+  <h2>🧬 SSRF in Real-World Attack Chains</h2>
+  <ul>
+    <li><strong>Internal Recon → RCE:</strong> Use SSRF to reach Jenkins/Redis/Elasticsearch internally, then abuse known admin endpoints to execute code.</li>
+    <li><strong>Steal Cloud Credentials:</strong> Query metadata to obtain temporary tokens; pivot to list buckets, read secrets, or modify infrastructure.</li>
+    <li><strong>Data Exfiltration:</strong> Read internal APIs (PII, invoices, admin notes) that are otherwise unreachable from the internet.</li>
+    <li><strong>Chained Bypasses:</strong> Combine SSRF with open-redirect, path traversal on internal apps, or weak auth to escalate impact.</li>
+  </ul>
+
+  <h2>🛡️ Prevention & Hardening</h2>
+  <ul>
+    <li><strong>Avoid raw URL fetches.</strong> Prefer fetching by ID from an allow-listed backend, not arbitrary URLs.</li>
+    <li><strong>Strict allow-lists.</strong> If URL input is required, only allow known hostnames. Resolve and pin to expected IPs; <em>re-resolve after redirects</em>.</li>
+    <li><strong>Block private &amp; link-local ranges.</strong> Deny RFC1918, <code>127.0.0.0/8</code>, <code>::1</code>, and <code>169.254.169.254</code> unless explicitly needed.</li>
+    <li><strong>Do not follow redirects</strong> (or re-validate destination after each hop).</li>
+    <li><strong>Normalize and parse URLs safely.</strong> Use robust libraries; reject userinfo, weird encodings, and unsupported schemes.</li>
+    <li><strong>Egress filtering.</strong> Outbound firewall rules from the app/server/container should restrict where it can connect.</li>
+    <li><strong>Cloud-specific controls.</strong> Enforce AWS IMDSv2, restrict metadata access at the network level, and use least-privilege IAM.</li>
+    <li><strong>Authenticate internal services.</strong> Admin panels should require auth, even if “internal-only”.</li>
+    <li><strong>Monitoring.</strong> Alert on unusual egress patterns, metadata access, or spikes in internal HTTP requests.</li>
+  </ul>
+
+  <h2>🧰 Tools</h2>
+  <ul>
+    <li><strong>Burp Suite</strong> (Repeater/Intruder; Collaborator for blind SSRF)</li>
+    <li>Custom DNS/HTTP listener (OAST, interactsh, etc.)</li>
+    <li>cURL / HTTPie for manual crafting &amp; timing checks</li>
+  </ul>
+
+  <hr />
+  <footer>
+    Web hacking is a discipline of logic, curiosity, and precision. Learn how the web works, then learn how to make it work for you.
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
