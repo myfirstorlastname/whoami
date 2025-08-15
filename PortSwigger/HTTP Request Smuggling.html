@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTTP Request Smuggling (HRS)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🚚 HTTP Request Smuggling (HRS)</h1>
+  <blockquote>When two servers disagree, you win.</blockquote>
+  <hr>
+
+  <h2>🧠 What is HTTP Request Smuggling?</h2>
+  <p>
+    HTTP Request Smuggling exploits <strong>inconsistent parsing</strong> of HTTP messages across a request chain
+    (typically <em>front-end proxy/CDN/WAF</em> → <em>back-end application server</em>). By crafting a request that each hop
+    interprets differently, an attacker can <strong>desynchronize</strong> the connection and smuggle a hidden request that
+    executes in the victim’s session or poisons shared state (caches, request queues).
+  </p>
+  <p>
+    Classic variants hinge on conflicts between <code>Content-Length</code> (CL) and <code>Transfer-Encoding: chunked</code> (TE),
+    while modern variants target <strong>HTTP/2</strong> translation layers, response queue poisoning, and client-side desync.
+  </p>
+
+  <h2>🧪 My Lab Progress (21 / 22)</h2>
+  <ul>
+    <li>HTTP request smuggling, confirming a CL.TE vulnerability via differential responses (solved)</li>
+    <li>HTTP request smuggling, confirming a TE.CL vulnerability via differential responses (solved)</li>
+    <li>Exploiting HTTP request smuggling to bypass front-end security controls, CL.TE vulnerability (solved)</li>
+    <li>Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability (solved)</li>
+    <li>Exploiting HTTP request smuggling to reveal front-end request rewriting (solved)</li>
+    <li>Exploiting HTTP request smuggling to capture other users' requests (solved)</li>
+    <li>Exploiting HTTP request smuggling to deliver reflected XSS (solved)</li>
+    <li>Response queue poisoning via H2.TE request smuggling (solved)</li>
+    <li>H2.CL request smuggling (solved)</li>
+    <li>HTTP/2 request smuggling via CRLF injection (solved)</li>
+    <li>HTTP/2 request splitting via CRLF injection (solved)</li>
+    <li>0.CL request smuggling <em>(not solved — newest lab)</em></li>
+    <li>CL.0 request smuggling (solved)</li>
+    <li>HTTP request smuggling, basic CL.TE vulnerability (solved)</li>
+    <li>HTTP request smuggling, basic TE.CL vulnerability (solved)</li>
+    <li>HTTP request smuggling, obfuscating the TE header (solved)</li>
+    <li>Exploiting HTTP request smuggling to perform web cache poisoning (solved)</li>
+    <li>Exploiting HTTP request smuggling to perform web cache deception (solved)</li>
+    <li>Bypassing access controls via HTTP/2 request tunnelling (solved)</li>
+    <li>Web cache poisoning via HTTP/2 request tunnelling (solved)</li>
+    <li>Client-side desync (solved)</li>
+    <li>Server-side pause-based request smuggling (solved)</li>
+  </ul>
+
+  <h2>🔍 Core Variants (What breaks and why)</h2>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>Idea</th><th>Quick mental model</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CL.TE</strong></td>
+        <td>Front-end honors <code>Content-Length</code>, back-end honors <code>Transfer-Encoding</code>.</td>
+        <td>Front-end forwards extra bytes the back-end treats as a new request.</td>
+      </tr>
+      <tr>
+        <td><strong>TE.CL</strong></td>
+        <td>Front-end honors <code>Transfer-Encoding</code>, back-end honors <code>Content-Length</code>.</td>
+        <td>Back-end splits payload differently and processes a smuggled request.</td>
+      </tr>
+      <tr>
+        <td><strong>CL.0 / 0.CL</strong></td>
+        <td>Ambiguity with zero-length bodies vs. non-zero CL across hops.</td>
+        <td>One hop closes the message early; the other keeps reading into the next request.</td>
+      </tr>
+      <tr>
+        <td><strong>HTTP/2 Desync</strong></td>
+        <td>H2-to-H1 downgrades, CRLF injection, or header translation mismatches.</td>
+        <td>Frame/stream boundaries don’t map cleanly to H1 message boundaries.</td>
+      </tr>
+      <tr>
+        <td><strong>H2.TE / H2.CL</strong></td>
+        <td>TE/CL semantics resurrected during H2→H1 translation at intermediaries.</td>
+        <td>Back-end gets an H1 message inconsistent with upstream assumptions.</td>
+      </tr>
+      <tr>
+        <td><strong>Client-side desync</strong></td>
+        <td>Poisoning the browser or proxy connection to prepend attacker traffic.</td>
+        <td>Victim’s next request is prefixed/suffixed by a queued attacker request.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>🧩 Real-World Effects</h2>
+  <ul>
+    <li><strong>Bypass front-end controls</strong>: WAF/CDN filtering on the proxy is skipped; the back-end sees the smuggled request unfiltered.</li>
+    <li><strong>Credential hijacking</strong>: Queue poisoning lets you <em>capture victim requests</em> (cookies, tokens) when they reuse the same connection.</li>
+    <li><strong>Reflected XSS delivery</strong>: Smuggle a request that primes the next response to contain malicious HTML/JS.</li>
+    <li><strong>Cache poisoning/deception</strong>: Poison a shared cache key so benign URLs serve attacker-controlled responses or leak private content.</li>
+    <li><strong>Access control bypass via H2 tunneling</strong>: Abuse stream coalescing/headers to reach internal endpoints.</li>
+  </ul>
+
+  <h2>🧪 Minimal CL.TE Example (mental model)</h2>
+  <p><em>Goal:</em> Make the back-end treat the tail as a new request, while the front-end believes it was part of the first body.</p>
+  <pre><code>POST / HTTP/1.1
+Host: target
+Content-Length: 13
+Transfer-Encoding: chunked
+
+0
+
+GET /admin HTTP/1.1
+Host: target
+  </code></pre>
+  <p>
+    If the front-end uses <code>Content-Length</code> (reads 13 bytes: <code>0\r\n\r\nGET ...</code>) but the back-end uses <code>TE</code> (treats <code>0</code> as end of chunks), 
+    the remainder (<code>GET /admin ...</code>) becomes the next back-end request — the <strong>smuggled request</strong>.
+  </p>
+
+  <h2>🛠️ Tools & Practical Tips</h2>
+  <ul>
+    <li><strong>Burp Suite</strong>:
+      <ul>
+        <li><em>Repeater</em> for hand-crafting CL/TE conflicts and toggling HTTP/1.1 vs HTTP/2</li>
+        <li><em>Comparer</em> for <strong>differential responses</strong> (detect desync via tiny response changes)</li>
+        <li><em>Turbo Intruder</em> for high-throughput queue poisoning and timing-based detection</li>
+      </ul>
+    </li>
+    <li><strong>Header tricks</strong>: lowercase <code>transfer-encoding</code>, duplicate TE, OBS-folding, <code>Content-Length: 0</code> edge cases.</li>
+    <li><strong>Detect like a pro</strong>: Send two paired requests — a <em>prefix</em> (potential smuggler) followed by a <em>victim</em>. Look for spillover or altered responses.</li>
+    <li><strong>HTTP/2 focus</strong>: Try h2 first; downgrade proxies often introduce fresh parsing bugs during h2→h1 conversion.</li>
+    <li><strong>Cache angle</strong>: After desync, immediately probe cacheable endpoints with benign paths and check if content is tainted.</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>HRS is about <strong>message boundary confusion</strong> between hops — not “just” weird headers.</li>
+    <li>Small parsing nuances (CL vs TE, header normalization, h2 downgrades) lead to high-impact exploits.</li>
+    <li>Queue poisoning enables request capture, XSS delivery, and cache compromise at scale.</li>
+    <li>Modern apps and CDNs still get this wrong — always test both HTTP/1.1 and HTTP/2 paths.</li>
+  </ul>
+
+  <hr />
+  <footer>
+    PortSwigger Academy rewards precision, persistence, and creativity. Climb the ranks not just by solving challenges, but by understanding the web behind them.
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
