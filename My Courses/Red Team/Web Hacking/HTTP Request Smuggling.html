@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTTP Request Smuggling (HRS)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🚚 HTTP Request Smuggling (HRS)</h1>
+  <blockquote>When two servers disagree, you win.</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    HTTP Request Smuggling (HRS) is an advanced web vulnerability that exploits <strong>inconsistent parsing</strong> of HTTP
+    requests across multiple components (CDN/Load Balancer/Reverse Proxy → App Server). By crafting a request that each hop
+    interprets differently, an attacker can <strong>desynchronize</strong> the connection and smuggle a hidden request that runs
+    with the victim’s session or corrupts shared state (queues, caches).
+  </p>
+
+  <h2>🌐 What is Happening Technically?</h2>
+  <p>
+    In a typical chain, the front-end proxy normalizes/forwards requests to a back-end server. If the proxy and the back-end
+    disagree on the <em>message boundaries</em>—where a request ends and the next begins—bytes intended as a body by one hop
+    may be interpreted as a <em>new request line</em> by the other. That disagreement enables:
+  </p>
+  <ul>
+    <li><strong>Queue poisoning</strong> (attacker’s bytes prepended to the next user’s request)</li>
+    <li><strong>Security control bypass</strong> (WAF/proxy filters skipped, rules applied to the wrong request)</li>
+    <li><strong>Cache poisoning/deception</strong> (shared cache serves attacker-controlled content)</li>
+    <li><strong>Credential/session theft</strong> (capturing other users’ requests on the same connection)</li>
+  </ul>
+
+  <h2>🧨 Core Variants</h2>
+  <table>
+    <thead>
+      <tr><th>Variant</th><th>Parsing Mismatch</th><th>Effect</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CL.TE</strong></td>
+        <td>Front-end trusts <code>Content-Length</code>; back-end trusts <code>Transfer-Encoding: chunked</code>.</td>
+        <td>Back-end treats leftover bytes as a new request (smuggled).</td>
+      </tr>
+      <tr>
+        <td><strong>TE.CL</strong></td>
+        <td>Front-end trusts <code>TE</code>; back-end trusts <code>CL</code>.</td>
+        <td>Back-end splits differently, executing the attacker’s hidden request.</td>
+      </tr>
+      <tr>
+        <td><strong>CL.0 / 0.CL</strong></td>
+        <td>Ambiguity around zero-length bodies vs. non-zero CL across hops.</td>
+        <td>One hop closes early; the other continues reading into the next request.</td>
+      </tr>
+      <tr>
+        <td><strong>HTTP/2 Desync</strong></td>
+        <td>H2→H1 translation issues, CRLF injection, header normalization bugs.</td>
+        <td>H1 message boundaries at the back-end diverge from H2 assumptions.</td>
+      </tr>
+      <tr>
+        <td><strong>H2.TE / H2.CL</strong></td>
+        <td>TE/CL semantics reappear after h2→h1 downgrade at intermediaries.</td>
+        <td>Smuggled requests despite HTTP/2 on the edge.</td>
+      </tr>
+      <tr>
+        <td><strong>Client-side desync</strong></td>
+        <td>Poison the connection the browser will reuse.</td>
+        <td>Victim’s next request is prefixed by queued attacker data.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>HRS = <strong>message boundary confusion</strong> between hops (proxy vs. app server).</li>
+      <li>Small header quirks (CL vs TE, casing, duplicates) → high-impact outcomes.</li>
+      <li>Always test both <strong>HTTP/1.1 and HTTP/2</strong> paths—downgrades are a goldmine.</li>
+    </ul>
+  </div>
+
+  <h2>🧪 Practical Examples (inspired by PortSwigger-style labs)</h2>
+
+  <h3>1) Minimal CL.TE Smuggle (differential responses)</h3>
+  <p><em>Goal:</em> Make the proxy read a body by <code>Content-Length</code> while the back-end ends the chunked body early.</p>
+  <pre><code>POST / HTTP/1.1
+Host: target
+Content-Length: 13
+Transfer-Encoding: chunked
+
+0
+
+GET /admin HTTP/1.1
+Host: target
+  </code></pre>
+  <p>
+    If the front-end uses <code>CL</code> (reads 13 bytes: <code>0\r\n\r\nGET ...</code>) but the back-end uses <code>TE</code> (treats <code>0</code> as end-of-chunks),
+    the tail <code>GET /admin</code> becomes the next back-end request—your <strong>smuggled request</strong>.
+  </p>
+
+  <h3>2) TE.CL with header obfuscation (bypass front-end controls)</h3>
+  <p>
+    Some proxies ignore <code>Transfer-Encoding</code> if it looks non-standard; others still honor it. Try casing, duplicates, or
+    obsolete folding to cause a mismatch:
+  </p>
+  <pre><code>POST / HTTP/1.1
+Host: target
+Content-Length: 4
+transfer-encoding: chunked
+Transfer-Encoding: xchunked  <!-- proxy ignores? backend normalizes? -->
+
+4
+WAF?
+0
+
+GET /hidden HTTP/1.1
+Host: target
+  </code></pre>
+  <p>Result: the back-end may treat the body as chunked and process the smuggled <code>GET /hidden</code> unfiltered.</p>
+
+  <h3>3) HTTP/2 to HTTP/1 desync (H2.CL / H2.TE)</h3>
+  <p>
+    Speak H2 at the edge, but coerce an H1 parsing bug after downgrade. For instance, an H2 request that translates into
+    ambiguous CL/TE at the H1 back-end can desynchronize the pipeline and enable queue or cache poisoning.
+  </p>
+
+  <h2>🧩 Real-World Attack Chains</h2>
+  <ul>
+    <li><strong>Bypass WAF / front-end security</strong> to reach internal endpoints or admin routes.</li>
+    <li><strong>Capture victim requests</strong> (cookies, CSRF tokens) via response queue poisoning.</li>
+    <li><strong>Deliver reflected XSS</strong> by smuggling a response primed with attacker HTML/JS.</li>
+    <li><strong>Web cache poisoning/deception</strong> to serve malicious content on benign URLs.</li>
+    <li><strong>Privilege escalation</strong> by tunneling forbidden methods/headers through H2 quirks.</li>
+  </ul>
+
+  <div class="tips-box">
+    <h3>🔧 Testing & Detection Tips</h3>
+    <ul>
+      <li>Use paired requests: a <em>prefix</em> (possible smuggler) then a <em>victim</em>; look for altered/delayed responses.</li>
+      <li>Try tiny deltas: toggle CL/TE, swap header order, change casing, add duplicate <code>Transfer-Encoding</code>.</li>
+      <li>Compare behaviors over <strong>HTTP/1.1 vs HTTP/2</strong>; gateways often break during downgrade.</li>
+      <li>Probe cacheable endpoints right after a suspected desync to detect poisoning.</li>
+    </ul>
+  </div>
+
+  <h2>🛡️ Prevention & Hardening</h2>
+  <ul>
+    <li><strong>Single source of truth:</strong> Normalize and <em>strip</em> ambiguous headers at the edge. Prefer one framing mechanism (TE <em>or</em> CL), never both.</li>
+    <li><strong>Upgrade stacks:</strong> Use up-to-date proxies/CDNs/app servers with HRS patches and strict HTTP parsing.</li>
+    <li><strong>Disallow request re-use</strong> between users when possible; isolate connections per client/session.</li>
+    <li><strong>Cache safety:</strong> Cache only what you must; vary keys properly; require explicit allowlists for cacheable routes.</li>
+    <li><strong>WAF rules ≠ fix:</strong> Treat WAF as defense-in-depth, not a parser—fix parsing at infrastructure level.</li>
+  </ul>
+
+  <h2>🧰 Tools</h2>
+  <ul>
+    <li><strong>Burp Suite</strong> Repeater for hand-crafted CL/TE tests and protocol toggling.</li>
+    <li><strong>Burp</strong> Comparer for differential responses; <strong>Turbo Intruder</strong> for high-throughput queue probing.</li>
+    <li>Custom scripts to automate prefix/victim patterns and timing-based detection.</li>
+  </ul>
+
+  <h2>🧠 Key Mindset</h2>
+  <ul>
+    <li>Don’t hunt “weird headers”; hunt <strong>boundary mismatches</strong> between hops.</li>
+    <li>After a suspected desync, immediately test <strong>capture</strong> and <strong>cache</strong> angles.</li>
+    <li>Map the chain (CDN → LB → WAF → App). Each hop is a chance for disagreement.</li>
+  </ul>
+
+  <hr />
+  <footer>
+    Web hacking is a discipline of logic, curiosity, and precision. Learn how the web works, then learn how to make it work for you.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
