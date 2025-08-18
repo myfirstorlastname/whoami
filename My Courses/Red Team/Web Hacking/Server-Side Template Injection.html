@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Server-Side Template Injection (SSTI)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🧩 Server-Side Template Injection (SSTI)</h1>
+  <blockquote>"If the server executes what you write, you control not just the output—but the server itself."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    Server-Side Template Injection (SSTI) is a vulnerability that arises when user input is embedded unsafely into server-side templates.  
+    Instead of being treated as data, the input is executed by the template engine—allowing attackers to read sensitive data, manipulate logic, or even achieve <strong>Remote Code Execution (RCE)</strong>.
+  </p>
+
+  <h2>📚 Template Engines in Use</h2>
+  <p>
+    Template engines are widely used in modern web applications to generate dynamic content:
+  </p>
+  <ul>
+    <li><strong>Python</strong>: Jinja2, Mako</li>
+    <li><strong>PHP</strong>: Twig, Smarty</li>
+    <li><strong>Java</strong>: Freemarker, Velocity</li>
+    <li><strong>JavaScript</strong>: Nunjucks, Handlebars (server-side)</li>
+  </ul>
+  <p>
+    Each engine has its own syntax and quirks, but all are vulnerable if user input is directly rendered without proper sandboxing.
+  </p>
+
+  <h2>🔍 How SSTI Happens</h2>
+  <p>Example of a Python Flask application using Jinja2:</p>
+  <pre><code class="language-python">
+from flask import Flask, request, render_template_string
+app = Flask(__name__)
+
+@app.route("/hello")
+def hello():
+    name = request.args.get("name", "guest")
+    return render_template_string("Hello " + name)
+  </code></pre>
+  <p>
+    If a user supplies <code>{{7*7}}</code>, Jinja2 evaluates it and the page displays <code>Hello 49</code>.  
+    This confirms SSTI.
+  </p>
+
+  <h2>🧨 Types of SSTI Exploits</h2>
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Expression Injection</td><td>Simple arithmetic or string payloads (e.g., <code>{{7*7}}</code>) prove code execution.</td></tr>
+      <tr><td>Object Access</td><td>Using built-in objects (e.g., <code>{{config.items()}}</code>) to leak data.</td></tr>
+      <tr><td>Sandbox Escape</td><td>Bypassing restrictions using unexpected objects, filters, or encoding tricks.</td></tr>
+      <tr><td>Code Execution</td><td>Accessing OS commands via runtime classes (e.g., <code>os.popen('id').read()</code>).</td></tr>
+    </tbody>
+  </table>
+
+  <div class="takeaway-box">
+    <h3>🧠 Key Takeaways</h3>
+    <ul>
+      <li>SSTI is often detected with harmless payloads like <code>{{7*7}}</code> before escalating.</li>
+      <li>Template engines expose dangerous internal objects—documentation is often the attacker’s best friend.</li>
+      <li>A successful SSTI almost always leads to critical impact: file read, secret disclosure, or RCE.</li>
+    </ul>
+  </div>
+
+  <div class="tips-box">
+    <h3>🤖 Tips for Detection & Exploitation</h3>
+    <ul>
+      <li>Inject small test payloads and look for evaluated expressions.</li>
+      <li>Use <a href="https://github.com/epinna/tplmap" target="_blank" rel="noopener noreferrer">Tplmap</a> to automate detection and RCE in multiple template engines.</li>
+      <li>Compare error messages across payloads—they often reveal the underlying template engine.</li>
+      <li>When a sandbox is present, try chaining filters, overflows, or type juggling to escape it.</li>
+    </ul>
+  </div>
+  
+  <h2>🧪 Practical Exploits</h2>
+
+  <h3>1. Reading Server Files (Jinja2)</h3>
+  <pre><code>{{ self.__init__.__globals__.__builtins__.open('/etc/passwd').read() }}</code></pre>
+
+  <h3>2. Executing System Commands (Java)</h3>
+  <pre><code>${''.getClass().forName('java.lang.Runtime').getRuntime().exec('id')}</code></pre>
+
+  <h3>3. Sandbox Escape (Twig)</h3>
+  <pre><code>{{['id']|filter('system')}}</code></pre>
+  <p>This bypasses Twig’s sandbox filter to execute commands.</p>
+
+  <h2>🧬 SSTI in Real-World Attack Chains</h2>
+  <p>
+    SSTI is rarely an isolated bug—it’s a <strong>pivot point</strong>. Once exploited, it can be chained to:
+  </p>
+  <ul>
+    <li>Leak environment variables (<code>AWS_SECRET_KEY</code>, API tokens).</li>
+    <li>Exfiltrate database credentials or JWT secrets.</li>
+    <li>Write a reverse shell to disk.</li>
+    <li>Move laterally within the infrastructure.</li>
+  </ul>
+
+  <div class="takeaway-box">
+    <h3>🛠️ Mindset for Pentesters</h3>
+    <ul>
+      <li>Don’t stop at proving SSTI—demonstrate real-world impact.</li>
+      <li>Document how the vulnerability can escalate from template injection → file read → RCE → privilege escalation.</li>
+      <li>Show defenders how insecure rendering practices can compromise entire infrastructures.</li>
+    </ul>
+  </div>
+
+  <hr />
+  
+  <footer>
+    Server-Side Template Injection highlights how convenience features in web frameworks can expose dangerous attack surfaces.  
+    Mastering SSTI is essential for both attackers and defenders: it transforms a template bug into full server compromise.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
