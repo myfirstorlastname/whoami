@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Server-Side Template Injection (SSTI)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🧩 Server-Side Template Injection (SSTI)</h1>
+  <blockquote>"When the server renders what you write, you can make it render anything—even code."</blockquote>
+  <hr>
+
+  <h2>🧠 What is SSTI?</h2>
+  <p>
+    Server-Side Template Injection (SSTI) occurs when user input is embedded directly into a server-side template,
+    which is then executed by the template engine. Exploiting this flaw allows attackers to access server data, 
+    manipulate rendering logic, and often escalate to <strong>Remote Code Execution (RCE)</strong>.
+  </p>
+
+  <h2>🧪 My Lab Progress</h2>
+  <p>I completed <strong>7 out of 7</strong> SSTI labs on PortSwigger Academy.</p>
+  <ul>
+    <li>Basic server-side template injection (solved)</li>
+    <li>Basic server-side template injection (code context) (solved)</li>
+    <li>Server-side template injection using documentation (solved)</li>
+    <li>Server-side template injection in an unknown language with a documented exploit (solved)</li>
+    <li>Server-side template injection with information disclosure via user-supplied objects (solved)</li>
+    <li>Server-side template injection in a sandboxed environment (solved)</li>
+    <li>Server-side template injection with a custom exploit (solved)</li>
+  </ul>
+
+  <h2>🧩 Examples from Labs</h2>
+
+  <h3>1) Basic Injection</h3>
+  <p>Payload injected into a template variable:</p>
+  <pre><code>{{7*7}}</code></pre>
+  <p>Rendered output reveals <code>49</code>, confirming SSTI.</p>
+
+  <h3>2) Code Context Injection</h3>
+  <p>Injection occurs in a code execution context:</p>
+  <pre><code>{{config.__class__.__init__.__globals__['os'].popen('id').read()}}</code></pre>
+  <p>Executes system commands on the server.</p>
+
+  <h3>3) Exploiting Documentation</h3>
+  <p>Some template engines expose helpers or built-in docs that reveal dangerous objects:</p>
+  <pre><code>${''.getClass().forName('java.lang.Runtime').getRuntime().exec('id')}</code></pre>
+
+  <h3>4) Sandbox Escapes</h3>
+  <p>Even restricted template environments can be bypassed by clever use of accessible objects, 
+  eventually leading to code execution.</p>
+
+  <h2>🧬 Real-World Applications</h2>
+  <p>
+    SSTI is especially dangerous because it often provides <strong>direct execution of server-side code</strong>.  
+    Exploits include:
+  </p>
+  <ul>
+    <li>Reading sensitive environment variables (<code>SECRET_KEY</code>, API tokens).</li>
+    <li>Bypassing access controls by rendering unintended data.</li>
+    <li>Chaining to RCE (reverse shells, privilege escalation).</li>
+    <li>Pivoting to internal systems through SSRF-like capabilities.</li>
+  </ul>
+
+  <h2>🧠 Key Takeaways</h2>
+  <ul>
+    <li>SSTI is often detected via arithmetic payloads (e.g., <code>{{7*7}}</code>).</li>
+    <li>Different template engines (Jinja2, Twig, Freemarker, Velocity) have different exploitation paths.</li>
+    <li>SSTI frequently leads to RCE, making it a critical issue in pentests and bug bounty.</li>
+  </ul>
+
+  <h2>🧰 Tools & Tips</h2>
+  <ul>
+    <li>Use small arithmetic payloads to test for injection without breaking pages.</li>
+    <li>Leverage <a href="https://github.com/epinna/tplmap" target="_blank" rel="noopener noreferrer">Tplmap</a> for automated detection and exploitation.</li>
+    <li>Study template engine documentation—features intended for developers often become weapons for attackers.</li>
+  </ul>
+
+  <hr />
+  
+  <footer>
+    PortSwigger’s SSTI labs highlight how template engines, meant for convenience, can become catastrophic attack surfaces.
+    Understanding each engine’s quirks is the key to exploiting and defending against these flaws.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
