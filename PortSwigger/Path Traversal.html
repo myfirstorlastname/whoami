@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PortSwigger Labs – Path Traversal</title>
+  <meta name="description" content="Training notes on PortSwigger Path Traversal labs with exploitation techniques and bypass strategies.">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <header>
+    <h1>Path Traversal – PortSwigger Labs</h1>
+    <blockquote>
+      Every directory is a step in the path. Traversal is just knowing where to climb.
+    </blockquote>
+  </header>
+
+  <main>
+    <h2>Introduction</h2>
+    <p>
+      Path Traversal (a.k.a. Directory Traversal) is a critical vulnerability that occurs when an attacker can manipulate
+      file paths to access sensitive files outside the intended directory. It can lead to disclosure of configuration files,
+      application secrets, or even remote code execution if combined with other flaws.
+    </p>
+    <p>
+      The <strong>PortSwigger Path Traversal labs</strong> provide a practical training ground for mastering different
+      bypass techniques, from simple directory traversal to advanced validation and decoding bypasses.
+    </p>
+
+    <h2>Covered Labs</h2>
+    <ul>
+      <li>File path traversal, simple case ✅</li>
+      <li>File path traversal, traversal sequences blocked with absolute path bypass ✅</li>
+      <li>File path traversal, traversal sequences stripped non-recursively ✅</li>
+      <li>File path traversal, traversal sequences stripped with superfluous URL-decode ✅</li>
+      <li>File path traversal, validation of start of path ✅</li>
+      <li>File path traversal, validation of file extension with null byte bypass ✅</li>
+    </ul>
+
+    <h2>Exploitation Techniques</h2>
+
+    <h3>1. Simple Directory Traversal</h3>
+    <p>
+      The base case leverages sequences like <code>../</code> to climb up directories until reaching sensitive files.
+    </p>
+    <pre><code>/image?filename=../../../../etc/passwd</code></pre>
+
+    <h3>2. Absolute Path Bypass</h3>
+    <p>
+      When traversal sequences are filtered, absolute paths (e.g. <code>/etc/passwd</code>) can directly access system files,
+      bypassing the blacklist.
+    </p>
+    <pre><code>/image?filename=/etc/passwd</code></pre>
+
+    <h3>3. Non-Recursive Stripping</h3>
+    <p>
+      Some filters remove <code>../</code> once, but not recursively. Doubling traversal sequences can bypass this defense.
+    </p>
+    <pre><code>/image?filename=....//....//....//etc/passwd</code></pre>
+
+    <h3>4. Superfluous URL-Decoding</h3>
+    <p>
+      If the server decodes input multiple times, attackers can encode traversal sequences:
+    </p>
+    <pre><code>/image?filename=..%252f..%252f..%252fetc/passwd</code></pre>
+    <p>
+      After double decoding, the string resolves into a valid <code>../../../etc/passwd</code>.
+    </p>
+
+    <h3>5. Path Prefix Validation</h3>
+    <p>
+      Some applications validate that the supplied path starts with a "safe" directory but fail to prevent escapes afterward.
+      Injecting traversal sequences after the prefix bypasses the control:
+    </p>
+    <pre><code>/image?filename=/var/www/images/../../../../etc/passwd</code></pre>
+
+    <h3>6. Null Byte Injection</h3>
+    <p>
+      File extension checks (e.g. <code>.png</code>) can be bypassed by injecting a null byte (<code>%00</code>),
+      terminating the string on the server side.
+    </p>
+    <pre><code>/image?filename=../../../../etc/passwd%00.png</code></pre>
+
+    <h2>Offensive Insights</h2>
+    <ul>
+      <li>Target high-value files like <code>/etc/passwd</code>, <code>/etc/shadow</code>, application configs, API keys, and cloud credentials.</li>
+      <li>Combine traversal with file upload to achieve remote code execution (e.g., writing to <code>/var/www/html/</code>).</li>
+      <li>Leverage traversal for reconnaissance: reading log files, source code, or database credentials.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>
+      Mastering <strong>Path Traversal</strong> is essential for offensive web security. PortSwigger's labs cover
+      all major bypass categories — from naive filters to advanced decoding quirks — preparing pentesters and bug bounty
+      hunters to exploit such flaws in real-world applications.
+    </p>
+  </main>
+
+  <footer>
+    <p>
+      Path Traversal is not just about reading <code>/etc/passwd</code>. A creative attacker can use these techniques
+      for privilege escalation, lateral movement, and eventually full compromise of the application or underlying host.
+    </p>
+  </footer>
+</body>
+</html>
