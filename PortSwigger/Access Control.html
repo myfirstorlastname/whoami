@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortSwigger Labs - Access Control</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+  <header>
+    <h1>PortSwigger Labs – Access Control</h1>
+    <blockquote>
+      "Access control flaws occur when applications fail to enforce restrictions on what authenticated users are allowed to do, leading to privilege escalation or horizontal attacks."
+    </blockquote>
+  </header>
+
+  <main>
+    <h2>Overview</h2>
+    <p>
+      Access control vulnerabilities arise when an application does not properly enforce restrictions on user permissions.  
+      Attackers can exploit these weaknesses to perform actions outside their intended privileges, such as accessing another user’s data (horizontal privilege escalation) or gaining administrative capabilities (vertical privilege escalation).
+    </p>
+    <p>
+      The following PortSwigger labs illustrate common <strong>Access Control flaws</strong> and the techniques used to exploit them.  
+      Each lab represents a real-world scenario where misconfigurations or missing controls lead to broken access control.
+    </p>
+
+    <h2>Labs</h2>
+    <ul>
+      <li><strong>Unprotected admin functionality</strong> – Direct access to an exposed admin panel without authentication.</li>
+      <li><strong>Unprotected admin functionality with unpredictable URL</strong> – Admin panel hidden behind a non-standard path, but still unprotected.</li>
+      <li><strong>User role controlled by request parameter</strong> – Privileges manipulated via a request parameter (e.g., role=admin).</li>
+      <li><strong>User role can be modified in user profile</strong> – Exploiting weak server-side validation to escalate privileges through profile updates.</li>
+      <li><strong>User ID controlled by request parameter</strong> – Horizontal privilege escalation by changing identifiers in requests.</li>
+      <li><strong>User ID controlled by request parameter, with unpredictable user IDs</strong> – Brute forcing or guessing non-sequential identifiers.</li>
+      <li><strong>User ID controlled by request parameter with data leakage in redirect</strong> – Exploiting redirects to gather sensitive user data.</li>
+      <li><strong>User ID controlled by request parameter with password disclosure</strong> – Accessing another user’s credentials through weak protections.</li>
+      <li><strong>Insecure direct object references (IDOR)</strong> – Exploiting predictable or poorly protected resource identifiers.</li>
+      <li><strong>URL-based access control can be circumvented</strong> – Access restrictions enforced by path only, bypassed by modifying the request.</li>
+      <li><strong>Method-based access control can be circumvented</strong> – Restrictions applied only to specific HTTP methods, bypassed by switching methods (e.g., GET → POST).</li>
+      <li><strong>Multi-step process with no access control on one step</strong> – Gaining unauthorized access by skipping or manipulating workflow steps.</li>
+      <li><strong>Referer-based access control</strong> – Weak reliance on HTTP Referer headers to enforce permissions.</li>
+    </ul>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Never rely solely on <strong>client-side controls</strong> or obscurity (hidden URLs, parameters).</li>
+      <li>Always enforce <strong>server-side validation</strong> of roles, IDs, and actions.</li>
+      <li>Implement <strong>least privilege principles</strong> and deny-by-default rules.</li>
+      <li>Apply <strong>defense-in-depth</strong> (multi-layered checks, logging, monitoring).</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>
+      Access control is one of the most critical areas in web security, as it directly impacts confidentiality and integrity of user data.  
+      The PortSwigger labs provide realistic scenarios where broken access control leads to privilege escalation or data breaches.  
+      Mastering these flaws ensures stronger application security against one of the <strong>OWASP Top 10</strong> categories.
+    </p>
+  </footer>
+
+</body>
+</html>
