@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Access Control (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🛡️ Access Control (My Courses)</h1>
+  <blockquote>
+    "Access control is the foundation of security: it ensures users can only do what they are supposed to do—and nothing more."
+  </blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    Access control is one of the simplest yet most important aspects of web security.  
+    It refers to the rules and mechanisms that define <strong>who can access which resources</strong>, and what actions they are allowed to perform.  
+    When broken, it allows attackers to impersonate other users, steal sensitive data, or even escalate their privileges to an administrator account.
+  </p>
+  <p>
+    Because access control flaws are easy to introduce and often overlooked by developers, they consistently appear in the 
+    <a href="https://owasp.org/Top10/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>.  
+    This course provides a beginner-friendly introduction, reinforced by examples from 
+    <a href="https://portswigger.net/web-security/access-control" target="_blank" rel="noopener noreferrer">PortSwigger Labs</a>.
+  </p>
+  <hr>
+
+  <h2>📘 What is Access Control?</h2>
+  <p>
+    Access control ensures that a user can only access the resources that belong to them.  
+    It usually involves two dimensions:
+  </p>
+  <ul>
+    <li><strong>Horizontal Access Control</strong> – Preventing users from accessing resources belonging to other users (e.g., Alice cannot view Bob’s profile).</li>
+    <li><strong>Vertical Access Control</strong> – Preventing users from performing actions reserved for higher-privileged roles (e.g., a normal user cannot access admin functionality).</li>
+  </ul>
+  <p>
+    Without strict enforcement, attackers can manipulate parameters, URLs, or workflows to break these controls.
+  </p>
+  <hr>
+
+  <h2>🔎 Examples from PortSwigger Labs</h2>
+
+  <h3>1. Unprotected Admin Functionality</h3>
+  <p>
+    An admin panel is available at <code>/admin</code> but not protected by any authentication.  
+    Simply visiting the page gives attackers full administrative rights.
+  </p>
+
+  <h3>2. User ID Controlled by Request Parameter</h3>
+  <p>
+    A request like <code>/profile?user=123</code> allows a logged-in user to change the ID and view another user’s account.  
+    This is a classic case of <strong>IDOR (Insecure Direct Object Reference)</strong>.
+  </p>
+
+  <h3>3. User Role Controlled by Request Parameter</h3>
+  <p>
+    A hidden parameter <code>role=user</code> in requests can be changed to <code>role=admin</code>, granting unauthorized access.  
+    This highlights the danger of trusting client-side input for authorization decisions.
+  </p>
+
+  <h3>4. Method- or URL-based Access Control</h3>
+  <p>
+    Some apps only restrict actions on certain HTTP methods (e.g., GET) or paths.  
+    Switching to <code>POST</code> or accessing an alternative URL may bypass these protections.
+  </p>
+  <hr>
+
+  <h2>🎯 How to Prevent Access Control Flaws</h2>
+  <ul>
+    <li>Enforce <strong>authorization checks on the server side</strong> for every request.</li>
+    <li>Use a <strong>deny-by-default</strong> approach: explicitly allow what’s permitted, block everything else.</li>
+    <li>Apply the <strong>Principle of Least Privilege</strong> (users should only have the permissions they need).</li>
+    <li>Do not rely on <strong>security by obscurity</strong> (hidden URLs, parameters, or Referer headers).</li>
+    <li>Log access violations and monitor for suspicious activity.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Access control flaws are often <strong>easy to find and exploit</strong>—yet devastating if left unchecked.</li>
+    <li>They are among the <strong>most common real-world vulnerabilities</strong> reported in bug bounty and penetration tests.</li>
+    <li>Even simple protections like requiring authentication and validating user IDs properly can stop entire classes of attacks.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>
+      Access control is not about complex payloads or exotic exploits—it’s about discipline.  
+      By rigorously enforcing rules on <strong>who can access what</strong>, developers can prevent attackers from moving horizontally across accounts or vertically into admin functions.  
+      For beginners, mastering access control is one of the fastest ways to understand the essence of web application security.
+    </p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
