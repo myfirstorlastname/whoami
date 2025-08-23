@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Authentication (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🔑 Authentication (My Courses)</h1>
+  <blockquote>
+    "Authentication is the gatekeeper of the web: if it fails, everything else falls apart."
+  </blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    Authentication is the process of verifying a user’s identity.  
+    It answers the fundamental question: <strong>“Who are you?”</strong>  
+    Every secure application must ensure that only legitimate users can log in, stay logged in, and reset their accounts when needed.
+  </p>
+  <p>
+    If authentication is broken, attackers can impersonate users, bypass login screens, or take over accounts.  
+    That’s why authentication flaws appear regularly in the 
+    <a href="https://owasp.org/Top10/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>.
+  </p>
+  <hr>
+
+  <h2>📘 What is Authentication?</h2>
+  <p>
+    Authentication is usually implemented in three steps:
+  </p>
+  <ul>
+    <li><strong>Login</strong> – A user provides credentials (username + password).</li>
+    <li><strong>Session management</strong> – The server issues a secure token (like a cookie) to keep the user logged in.</li>
+    <li><strong>Password recovery</strong> – A safe way for users to reset their password if they forget it.</li>
+  </ul>
+  <p>
+    Weaknesses in any of these steps can let attackers break in.  
+    For example, a predictable cookie can be brute-forced, or a flawed password reset can let anyone reset your account.
+  </p>
+  <hr>
+
+  <h2>🔎 Examples of Authentication Flaws</h2>
+
+  <h3>1. Username Enumeration</h3>
+  <p>
+    If the login page reveals whether a username exists (different error messages or response times), attackers can collect valid accounts to target.
+  </p>
+
+  <h3>2. Weak Brute-Force Protection</h3>
+  <p>
+    Without proper rate-limiting, attackers can try thousands of passwords until one works.  
+    Even if protections exist, weak logic (like blocking only by IP) can often be bypassed.
+  </p>
+
+  <h3>3. Broken Password Reset</h3>
+  <p>
+    If reset links are guessable, re-usable, or can be poisoned via headers, attackers can hijack accounts without knowing the password.
+  </p>
+
+  <h3>4. 2FA Bypass</h3>
+  <p>
+    Two-Factor Authentication (2FA) should add a second layer of security.  
+    But if the app only checks it sometimes, or allows brute-forcing of the code, attackers can still log in.
+  </p>
+  <hr>
+
+  <h2>🎯 How to Prevent Authentication Flaws</h2>
+  <ul>
+    <li>Use <strong>generic error messages</strong> so usernames can’t be enumerated.</li>
+    <li>Apply <strong>rate limiting</strong> and monitoring on all login attempts.</li>
+    <li>Generate <strong>secure session tokens</strong> (random, unpredictable, short-lived).</li>
+    <li>Implement <strong>strong password reset</strong> with single-use, time-limited tokens.</li>
+    <li>Enforce <strong>robust 2FA</strong> with no shortcuts or bypassable steps.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Authentication is the first line of defense—and the first target for attackers.</li>
+    <li>Small mistakes (error messages, weak tokens, lazy reset flows) can lead to total account compromise.</li>
+    <li>Think like an attacker: assume they’ll try brute-force, token guessing, and logic flaws.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Strong authentication stops intruders at the gate."</p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
