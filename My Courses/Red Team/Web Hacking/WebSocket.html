@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebSockets (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>📡 WebSockets (My Courses)</h1>
+  <blockquote>
+    "A persistent connection is powerful—but without validation, it’s also dangerous."
+  </blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    WebSockets are a protocol that allows a <strong>persistent, two-way communication channel</strong> between a client (browser) and a server.  
+    Unlike HTTP requests that are stateless and one-shot, WebSockets stay open, making them ideal for chat apps, live dashboards, or multiplayer games.
+  </p>
+  <p>
+    But this persistent channel comes with security challenges. If input validation or authentication is weak, attackers can abuse WebSockets to hijack sessions, inject malicious data, or bypass controls.
+  </p>
+  <hr>
+
+  <h2>📘 How WebSockets Work</h2>
+  <p>
+    A WebSocket connection starts with an <strong>HTTP handshake</strong>. The browser sends an upgrade request:
+  </p>
+  <pre><code>GET /chat HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: random_base64
+Sec-WebSocket-Version: 13
+</code></pre>
+  <p>
+    If accepted, the server responds and the connection is established. From that point, both client and server can send messages freely—no need to wait for a request.
+  </p>
+  <hr>
+
+  <h2>🔎 Common WebSocket Vulnerabilities</h2>
+
+  <h3>1. Manipulating WebSocket Messages</h3>
+  <p>
+    Because WebSocket messages often carry user input, failing to validate them server-side can lead to <strong>injection vulnerabilities</strong>.  
+    Example: sending crafted JSON that injects SQL or HTML if the server blindly trusts the data.
+  </p>
+
+  <h3>2. Cross-Site WebSocket Hijacking (CSWSH)</h3>
+  <p>
+    If authentication relies only on cookies and the server doesn’t enforce <code>Origin</code> checks, an attacker’s site can open a WebSocket to the target app in the victim’s browser.  
+    This can result in <strong>account takeover or data exfiltration</strong>.
+  </p>
+
+  <h3>3. Insecure WebSocket Handshake</h3>
+  <p>
+    Weak or missing checks during the handshake (e.g., no <code>Origin</code> validation, no token) allow attackers to establish unauthorized connections.  
+    This is similar to bypassing login on an HTTP endpoint.
+  </p>
+  <hr>
+
+  <h2>🧪 Examples from PortSwigger Labs</h2>
+  <ul>
+    <li><strong>Manipulating WebSocket messages</strong> – Injecting payloads into chat messages to exploit server-side logic.</li>
+    <li><strong>Cross-site WebSocket hijacking</strong> – Forcing a victim’s browser to open a WebSocket connection to steal their session data.</li>
+    <li><strong>Manipulating the handshake</strong> – Exploiting weak upgrade requests to bypass protections.</li>
+  </ul>
+  <hr>
+
+  <h2>🎯 How to Prevent WebSocket Vulnerabilities</h2>
+  <ul>
+    <li>Apply <strong>strict input validation</strong> on all WebSocket messages—never trust client data.</li>
+    <li>Enforce <strong>Origin and token checks</strong> during the handshake.</li>
+    <li>Use <strong>strong authentication and authorization</strong> for all WebSocket actions, not just the initial login.</li>
+    <li>Log and monitor WebSocket traffic—real-time does not mean invisible.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>WebSockets are powerful but expand the attack surface.</li>
+    <li>Think of them as HTTP endpoints: they need the same validation and security checks.</li>
+    <li>Never assume that a persistent channel is safe just because it’s behind authentication.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Secure the stream, or the attacker will ride the flow."</p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
