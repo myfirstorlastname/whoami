@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Cache Poisoning (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🧩 Web Cache Poisoning (My Courses)</h1>
+  <blockquote>
+    "A poisoned cache turns one request into thousands of exploits."
+  </blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    Web Cache Poisoning is a powerful web attack that abuses the way <strong>caching servers</strong> store and serve responses.  
+    Caches (like CDNs or reverse proxies) are designed to improve performance by reusing responses for many users.  
+    But if an attacker manages to <em>inject malicious content</em> into a cached response, the poisoned version will be delivered to <strong>every subsequent user</strong>.
+  </p>
+  <p>
+    This attack doesn’t just impact one victim—it scales to all users served by the cache, making it especially dangerous.
+  </p>
+  <hr>
+
+  <h2>📘 How Web Cache Poisoning Works</h2>
+  <p>
+    The vulnerability comes from a mismatch: the cache decides what to store based on certain request parts (the <strong>cache key</strong>),  
+    but the application might process additional inputs.  
+    If these extra inputs are not included in the cache key, they can be used to inject malicious content.
+  </p>
+  <p>
+    Example: if the cache ignores a header like <code>X-Forwarded-Host</code>, but the server reflects it in the response,  
+    attackers can craft a malicious header. The poisoned response gets cached and served to others.
+  </p>
+  <hr>
+
+  <h2>🔎 Examples from PortSwigger Labs</h2>
+
+  <h3>1. Unkeyed Header</h3>
+  <p>
+    The cache ignores the <code>X-Forwarded-Host</code> header, but the server uses it to build links.  
+    Injecting a malicious value poisons the cached page for all visitors.
+  </p>
+
+  <h3>2. Unkeyed Cookie</h3>
+  <p>
+    If a cookie is reflected in the page but not considered by the cache, attackers can inject payloads (like XSS)  
+    and have them cached globally.
+  </p>
+
+  <h3>3. Parameter Cloaking</h3>
+  <p>
+    By sending duplicate or malformed parameters, the cache and the application parse them differently.  
+    The attacker controls the parameter processed by the server, while the cache stores a poisoned version.
+  </p>
+
+  <h3>4. URL Normalization</h3>
+  <p>
+    Encoded characters (e.g., <code>%2F</code> vs <code>/</code>) may be treated differently by the cache and the server.  
+    This discrepancy can be used to poison the cache with malicious responses.
+  </p>
+
+  <h3>5. Combining Vulnerabilities</h3>
+  <p>
+    Realistic attacks often chain techniques: unkeyed parameters + cache key injection + DOM-based flaws,  
+    creating persistent cross-user exploits.
+  </p>
+  <hr>
+
+  <h2>🎯 How to Prevent Web Cache Poisoning</h2>
+  <ul>
+    <li>Include <strong>all relevant inputs</strong> (headers, cookies, query parameters) in the cache key.</li>
+    <li>Block or sanitize <strong>unnecessary headers</strong> (like <code>X-Forwarded-*</code>) before they reach the app.</li>
+    <li>Apply <strong>strict input validation</strong> on any data reflected in responses.</li>
+    <li>Use <strong>Cache-Control</strong> headers wisely (<code>no-store</code> or <code>private</code> for sensitive content).</li>
+    <li>Regularly test cache behavior in penetration tests—caches often hide subtle bugs.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Cache poisoning exploits <strong>inconsistencies</strong> between cache keys and application logic.</li>
+    <li>A single poisoned request can scale to <strong>thousands of victims</strong>.</li>
+    <li>Defense requires both <strong>secure cache configuration</strong> and <strong>robust application input validation</strong>.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"One poisoned response can infect an entire user base."</p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
