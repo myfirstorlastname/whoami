@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortSwigger Labs - Web Cache Poisoning</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+  <header>
+    <h1>PortSwigger Labs – Web Cache Poisoning</h1>
+    <blockquote>
+      "When a cache stores the wrong thing, every user sees the attacker’s payload."
+    </blockquote>
+  </header>
+
+  <main>
+    <h2>Overview</h2>
+    <p>
+      Web cache poisoning attacks exploit how caching servers store and serve HTTP responses.  
+      If attackers can manipulate the cache key or headers that influence caching, they can “poison” the cache with malicious responses.  
+      Once cached, these poisoned responses are delivered to all subsequent users—turning a single exploit into a mass compromise.
+    </p>
+    <p>
+      The following PortSwigger labs demonstrate different cache poisoning scenarios.  
+      They show how attackers abuse <strong>unkeyed inputs, header manipulation, query strings, and normalization quirks</strong> to deliver persistent payloads to victims.
+    </p>
+
+    <h2>Labs</h2>
+    <ul>
+      <li><strong>Web cache poisoning with an unkeyed header</strong> – Exploiting a header ignored by the cache to inject malicious content.</li>
+      <li><strong>Web cache poisoning with an unkeyed cookie</strong> – Using cookies excluded from the cache key to poison shared responses.</li>
+      <li><strong>Web cache poisoning with multiple headers</strong> – Combining multiple unkeyed headers to trigger and store a poisoned payload.</li>
+      <li><strong>Targeted web cache poisoning using an unknown header</strong> – Identifying and exploiting custom headers that affect responses but not cache keys.</li>
+      <li><strong>Web cache poisoning via an unkeyed query string</strong> – Leveraging query strings excluded from cache keys to poison responses.</li>
+      <li><strong>Web cache poisoning via an unkeyed query parameter</strong> – Manipulating specific query parameters ignored by the cache logic.</li>
+      <li><strong>Parameter cloaking</strong> – Exploiting how duplicate or malformed parameters are interpreted differently by the cache and the application.</li>
+      <li><strong>Web cache poisoning via a fat GET request</strong> – Sending large GET requests with extra headers to poison the cache.</li>
+      <li><strong>URL normalization</strong> – Abusing URL encoding/decoding differences to trick the cache and poison responses.</li>
+      <li><strong>Web cache poisoning to exploit a DOM vulnerability via a cache with strict cacheability criteria</strong> – Combining cache poisoning with a client-side flaw to deliver malicious scripts to users.</li>
+      <li><strong>Combining web cache poisoning vulnerabilities</strong> – Chaining multiple cache quirks together for a more reliable and impactful attack.</li>
+      <li><strong>Cache key injection</strong> – Injecting malicious input directly into the cache key to alter stored entries.</li>
+      <li><strong>Internal cache poisoning</strong> – Poisoning internal or upstream caches, impacting entire infrastructures.</li>
+    </ul>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Caches speed up the web—but if misconfigured, they spread attacks at scale.</li>
+      <li>Any input ignored by the cache but processed by the application is a potential poisoning vector.</li>
+      <li>URL normalization and parameter cloaking are subtle but highly effective cache bypass techniques.</li>
+      <li>Web cache poisoning is often combined with <strong>XSS, DOM vulnerabilities, or open redirects</strong> for maximum impact.</li>
+      <li>Testing requires patience and creativity: small quirks often lead to global compromises.</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>
+      Cache poisoning turns one request into a weapon against thousands—precision makes it devastating.  
+    </p>
+  </footer>
+
+</body>
+</html>
