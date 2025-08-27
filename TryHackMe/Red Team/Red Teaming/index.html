@@ -3,82 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Red Team Fundamentals (TryHackMe : Red Teaming path)</title>
-  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+  <title>Red Teaming (TryHackMe : Learning Path)</title>
+  <link rel="stylesheet" href="../../../style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
   
-  <h1>🎭 Red Team Fundamentals (TryHackMe : Red Teaming path)</h1>
-  <blockquote>"Red teaming isn’t just hacking—it’s simulating an adversary with discipline, patience, and purpose."</blockquote>
+  <h1>🎭 Red Teaming (TryHackMe : Learning Path)</h1>
+  <blockquote>"Red teaming is not about exploits—it’s about simulating real adversaries to test resilience."</blockquote>
   <hr>
 
-  <h2>🧠 About</h2>
+  <h2>🧠 About this Learning Path</h2>
   <p>
-    This page documents my completion of the 
-    <a href="https://tryhackme.com/module/red-team-fundamentals" target="_blank" rel="noopener noreferrer">Red Team Fundamentals</a> 
-    module, part of the <em>Red Teaming</em> learning path on TryHackMe.  
-    Unlike exploit-heavy modules, this one provides the <strong>strategic foundations</strong> of red teaming: planning engagements, gathering threat intelligence, maintaining OPSEC, and introducing Command & Control concepts.
+    The <strong>Red Teaming</strong> path on TryHackMe is designed to introduce offensive operators to the full cycle of adversary simulation.  
+    Unlike traditional penetration testing, red teaming emphasizes <strong>stealth, persistence, and realism</strong>.  
+    The modules progress from fundamentals and initial access, through post-compromise actions, to advanced evasion and Active Directory compromise.
   </p>
   <p>
-    The goal is not to teach advanced exploitation yet, but to shape the <strong>mindset of a red teamer</strong>: stealthy, intelligence-driven, and mission-oriented.
+    I have already completed the <em>Red Team Fundamentals</em> and <em>Compromising Active Directory</em> modules, with the remaining modules in progress.
   </p>
   <hr>
 
-  <h2>🛰️ Philosophy</h2>
-  <blockquote>"Red teams don’t just break in—they emulate real-world adversaries to test resilience."</blockquote>
-  <ul>
-    <li>A red teamer’s job is to simulate <em>threat actors</em>, not just pentesters with exploits.</li>
-    <li>Every action has an operational cost: stealth and timing matter as much as payloads.</li>
-    <li>Intelligence and OPSEC define the difference between a noisy hacker and a disciplined operator.</li>
-  </ul>
-  <hr>
+  <h2>📘 Modules</h2>
+  <div class="grid-container">
+    
+    <a href="./Red Team Fundamentals" class="card">
+      <h3>🎭 Red Team Fundamentals ✅</h3>
+      <p>Introduction to red team mindset, engagements, threat intel, OPSEC, and C2 basics.</p>
+    </a>
 
-  <h2>🔎 Learning Outcomes: Red Team Fundamentals</h2>
-  <blockquote>From planning to C2—laying the groundwork for disciplined offensive operations.</blockquote>
+    <a href="./Initial Access" class="card">
+      <h3>🚪 Initial Access</h3>
+      <p>Phishing, web exploits, and techniques to gain a first foothold in the target network.</p>
+    </a>
 
-  <h3>📘 Module Summary (Rooms)</h3>
-  <ul>
-    <li><strong>Red Team Fundamentals</strong> — Introduced the concept of red teaming as distinct from penetration testing: mission-driven, intelligence-led, and focused on objectives rather than vulnerabilities.</li>
-    <li><strong>Red Team Engagements</strong> — Explained how engagements are structured: scoping, objectives, rules of engagement (RoE), and reporting to leadership. Highlighted the difference between assumed breach vs. full-scope simulations.</li>
-    <li><strong>Red Team Threat Intel</strong> — Covered how cyber threat intelligence (CTI) informs red team operations: mapping to MITRE ATT&CK, understanding adversary TTPs, and tailoring engagements accordingly.</li>
-    <li><strong>Red Team OPSEC</strong> — Showed how attackers must practice strict operational security. Topics included infrastructure separation (staging vs. production C2 servers), domain fronting, blending in with normal traffic, and managing digital footprints.  
-      The key idea: <em>don’t just hack—stay hidden while hacking</em>.</li>
-    <li><strong>Intro to C2</strong> — Introduced Command & Control frameworks used to maintain persistence and manage compromised hosts. Covered beaconing, callbacks, staging payloads, and traffic obfuscation. Emphasized the dual challenge: reliable operator control while evading blue team detection.</li>
-  </ul>
+    <a href="./Post Compromise" class="card">
+      <h3>🖥️ Post Compromise</h3>
+      <p>Actions after initial breach: privilege escalation, credential dumping, persistence.</p>
+    </a>
 
-  <h3>🧪 What I appreciated as a learner</h3>
-  <ul>
-    <li>The OPSEC section was highly practical: understanding how red teams structure their infrastructure and blend into normal network patterns.</li>
-    <li>The C2 introduction made clear that real-world operations are about persistence and control—not just initial exploitation.</li>
-    <li>The module forced me to think strategically: engagements are <strong>planned missions</strong>, not random exploits.</li>
-  </ul>
+    <a href="./Host Evasions" class="card">
+      <h3>🕶️ Host Evasions</h3>
+      <p>Techniques to bypass AV/EDR, obfuscate payloads, and remain undetected on endpoints.</p>
+    </a>
 
-  <h3>🎓 Who I recommend this to</h3>
-  <ul>
-    <li>Pentesters transitioning into red teaming and needing a <strong>mindset shift</strong> from vulnerabilities to adversary simulation.</li>
-    <li>Defenders who want to understand <strong>how adversaries maintain stealth</strong> and why OPSEC matters for attackers.</li>
-    <li>Anyone interested in adversary emulation, threat intel, or offensive security strategy.</li>
-  </ul>
+    <a href="./Network Security Evasion" class="card">
+      <h3>🌐 Network Security Evasion</h3>
+      <p>Evading firewalls, proxies, IDS/IPS, and blending C2 traffic with normal activity.</p>
+    </a>
 
-  <h3>🛠️ My Personal Tips</h3>
-  <ul>
-    <li>Always separate infrastructure: don’t expose your real C2 server—use redirectors and staging hosts.</li>
-    <li>For OPSEC, remember that <strong>noise kills operations</strong>: automate carefully and randomize timings.</li>
-    <li>When exploring C2 frameworks (Cobalt Strike, Mythic, Covenant), focus on <strong>traffic profiles</strong> and evasion techniques, not just features.</li>
-    <li>Engagements are team sports: communication and documentation are as important as shells and payloads.</li>
-  </ul>
+    <a href="./Compromising Active Directory" class="card">
+      <h3>🔐 Compromising Active Directory ✅</h3>
+      <p>Attacking Kerberos, abusing misconfigurations, and full-domain compromise scenarios.</p>
+    </a>
 
-  <h3>✅ Completion Status</h3>
-  <ul>
-    <li><strong>Module completed: 100%</strong></li>
-    <li><strong>Final thoughts:</strong> This module set the stage for the technical labs that follow. It framed red teaming not as a collection of exploits, but as an <em>adversarial discipline</em> combining intelligence, stealth, and long-term persistence.</li>
-  </ul>
+  </div>
 
   <hr>
   <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
-    Red teaming begins with mindset: stealth, discipline, and adversary emulation. The tools come later.  
+    Red Teaming is a discipline: simulate real adversaries, adapt to defenses, and aim for persistence.  
   </footer>
-  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+
+  <script src="../../../call_for_toc.js"></script>
 </body>
 </html>
