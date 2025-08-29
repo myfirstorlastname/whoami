@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Initial Access (TryHackMe : Red Teaming path)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🚪 Initial Access (TryHackMe : Red Teaming path)</h1>
+  <blockquote>"First foothold, minimal noise—precision beats bravado."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    This page documents my work on the 
+    <a href="https://tryhackme.com/room/" target="_blank" rel="noopener noreferrer">Initial Access</a> 
+    module of the <em>Red Teaming</em> learning path. The focus here is on <strong>how real intrusions begin</strong>:
+    discovering viable entry points, crafting delivery mechanisms, and executing low-noise approaches that survive the first detection hurdles.
+  </p>
+  <p>
+    The module is introductory but practical: from <em>open-source reconnaissance</em> and <em>weaponization</em> to 
+    <em>password attacks</em> and <em>phishing</em>. The goal is a disciplined, repeatable process that’s usable during engagements without sacrificing OPSEC.
+  </p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Access without detection is the only access that matters."</blockquote>
+  <ul>
+    <li>Favor <strong>signal-building steps</strong> (intel + validation) over noisy, premature exploitation.</li>
+    <li><strong>Small, high-fidelity footholds</strong> beat broad, high-noise campaigns.</li>
+    <li>Initial access is a <strong>process</strong>—recon → validate → deliver → establish → verify persistence.</li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Learning Outcomes: Initial Access</h2>
+  <blockquote>From intel to inbox to implant—turning leads into low-noise footholds.</blockquote>
+
+  <h3>📘 Module Summary (Rooms)</h3>
+  <ul>
+    <li><strong>Red Team Recon</strong> — Building a target picture with OSINT (people, tech stack, cloud footprint, exposed services). 
+      Mapping trust relationships (email domains, SSO, supply chain) to prioritize attack paths.</li>
+    <li><strong>Weaponization</strong> — Turning delivery vectors into execution. Crafting payloads and droppers (docs, HTA/LNK, JS, ISO/VHD), 
+      staging vs. direct delivery, and content hardening to reduce detections.</li>
+    <li><strong>Password Attacks</strong> — (beginner-friendly) Credential stuffing vs. password spraying, smart wordlists & rules, throttling awareness, 
+      and using low-and-slow cadence. Understanding lockout policies, SSO angles, and MFA realities.</li>
+    <li><strong>Phishing</strong> — Pretext design, landing page realism, link vs. attachment tradeoffs, credential harvest vs. malware delivery, 
+      and behavioral cues to avoid (typos, generic branding, wrong tone).</li>
+  </ul>
+
+  <h3>🧪 What I appreciated as a learner</h3>
+  <ul>
+    <li>The recon workflows go beyond “scan and hope”—they teach <strong>targeted collection</strong> and <strong>hypothesis-driven validation</strong>.</li>
+    <li>Weaponization emphasizes <strong>format and delivery constraints</strong> (macro security, file marks, MOTW, SmartScreen).</li>
+    <li><strong>Password Attacks</strong> are framed with <em>policy-aware</em> tactics: spray windows, account cool-downs, timing jitter, and user targeting.</li>
+    <li>Phishing focuses on <strong>pretext craft</strong> and <strong>trust anchors</strong> (SPF/DKIM/DMARC, realistic sender personas) rather than gimmicks.</li>
+  </ul>
+
+  <h2>🧭 Mini Playbooks</h2>
+
+  <h3>1) Red Team Recon (OSINT → Validation)</h3>
+  <ul>
+    <li><strong>People & Org:</strong> public org chart, job posts (stack + tools), LinkedIn roles for phishing personas.</li>
+    <li><strong>Infra:</strong> target domains, subdomains, ASN/cloud providers, known tech (CDN/WAF, SSO, mail gateways).</li>
+    <li><strong>Exposures:</strong> dev portals, forgotten staging hosts, VPN portals, OWA/SSO, default logins.</li>
+    <li><strong>Validate:</strong> confirm login portals, observe headers/cookies, check rate limits & lockout hints.</li>
+  </ul>
+
+  <h3>2) Weaponization (Delivery → Execution)</h3>
+  <ul>
+    <li><strong>File types:</strong> containerized formats (ISO/VHD) vs. doc macros, shortcut chains (LNK → LOLBins), JS/HTA.</li>
+    <li><strong>Staging:</strong> redirectors, signed-like URLs, content-type control; prefer <em>pull</em> models over big attachments.</li>
+    <li><strong>OPSEC:</strong> compress/obfuscate only as needed, randomize filenames & compile times, avoid common IoCs.</li>
+  </ul>
+
+  <h3>3) Password Attacks (Beginner Focus)</h3>
+  <ul>
+    <li><strong>Credential stuffing:</strong> reuse leaked combos on target SSO/VPN/OWA; filter by target domain first.</li>
+    <li><strong>Password spraying:</strong> 1–3 common candidates across many users; respect lockout thresholds; add <em>jitter</em> and <em>sleep</em>.</li>
+    <li><strong>Wordlists & rules:</strong> build with company thematics (brand, season, year), apply rules (<code>Spring2025!</code> variants) sparingly.</li>
+    <li><strong>MFA reality:</strong> look for legacy protocols, backup codes, or MFA fatigue vectors—but keep noise minimal.</li>
+    <li><strong>Validation:</strong> detect soft signals (status/length changes), don’t chase false positives without a second check.</li>
+  </ul>
+
+  <h3>4) Phishing (Pretext → Delivery → Capture)</h3>
+  <ul>
+    <li><strong>Pretext:</strong> pick business-credible triggers (policy updates, invoice queries, calendar conflicts).</li>
+    <li><strong>Trust:</strong> domains that pass SPF/DKIM/DMARC; clone tone & cadence from real comms.</li>
+    <li><strong>Delivery:</strong> link-first (credential capture) vs. attachment-first (execution) depending on objective & OPSEC.</li>
+    <li><strong>Capture:</strong> unique tokens per user, short-lived links, clear telemetry; handle credentials responsibly.</li>
+  </ul>
+  <hr>
+
+  <h2>🧩 Defense Mindset (for blue & purple)</h2>
+  <ul>
+    <li>Instrument <strong>login portals</strong>: per-user and per-IP thresholds, geo/time anomalies, <em>progressive friction</em> instead of hard locks only.</li>
+    <li>Harden <strong>email</strong>: enforce DMARC quarantine/reject, banner external senders, train on <em>tone mismatch</em> cues.</li>
+    <li>Constrain <strong>execution</strong>: block scriptable containers, AMSI + Attack Surface Reduction rules, macro policies with MOTW enforcement.</li>
+    <li>Measure <strong>detection debt</strong>: what gets through today? test with controlled exercises.</li>
+  </ul>
+  <hr>
+
+  <h3>✅ Status</h3>
+  <ul>
+    <li><strong>Module progress:</strong> In progress (deep focus on Password Attacks & Phishing fundamentals).</li>
+    <li><strong>Working approach:</strong> policy-aware spraying + pretext-driven phishing, with redirectors and low-noise staging.</li>
+  </ul>
+
+  <hr>
+  <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+    Initial access favors calm operators—recon first, deliver quietly, verify twice.
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
