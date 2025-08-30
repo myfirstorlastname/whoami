@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Insecure Deserialization (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>📦 Insecure Deserialization (My Courses)</h1>
+  <blockquote>"When bytes become objects, attackers choose the story."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    <strong>Deserialization</strong> is the process of turning bytes (or text) back into in-memory objects. It’s common in web apps:
+    session stores, “remember me” cookies, cached widgets, message queues, APIs, file metadata, and more.
+    <em>Insecure deserialization</em> happens when an application deserializes <strong>untrusted data</strong> without strict controls,
+    letting attackers influence <em>what</em> objects are created and <em>which code paths</em> run.
+  </p>
+  <p>
+    Impact ranges from subtle logic manipulation (flag flips, role changes) to <strong>remote code execution (RCE)</strong> via
+    <em>gadget chains</em> hidden in dependencies. This course introduces the core ideas and gives hands-on patterns inspired by
+    PortSwigger labs you’ve been solving.
+  </p>
+  <hr>
+
+  <h2>📘 How Deserialization Works</h2>
+  <ul>
+    <li><strong>Serialization</strong>: convert an object → bytes/string (PHP <code>serialize()</code>, Java <code>ObjectOutputStream</code>, Ruby <code>Marshal.dump</code>).</li>
+    <li><strong>Deserialization</strong>: bytes/string → object (PHP <code>unserialize()</code>, Java <code>ObjectInputStream</code>, Ruby <code>Marshal.load</code>).</li>
+    <li><strong>Magic / lifecycle methods</strong>: some languages run callbacks during/after deserialization (PHP <code>__wakeup</code>/<code>__destruct</code>, Java readObject, Ruby custom initialize).</li>
+    <li><strong>Gadget chains</strong>: sequences of classes/methods that an attacker can trigger on deserialization to reach dangerous sinks (file write, command exec).</li>
+  </ul>
+  <p>
+    The risk: if user-supplied data is passed to a deserializer that can instantiate arbitrary types, <em>constructor-like code</em> may run
+    before any business validation happens.
+  </p>
+  <hr>
+
+  <h2>🔎 Recognizing Vulnerable Patterns</h2>
+  <ul>
+    <li>Endpoints that accept opaque blobs and immediately call <code>unserialize()</code> / <code>ObjectInputStream.readObject()</code>.</li>
+    <li>“Remember me” cookies or session blobs that decode to complex objects rather than simple JSON.</li>
+    <li>File handlers that touch metadata (e.g., PHP <code>phar://</code> paths, <code>exif_read_data</code> parsing PHAR metadata).</li>
+    <li>Background workers or caches reading untrusted queues or keys (Redis/MQ entries saved from user input).</li>
+  </ul>
+  <hr>
+
+  <h2>🧪 Practical Examples (inspired by PortSwigger labs)</h2>
+
+  <h3>1) Modifying Serialized Objects (flag/role flip)</h3>
+  <pre><code>s:10:"O:4:"User":2:{s:5:"role";s:4:"user";s:2:"id";i:7;}"</code></pre>
+  <p>
+    If the server trusts this blob, changing <code>role</code> → <code>admin</code> or <code>isPremium</code> → <code>true</code> alters logic on load.
+  </p>
+
+  <h3>2) Modifying Data Types (type confusion)</h3>
+  <p>
+    Flipping a string to an array/int (or vice-versa) can bypass loose comparisons, short-circuit validators, or crash guards during deserialization.
+  </p>
+
+  <h3>3) Arbitrary Object Injection in PHP</h3>
+  <pre><code>O:8:"LogWriter":1:{s:8:"filePath";s:18:"/var/www/html/1.php";}</code></pre>
+  <p>
+    If <code>LogWriter::__destruct()</code> writes data, crafting the object controls where/what gets written → potential web shell.
+  </p>
+
+  <h3>4) Gadget Chains (Java / PHP / Ruby)</h3>
+  <ul>
+    <li><strong>Java</strong>: gadget paths in libraries (e.g., collections, templating) triggered by <code>readObject()</code>, yielding RCE.</li>
+    <li><strong>PHP</strong>: chains via magic methods in popular packages (e.g., logging/templating components) invoked by <code>unserialize()</code>.</li>
+    <li><strong>Ruby</strong>: <code>YAML.load</code> / <code>Marshal.load</code> on untrusted input → documented chains to dangerous sinks.</li>
+  </ul>
+
+  <h3>5) PHAR-based Deserialization (PHP)</h3>
+  <p>
+    PHAR archives store serialized metadata. Calling functions like <code>file_exists("phar://…")</code> can trigger unserialization
+    of attacker-controlled metadata → execute gadget chain without directly calling <code>unserialize()</code>.
+  </p>
+  <hr>
+
+  <h2>🛠️ Hands-On Checklist (Beginner Playbook)</h2>
+  <ol>
+    <li><strong>Identify the blob</strong>: base64/hex strings, cookies, hidden fields, upload metadata. Try decoding → do you see <code>O:</code>, <code>a:</code>, <code>s:</code> (PHP), or binary Java stream headers (<code>AC ED 00 05</code>)?</li>
+    <li><strong>Prove influence</strong>: tweak a non-critical field (e.g., username casing) and see if it reflects back after deserialization.</li>
+    <li><strong>Hunt magic methods</strong>: scan code/deps for <code>__wakeup</code>, <code>__destruct</code>, <code>readObject</code>, or dangerous sinks (file ops, eval, system).</li>
+    <li><strong>Build minimal PoC</strong>: craft the smallest object that triggers a visible effect (file touch, HTTP callback) to confirm reachability.</li>
+    <li><strong>Escalate carefully</strong>: pivot from logic impact → file write → code exec <em>only in safe environments</em>.</li>
+  </ol>
+  <hr>
+
+  <h2>🧩 Defense Mindset</h2>
+  <ul>
+    <li><strong>Avoid deserializing untrusted data</strong>. Prefer JSON with explicit schema validation (types, ranges, enums).</li>
+    <li><strong>Constrain types</strong>: allow-list classes, disable autoload on deserialization, and refuse unknown types.</li>
+    <li><strong>Use signed/encrypted tokens</strong> (e.g., JWT with proper validation) instead of serializing objects for client storage.</li>
+    <li><strong>Harden libraries</strong>: keep dependencies updated; remove risky packages; review for known gadget chains.</li>
+    <li><strong>PHAR hygiene</strong>: disallow <code>phar://</code> in user-controlled paths; treat image/zip/exif parsers as untrusted.</li>
+    <li><strong>Runtime guards</strong>: Java <code>ObjectInputFilter</code>, vendor deserialization filters, WAF rules for known signatures.</li>
+    <li><strong>Monitoring</strong>: alert on unexpected file writes, outbound callbacks, and unusual temp directories during request handling.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Deserialization turns attacker-controlled bytes into <strong>code paths</strong>; that’s the whole risk.</li>
+    <li>You don’t need full RCE to be dangerous—<strong>logic flips</strong> and <strong>type confusion</strong> already break trust.</li>
+    <li>Secure designs avoid complex object graphs at trust boundaries and <strong>validate types strictly</strong>.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Bytes are cheap—execution isn’t. Validate before you deserialize."</p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
