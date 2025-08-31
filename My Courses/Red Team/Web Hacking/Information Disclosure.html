@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Information Disclosure (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🕵️ Information Disclosure (My Courses)</h1>
+  <blockquote>"What you reveal can be used against you."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    <strong>Information disclosure</strong> occurs when an application unintentionally leaks sensitive information to users.  
+    These leaks may look harmless at first—like an error message or a forgotten file—but attackers can piece them together to
+    learn about the system and prepare stronger attacks.
+  </p>
+  <p>
+    This weakness is often overlooked because it doesn’t always provide an immediate exploit.  
+    However, <em>every leak reduces the attacker’s workload</em> and can become the missing puzzle piece for a bigger compromise.
+  </p>
+  <hr>
+
+  <h2>📘 Common Sources of Information Disclosure</h2>
+  <ul>
+    <li><strong>Error messages</strong> – verbose stack traces, file paths, SQL queries.</li>
+    <li><strong>Debug pages</strong> – leftover admin/debug endpoints showing environment variables or secrets.</li>
+    <li><strong>Backup files</strong> – old or temporary versions (<code>.bak</code>, <code>.old</code>, <code>index.php~</code>) containing source code.</li>
+    <li><strong>Version control</strong> – exposed <code>.git</code> or repositories revealing commit history, hardcoded credentials, or old files.</li>
+    <li><strong>Metadata</strong> – comments in HTML, hidden fields, error logs, or leaked config files.</li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Practical Examples</h2>
+
+  <h3>1. Information disclosure in error messages</h3>
+  <p>
+    A malformed request triggers an error like:  
+    <code>SQL syntax error near 'admin' in SELECT * FROM users WHERE name='admin'</code>  
+    → This reveals the database structure, helping attackers craft SQL injection payloads.
+  </p>
+
+  <h3>2. Debug page exposure</h3>
+  <p>
+    A forgotten <code>/debug</code> endpoint lists environment variables such as <code>DB_PASSWORD</code>.  
+    → Attackers can use these credentials directly to access the database.
+  </p>
+
+  <h3>3. Backup file disclosure</h3>
+  <p>
+    A file like <code>index.php.bak</code> is accessible and contains the app’s source code.  
+    → Reviewing the code exposes authentication logic and hidden parameters.
+  </p>
+
+  <h3>4. Authentication bypass via info leaks</h3>
+  <p>
+    An error message reveals a valid username, or a forgotten endpoint leaks session tokens.  
+    → Attackers can combine this with brute force or replay attacks to bypass login.
+  </p>
+
+  <h3>5. Version control history</h3>
+  <p>
+    An exposed <code>.git</code> folder allows downloading commit history.  
+    → Secrets committed by mistake (API keys, private endpoints) are now fully exposed.
+  </p>
+  <hr>
+
+  <h2>🛠️ How to Prevent Information Disclosure</h2>
+  <ul>
+    <li>Use <strong>generic error messages</strong> in production (log details internally, show users only safe info).</li>
+    <li><strong>Remove debug endpoints</strong> before deployment—never leave them public.</li>
+    <li>Clean up <strong>temporary and backup files</strong> before pushing code live.</li>
+    <li>Restrict or remove <strong>version control folders</strong> (<code>.git</code>, <code>.svn</code>) from production servers.</li>
+    <li>Review <strong>HTML comments, hidden fields, and config files</strong> for sensitive information before release.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Information disclosure is often the first step in an attack chain.</li>
+    <li>Small leaks (file paths, usernames, version numbers) can enable much bigger exploits.</li>
+    <li>Good operational hygiene (no debug pages, no backup files, no exposed repos) prevents most leaks.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"A single leaked detail can collapse your defenses."</p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
