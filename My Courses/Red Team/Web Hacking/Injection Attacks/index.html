@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Injection Attacks</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🧨 Injection Attacks (My Courses)</h1>
+  <blockquote>"Inputs are contracts—break the contract, break the app."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    <strong>Injection attacks</strong> happen when untrusted input is interpreted as code or control instructions by a backend component
+    (database, template engine, OS shell, API resolver). Mastering injections is core to web pentesting:
+    they’re frequent, high-impact, and often chain into authentication bypass, data exfiltration, or RCE.
+  </p>
+  <p>
+    This course gives you a beginner-friendly map of the main injection families you’ll meet in real engagements and bug bounty.
+    Each topic below links to a dedicated page with hands-on methodology and examples.
+  </p>
+  <hr>
+
+  <h2>📘 What is an Injection?</h2>
+  <ul>
+    <li><strong>Source</strong>: user-controlled data (query params, JSON body, headers, cookies, files).</li>
+    <li><strong>Sink</strong>: a parser/interpreter (SQL engine, templating runtime, OS shell, GraphQL resolver).</li>
+    <li><strong>Vulnerability</strong>: input is embedded unsafely in commands/expressions → attacker gains control of logic or execution.</li>
+  </ul>
+  <p>
+    The golden rule: <em>never mix code and data</em>. If you must, enforce strict encoding, parameterization, and schema validation.
+  </p>
+  <hr>
+
+  <h2>🗂️ Course Modules</h2>
+  <div class="grid-container">
+    <a class="card" href="./SQL Injection">
+      <h3>🧩 SQL Injection</h3>
+      <p>From boolean/time-based probes to data extraction and RCE pivots.</p>
+    </a>
+
+    <a class="card" href="./NoSQL Injection">
+      <h3>🗃️ NoSQL Injection</h3>
+      <p>Operators abuse, type juggling, and JSON-specific pitfalls.</p>
+    </a>
+
+    <a class="card" href="./OS Command Injection">
+      <h3>💻 OS Command Injection</h3>
+      <p>Command concatenation, blind detection, and safe escalation paths.</p>
+    </a>
+
+    <a class="card" href="./Server-Side Template Injection">
+      <h3>🧠 Server-Side Template Injection (SSTI)</h3>
+      <p>Engine fingerprinting → expression eval → sandbox escape.</p>
+    </a>
+
+    <a class="card" href="./GraphQL Vulnerabilities">
+      <h3>🔗 GraphQL Vulnerabilities</h3>
+      <p>Resolvers, introspection, injections, and authorization gaps.</p>
+    </a>
+  </div>
+  <hr>
+
+  <h2>🎯 Beginner Playbook</h2>
+  <ul>
+    <li><strong>Probe lightly</strong>: flip booleans, measure timing/length/status code changes before heavy payloads.</li>
+    <li><strong>Stay in-context</strong>: match the sink (SQL vs. JSON vs. template), encode accordingly.</li>
+    <li><strong>Confirm signal</strong>: reproduce with minimal payloads before chaining to impact.</li>
+    <li><strong>Think in chains</strong>: injection → data access → auth bypass → file write/RCE → lateral movement.</li>
+  </ul>
+  <hr>
+
+  <h2>🛡️ Defense Mindset</h2>
+  <ul>
+    <li>Use <strong>parameterized queries</strong> / prepared statements and <strong>strict schema validation</strong>.</li>
+    <li>Apply <strong>contextual encoding</strong> (SQL/JSON/shell/template) and avoid string concatenation.</li>
+    <li>Segment privileges (DB least privilege, read-only accounts) and monitor anomalous query patterns.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Separate code from data, or attackers won’t."</p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
