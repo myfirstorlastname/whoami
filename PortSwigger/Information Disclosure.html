@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortSwigger Labs - Information Disclosure</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+  <header>
+    <h1>PortSwigger Labs – Information Disclosure</h1>
+    <blockquote>
+      "Every extra detail revealed is a foothold for the attacker."
+    </blockquote>
+  </header>
+
+  <main>
+    <h2>Overview</h2>
+    <p>
+      Information disclosure occurs when an application unintentionally exposes sensitive details to users or attackers.  
+      These leaks may seem harmless at first (debug data, error messages, metadata), but they often reveal crucial information such as file paths, stack traces, source code, credentials, or even keys for authentication.
+    </p>
+    <p>
+      The following PortSwigger labs demonstrate how <strong>small leaks can escalate into major vulnerabilities</strong>, sometimes even enabling authentication bypass or full compromise.
+    </p>
+
+    <h2>Labs</h2>
+    <ul>
+      <li><strong>Information disclosure in error messages</strong> – Error handling reveals details like stack traces, file paths, database queries, or internal server info.</li>
+      <li><strong>Information disclosure on debug page</strong> – Exposed debugging endpoints provide sensitive configuration values, environment variables, or credentials.</li>
+      <li><strong>Source code disclosure via backup files</strong> – Forgotten or misconfigured backup files (<code>.bak</code>, <code>~</code>, old versions) expose the underlying source code and secrets.</li>
+      <li><strong>Authentication bypass via information disclosure</strong> – Leaked details allow prediction or manipulation of authentication tokens, enabling bypass of login controls.</li>
+      <li><strong>Information disclosure in version control history</strong> – Publicly accessible repositories or exposed <code>.git</code> directories reveal commit history, including sensitive files and hardcoded credentials.</li>
+    </ul>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Seemingly harmless information can be weaponized: <strong>every leak lowers the attacker’s workload</strong>.</li>
+      <li>Common culprits include <strong>error messages, debug endpoints, backup files, and version control metadata</strong>.</li>
+      <li>Developers should enforce strict <strong>error handling</strong>, never expose debug functionality in production, and clean up artifacts such as backups or <code>.git</code> folders.</li>
+      <li>Information disclosure often <strong>chains into other attacks</strong>, such as authentication bypass, privilege escalation, or RCE.</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>
+      Information disclosure is not noise—it’s signal. Treat every leak as an attack surface.
+    </p>
+  </footer>
+
+</body>
+</html>
