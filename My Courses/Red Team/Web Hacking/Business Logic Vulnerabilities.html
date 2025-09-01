@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Logic Vulnerabilities (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🧮 Business Logic Vulnerabilities (My Courses)</h1>
+  <blockquote>"A secure app can still fail if its logic is flawed."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    <strong>Business Logic Vulnerabilities</strong> occur when an application’s intended workflow can be misused
+    to gain an advantage or bypass restrictions.  
+    Unlike injections or technical exploits, these flaws don’t rely on exotic payloads—they exploit the <em>rules</em>
+    that define how the application works.
+  </p>
+  <p>
+    For example, if an e-commerce site forgets to validate prices server-side, an attacker can modify requests
+    to buy items at 90% off.  
+    These issues are subtle, context-specific, and often invisible to scanners, making them highly valuable in penetration testing and bug bounty hunting.
+  </p>
+  <hr>
+
+  <h2>📘 What Are Business Logic Flaws?</h2>
+  <p>
+    Business logic flaws arise from <strong>assumptions</strong> developers make about how users will behave.  
+    Attackers don’t follow the "happy path"—they try to:
+  </p>
+  <ul>
+    <li><strong>Skip steps</strong> in multi-step processes (e.g., go straight to checkout without payment).</li>
+    <li><strong>Repeat steps</strong> to abuse logic (e.g., apply coupons multiple times).</li>
+    <li><strong>Send unexpected input</strong> (negative numbers, null values, extreme values).</li>
+    <li><strong>Exploit inconsistencies</strong> between endpoints, parameters, or states.</li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Examples of Business Logic Vulnerabilities</h2>
+
+  <h3>1. Excessive trust in client-side controls</h3>
+  <p>
+    Price is stored in a hidden form field:  
+    <code>&lt;input type="hidden" name="price" value="100"&gt;</code>  
+    → Changing it to <code>1</code> makes the server accept the new price.
+  </p>
+
+  <h3>2. Skipping workflow validation</h3>
+  <p>
+    An app expects users to <code>/add-to-cart → /checkout → /payment</code>.  
+    Directly visiting <code>/checkout</code> without paying grants items for free.
+  </p>
+
+  <h3>3. Authentication bypass via state machine flaw</h3>
+  <p>
+    The login process has multiple states (enter username → verify OTP → access granted).  
+    Manipulating requests jumps from state 1 to state 3 without OTP validation.
+  </p>
+
+  <h3>4. Infinite money logic flaw</h3>
+  <p>
+    A refund system doesn’t check if items were actually purchased.  
+    Submitting multiple refund requests generates unlimited credits.
+  </p>
+  <hr>
+
+  <h2>🛡️ How to Prevent Business Logic Vulnerabilities</h2>
+  <ul>
+    <li>Perform <strong>threat modeling</strong>: think like an attacker, not just a normal user.</li>
+    <li>Validate <strong>all rules server-side</strong> (prices, roles, limits).</li>
+    <li>Apply <strong>workflow validation</strong>: enforce correct step sequences.</li>
+    <li>Test with <strong>edge cases</strong> (negative, null, extreme values).</li>
+    <li>Keep <strong>consistent controls</strong> across all endpoints and states.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Business logic flaws exploit <strong>design mistakes</strong>, not missing patches.</li>
+    <li>They are highly context-dependent and <strong>rarely detected by scanners</strong>.</li>
+    <li>Pentesters and bug bounty hunters must adopt a <strong>“what if?” mindset</strong> to uncover them.</li>
+    <li>Developers should validate workflows like code: assume nothing, enforce everything.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Logic flaws don’t need exploits—just creativity."</p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
