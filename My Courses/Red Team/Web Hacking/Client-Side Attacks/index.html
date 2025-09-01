@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client-Side Attacks</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🕸️ Client-Side Attacks (My Courses)</h1>
+  <blockquote>"If the browser trusts it, an attacker will try to bend it."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    <strong>Client-side attacks</strong> target the user’s browser and front-end logic: how pages render, how scripts run,
+    how cross-origin rules are enforced, and how UI flows shape user actions. Mastering them is essential for
+    bug bounty and modern web pentesting because <em>small UI or policy mistakes often lead to big impact</em>
+    like account takeover, data theft, or action forgery.
+  </p>
+  <p>
+    This course index maps the major client-side families and links to dedicated pages with methodology and hands-on examples.
+  </p>
+  <hr>
+
+  <h2>📘 What is a Client-Side Attack?</h2>
+  <ul>
+    <li><strong>Target</strong>: the browser & DOM (scripts, HTML, CSS, storage, UI), not just the server.</li>
+    <li><strong>Goal</strong>: steal data (cookies/tokens), force actions (CSRF), mislead users (UI redress), or corrupt logic (prototype pollution).</li>
+    <li><strong>Levers</strong>: untrusted input in the DOM, weak browser policies (CSP, SOP), and user interaction patterns.</li>
+  </ul>
+  <p>
+    Think in <em>contexts</em>: HTML, attribute, script, URL, CSS, JSON — each has different parsing and escaping rules.
+  </p>
+  <hr>
+
+  <h2>🗂️ Course Modules</h2>
+  <div class="grid-container">
+    <a class="card" href="./Cross Site Scripting">
+      <h3>🧩 Cross-Site Scripting (XSS)</h3>
+      <p>Reflected, stored, and DOM XSS · context-aware payloads · exfiltration patterns.</p>
+    </a>
+
+    <a class="card" href="./Cross Site Request Forgery">
+      <h3>🔁 Cross-Site Request Forgery (CSRF)</h3>
+      <p>Forged actions via cookies · anti-CSRF tokens · SameSite and modern defenses.</p>
+    </a>
+
+    <a class="card" href="./Clickjacking">
+      <h3>🖼️ Clickjacking</h3>
+      <p>UI redress attacks with iframes · framing protections (X-Frame-Options, CSP frame-ancestors).</p>
+    </a>
+
+    <a class="card" href="./DOM-Based">
+      <h3>🌳 DOM-Based Attacks</h3>
+      <p>Source → sink mapping · dangerous APIs (innerHTML, location, eval) · taint analysis.</p>
+    </a>
+
+    <a class="card" href="./Prototype Pollution">
+      <h3>🧪 Prototype Pollution</h3>
+      <p>Object prototype tampering → logic corruption · gadget hunting in front-end code.</p>
+    </a>
+
+    <a class="card" href="./WEB LLM">
+      <h3>🤖 Web LLM Attacks</h3>
+      <p>Prompt injection via web content · data exfiltration and instruction hijacking in agents.</p>
+    </a>
+  </div>
+  <hr>
+
+  <h2>🎯 Beginner Playbook</h2>
+  <ul>
+    <li><strong>Map contexts</strong>: where does input land (HTML/attr/JS/URL/CSS)? Choose payloads per context.</li>
+    <li><strong>Start quiet</strong>: use length/status/timing and harmless probes before full scripts or frames.</li>
+    <li><strong>Abuse flows</strong>: test cross-origin behaviors, form auto-submits, and UI overlays.</li>
+    <li><strong>Chain issues</strong>: XSS → steal CSRF token → perform CSRF; DOM bug → CSP bypass; prototype pollution → XSS.</li>
+  </ul>
+  <hr>
+
+  <h2>🛡️ Defense Mindset</h2>
+  <ul>
+    <li>Enforce <strong>contextual output encoding</strong> and a restrictive <strong>CSP</strong>.</li>
+    <li>Require <strong>anti-CSRF</strong> tokens; set cookies with <code>SameSite=Lax/Strict</code>, <code>HttpOnly</code>, and <code>Secure</code>.</li>
+    <li>Disallow framing (<code>X-Frame-Options: DENY</code> or CSP <code>frame-ancestors</code>).</li>
+    <li>Sanitize/validate input used in the DOM; avoid dangerous sinks; harden client libraries against <strong>prototype pollution</strong>.</li>
+    <li>For LLM/agent UIs: isolate untrusted content, <strong>treat prompts as data</strong>, and validate tool calls.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Client-side bugs turn the browser into an attack surface; <strong>context is everything</strong>.</li>
+    <li>Small UI/policy oversights often chain into high-impact compromises.</li>
+    <li>Solid hygiene (encoding, CSP, SameSite, safe DOM APIs) blocks most classes of attacks.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Harden the browser paths, and the payloads lose power."</p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
