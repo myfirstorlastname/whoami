@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortSwigger Labs - File Upload Vulnerabilities</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+  <header>
+    <h1>PortSwigger Labs – File Upload Vulnerabilities</h1>
+    <blockquote>
+      "An unrestricted file upload is like handing the attacker a keyboard inside your server."
+    </blockquote>
+  </header>
+
+  <main>
+    <h2>Overview</h2>
+    <p>
+      File upload vulnerabilities occur when an application accepts user-supplied files without proper validation.  
+      Attackers can abuse this functionality to upload malicious scripts, bypass security checks, or overwrite critical resources.  
+      The <strong>PortSwigger labs</strong> in this category demonstrate how weak upload handling leads to <strong>remote code execution (RCE)</strong>.
+    </p>
+
+    <h2>Labs</h2>
+    <ul>
+      <li><strong>Remote code execution via web shell upload</strong> – Uploading a PHP web shell to directly execute commands on the server.</li>
+      <li><strong>Web shell upload via Content-Type restriction bypass</strong> – Circumventing MIME-type checks by altering headers (e.g., <code>Content-Type: image/jpeg</code>).</li>
+      <li><strong>Web shell upload via path traversal</strong> – Exploiting directory traversal in the upload path to place a shell in an executable location.</li>
+      <li><strong>Web shell upload via extension blacklist bypass</strong> – Using double extensions (e.g., <code>shell.php.jpg</code>) or uncommon server mappings to bypass blacklists.</li>
+      <li><strong>Web shell upload via obfuscated file extension</strong> – Leveraging tricks like Unicode characters, case sensitivity, or trailing dots to evade filters.</li>
+      <li><strong>Remote code execution via polyglot web shell upload</strong> – Crafting a file valid in multiple formats (e.g., image + PHP) to bypass checks and still execute code.</li>
+      <li><strong>Web shell upload via race condition</strong> – Exploiting timing gaps between upload and sanitization to execute malicious files before cleanup.</li>
+    </ul>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>Never rely solely on <strong>client-side checks</strong> (JavaScript, HTML attributes).</li>
+      <li>Do not trust <strong>Content-Type</strong> or file extensions — they can be forged or obfuscated.</li>
+      <li>Whitelist specific file types and enforce checks with secure libraries, not blacklists.</li>
+      <li>Store uploaded files outside the webroot whenever possible, and serve them through a safe handler.</li>
+      <li>Monitor for anomalies: unusual extensions, large uploads, or repeated attempts.</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>
+      File uploads are among the most dangerous features in web apps: a single mistake can give attackers direct code execution.  
+      Treat every upload as hostile by default.
+    </p>
+  </footer>
+
+</body>
+</html>
