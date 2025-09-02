@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Server-Side Attacks (My Courses • Red Team • Web Hacking)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🛠️ Server-Side Attacks (My Courses)</h1>
+  <blockquote>"If the server trusts input, the attacker shapes output."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    <strong>Server-side attacks</strong> exploit how the backend parses requests, talks to internal services, and builds responses.
+    They often yield high impact—data exfiltration, authentication bypass, and even <em>remote code execution (RCE)</em>.
+    This index maps the core families you’ll meet in real engagements and bug bounty.
+  </p>
+  <p>
+    Chaque carte ci-dessous mène vers un cours dédié (détection, exploitation pas à pas, et mitigations).
+  </p>
+  <hr>
+
+  <h2>📘 What is a Server-Side Attack?</h2>
+  <ul>
+    <li><strong>Source</strong>: untrusted input (URL/query/body/headers/files) reaches backend components.</li>
+    <li><strong>Sink</strong>: server interpreters, internal networks (metadata, APIs), file systems, or caches.</li>
+    <li><strong>Impact</strong>: unauthorized access, data leakage, SSRF pivots, RCE, or full service compromise.</li>
+  </ul>
+  <p>
+    Mindset: trace the <em>data flow</em>—where does input go (parser, protocol, file path, internal HTTP)? What assumptions break?
+  </p>
+  <hr>
+
+  <h2>🗂️ Course Modules</h2>
+  <div class="grid-container">
+    <a class="card" href="./Server-Side Request Forgery">
+      <h3>🌐 Server-Side Request Forgery (SSRF)</h3>
+      <p>Pivoting into internal services, cloud metadata, and blind SSRF techniques.</p>
+    </a>
+
+    <a class="card" href="./HTTP Request Smuggling">
+      <h3>📦 HTTP Request Smuggling</h3>
+      <p>CL.TE/TE.CL desync, HTTP/2 downgrades, cache poisoning and session hijack paths.</p>
+    </a>
+
+    <a class="card" href="./File Upload Vulnerabilities">
+      <h3>📂 File Upload Vulnerabilities</h3>
+      <p>MIME/extension bypasses, polyglots, race conditions → RCE in upload flows.</p>
+    </a>
+
+    <a class="card" href="./XML External Entity (XXE)">
+      <h3>📄 XML External Entity (XXE)</h3>
+      <p>External entities, SSRF via XML parsers, and safe parser configurations.</p>
+    </a>
+
+    <a class="card" href="./Insecure Deserialization">
+      <h3>📦 Insecure Deserialization</h3>
+      <p>Magic methods & gadget chains (PHP/Java/Ruby) from logic flips to RCE.</p>
+    </a>
+
+    <a class="card" href="./Directory Traversal">
+      <h3>🗂️ Directory Traversal (LFI/RFI)</h3>
+      <p>Path traversal, log poisoning, wrapper abuse, and read→execute pivots.</p>
+    </a>
+  </div>
+  <hr>
+
+  <h2>🎯 Beginner Playbook</h2>
+  <ul>
+    <li><strong>Probe safely</strong>: start with harmless diffs (status/length/time) before heavy payloads.</li>
+    <li><strong>Map sinks</strong>: file paths, internal HTTP calls, parsers (XML/template), upload handlers.</li>
+    <li><strong>Chain impact</strong>: SSRF → creds/metadata → lateral move; upload → shell → persistence.</li>
+    <li><strong>Log everything</strong>: reproduce minimal PoCs, then escalate methodically.</li>
+  </ul>
+  <hr>
+
+  <h2>🛡️ Defense Mindset</h2>
+  <ul>
+    <li>Deny-by-default on parsers (disable XXE, strict content-types, schema validation).</li>
+    <li>Network egress controls + metadata service protections (IMDSv2, no-link-local by default).</li>
+    <li>Safe upload pipelines: type & content validation, store outside webroot, no-exec on upload dirs.</li>
+    <li>Keep dependencies updated; enforce least privilege for services and filesystem access.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Harden the backend paths—small parsing quirks lead to big breaches."</p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
