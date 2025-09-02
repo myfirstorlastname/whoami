@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>File Upload Vulnerabilities (My Courses)</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>📂 File Upload Vulnerabilities (My Courses)</h1>
+  <blockquote>"An insecure upload feature is an open door to the server."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    Many web applications allow users to upload files: profile pictures, documents, resumes, images, etc.  
+    If these uploads are not handled securely, attackers can use them to upload <strong>malicious files</strong> — often leading to
+    <em>Remote Code Execution (RCE)</em> or other serious compromises.
+  </p>
+  <p>
+    In this course, we explore the most common <strong>file upload vulnerabilities</strong> and how they can be exploited, with practical
+    references to <a href="https://portswigger.net/web-security/file-upload" target="_blank" rel="noopener noreferrer">PortSwigger labs</a>.
+  </p>
+  <hr>
+
+  <h2>📘 What is a File Upload Vulnerability?</h2>
+  <p>
+    A file upload vulnerability happens when an application fails to <strong>validate</strong> or <strong>sanitize</strong> user-uploaded files.  
+    Instead of harmless images or PDFs, an attacker may upload:
+  </p>
+  <ul>
+    <li>A <strong>web shell</strong> (e.g., a PHP script) to execute system commands remotely.</li>
+    <li>A <strong>malicious payload disguised as an image</strong> (polyglot file).</li>
+    <li>A file placed in an unintended location (via path traversal).</li>
+    <li>An obfuscated file that bypasses simple extension checks.</li>
+  </ul>
+  <p>
+    The result can be devastating: <strong>complete server takeover</strong>.
+  </p>
+  <hr>
+
+  <h2>🔎 Examples from PortSwigger Labs</h2>
+
+  <h3>1. Content-Type Restriction Bypass</h3>
+  <p>
+    Some applications only check the <code>Content-Type</code> header (e.g., <code>image/jpeg</code>), which is under attacker control.  
+    By changing it in the request, an attacker can upload a script instead of an image.
+  </p>
+
+  <h3>2. Path Traversal in Uploads</h3>
+  <p>
+    If the upload path is not sanitized, attackers can use <code>../</code> sequences to place their file in an executable directory
+    (e.g., <code>/var/www/html/uploads/../../shell.php</code>).
+  </p>
+
+  <h3>3. Extension Blacklist Bypass</h3>
+  <p>
+    Blacklists often block <code>.php</code> but miss tricks like <code>.php.jpg</code>, uppercase extensions, or Unicode characters.  
+    The server may still interpret the file as executable code.
+  </p>
+
+  <h3>4. Obfuscated or Polyglot Files</h3>
+  <p>
+    Attackers create files valid as both an image and a script (polyglots), bypassing security checks while remaining executable.  
+    Example: a JPEG header followed by PHP code.
+  </p>
+
+  <h3>5. Race Conditions</h3>
+  <p>
+    Some systems sanitize or rename files after upload. If an attacker accesses the file <em>before</em> this process completes,  
+    they may execute malicious code in a short window of opportunity.
+  </p>
+  <hr>
+
+  <h2>🎯 How to Prevent File Upload Vulnerabilities</h2>
+  <ul>
+    <li>Use a <strong>whitelist</strong> of allowed file types (e.g., images only) and verify with server-side libraries.</li>
+    <li>Validate the <strong>file content</strong>, not just the extension or MIME type.</li>
+    <li>Rename uploaded files and store them <strong>outside the webroot</strong> — serve them via a secure handler.</li>
+    <li>Disable execution permissions on upload directories.</li>
+    <li>Log and monitor uploads for suspicious activity (large files, repeated attempts, unusual extensions).</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>File upload features are inherently dangerous: treat every file as <strong>hostile</strong>.</li>
+    <li>Weak validation leads directly to <strong>Remote Code Execution</strong>.</li>
+    <li>Defense must be layered: type validation, secure storage, permission hardening, and monitoring.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Every upload is an attack surface — guard it like an entry point."</p>
+  </footer>
+
+  <script src="../../call_for_toc.js"></script>
+</body>
+</html>
