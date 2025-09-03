@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JWT Vulnerabilities (My Courses)</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🔐 JWT Vulnerabilities (My Courses)</h1>
+  <blockquote>
+    "A token is only as secure as its validation—weak checks make impersonation trivial."
+  </blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    <strong>JSON Web Tokens (JWTs)</strong> are a common mechanism for authentication and session management.  
+    They consist of three parts separated by dots: <code>header.payload.signature</code>, and are usually base64url-encoded.  
+    The <em>server</em> validates the signature to ensure the token has not been tampered with.  
+    However, if verification is missing, weak, or misconfigured, attackers can forge tokens and gain unauthorized access.
+  </p>
+
+  <pre><code>// JWT structure
+header.payload.signature
+
+// Example
+eyJhbGciOiAiSFMyNTYiLCAidHlwIjoiSldUIn0=
+eyJ1c2VyIjoiYWRtaW4iLCJpZCI6MSwicm9sZSI6ImFkbWluIn0=
+mFhhP8uVj5VZZyL7Xn21gYp3bQIlfJ7NqgMbnlkHj8w=
+</code></pre>
+  <hr>
+
+  <h2>📘 Common Vulnerabilities</h2>
+
+  <h3>1. Unverified Signature</h3>
+  <p>
+    Some applications <strong>don’t check the signature at all</strong>.  
+    Attackers can simply modify the payload (e.g., set <code>"role":"admin"</code>) and re-submit the token.
+  </p>
+
+  <h3>2. Weak Signing Key</h3>
+  <p>
+    If the application uses a weak HMAC key (like <code>secret</code>), attackers can brute force it and generate valid tokens.  
+    Tools like <code>hashcat</code> or <code>jwt-cracker</code> make this trivial.
+  </p>
+
+  <h3>3. Header Injection (jwk / jku / kid)</h3>
+  <ul>
+    <li><strong>jwk</strong>: attackers inject their own public key directly into the header.</li>
+    <li><strong>jku</strong>: attackers point to a malicious JWKS file they control.</li>
+    <li><strong>kid</strong>: attackers use directory traversal (e.g., <code>../../etc/passwd</code>) to load arbitrary files as keys.</li>
+  </ul>
+
+  <h3>4. Algorithm Confusion</h3>
+  <p>
+    If the server accepts both asymmetric (RSA) and symmetric (HMAC) algorithms,  
+    an attacker can trick the server into using the <em>public key</em> as an HMAC secret.  
+    This allows forging tokens without knowing the private key.
+  </p>
+  <hr>
+
+  <h2>🧪 Examples from PortSwigger Labs</h2>
+  <ul>
+    <li><strong>JWT authentication bypass via unverified signature</strong> – Simply modify payload, signature ignored.</li>
+    <li><strong>JWT authentication bypass via weak signing key</strong> – Crack the HMAC secret, forge valid tokens.</li>
+    <li><strong>JWT authentication bypass via jku header injection</strong> – Host your own JWKS and point the app to it.</li>
+    <li><strong>JWT authentication bypass via algorithm confusion</strong> – Replace <code>RS256</code> with <code>HS256</code> and use the public key as secret.</li>
+  </ul>
+  <hr>
+
+  <h2>🎯 How to Defend Against JWT Attacks</h2>
+  <ul>
+    <li>Always <strong>verify signatures</strong> with strong libraries.</li>
+    <li>Use <strong>strong random keys</strong> (minimum 256 bits for HMAC).</li>
+    <li><strong>Fix the algorithm</strong> (e.g., enforce RS256), never trust the client’s <code>alg</code> header.</li>
+    <li>Disable or strictly validate <code>jwk</code>, <code>jku</code>, and <code>kid</code> headers.</li>
+    <li>Set short token lifetimes and use refresh tokens when needed.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>JWTs are widely deployed, but misconfigurations make them a prime target.</li>
+    <li>Attackers love JWTs because a single flaw = total account takeover.</li>
+    <li>Cryptography is useless if developers implement it incorrectly.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>
+      JWTs promise stateless security—but broken validation turns them into attacker backdoors.
+    </p>
+  </footer>
+
+  <script src="../../../call_for_toc.js"></script>
+</body>
+</html>
