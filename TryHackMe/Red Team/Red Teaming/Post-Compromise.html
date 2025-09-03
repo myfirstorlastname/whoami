@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post-Compromise (TryHackMe : Red Teaming path)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🕵️ Post-Compromise (TryHackMe : Red Teaming path)</h1>
+  <blockquote>
+    "Getting in is only half the job—true impact comes after persistence, movement, and data exfiltration."
+  </blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    This page documents my completion of the 
+    <a href="https://tryhackme.com/module/post-compromise" target="_blank" rel="noopener noreferrer">Post-Compromise</a> 
+    module, part of the <em>Red Teaming</em> learning path on TryHackMe.  
+    This stage covers what happens <strong>after initial access</strong> has been achieved: maintaining presence, escalating privileges, moving laterally, and ultimately achieving mission objectives such as data theft.
+  </p>
+  <p>
+    The emphasis is on methodology and tradecraft: working <em>quietly</em>, chaining techniques, and persisting beyond initial footholds.  
+    Unlike exploitation, post-compromise requires patience, creativity, and discipline to avoid detection.
+  </p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>
+    "Exploitation is loud, but persistence is art."
+  </blockquote>
+  <ul>
+    <li>Every foothold is temporary—persistence is mandatory.</li>
+    <li>Enumeration is not just recon: it’s a roadmap for escalation and movement.</li>
+    <li>Post-compromise success is measured by <strong>objectives achieved</strong>, not shells obtained.</li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Learning Outcomes: Post-Compromise Module</h2>
+  <blockquote>
+    From privilege escalation to exfiltration—turning access into lasting control.
+  </blockquote>
+
+  <h3>📘 Module Summary (Rooms)</h3>
+  <ul>
+    <li><strong>The Lay of the Land</strong> — Understanding the compromised environment, identifying trust boundaries, and mapping critical assets.</li>
+    <li><strong>Enumeration</strong> — Collecting host and domain information, credentials, tokens, and identifying privilege escalation paths.</li>
+    <li><strong>Windows Privilege Escalation</strong> — Techniques such as unquoted service paths, DLL hijacking, misconfigured permissions, and kernel exploits.</li>
+    <li><strong>Windows Local Persistence</strong> — Methods like scheduled tasks, registry keys, WMI event subscriptions, and service creation to maintain access.</li>
+    <li><strong>Lateral Movement and Pivoting</strong> — Leveraging harvested credentials or tokens to access other systems, moving across network segments, and pivoting through compromised hosts.</li>
+    <li><strong>Data Exfiltration</strong> — Covert techniques for extracting sensitive data while evading monitoring (encryption, staging, chunking, living-off-the-land tools).</li>
+  </ul>
+
+  <h3>🧪 What I Appreciated</h3>
+  <ul>
+    <li>Clear methodology: from foothold → escalation → persistence → lateral movement → exfiltration.</li>
+    <li>Realistic Windows-based scenarios that mirror enterprise environments.</li>
+    <li>Hands-on practice with persistence techniques that defenders actively look for.</li>
+    <li>Emphasis on operational security (OPSEC) and stealth during enumeration and movement.</li>
+  </ul>
+
+  <h3>🎓 Who I Recommend This To</h3>
+  <ul>
+    <li>Red Team beginners who want to understand what happens after “getting in”.</li>
+    <li>Pentesters preparing for advanced exams (e.g., OSCP, OSEP) that require escalation and persistence skills.</li>
+    <li>Defenders (Blue Team) who need to recognize post-compromise behaviors in SIEM/EDR alerts.</li>
+  </ul>
+
+  <h3>🛠️ My Personal Tips</h3>
+  <ul>
+    <li>Always start with enumeration: know your environment before attempting escalation.</li>
+    <li>Privilege escalation is rarely “one shot”—test multiple vectors quietly.</li>
+    <li>For persistence, use minimal and reversible methods (low footprint) when possible.</li>
+    <li>Lateral movement should mimic normal admin activity to avoid detection.</li>
+    <li>Stage exfiltration: compress, encrypt, and move data in chunks.</li>
+  </ul>
+
+  <h3>✅ Completion Status</h3>
+  <ul>
+    <li><strong>Module completed: 100%</strong></li>
+    <li><strong>Final thoughts:</strong> This module reinforced the importance of <em>discipline</em> and <em>methodology</em> in Red Team operations.  
+      Exploiting a machine is only step one—real impact requires persistence, stealth, and alignment with mission objectives.</li>
+  </ul>
+
+  <hr>
+  <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+    Post-compromise tradecraft is where real Red Teaming begins: persistence, escalation, movement, and exfiltration—quietly, methodically, and with purpose.
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
