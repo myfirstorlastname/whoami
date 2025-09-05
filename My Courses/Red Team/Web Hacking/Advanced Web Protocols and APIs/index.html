@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advanced Web Protocols & APIs (My Courses • Red Team • Web Hacking)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🔌 Advanced Web Protocols & APIs (My Courses)</h1>
+  <blockquote>"When protocols bend, boundaries break."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    This course focuses on attacks that arise from <strong>how browsers and servers speak to each other</strong> and how modern
+    APIs are designed. Rather than classic input injections, these topics abuse <em>protocol semantics</em>, <em>policy gaps</em>,
+    and <em>deployment quirks</em> to cross security boundaries or gain privileged access.
+  </p>
+  <p>
+    You’ll learn how to test <strong>CORS</strong> rules, <strong>WebSocket</strong> handshakes and messaging, <strong>API</strong> security controls,
+    and <strong>Host header</strong> trust. Each module below links to a dedicated page with hands-on methods and mitigations.
+  </p>
+  <hr>
+
+  <h2>🗂️ Course Modules</h2>
+  <div class="grid-container">
+    <a class="card" href="./CORS">
+      <h3>🌍 CORS</h3>
+      <p>Origin reflection, credentialed requests, wildcard pitfalls, and SOP bypass scenarios.</p>
+    </a>
+
+    <a class="card" href="./WebSocket">
+      <h3>🔌 WebSocket</h3>
+      <p>Handshake manipulation, origin checks, CSWSH, and message tampering.</p>
+    </a>
+
+    <a class="card" href="./API Testing">
+      <h3>🧩 API Testing</h3>
+      <p>AuthZ gaps (BOLA/BFLA), rate limits, schema abuse, versioning and shadow endpoints.</p>
+    </a>
+
+    <a class="card" href="./Host Header Attacks">
+      <h3>🏷️ Host Header Attacks</h3>
+      <p>Virtual host confusion, password-reset poisoning, cache issues, and absolute-URL trust.</p>
+    </a>
+  </div>
+  <hr>
+
+  <h2>📘 What Do We Mean by “Protocols & APIs”?</h2>
+  <ul>
+    <li><strong>Protocols</strong>: HTTP(S), CORS preflights, WebSocket upgrade flows, proxy/CDN layers.</li>
+    <li><strong>Policies</strong>: Same-Origin Policy, CORS rules, frame/embed and fetch contexts.</li>
+    <li><strong>APIs</strong>: REST/JSON, GraphQL, RPC; authentication (cookies, JWT, OAuth), authorization models, and rate limiting.</li>
+  </ul>
+  <p>We test <em>edges and assumptions</em>—where infrastructure or specifications are interpreted loosely.</p>
+  <hr>
+
+  <h2>🎯 Beginner Playbook</h2>
+  <ul>
+    <li><strong>CORS:</strong> Try custom <code>Origin</code> values. Check if <code>Access-Control-Allow-Origin</code> reflects arbitrary origins, if <code>credentials</code> are allowed, and whether preflight (<code>OPTIONS</code>) rules differ from actual handling.</li>
+    <li><strong>WebSocket:</strong> Inspect the <code>Upgrade</code> request. Test <code>Origin</code> enforcement, subprotocols, and whether server trusts client messages without re-auth.</li>
+    <li><strong>API:</strong> Enumerate endpoints (OpenAPI/Swagger/GraphQL introspection). Probe for IDOR/BOLA, missing object-level checks, verb confusion, and rate-limit bypass.</li>
+    <li><strong>Host header:</strong> Send crafted <code>Host</code>/<code>X-Forwarded-Host</code>/<code>X-Forwarded-Proto</code>. Look for password-reset links or absolute URLs poisoned with your domain.</li>
+  </ul>
+  <hr>
+
+  <h2>🛡️ Defense Mindset</h2>
+  <ul>
+    <li><strong>CORS:</strong> Strict allowlists; never use <code>*</code> with credentials; validate preflight logic and vary by route.</li>
+    <li><strong>WebSocket:</strong> Enforce <code>Origin</code> checks server-side, re-authenticate on connect, validate message schemas.</li>
+    <li><strong>API:</strong> Centralized authN/Z, deny-by-default object access, rate limiting, schema validation, and version governance.</li>
+    <li><strong>Host header:</strong> Canonicalize host/scheme/port; ignore untrusted forwarding headers unless set by a trusted proxy; generate absolute URLs from server config, not request headers.</li>
+  </ul>
+  <hr>
+
+  <h2>✅ Key Takeaways</h2>
+  <ul>
+    <li>Small policy mistakes (CORS, Host) can <strong>collapse origin boundaries</strong>.</li>
+    <li>WebSockets and APIs require <strong>explicit, server-side checks</strong>—don’t trust clients.</li>
+    <li>Test assumptions end-to-end: browser → proxy/CDN → app → backend services.</li>
+  </ul>
+  <hr>
+
+  <footer>
+    <p>"Harden the rules of communication—and attackers lose their shortcuts."</p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
