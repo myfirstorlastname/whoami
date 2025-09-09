@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Host Evasion (TryHackMe : Red Teaming path)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+  
+  <h1>🕵️‍♂️ Host Evasion (TryHackMe : Red Teaming path)</h1>
+  <blockquote>"To persist undetected, a Red Teamer must not only break in, but blend in."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    This page documents my completion of the 
+    <a href="https://tryhackme.com/module/host-evasion" target="_blank" rel="noopener noreferrer">Host Evasion</a> module, part of the 
+    <em>Red Teaming</em> learning path on TryHackMe.  
+    The module focuses on understanding <strong>detection mechanisms</strong> within Windows environments and learning practical techniques to <strong>evade antivirus, endpoint detection, and monitoring tools</strong>.  
+  </p>
+  <p>
+    Whereas earlier modules emphasize gaining access, this module is about <strong>staying inside</strong>.  
+    It builds both a theoretical foundation in Windows internals and a toolkit of evasion methods for real-world engagements.  
+  </p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Red Teaming is not just about exploitation—it’s about survival after the breach."</blockquote>
+  <ul>
+    <li>Evasion is not about magic tricks—it’s about understanding <em>how defenders see you</em> and neutralizing their visibility.</li>
+    <li>Windows internals are both a roadmap and an arsenal: knowing processes, APIs, and privileges is essential for stealth.</li>
+    <li>A true Red Teamer avoids detection through restraint and precision, not by flooding logs with noise.</li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Learning Outcomes: Host Evasion Module</h2>
+  <blockquote>From Windows APIs to AV evasion—mastering the art of staying undetected.</blockquote>
+
+  <h3>📘 Module Summary (Rooms)</h3>
+  <ul>
+    <li><strong>Windows Internals</strong> — Explored process management, memory, and privilege models within Windows. Provided the foundation for evasion techniques.</li>
+    <li><strong>Introduction to Windows API</strong> — Demonstrated how native API calls can be leveraged for stealthy process injection, enumeration, and memory manipulation.</li>
+    <li><strong>Abusing Windows Internals</strong> — Showed how attackers exploit token manipulation, DLL injection, and handle inheritance to bypass standard protections.</li>
+    <li><strong>Introduction to AntiVirus</strong> — Reviewed how AV engines detect malware (signatures, heuristics, sandboxing) and their blind spots.</li>
+    <li><strong>AV Evasion: Shellcode</strong> — Practiced encoding, obfuscating, and executing shellcode in ways that avoid static and behavioral detection.</li>
+    <li><strong>Obfuscation Principles</strong> — Covered string encoding, polymorphism, and packers—techniques to disguise malicious code and evade analysis.</li>
+    <li><strong>Signature Evasion</strong> — Focused on bypassing static detection (hashes, patterns) through mutation and custom loaders.</li>
+    <li><strong>Bypassing UAC</strong> — Showed practical techniques to escalate privileges without triggering User Account Control prompts.</li>
+    <li><strong>Runtime Detection Evasion</strong> — Introduced process hollowing, early-bird injection, and API unhooking to remain invisible at runtime.</li>
+    <li><strong>Evading Logging and Monitoring</strong> — Techniques for tampering with Event Tracing for Windows (ETW), hiding PowerShell activity, and bypassing Sysmon.</li>
+    <li><strong>Living Off the Land</strong> — Leveraged built-in Windows tools (LOLbins) such as PowerShell, mshta, and certutil to blend attacks into normal admin activity.</li>
+  </ul>
+
+  <h3>🧪 What I appreciated as a learner</h3>
+  <ul>
+    <li>The mix of <strong>theory and practice</strong>: starting with Windows internals before diving into evasions made the labs much clearer.</li>
+    <li>The AV evasion and obfuscation exercises mirrored real-world challenges, where payloads must constantly adapt.</li>
+    <li>Living Off the Land labs reinforced the idea that stealth often comes from <em>using what’s already trusted</em>.</li>
+    <li>Bypassing UAC and runtime evasion labs demanded precision and creativity—very close to red team fieldwork.</li>
+  </ul>
+
+  <h3>🎓 Who I recommend this to</h3>
+  <ul>
+    <li>Red Team operators who want to sharpen post-exploitation survival techniques.</li>
+    <li>Pentesters preparing for advanced certifications (OSEP, CRTO, OSCP with AD focus).</li>
+    <li>Defenders (Blue Team, SOC, DFIR) who want to understand how attackers bypass AV, EDR, and logging systems.</li>
+  </ul>
+
+  <h3>🛠️ My Personal Tips</h3>
+  <ul>
+    <li>Always start with reconnaissance: know what security solutions are deployed before choosing evasion methods.</li>
+    <li>Keep payloads minimal—less is more when trying to stay undetected.</li>
+    <li>When using LOLbins, remember they leave traces: combine with log tampering or redirection.</li>
+    <li>Test obfuscation and evasion techniques in lab environments with multiple AV/EDR engines.</li>
+    <li>Think like a defender: ask yourself how <em>you</em> would catch your own attack.</li>
+  </ul>
+
+  <h3>✅ Completion Status</h3>
+  <ul>
+    <li><strong>Module completed: 100%</strong></li>
+    <li><strong>Final thoughts:</strong> Host evasion is the bridge between compromise and persistence. Mastering it transforms exploitation into a sustainable red team operation.</li>
+  </ul>
+  <hr>
+
+  <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+    "Evasion is not about hiding—it’s about blending into the system’s rhythm."
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
