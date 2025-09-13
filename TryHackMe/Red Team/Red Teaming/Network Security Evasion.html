@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Security Evasion (TryHackMe : Red Teaming path)</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <h1>🕵️‍♂️ Network Security Evasion (TryHackMe : Red Teaming path)</h1>
+  <blockquote>"Every perimeter defense has blind spots—evasion is about finding and exploiting them."</blockquote>
+  <hr>
+
+  <h2>🧠 About</h2>
+  <p>
+    This page documents my completion of the 
+    <a href="https://tryhackme.com/module/network-security-evasion" target="_blank" rel="noopener noreferrer">
+      Network Security Evasion
+    </a> module, part of the <em>Red Teaming</em> learning path on TryHackMe.  
+    The module introduces how modern network defenses—such as firewalls and sandboxes—work, and how attackers adapt to bypass them.  
+  </p>
+  <p>
+    While less technical than later Red Team modules, it provides essential knowledge for operating stealthily in environments where detection systems and filtering mechanisms are deployed.
+  </p>
+  <hr>
+
+  <h2>🛰️ Philosophy</h2>
+  <blockquote>"Defense dictates the rules, but attackers can always find creative detours."</blockquote>
+  <ul>
+    <li>Evasion is not about brute force—it’s about subtlety and misdirection.</li>
+    <li>Understanding the <strong>limitations of network defenses</strong> helps red teamers design payloads and operations that blend in.</li>
+    <li>Every filtering system is a trade-off between <em>security</em> and <em>usability</em>—attackers exploit this balance.</li>
+  </ul>
+  <hr>
+
+  <h2>🔎 Learning Outcomes: Network Security Evasion Module</h2>
+  <blockquote>Learning how to bypass the guards at the gate of the network.</blockquote>
+
+  <h3>📘 Module Summary (Rooms)</h3>
+  <ul>
+    <li><strong>Network Security Solutions</strong>  
+      Overview of IDS/IPS, firewalls, and sandboxes. Emphasis on detection strategies (signature-based vs. behavioral analysis) and how attackers exploit blind spots.</li>
+    <li><strong>Firewalls</strong>  
+      Covered how stateful and application firewalls enforce traffic rules. Techniques for evasion included using alternate ports, tunneling traffic, fragmenting payloads, and protocol misuses.</li>
+    <li><strong>Sandbox Evasion</strong>  
+      Showed how attackers detect sandbox environments (e.g., virtualized hardware, limited runtime, unusual processes) and delay or obfuscate payload execution until outside the sandbox.  
+      Examples: time delays, API calls that behave differently in sandboxes, and multi-stage payloads that activate only in real environments.</li>
+  </ul>
+
+  <h3>🧪 What I appreciated</h3>
+  <ul>
+    <li>Clear breakdown of <strong>defensive trade-offs</strong>—why strict filtering often gets relaxed in production.</li>
+    <li>Sandbox evasion techniques felt close to real-world malware tactics, useful for pentesting awareness.</li>
+    <li>The module emphasized mindset: learning to think in terms of bypassing rather than breaking.</li>
+  </ul>
+
+  <h3>🎓 Who I recommend this to</h3>
+  <ul>
+    <li>Red team beginners who want to understand the basics of bypassing firewalls and sandboxing systems.</li>
+    <li>Blue teamers looking to strengthen defenses by knowing attacker evasion strategies.</li>
+    <li>Anyone transitioning from lab pentesting to real-world engagements, where stealth is as important as exploitation.</li>
+  </ul>
+
+  <h3>🛠️ My Personal Tips</h3>
+  <ul>
+    <li>Always <strong>fingerprint the environment</strong>—knowing what firewall or sandbox is in place guides your evasion strategy.</li>
+    <li>For sandbox evasion, study malware analysis reports—they’re goldmines of creative techniques.</li>
+    <li>Never underestimate <strong>protocol abuse</strong>: HTTP smuggling, DNS tunneling, or using WebSockets often slip through filters.</li>
+  </ul>
+
+  <h3>✅ Completion Status</h3>
+  <ul>
+    <li><strong>Module completed: 100%</strong></li>
+    <li><strong>Final thoughts:</strong> This module reinforced the idea that red teaming is as much about stealth and bypass as it is about exploitation.  
+    Firewalls and sandboxes raise the bar, but with creativity, evasion is always possible.</li>
+  </ul>
+
+  <hr>
+  <footer style="margin-top: 3rem; font-size: 0.9rem; color: #666;">
+    "Security tools are only as strong as their blind spots are hidden—attackers thrive in the gaps."
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
