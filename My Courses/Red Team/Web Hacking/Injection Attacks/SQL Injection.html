@@ -150,7 +150,7 @@ print(f"[+] Database name: {db_name}")
 
   <h2>🧬 SQL Injection in Real-World Attack Chains</h2>
   <p>
-    In professional penetration testing and real-world breaches, SQL Injection is rarely the end goal — it's a <strong>gateway vulnerability</strong> used to gain deeper access. A successful SQLi can be weaponized to move laterally or escalate privileges across the infrastructure.
+    In professional penetration testing and real-world breaches, SQL Injection is rarely the end goal : it's a <strong>gateway vulnerability</strong> used to gain deeper access. A successful SQLi can be weaponized to move laterally or escalate privileges across the infrastructure.
   </p>
   
   <h3>Gaining Admin Panel Access</h3>
@@ -192,13 +192,13 @@ print(f"[+] Database name: {db_name}")
   
   <h3>Full Server Compromise</h3>
   <p>
-    Combining SQLi with other misconfigurations (like exposed file uploads, weak permissions, or vulnerable libraries) can result in a full compromise of the target server — turning a web vulnerability into shell access and lateral movement across the network.
+    Combining SQLi with other misconfigurations (like exposed file uploads, weak permissions, or vulnerable libraries) can result in a full compromise of the target server : turning a web vulnerability into shell access and lateral movement across the network.
   </p>
   
   <div class="takeaway-box">
     <h3>🛠️ Key Mindset</h3>
     <ul>
-      <li>Don’t treat SQLi as an isolated bug — it’s a pivot point.</li>
+      <li>Don’t treat SQLi as an isolated bug : it’s a pivot point.</li>
       <li>Think like an attacker: "Now that I’m inside the database, what can I leverage to reach the system or internal users?"</li>
       <li>Trace your attack path from initial injection → credential access → file read/write → RCE → privilege escalation.</li>
     </ul>
