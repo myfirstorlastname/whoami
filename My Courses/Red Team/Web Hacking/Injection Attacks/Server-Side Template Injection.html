@@ -10,13 +10,13 @@
   <div id="toc-container"></div>
   
   <h1>🧩 Server-Side Template Injection (SSTI)</h1>
-  <blockquote>"If the server executes what you write, you control not just the output—but the server itself."</blockquote>
+  <blockquote>"If the server executes what you write, you control not just the output : but the server itself."</blockquote>
   <hr>
 
   <h2>🧠 About</h2>
   <p>
     Server-Side Template Injection (SSTI) is a vulnerability that arises when user input is embedded unsafely into server-side templates.  
-    Instead of being treated as data, the input is executed by the template engine—allowing attackers to read sensitive data, manipulate logic, or even achieve <strong>Remote Code Execution (RCE)</strong>.
+    Instead of being treated as data, the input is executed by the template engine : allowing attackers to read sensitive data, manipulate logic, or even achieve <strong>Remote Code Execution (RCE)</strong>.
   </p>
 
   <h2>📚 Template Engines in Use</h2>
@@ -66,7 +66,7 @@ def hello():
     <h3>🧠 Key Takeaways</h3>
     <ul>
       <li>SSTI is often detected with harmless payloads like <code>{{7*7}}</code> before escalating.</li>
-      <li>Template engines expose dangerous internal objects—documentation is often the attacker’s best friend.</li>
+      <li>Template engines expose dangerous internal objects : documentation is often the attacker’s best friend.</li>
       <li>A successful SSTI almost always leads to critical impact: file read, secret disclosure, or RCE.</li>
     </ul>
   </div>
@@ -95,7 +95,7 @@ def hello():
 
   <h2>🧬 SSTI in Real-World Attack Chains</h2>
   <p>
-    SSTI is rarely an isolated bug—it’s a <strong>pivot point</strong>. Once exploited, it can be chained to:
+    SSTI is rarely an isolated bug : it’s a <strong>pivot point</strong>. Once exploited, it can be chained to:
   </p>
   <ul>
     <li>Leak environment variables (<code>AWS_SECRET_KEY</code>, API tokens).</li>
@@ -107,7 +107,7 @@ def hello():
   <div class="takeaway-box">
     <h3>🛠️ Mindset for Pentesters</h3>
     <ul>
-      <li>Don’t stop at proving SSTI—demonstrate real-world impact.</li>
+      <li>Don’t stop at proving SSTI : demonstrate real-world impact.</li>
       <li>Document how the vulnerability can escalate from template injection → file read → RCE → privilege escalation.</li>
       <li>Show defenders how insecure rendering practices can compromise entire infrastructures.</li>
     </ul>
