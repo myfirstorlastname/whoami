@@ -49,8 +49,8 @@
   <div class="tips-box">
     <h3>🔧 Testing Tips</h3>
     <ul>
-      <li>Use <code><script>alert(1)</script></code> to test basic injection points.</li>
-      <li>Try <code><img src=x onerror=alert(1)></code> for HTML injection.</li>
+      <li>Use <code>&lt;script&gt;alert(1)&lt;/script&gt;</code> to test basic injection points.</li>
+      <li>Try <code>&lt;img src=x onerror=alert(1)&gt;</code> for HTML injection.</li>
       <li>Use Burp Suite's XSS cheat sheets and the Repeater tab to fuzz parameters.</li>
       <li>For DOM XSS, inspect JavaScript and monitor how <code>location.hash</code>, <code>document.URL</code>, or <code>innerHTML</code> are used.</li>
     </ul>
@@ -105,7 +105,7 @@ document.getElementById("welcome").innerHTML = "Hello " + name;
 
   <h2>🧬 XSS in Real-World Attack Chains</h2>
   <p>
-    While often seen as a “minor” bug, Cross-Site Scripting can be a powerful entry point — especially when chained with other vulnerabilities. In modern attacks and Red Team operations, XSS is used to <strong>escalate access, extract credentials, or pivot to internal systems</strong>.
+    While often seen as a “minor” bug, Cross-Site Scripting can be a powerful entry point : especially when chained with other vulnerabilities. In modern attacks and Red Team operations, XSS is used to <strong>escalate access, extract credentials, or pivot to internal systems</strong>.
   </p>
   
   <h3>Session Hijacking & Account Takeover</h3>
@@ -158,7 +158,7 @@ document.getElementById("welcome").innerHTML = "Hello " + name;
   <div class="takeaway-box">
     <h3>🛠️ Key Mindset</h3>
     <ul>
-      <li>XSS is not just alert boxes — it's a stepping stone.</li>
+      <li>XSS is not just alert boxes : it's a stepping stone.</li>
       <li>Consider the context: who executes the payload, what access they have, and what features are exposed.</li>
       <li>Think like an attacker: "What can I reach through their browser?"</li>
     </ul>
