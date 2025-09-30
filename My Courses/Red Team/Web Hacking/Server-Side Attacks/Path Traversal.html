@@ -8,86 +8,83 @@
 </head>
 <body>
   <div id="toc-container"></div>
-    <h1>Path Traversal</h1>
-    <blockquote>
-      “A single <code>../</code> can turn an image loader into a system explorer.”
-    </blockquote>
 
-    <h2>Introduction</h2>
-    <p>
-      Path Traversal (aussi appelé <em>Directory Traversal</em>) est une vulnérabilité qui permet à un attaquant 
-      de manipuler les chemins d’accès aux fichiers afin d’accéder à des ressources non prévues par 
-      l’application. En abusant des séquences <code>../</code>, un attaquant peut sortir du répertoire 
-      autorisé et consulter ou exécuter des fichiers sensibles du serveur.
-    </p>
+  <h1>Path Traversal</h1>
+  <blockquote>
+    "A single <code>../</code> can turn an image loader into a system explorer."
+  </blockquote>
 
-    <h2>Offensive Perspective</h2>
-    <p>
-      L’objectif principal d’un attaquant est de transformer une simple fonctionnalité de chargement 
-      (images, templates, logs, etc.) en point d’entrée vers des fichiers critiques : 
-      <code>/etc/passwd</code>, <code>web.config</code>, ou encore des clés privées.
-    </p>
-    <p>
-      La technique repose sur le fait que l’application ne valide pas correctement l’entrée utilisateur. 
-      Les contournements les plus courants incluent :
-    </p>
-    <ul>
-      <li><strong>Encodages multiples</strong> : <code>%2e%2e/</code>, <code>..%2f</code></li>
-      <li><strong>Double décodage</strong> pour forcer la réinterprétation du chemin</li>
-      <li><strong>Null byte injection</strong> (<code>%00</code>) pour contourner la validation d’extension</li>
-      <li><strong>Préfixes absolus</strong> (ex: <code>/etc/passwd</code>) pour bypasser un filtre naïf</li>
-    </ul>
+  <h2>Introduction</h2>
+  <p>
+    Path Traversal (also called <em>Directory Traversal</em>) is a vulnerability that lets an attacker
+    manipulate file paths to access resources the application did not intend to expose.
+    By abusing sequences such as <code>../</code>, an attacker can escape the intended directory
+    and read or even execute sensitive files on the server.
+  </p>
 
-    <h2>Practical Examples</h2>
+  <h2>Offensive perspective</h2>
+  <p>
+    The primary goal of an attacker is to turn a simple file-loading feature (images, templates, logs, etc.)
+    into an entry point to critical files such as <code>/etc/passwd</code>, <code>web.config</code>, or private keys.
+  </p>
+  <p>
+    The technique relies on improper input validation. Common bypass techniques include:
+  </p>
+  <ul>
+    <li><strong>Multiple encodings</strong>: <code>%2e%2e/</code>, <code>..%2f</code></li>
+    <li><strong>Double decoding</strong> to force re-interpretation of the path</li>
+    <li><strong>Null-byte injection</strong> (<code>%00</code>) to bypass extension checks</li>
+    <li><strong>Absolute path prefixes</strong> (e.g. <code>/etc/passwd</code>) to bypass naive filters</li>
+  </ul>
 
-    <h3>1. Simple Case</h3>
-    <p>
-      Si l’application charge un fichier via :  
-      <code>GET /loadImage?file=cat.png</code>  
-      → Injection : <code>?file=../../../../etc/passwd</code>  
-      permet d’exfiltrer la liste des utilisateurs du système.
-    </p>
+  <h2>Practical examples</h2>
 
-    <h3>2. Absolute Path Bypass</h3>
-    <p>
-      Lorsque les séquences <code>../</code> sont filtrées, il peut suffire de spécifier un chemin absolu :  
-      <code>?file=/etc/passwd</code>
-    </p>
+  <h3>1. Simple case</h3>
+  <p>
+    If the application loads a file via:  
+    <code>GET /loadImage?file=cat.png</code>  
+    → Injection: <code>?file=../../../../etc/passwd</code>  
+    allows exfiltrating the system users list.
+  </p>
 
-    <h3>3. Stripped Non-Recursively</h3>
-    <p>
-      Certains filtres retirent <em>une seule fois</em> les séquences interdites.  
-      → Payload : <code>....//....//etc/passwd</code>  
-      Après une seule suppression, il reste un chemin valide vers <code>/etc/passwd</code>.
-    </p>
+  <h3>2. Absolute path bypass</h3>
+  <p>
+    When <code>../</code> sequences are filtered out, specifying an absolute path may work:  
+    <code>?file=/etc/passwd</code>
+  </p>
 
-    <h3>4. Double Decoding</h3>
-    <p>
-      Un encodeur naïf peut être trompé par un double encodage :  
-      <code>%252e%252e%252fetc/passwd</code>  
-      est décodé deux fois en <code>../../etc/passwd</code>.
-    </p>
+  <h3>3. Stripped non-recursively</h3>
+  <p>
+    Some filters remove forbidden sequences only <em>once</em>.  
+    → Payload: <code>....//....//etc/passwd</code>  
+    After a single removal, the resulting path becomes valid and points to <code>/etc/passwd</code>.
+  </p>
 
-    <h3>5. Null Byte Injection</h3>
-    <p>
-      Pour contourner une validation d’extension (ex: <code>.png</code>), un attaquant peut injecter un 
-      <code>%00</code> :  
-      <code>?file=../../etc/passwd%00.png</code>
-    </p>
+  <h3>4. Double decoding</h3>
+  <p>
+    A naive decoder can be tricked by double-encoding:  
+    <code>%252e%252e%252fetc/passwd</code>  
+    is decoded twice into <code>../../etc/passwd</code>.
+  </p>
 
-    <h2>Attacker’s Goals</h2>
-    <ul>
-      <li>Lire des fichiers sensibles (<code>/etc/passwd</code>, <code>/etc/shadow</code>, <code>web.config</code>)</li>
-      <li>Exécuter du code en important des scripts côté serveur</li>
-      <li>Escalade vers RCE via inclusion de fichiers applicatifs</li>
-    </ul>
+  <h3>5. Null-byte injection</h3>
+  <p>
+    To bypass an extension check (e.g. requiring <code>.png</code>), an attacker may add a null byte:  
+    <code>?file=../../etc/passwd%00.png</code>
+  </p>
+
+  <h2>Attacker objectives</h2>
+  <ul>
+    <li>Read sensitive files (<code>/etc/passwd</code>, <code>/etc/shadow</code>, <code>web.config</code>)</li>
+    <li>Execute code by including server-side scripts</li>
+    <li>Escalate to RCE via inclusion of application files or logs</li>
+  </ul>
 
   <footer>
-      Path Traversal illustre parfaitement comment une mauvaise validation des chemins peut 
-      transformer une fonctionnalité anodine en arme d’exfiltration et parfois d’exécution de code.  
-      Comprendre ces vecteurs et leurs contournements est essentiel pour tout pentester offensif.
+    Path Traversal shows how poor path validation can turn a harmless feature into a powerful exfiltration
+    or code execution vector. Understanding these techniques and their bypasses is essential for any offensive tester.
   </footer>
-  
+
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
