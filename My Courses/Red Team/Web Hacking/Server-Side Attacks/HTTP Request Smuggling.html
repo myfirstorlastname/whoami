@@ -24,7 +24,7 @@
   <h2>🌐 What is Happening Technically?</h2>
   <p>
     In a typical chain, the front-end proxy normalizes/forwards requests to a back-end server. If the proxy and the back-end
-    disagree on the <em>message boundaries</em>—where a request ends and the next begins—bytes intended as a body by one hop
+    disagree on the <em>message boundaries</em>, where a request ends and the next begins, bytes intended as a body by one hop
     may be interpreted as a <em>new request line</em> by the other. That disagreement enables:
   </p>
   <ul>
@@ -152,7 +152,7 @@ Host: target
     <li><strong>Upgrade stacks:</strong> Use up-to-date proxies/CDNs/app servers with HRS patches and strict HTTP parsing.</li>
     <li><strong>Disallow request re-use</strong> between users when possible; isolate connections per client/session.</li>
     <li><strong>Cache safety:</strong> Cache only what you must; vary keys properly; require explicit allowlists for cacheable routes.</li>
-    <li><strong>WAF rules ≠ fix:</strong> Treat WAF as defense-in-depth, not a parser—fix parsing at infrastructure level.</li>
+    <li><strong>WAF rules ≠ fix:</strong> Treat WAF as defense-in-depth, not a parser : fix parsing at infrastructure level.</li>
   </ul>
 
   <h2>🧰 Tools</h2>
