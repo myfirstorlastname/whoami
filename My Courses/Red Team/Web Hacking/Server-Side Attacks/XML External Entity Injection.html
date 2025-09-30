@@ -23,7 +23,7 @@
   <h2>📚 What is XML?</h2>
   <p>
     eXtensible Markup Language (XML) is a structured data format used by APIs, legacy SOAP services, SAML assertions, configuration files, and document imports.
-    XML documents can define <em>entities</em>—placeholders that the parser replaces with values. When external entities are allowed, an attacker can point them to local files or network resources.
+    XML documents can define <em>entities</em> : placeholders that the parser replaces with values. When external entities are allowed, an attacker can point them to local files or network resources.
   </p>
 
   <h2>🔍 How XXE Happens</h2>
@@ -45,7 +45,7 @@ Content-Type: application/xml
 &lt;data&gt;&amp;xxe;&lt;/data&gt;
   </code></pre>
   <p>
-    If the parser expands <code>&amp;xxe;</code>, the server may include the contents of <code>/etc/passwd</code> in its response—or send it somewhere else (blind exfiltration).
+    If the parser expands <code>&amp;xxe;</code>, the server may include the contents of <code>/etc/passwd</code> in its response, or send it somewhere else (blind exfiltration).
   </p>
 
   <h2>🧨 Types of XXE & Related Vectors</h2>
@@ -115,7 +115,7 @@ Content-Type: application/xml
 &lt;fetch&gt;&amp;xxe;&lt;/fetch&gt;
   </code></pre>
   <p>
-    The parser makes a server-side request to an internal endpoint—useful for probing intranet services or metadata endpoints.
+    The parser makes a server-side request to an internal endpoint : useful for probing intranet services or metadata endpoints.
   </p>
 
   <h3>3) Blind exfiltration with external DTD</h3>
@@ -161,7 +161,7 @@ Content-Type: application/xml
 
   <h2>🧬 XXE in Real-World Attack Chains</h2>
   <p>
-    In professional testing, XXE is rarely the end goal—it’s a <strong>pivot</strong>:
+    In professional testing, XXE is rarely the end goal : it’s a <strong>pivot</strong>:
   </p>
   <ul>
     <li><strong>File read → credentials → lateral movement</strong> (DB connection strings, API tokens, SSH keys)</li>
@@ -173,7 +173,7 @@ Content-Type: application/xml
   <div class="takeaway-box">
     <h3>🛠️ Key Mindset</h3>
     <ul>
-      <li>Think “what can the parser reach?”—files, loopback services, intranet, cloud metadata.</li>
+      <li>Think “what can the parser reach?” : files, loopback services, intranet, cloud metadata.</li>
       <li>If you can’t see output, try blind exfiltration via an external DTD or collaborator domain.</li>
       <li>When XXE is blocked, test for XInclude and parser-specific quirks.</li>
     </ul>
