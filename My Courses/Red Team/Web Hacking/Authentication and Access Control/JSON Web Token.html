@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JWT Vulnerabilities (My Courses)</title>
-  <link rel="stylesheet" href="../../../style.css" />
+  <title>JSON Web Token</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
   
-  <h1>🔐 JWT Vulnerabilities (My Courses)</h1>
+  <h1>🔐 JSON Web Token</h1>
   <blockquote>
-    "A token is only as secure as its validation—weak checks make impersonation trivial."
+    "A token is only as secure as its validation : weak checks make impersonation trivial."
   </blockquote>
   <hr>
 
@@ -64,10 +64,10 @@ mFhhP8uVj5VZZyL7Xn21gYp3bQIlfJ7NqgMbnlkHj8w=
 
   <h2>🧪 Examples from PortSwigger Labs</h2>
   <ul>
-    <li><strong>JWT authentication bypass via unverified signature</strong> – Simply modify payload, signature ignored.</li>
-    <li><strong>JWT authentication bypass via weak signing key</strong> – Crack the HMAC secret, forge valid tokens.</li>
-    <li><strong>JWT authentication bypass via jku header injection</strong> – Host your own JWKS and point the app to it.</li>
-    <li><strong>JWT authentication bypass via algorithm confusion</strong> – Replace <code>RS256</code> with <code>HS256</code> and use the public key as secret.</li>
+    <li><strong>JWT authentication bypass via unverified signature</strong> : Simply modify payload, signature ignored.</li>
+    <li><strong>JWT authentication bypass via weak signing key</strong> : Crack the HMAC secret, forge valid tokens.</li>
+    <li><strong>JWT authentication bypass via jku header injection</strong> : Host your own JWKS and point the app to it.</li>
+    <li><strong>JWT authentication bypass via algorithm confusion</strong> : Replace <code>RS256</code> with <code>HS256</code> and use the public key as secret.</li>
   </ul>
   <hr>
 
@@ -91,10 +91,10 @@ mFhhP8uVj5VZZyL7Xn21gYp3bQIlfJ7NqgMbnlkHj8w=
 
   <footer>
     <p>
-      JWTs promise stateless security—but broken validation turns them into attacker backdoors.
+      JWTs promise stateless security, but broken validation turns them into attacker backdoors.
     </p>
   </footer>
 
-  <script src="../../../call_for_toc.js"></script>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
