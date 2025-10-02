@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WebSockets (My Courses)</title>
-  <link rel="stylesheet" href="../../style.css" />
+  <title>WebSockets</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
   
-  <h1>📡 WebSockets (My Courses)</h1>
+  <h1>📡 WebSockets</h1>
   <blockquote>
-    "A persistent connection is powerful—but without validation, it’s also dangerous."
+    "A persistent connection is powerful. But without validation, it’s also dangerous."
   </blockquote>
   <hr>
 
@@ -37,7 +37,7 @@ Sec-WebSocket-Key: random_base64
 Sec-WebSocket-Version: 13
 </code></pre>
   <p>
-    If accepted, the server responds and the connection is established. From that point, both client and server can send messages freely—no need to wait for a request.
+    If accepted, the server responds and the connection is established. From that point, both client and server can send messages freely : no need to wait for a request.
   </p>
   <hr>
 
@@ -64,18 +64,18 @@ Sec-WebSocket-Version: 13
 
   <h2>🧪 Examples from PortSwigger Labs</h2>
   <ul>
-    <li><strong>Manipulating WebSocket messages</strong> – Injecting payloads into chat messages to exploit server-side logic.</li>
-    <li><strong>Cross-site WebSocket hijacking</strong> – Forcing a victim’s browser to open a WebSocket connection to steal their session data.</li>
-    <li><strong>Manipulating the handshake</strong> – Exploiting weak upgrade requests to bypass protections.</li>
+    <li><strong>Manipulating WebSocket messages</strong> : Injecting payloads into chat messages to exploit server-side logic.</li>
+    <li><strong>Cross-site WebSocket hijacking</strong> : Forcing a victim’s browser to open a WebSocket connection to steal their session data.</li>
+    <li><strong>Manipulating the handshake</strong> : Exploiting weak upgrade requests to bypass protections.</li>
   </ul>
   <hr>
 
   <h2>🎯 How to Prevent WebSocket Vulnerabilities</h2>
   <ul>
-    <li>Apply <strong>strict input validation</strong> on all WebSocket messages—never trust client data.</li>
+    <li>Apply <strong>strict input validation</strong> on all WebSocket messages, never trust client data.</li>
     <li>Enforce <strong>Origin and token checks</strong> during the handshake.</li>
     <li>Use <strong>strong authentication and authorization</strong> for all WebSocket actions, not just the initial login.</li>
-    <li>Log and monitor WebSocket traffic—real-time does not mean invisible.</li>
+    <li>Log and monitor WebSocket traffic, real-time does not mean invisible.</li>
   </ul>
   <hr>
 
@@ -91,6 +91,6 @@ Sec-WebSocket-Version: 13
     <p>"Secure the stream, or the attacker will ride the flow."</p>
   </footer>
 
-  <script src="../../call_for_toc.js"></script>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
