@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CORS (Cross-Origin Resource Sharing)</title>
+  <title>Cross-Origin Resource Sharing</title>
   <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
   
-  <h1>🌐 CORS — Cross-Origin Resource Sharing</h1>
+  <h1>🌐 Cross-Origin Resource Sharing</h1>
   <blockquote>Cross-domain trust is a privilege, not a default. Configure it like a firewall.</blockquote>
   <hr>
 
   <h2>🧠 About</h2>
   <p>
     CORS (Cross-Origin Resource Sharing) is a browser security mechanism that controls when a web page can request
-    resources from a different origin (domain, protocol, or port). It enables modern app architectures — but
+    resources from a different origin (domain, protocol, or port). It enables modern app architectures, but
     <strong>misconfiguration</strong> can allow attackers to read sensitive data cross-origin or act as an authenticated user.
   </p>
 
@@ -26,10 +26,10 @@
     CORS is a set of HTTP headers that lets a server say, <em>“this other origin is allowed to read my responses.”</em>
   </p>
   <ul>
-    <li><code>Access-Control-Allow-Origin</code> — which origins may read the response</li>
-    <li><code>Access-Control-Allow-Credentials</code> — whether cookies/credentials may accompany the request</li>
-    <li><code>Access-Control-Allow-Methods</code> / <code>Allow-Headers</code> — which verbs/headers are allowed</li>
-    <li>Preflight requests (<code>OPTIONS</code>) — browser asks permission before sending the “real” request</li>
+    <li><code>Access-Control-Allow-Origin</code> : which origins may read the response</li>
+    <li><code>Access-Control-Allow-Credentials</code> : whether cookies/credentials may accompany the request</li>
+    <li><code>Access-Control-Allow-Methods</code> / <code>Allow-Headers</code> : which verbs/headers are allowed</li>
+    <li>Preflight requests (<code>OPTIONS</code>) : browser asks permission before sending the “real” request</li>
   </ul>
 
   <h2>🔍 How CORS Vulnerabilities Happen</h2>
@@ -79,7 +79,7 @@
   <div class="takeaway-box">
     <h3>🧠 Key Takeaways</h3>
     <ul>
-      <li>CORS doesn’t send data to attackers — <em>it allows the browser to share it with allowed origins</em>.</li>
+      <li>CORS doesn’t send data to attackers : <em>it allows the browser to share it with allowed origins</em>.</li>
       <li>Impact requires two things: a logged-in victim and a response that the attacker-origin can read.</li>
       <li>Misconfigured <code>Allow-Origin</code> + <code>Allow-Credentials</code> often leads to data leakage.</li>
       <li>Whitelisting logic is the usual weak point. Treat it like auth: verify precisely.</li>
