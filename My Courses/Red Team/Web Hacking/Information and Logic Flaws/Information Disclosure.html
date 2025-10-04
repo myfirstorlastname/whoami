@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Information Disclosure (My Courses)</title>
-  <link rel="stylesheet" href="../../style.css" />
+  <title>Information Disclosure</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
 
-  <h1>🕵️ Information Disclosure (My Courses)</h1>
+  <h1>🕵️ Information Disclosure</h1>
   <blockquote>"What you reveal can be used against you."</blockquote>
   <hr>
 
   <h2>🧠 About</h2>
   <p>
     <strong>Information disclosure</strong> occurs when an application unintentionally leaks sensitive information to users.  
-    These leaks may look harmless at first—like an error message or a forgotten file—but attackers can piece them together to
+    These leaks may look harmless at first : like an error message or a forgotten file—but attackers can piece them together to
     learn about the system and prepare stronger attacks.
   </p>
   <p>
@@ -27,11 +27,11 @@
 
   <h2>📘 Common Sources of Information Disclosure</h2>
   <ul>
-    <li><strong>Error messages</strong> – verbose stack traces, file paths, SQL queries.</li>
-    <li><strong>Debug pages</strong> – leftover admin/debug endpoints showing environment variables or secrets.</li>
-    <li><strong>Backup files</strong> – old or temporary versions (<code>.bak</code>, <code>.old</code>, <code>index.php~</code>) containing source code.</li>
-    <li><strong>Version control</strong> – exposed <code>.git</code> or repositories revealing commit history, hardcoded credentials, or old files.</li>
-    <li><strong>Metadata</strong> – comments in HTML, hidden fields, error logs, or leaked config files.</li>
+    <li><strong>Error messages</strong> : verbose stack traces, file paths, SQL queries.</li>
+    <li><strong>Debug pages</strong> : leftover admin/debug endpoints showing environment variables or secrets.</li>
+    <li><strong>Backup files</strong> : old or temporary versions (<code>.bak</code>, <code>.old</code>, <code>index.php~</code>) containing source code.</li>
+    <li><strong>Version control</strong> : exposed <code>.git</code> or repositories revealing commit history, hardcoded credentials, or old files.</li>
+    <li><strong>Metadata</strong> : comments in HTML, hidden fields, error logs, or leaked config files.</li>
   </ul>
   <hr>
 
@@ -72,7 +72,7 @@
   <h2>🛠️ How to Prevent Information Disclosure</h2>
   <ul>
     <li>Use <strong>generic error messages</strong> in production (log details internally, show users only safe info).</li>
-    <li><strong>Remove debug endpoints</strong> before deployment—never leave them public.</li>
+    <li><strong>Remove debug endpoints</strong> before deployment : never leave them public.</li>
     <li>Clean up <strong>temporary and backup files</strong> before pushing code live.</li>
     <li>Restrict or remove <strong>version control folders</strong> (<code>.git</code>, <code>.svn</code>) from production servers.</li>
     <li>Review <strong>HTML comments, hidden fields, and config files</strong> for sensitive information before release.</li>
@@ -91,6 +91,6 @@
     <p>"A single leaked detail can collapse your defenses."</p>
   </footer>
 
-  <script src="../../call_for_toc.js"></script>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
