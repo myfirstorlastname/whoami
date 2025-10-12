@@ -15,7 +15,7 @@
 
   <h2>🧠 What is CSRF?</h2>
   <p>
-    Cross-Site Request Forgery (CSRF) is a vulnerability that allows an attacker to force a victim's browser to perform actions on a web application in which the victim is authenticated — without their consent or awareness.
+    Cross-Site Request Forgery (CSRF) is a vulnerability that allows an attacker to force a victim's browser to perform actions on a web application in which the victim is authenticated, without their consent or awareness.
   </p>
   <p>
     It exploits implicit trust between the browser and server, especially in apps that rely only on session cookies for authentication without additional safeguards (e.g., CSRF tokens).
@@ -69,7 +69,7 @@
   <ul>
     <li>CSRF abuses **trust** in the browser, not flaws in authentication itself</li>
     <li>Defense requires **explicit validation** of user intent (e.g., token or double submit)</li>
-    <li>Modern browsers with <code>SameSite=Lax</code> cookies offer good default protection — but not full coverage</li>
+    <li>Modern browsers with <code>SameSite=Lax</code> cookies offer good default protection, but not full coverage</li>
     <li>Combine CSRF with IDOR or XSS for powerful chained attacks</li>
   </ul>
 
