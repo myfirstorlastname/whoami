@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PortSwigger Labs - Insecure Deserialization</title>
-  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
 
   <header>
-    <h1>PortSwigger Labs – Insecure Deserialization</h1>
+    <h1>Insecure Deserialization</h1>
     <blockquote>
-      "If user-controlled bytes become objects, expect arbitrary code paths—sometimes code execution."
+      "If user-controlled bytes become objects, expect arbitrary code paths, sometimes code execution."
     </blockquote>
   </header>
 
@@ -22,35 +22,35 @@
       Attackers can tamper with serialized structures to alter program logic, trigger dangerous “magic methods”, or leverage known <strong>gadget chains</strong> in third-party libraries to achieve code execution.
     </p>
     <p>
-      These labs explore practical techniques across PHP, Java, and Ruby—ranging from subtle logic abuse to full RCE via gadgets.
+      These labs explore practical techniques across PHP, Java, and Ruby ranging from subtle logic abuse to full RCE via gadgets.
     </p>
 
     <h2>Labs</h2>
     <ul>
-      <li><strong>Modifying serialized objects</strong> <em>(solved)</em> — Flip fields or flags inside an object to change behavior (e.g., isAdmin, price, feature toggles).</li>
+      <li><strong>Modifying serialized objects</strong> <em>(solved)</em> : Flip fields or flags inside an object to change behavior (e.g., isAdmin, price, feature toggles).</li>
 
-      <li><strong>Modifying serialized data types</strong> <em>(solved)</em> — Abuse type confusion (string vs. int/array) to bypass checks or crash logic during deserialization.</li>
+      <li><strong>Modifying serialized data types</strong> <em>(solved)</em> : Abuse type confusion (string vs. int/array) to bypass checks or crash logic during deserialization.</li>
 
-      <li><strong>Using application functionality to exploit insecure deserialization</strong> <em>(solved)</em> — Chain a benign feature (file read/write, include) with a crafted payload to reach dangerous sinks.</li>
+      <li><strong>Using application functionality to exploit insecure deserialization</strong> <em>(solved)</em> : Chain a benign feature (file read/write, include) with a crafted payload to reach dangerous sinks.</li>
 
-      <li><strong>Arbitrary object injection in PHP</strong> <em>(solved)</em> — Inject a PHP object that triggers magic methods (<code>__wakeup</code>, <code>__destruct</code>) and pivots into file operations or command execution.</li>
+      <li><strong>Arbitrary object injection in PHP</strong> <em>(solved)</em> : Inject a PHP object that triggers magic methods (<code>__wakeup</code>, <code>__destruct</code>) and pivots into file operations or command execution.</li>
 
-      <li><strong>Exploiting Java deserialization with Apache Commons</strong> <em>(not solved)</em> — Use a known Commons-Collections gadget chain to execute commands when an unsafe deserializer processes attacker-controlled bytes.</li>
+      <li><strong>Exploiting Java deserialization with Apache Commons</strong> <em>(not solved)</em> : Use a known Commons-Collections gadget chain to execute commands when an unsafe deserializer processes attacker-controlled bytes.</li>
 
-      <li><strong>Exploiting PHP deserialization with a pre-built gadget chain</strong> <em>(solved)</em> — Leverage a documented chain from a dependency (e.g., Monolog, Symfony components) to reach RCE on <code>unserialize()</code>.</li>
+      <li><strong>Exploiting PHP deserialization with a pre-built gadget chain</strong> <em>(solved)</em> : Leverage a documented chain from a dependency (e.g., Monolog, Symfony components) to reach RCE on <code>unserialize()</code>.</li>
 
-      <li><strong>Exploiting Ruby deserialization using a documented gadget chain</strong> <em>(not solved)</em> — Abuse <code>YAML.load</code> / <code>Marshal.load</code> with a known gadget path to run arbitrary code.</li>
+      <li><strong>Exploiting Ruby deserialization using a documented gadget chain</strong> <em>(not solved)</em> : Abuse <code>YAML.load</code> / <code>Marshal.load</code> with a known gadget path to run arbitrary code.</li>
 
-      <li><strong>Developing a custom gadget chain for Java deserialization</strong> <em>(not solved)</em> — Build your own chain by tracing reachable methods from attacker-influenced object graphs to a code execution sink.</li>
+      <li><strong>Developing a custom gadget chain for Java deserialization</strong> <em>(not solved)</em> : Build your own chain by tracing reachable methods from attacker-influenced object graphs to a code execution sink.</li>
 
-      <li><strong>Developing a custom gadget chain for PHP deserialization</strong> <em>(not solved)</em> — Identify classes with magic methods and controllable properties to create a chain that writes files, executes commands, or exfiltrates data.</li>
+      <li><strong>Developing a custom gadget chain for PHP deserialization</strong> <em>(not solved)</em> : Identify classes with magic methods and controllable properties to create a chain that writes files, executes commands, or exfiltrates data.</li>
 
-      <li><strong>Using PHAR deserialization to deploy a custom gadget chain</strong> <em>(not solved)</em> — Smuggle a serialized payload in PHAR metadata and trigger it via file functions (<code>file_exists</code>, <code>exif_read_data</code>, etc.).</li>
+      <li><strong>Using PHAR deserialization to deploy a custom gadget chain</strong> <em>(not solved)</em> : Smuggle a serialized payload in PHAR metadata and trigger it via file functions (<code>file_exists</code>, <code>exif_read_data</code>, etc.).</li>
     </ul>
 
     <h2>Key Takeaways</h2>
     <ul>
-      <li><strong>Never deserialize untrusted input</strong>—use safe formats (JSON) and strict schema validation.</li>
+      <li><strong>Never deserialize untrusted input</strong> : use safe formats (JSON) and strict schema validation.</li>
       <li>Deserialization triggers <strong>magic methods / callbacks</strong> that attackers can steer into dangerous code paths.</li>
       <li><strong>Gadget chains</strong> are often hidden in third-party libraries: your SBOM and dependency hygiene matter.</li>
       <li>Even without RCE, type and logic manipulation can cause <strong>authz bypass, data tampering, or file write</strong>.</li>
@@ -60,9 +60,9 @@
 
   <footer>
     <p>
-      Deserialization is a shortcut from bytes to behavior—treat those bytes as hostile.
+      Deserialization is a shortcut from bytes to behavior, treat those bytes as hostile.
     </p>
   </footer>
-
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
