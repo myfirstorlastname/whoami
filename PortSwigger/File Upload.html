@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PortSwigger Labs - File Upload Vulnerabilities</title>
+  <title>File Upload</title>
   <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css">
 </head>
 <body>
-
-  <header>
-    <h1>PortSwigger Labs – File Upload Vulnerabilities</h1>
+  <div id="toc-container"></div>
+    <h1>File Upload</h1>
     <blockquote>
       "An unrestricted file upload is like handing the attacker a keyboard inside your server."
     </blockquote>
-  </header>
-
-  <main>
     <h2>Overview</h2>
     <p>
       File upload vulnerabilities occur when an application accepts user-supplied files without proper validation.  
@@ -42,7 +38,6 @@
       <li>Store uploaded files outside the webroot whenever possible, and serve them through a safe handler.</li>
       <li>Monitor for anomalies: unusual extensions, large uploads, or repeated attempts.</li>
     </ul>
-  </main>
 
   <footer>
     <p>
