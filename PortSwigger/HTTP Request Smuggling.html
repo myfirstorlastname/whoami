@@ -38,7 +38,7 @@
     <li>H2.CL request smuggling (solved)</li>
     <li>HTTP/2 request smuggling via CRLF injection (solved)</li>
     <li>HTTP/2 request splitting via CRLF injection (solved)</li>
-    <li>0.CL request smuggling <em>(not solved — newest lab)</em></li>
+    <li>0.CL request smuggling <em>(not solved : newest lab)</em></li>
     <li>CL.0 request smuggling (solved)</li>
     <li>HTTP request smuggling, basic CL.TE vulnerability (solved)</li>
     <li>HTTP request smuggling, basic TE.CL vulnerability (solved)</li>
@@ -113,7 +113,7 @@ Host: target
   </code></pre>
   <p>
     If the front-end uses <code>Content-Length</code> (reads 13 bytes: <code>0\r\n\r\nGET ...</code>) but the back-end uses <code>TE</code> (treats <code>0</code> as end of chunks), 
-    the remainder (<code>GET /admin ...</code>) becomes the next back-end request — the <strong>smuggled request</strong>.
+    the remainder (<code>GET /admin ...</code>) becomes the next back-end request, the <strong>smuggled request</strong>.
   </p>
 
   <h2>🛠️ Tools & Practical Tips</h2>
@@ -126,17 +126,17 @@ Host: target
       </ul>
     </li>
     <li><strong>Header tricks</strong>: lowercase <code>transfer-encoding</code>, duplicate TE, OBS-folding, <code>Content-Length: 0</code> edge cases.</li>
-    <li><strong>Detect like a pro</strong>: Send two paired requests — a <em>prefix</em> (potential smuggler) followed by a <em>victim</em>. Look for spillover or altered responses.</li>
+    <li><strong>Detect like a pro</strong>: Send two paired requests, a <em>prefix</em> (potential smuggler) followed by a <em>victim</em>. Look for spillover or altered responses.</li>
     <li><strong>HTTP/2 focus</strong>: Try h2 first; downgrade proxies often introduce fresh parsing bugs during h2→h1 conversion.</li>
     <li><strong>Cache angle</strong>: After desync, immediately probe cacheable endpoints with benign paths and check if content is tainted.</li>
   </ul>
 
   <h2>🧠 Key Takeaways</h2>
   <ul>
-    <li>HRS is about <strong>message boundary confusion</strong> between hops — not “just” weird headers.</li>
+    <li>HRS is about <strong>message boundary confusion</strong> between hops, not “just” weird headers.</li>
     <li>Small parsing nuances (CL vs TE, header normalization, h2 downgrades) lead to high-impact exploits.</li>
     <li>Queue poisoning enables request capture, XSS delivery, and cache compromise at scale.</li>
-    <li>Modern apps and CDNs still get this wrong — always test both HTTP/1.1 and HTTP/2 paths.</li>
+    <li>Modern apps and CDNs still get this wrong, always test both HTTP/1.1 and HTTP/2 paths.</li>
   </ul>
 
   <hr />
