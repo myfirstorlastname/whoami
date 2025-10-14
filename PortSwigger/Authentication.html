@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PortSwigger Labs - Authentication</title>
-  <link rel="stylesheet" href="../../style.css">
+  <title>Authentication</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
-
-  <header>
-    <h1>PortSwigger Labs – Authentication</h1>
+<div id="toc-container"></div>
+    <h1>Authentication</h1>
     <blockquote>
       "Authentication flaws arise when applications fail to properly verify user identities or enforce secure login processes, enabling attackers to impersonate users or bypass protections."
     </blockquote>
-  </header>
 
-  <main>
     <h2>Overview</h2>
     <p>
       Authentication is the cornerstone of web application security.  
@@ -29,39 +26,38 @@
 
     <h2>Labs</h2>
     <ul>
-      <li><strong>Username enumeration via different responses</strong> – Identifying valid usernames by comparing distinct error messages.</li>
-      <li><strong>2FA simple bypass</strong> – Skipping a weak second authentication step to access accounts directly.</li>
-      <li><strong>Password reset broken logic</strong> – Exploiting insecure password reset workflows to reset other users’ passwords.</li>
-      <li><strong>Username enumeration via subtly different responses</strong> – Detecting valid usernames through small variations in server messages.</li>
-      <li><strong>Username enumeration via response timing</strong> – Leveraging timing discrepancies to infer valid accounts.</li>
-      <li><strong>Broken brute-force protection, IP block</strong> – Bypassing simplistic rate-limiting based only on IP addresses.</li>
-      <li><strong>Username enumeration via account lock</strong> – Triggering lockouts to reveal valid usernames.</li>
-      <li><strong>2FA broken logic</strong> – Circumventing weakly implemented two-factor authentication workflows.</li>
-      <li><strong>Brute-forcing a stay-logged-in cookie</strong> – Exploiting predictable or weak session cookies to hijack accounts.</li>
-      <li><strong>Offline password cracking</strong> – Using stolen password hashes for offline brute-force attacks.</li>
-      <li><strong>Password reset poisoning via middleware</strong> – Manipulating headers or middleware logic to redirect password reset links.</li>
-      <li><strong>Password brute-force via password change</strong> – Exploiting a password change endpoint to test multiple passwords without lockout.</li>
-      <li><strong>Broken brute-force protection, multiple credentials per request</strong> – Sending multiple login attempts in a single request to bypass rate-limits.</li>
-      <li><strong>2FA bypass using a brute-force attack</strong> – Systematically brute-forcing 2FA codes due to weak protections.</li>
+      <li><strong>Username enumeration via different responses</strong> : Identifying valid usernames by comparing distinct error messages.</li>
+      <li><strong>2FA simple bypass</strong> : Skipping a weak second authentication step to access accounts directly.</li>
+      <li><strong>Password reset broken logic</strong> : Exploiting insecure password reset workflows to reset other users’ passwords.</li>
+      <li><strong>Username enumeration via subtly different responses</strong> : Detecting valid usernames through small variations in server messages.</li>
+      <li><strong>Username enumeration via response timing</strong> : Leveraging timing discrepancies to infer valid accounts.</li>
+      <li><strong>Broken brute-force protection, IP block</strong> : Bypassing simplistic rate-limiting based only on IP addresses.</li>
+      <li><strong>Username enumeration via account lock</strong> : Triggering lockouts to reveal valid usernames.</li>
+      <li><strong>2FA broken logic</strong> : Circumventing weakly implemented two-factor authentication workflows.</li>
+      <li><strong>Brute-forcing a stay-logged-in cookie</strong> : Exploiting predictable or weak session cookies to hijack accounts.</li>
+      <li><strong>Offline password cracking</strong> : Using stolen password hashes for offline brute-force attacks.</li>
+      <li><strong>Password reset poisoning via middleware</strong> : Manipulating headers or middleware logic to redirect password reset links.</li>
+      <li><strong>Password brute-force via password change</strong> : Exploiting a password change endpoint to test multiple passwords without lockout.</li>
+      <li><strong>Broken brute-force protection, multiple credentials per request</strong> : Sending multiple login attempts in a single request to bypass rate-limits.</li>
+      <li><strong>2FA bypass using a brute-force attack</strong> : Systematically brute-forcing 2FA codes due to weak protections.</li>
     </ul>
 
     <h2>Key Takeaways</h2>
     <ul>
-      <li>Never reveal whether a username is valid—use <strong>generic error messages</strong> and consistent response times.</li>
+      <li>Never reveal whether a username is valid, use <strong>generic error messages</strong> and consistent response times.</li>
       <li>Enforce <strong>robust brute-force protections</strong> (per-user, per-IP, with exponential backoff and monitoring).</li>
       <li>Implement <strong>secure password reset flows</strong> with single-use, time-limited tokens.</li>
       <li>2FA must be <strong>strictly enforced</strong> and resilient against bypasses and brute-force attempts.</li>
       <li>Session tokens and "remember me" cookies should be unpredictable, securely generated, and protected with <code>HttpOnly</code> and <code>Secure</code> flags.</li>
     </ul>
-  </main>
 
   <footer>
     <p>
       Authentication vulnerabilities directly undermine user trust and application integrity.  
-      The PortSwigger labs highlight realistic flaws—from username enumeration to multi-factor bypasses—showing how attackers chain weak authentication controls into account takeover.  
+      The PortSwigger labs highlight realistic flaws from username enumeration to multi-factor bypasses, showing how attackers chain weak authentication controls into account takeover.  
       Mastering these lessons is essential to secure login systems and protect user identities.
     </p>
   </footer>
-
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
