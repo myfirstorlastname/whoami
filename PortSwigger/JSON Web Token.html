@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PortSwigger Labs - JWT Vulnerabilities</title>
-  <link rel="stylesheet" href="../../style.css">
+  <title>JSON Web Token</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
-
-  <header>
-    <h1>PortSwigger Labs – JWT Vulnerabilities</h1>
+  <div id="toc-container"></div>
+    <h1>JSON Web Token</h1>
     <blockquote>
-      "A token is only as strong as its validation—when signatures are weak, trust collapses."
+      "A token is only as strong as its validation : when signatures are weak, trust collapses."
     </blockquote>
-  </header>
 
-  <main>
     <h2>Overview</h2>
     <p>
       <strong>JSON Web Tokens (JWTs)</strong> are widely used for authentication and session management.  
@@ -26,25 +23,24 @@
 
     <h2>Labs</h2>
     <ul>
-      <li><strong>JWT authentication bypass via unverified signature</strong> – Exploiting systems that fail to verify token signatures at all.</li>
-      <li><strong>JWT authentication bypass via flawed signature verification</strong> – Applications incorrectly treat any valid token as trusted, even with mismatched signatures.</li>
-      <li><strong>JWT authentication bypass via weak signing key</strong> – Cracking weak HMAC secrets (e.g., <code>secret</code>, dictionary-based attacks).</li>
-      <li><strong>JWT authentication bypass via <code>jwk</code> header injection</strong> – Supplying attacker-controlled keys directly in the token header.</li>
-      <li><strong>JWT authentication bypass via <code>jku</code> header injection</strong> – Pointing to a malicious JSON Web Key Set (JWKS) hosted by the attacker.</li>
-      <li><strong>JWT authentication bypass via <code>kid</code> header path traversal</strong> – Manipulating key identifiers to load arbitrary files as secret keys.</li>
-      <li><strong>JWT authentication bypass via algorithm confusion</strong> – Exploiting confusion between symmetric (HMAC) and asymmetric (RSA) algorithms.</li>
-      <li><strong>JWT authentication bypass via algorithm confusion with no exposed key</strong> – Demonstrating how algorithm flaws alone can break trust even without leaked keys.</li>
+      <li><strong>JWT authentication bypass via unverified signature</strong> : Exploiting systems that fail to verify token signatures at all.</li>
+      <li><strong>JWT authentication bypass via flawed signature verification</strong> : Applications incorrectly treat any valid token as trusted, even with mismatched signatures.</li>
+      <li><strong>JWT authentication bypass via weak signing key</strong> : Cracking weak HMAC secrets (e.g., <code>secret</code>, dictionary-based attacks).</li>
+      <li><strong>JWT authentication bypass via <code>jwk</code> header injection</strong> : Supplying attacker-controlled keys directly in the token header.</li>
+      <li><strong>JWT authentication bypass via <code>jku</code> header injection</strong> : Pointing to a malicious JSON Web Key Set (JWKS) hosted by the attacker.</li>
+      <li><strong>JWT authentication bypass via <code>kid</code> header path traversal</strong> : Manipulating key identifiers to load arbitrary files as secret keys.</li>
+      <li><strong>JWT authentication bypass via algorithm confusion</strong> : Exploiting confusion between symmetric (HMAC) and asymmetric (RSA) algorithms.</li>
+      <li><strong>JWT authentication bypass via algorithm confusion with no exposed key</strong> : Demonstrating how algorithm flaws alone can break trust even without leaked keys.</li>
     </ul>
 
     <h2>Key Takeaways</h2>
     <ul>
-      <li>Always <strong>verify signatures</strong> server-side—never trust a token without cryptographic validation.</li>
+      <li>Always <strong>verify signatures</strong> server-side : never trust a token without cryptographic validation.</li>
       <li>Use <strong>strong, random signing keys</strong> (at least 256 bits for HMAC).</li>
       <li>Disable or strictly validate dynamic headers like <code>jwk</code>, <code>jku</code>, and <code>kid</code>.</li>
       <li>Enforce a <strong>fixed algorithm</strong> (e.g., RS256), do not allow clients to dictate algorithms.</li>
       <li>Monitor for anomalies in JWT headers, unusual algorithms, or unsigned tokens.</li>
     </ul>
-  </main>
 
   <footer>
     <p>
@@ -52,6 +48,6 @@
       Strong cryptography only matters if implemented correctly.
     </p>
   </footer>
-
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
