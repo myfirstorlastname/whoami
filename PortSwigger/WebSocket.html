@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PortSwigger Labs - WebSockets</title>
-  <link rel="stylesheet" href="../../style.css">
+  <title>WebSockets</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
-
-  <header>
-    <h1>PortSwigger Labs – WebSockets</h1>
+  <div id="toc-container"></div>
+    <h1>WebSockets</h1>
     <blockquote>
-      "WebSockets create a live channel between client and server—if not secured, attackers can eavesdrop, hijack, or manipulate the stream."
+      "WebSockets create a live channel between client and server. If not secured, attackers can eavesdrop, hijack, or manipulate the stream."
     </blockquote>
-  </header>
 
-  <main>
     <h2>Overview</h2>
     <p>
       WebSockets provide a persistent, full-duplex communication channel between a client and a server.  
@@ -28,25 +25,24 @@
 
     <h2>Labs</h2>
     <ul>
-      <li><strong>Manipulating WebSocket messages to exploit vulnerabilities</strong> – Injecting malicious payloads directly into WebSocket messages to exploit weaknesses in server-side processing.</li>
-      <li><strong>Cross-site WebSocket hijacking</strong> – Forcing a victim’s browser to establish a malicious WebSocket connection, leading to account takeover or data exfiltration.</li>
-      <li><strong>Manipulating the WebSocket handshake to exploit vulnerabilities</strong> – Tampering with the initial handshake request (headers, origin checks) to bypass security controls.</li>
+      <li><strong>Manipulating WebSocket messages to exploit vulnerabilities</strong> : Injecting malicious payloads directly into WebSocket messages to exploit weaknesses in server-side processing.</li>
+      <li><strong>Cross-site WebSocket hijacking</strong> : Forcing a victim’s browser to establish a malicious WebSocket connection, leading to account takeover or data exfiltration.</li>
+      <li><strong>Manipulating the WebSocket handshake to exploit vulnerabilities</strong> : Tampering with the initial handshake request (headers, origin checks) to bypass security controls.</li>
     </ul>
 
     <h2>Key Takeaways</h2>
     <ul>
-      <li>Always <strong>validate and sanitize WebSocket messages</strong> on the server side—never trust client input.</li>
+      <li>Always <strong>validate and sanitize WebSocket messages</strong> on the server side : never trust client input.</li>
       <li>Enforce strict <strong>origin checks</strong> during the handshake to prevent cross-site hijacking.</li>
       <li>Apply the same <strong>authentication and authorization controls</strong> to WebSockets as you would to HTTP requests.</li>
-      <li>Monitor and log WebSocket traffic—real-time channels can hide attacks if left unchecked.</li>
+      <li>Monitor and log WebSocket traffic, real-time channels can hide attacks if left unchecked.</li>
     </ul>
-  </main>
 
   <footer>
     <p>
-      WebSockets expand the attack surface—without strict validation, attackers can turn real-time features into real-time exploits.
+      WebSockets expand the attack surface. Without strict validation, attackers can turn real-time features into real-time exploits.
     </p>
   </footer>
-
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
