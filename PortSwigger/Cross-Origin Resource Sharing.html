@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CORS Vulnerabilities</title>
+  <title>Cross-Origin Resource Sharing (CORS)</title>
   <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
 </head>
 <body>
   <div id="toc-container"></div>
   
-  <h1>🌐 Cross-Origin Resource Sharing (CORS) Vulnerabilities</h1>
-  <blockquote>Cross-domain trust is a privilege — never a default.</blockquote>
+  <h1>🌐 Cross-Origin Resource Sharing (CORS)</h1>
+  <blockquote>Cross-domain trust is a privilege, never a default.</blockquote>
   <hr>
 
   <h2>🧠 What is CORS?</h2>
@@ -45,7 +45,7 @@
   <h2>🧠 Key Takeaways</h2>
   <ul>
     <li>Never use <code>Access-Control-Allow-Origin: *</code> with credentials allowed.</li>
-    <li>Validate and strictly define trusted origins — avoid reflection of user input.</li>
+    <li>Validate and strictly define trusted origins, avoid reflection of user input.</li>
     <li>Be cautious with <code>null</code> origins (common in sandboxed iframes and local files).</li>
     <li>Secure endpoints with proper authentication and CSRF protections, even with CORS restrictions.</li>
   </ul>
@@ -61,7 +61,7 @@
   <hr />
   
   <footer>
-    CORS is a gatekeeper between domains — configure it with the same caution as you would a firewall.
+    CORS is a gatekeeper between domains, configure it with the same caution as you would a firewall.
   </footer>
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
