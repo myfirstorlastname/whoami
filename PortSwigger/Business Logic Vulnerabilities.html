@@ -3,23 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PortSwigger Labs - Business Logic Vulnerabilities</title>
-  <link rel="stylesheet" href="../../style.css">
+  <title>Business Logic Vulnerabilities</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css">
 </head>
 <body>
-
-  <header>
-    <h1>PortSwigger Labs – Business Logic Vulnerabilities</h1>
+  <div id="toc-container"></div>
+    <h1>Business Logic Vulnerabilities</h1>
     <blockquote>
       "When logic is flawed, no payload is needed."
     </blockquote>
-  </header>
 
-  <main>
     <h2>Overview</h2>
     <p>
       Business logic vulnerabilities arise when an application’s workflows and rules can be abused to gain unintended advantages.
-      Unlike classic injections, these issues stem from <strong>design and process weaknesses</strong>—how steps are sequenced, states change,
+      Unlike classic injections, these issues stem from <strong>design and process weaknesses</strong>, how steps are sequenced, states change,
       limits are enforced, or assumptions are made about user behavior. The impact ranges from authentication bypass to financial fraud.
     </p>
     <p>
@@ -29,29 +26,29 @@
 
     <h2>Labs</h2>
     <ul>
-      <li><strong>Excessive trust in client-side controls</strong> — Server accepts prices/roles/limits from the client; modifying requests bypasses intended restrictions.</li>
+      <li><strong>Excessive trust in client-side controls</strong> : Server accepts prices/roles/limits from the client; modifying requests bypasses intended restrictions.</li>
 
-      <li><strong>High-level logic vulnerability</strong> — Abusing overall workflow (e.g., skipping or reordering steps) to achieve outcomes never intended by the business rules.</li>
+      <li><strong>High-level logic vulnerability</strong> : Abusing overall workflow (e.g., skipping or reordering steps) to achieve outcomes never intended by the business rules.</li>
 
-      <li><strong>Inconsistent security controls</strong> — Some endpoints enforce checks while others don’t; switching routes or methods avoids protections.</li>
+      <li><strong>Inconsistent security controls</strong> : Some endpoints enforce checks while others don’t; switching routes or methods avoids protections.</li>
 
-      <li><strong>Flawed enforcement of business rules</strong> — Missing server-side validation of quantity, price, or eligibility allows discount stacking or unauthorized actions.</li>
+      <li><strong>Flawed enforcement of business rules</strong> : Missing server-side validation of quantity, price, or eligibility allows discount stacking or unauthorized actions.</li>
 
-      <li><strong>Low-level logic flaw</strong> — Edge-case arithmetic or state handling (rounding, overflow, sign errors) produces exploitable outcomes.</li>
+      <li><strong>Low-level logic flaw</strong> : Edge-case arithmetic or state handling (rounding, overflow, sign errors) produces exploitable outcomes.</li>
 
-      <li><strong>Inconsistent handling of exceptional input</strong> — Unusual values (null/negative/very large) push code into alternate branches that skip validations.</li>
+      <li><strong>Inconsistent handling of exceptional input</strong> : Unusual values (null/negative/very large) push code into alternate branches that skip validations.</li>
 
-      <li><strong>Weak isolation on dual-use endpoint</strong> — One endpoint serves multiple roles (view/update) without strict authorization boundaries, enabling cross-user impact.</li>
+      <li><strong>Weak isolation on dual-use endpoint</strong> : One endpoint serves multiple roles (view/update) without strict authorization boundaries, enabling cross-user impact.</li>
 
-      <li><strong>Insufficient workflow validation</strong> — Server does not verify that the user followed the correct sequence; direct calls to later steps succeed without prerequisites.</li>
+      <li><strong>Insufficient workflow validation</strong> : Server does not verify that the user followed the correct sequence; direct calls to later steps succeed without prerequisites.</li>
 
-      <li><strong>Authentication bypass via flawed state machine</strong> — Transition logic allows jumping from “partially authenticated” to “authenticated” without completing checks.</li>
+      <li><strong>Authentication bypass via flawed state machine</strong> : Transition logic allows jumping from “partially authenticated” to “authenticated” without completing checks.</li>
 
-      <li><strong>Infinite money logic flaw</strong> — Manipulating discounts, refunds, or loyalty points to mint value (e.g., double-spend via timing or repeated steps).</li>
+      <li><strong>Infinite money logic flaw</strong> : Manipulating discounts, refunds, or loyalty points to mint value (e.g., double-spend via timing or repeated steps).</li>
 
-      <li><strong>Authentication bypass via encryption oracle</strong> — Predictable/forgeable tokens oracles (encode/decode endpoints) make session or password reset tokens reversible.</li>
+      <li><strong>Authentication bypass via encryption oracle</strong> : Predictable/forgeable tokens oracles (encode/decode endpoints) make session or password reset tokens reversible.</li>
 
-      <li><strong>Bypassing access controls using email address parsing discrepancies</strong> — Canonicalization mismatches (dots, plus tags, Unicode) trick identity checks or allow account takeover.</li>
+      <li><strong>Bypassing access controls using email address parsing discrepancies</strong> : Canonicalization mismatches (dots, plus tags, Unicode) trick identity checks or allow account takeover.</li>
     </ul>
 
     <h2>Key Takeaways</h2>
@@ -59,15 +56,14 @@
       <li>Logic bugs live in <strong>assumptions</strong>: trust in the client, missing server checks, or fragile state machines.</li>
       <li>Think like a user-turned-attacker: <strong>reorder, repeat, skip</strong> steps; test limits and exceptional inputs.</li>
       <li>Always enforce rules on the server: <strong>deny-by-default</strong>, strict workflow/state validation, consistent controls across endpoints.</li>
-      <li>Design with abuse cases: model incentives, race/timing, and alternate paths—not just the happy path.</li>
+      <li>Design with abuse cases: model incentives, race/timing, and alternate paths, not just the happy path.</li>
     </ul>
-  </main>
 
   <footer>
     <p>
       Secure the process, not just the payloads.
     </p>
   </footer>
-
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
 </body>
 </html>
