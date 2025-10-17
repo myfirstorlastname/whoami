@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PortSwigger Labs - Information Disclosure</title>
-  <link rel="stylesheet" href="../../style.css">
+  <title>Information Disclosure</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css">
 </head>
 <body>
-
+  <div id="toc-container"></div>
   <header>
-    <h1>PortSwigger Labs – Information Disclosure</h1>
+    <h1>Information Disclosure</h1>
     <blockquote>
       "Every extra detail revealed is a foothold for the attacker."
     </blockquote>
@@ -27,11 +27,11 @@
 
     <h2>Labs</h2>
     <ul>
-      <li><strong>Information disclosure in error messages</strong> – Error handling reveals details like stack traces, file paths, database queries, or internal server info.</li>
-      <li><strong>Information disclosure on debug page</strong> – Exposed debugging endpoints provide sensitive configuration values, environment variables, or credentials.</li>
-      <li><strong>Source code disclosure via backup files</strong> – Forgotten or misconfigured backup files (<code>.bak</code>, <code>~</code>, old versions) expose the underlying source code and secrets.</li>
-      <li><strong>Authentication bypass via information disclosure</strong> – Leaked details allow prediction or manipulation of authentication tokens, enabling bypass of login controls.</li>
-      <li><strong>Information disclosure in version control history</strong> – Publicly accessible repositories or exposed <code>.git</code> directories reveal commit history, including sensitive files and hardcoded credentials.</li>
+      <li><strong>Information disclosure in error messages</strong> : Error handling reveals details like stack traces, file paths, database queries, or internal server info.</li>
+      <li><strong>Information disclosure on debug page</strong> : Exposed debugging endpoints provide sensitive configuration values, environment variables, or credentials.</li>
+      <li><strong>Source code disclosure via backup files</strong> : Forgotten or misconfigured backup files (<code>.bak</code>, <code>~</code>, old versions) expose the underlying source code and secrets.</li>
+      <li><strong>Authentication bypass via information disclosure</strong> : Leaked details allow prediction or manipulation of authentication tokens, enabling bypass of login controls.</li>
+      <li><strong>Information disclosure in version control history</strong> : Publicly accessible repositories or exposed <code>.git</code> directories reveal commit history, including sensitive files and hardcoded credentials.</li>
     </ul>
 
     <h2>Key Takeaways</h2>
@@ -45,7 +45,7 @@
 
   <footer>
     <p>
-      Information disclosure is not noise—it’s signal. Treat every leak as an attack surface.
+      Information disclosure is not noise, it’s signal. Treat every leak as an attack surface.
     </p>
   </footer>
 
