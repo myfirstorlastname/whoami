@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Case 1</h1>
+  </header>
+
+   <section>
+    <h2>Whole Process : from IP to ROOT</h2>
+      <h3>VPN</h3>
+       <p>Connect to vpn using openvpn</p>
+      <h3>Scan</h3>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 21, 22, 80</p>
+      <h3>PCAP - Credentials Theft via via IDOR</h3>
+       <p>IDOR : request the pcap file for id=0 instead of yours</p>
+       <p>Credentials Theft : download PCAP file, open it with wireshark, follow tcp Stream, user & password are in plaintext</p>
+      <h3>User - Initial Access via SSH Takeover</h3>
+       <p>SSH Takeover : test creds on ftp -> failed, test them on ssh -> success</p>
+      <h3>Root - Privileges Escalation via Python cap_setuid</h3>
+       <p>Python cap_setuid : Launch linpeas, result about python capabilities tells that setuid is available</p>
+       <p>Privileges Escalation : Launch python, exploit os.setuid and call a shell</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>With IDOR, attackers don’t break in, you hand them the wrong person’s keys</p>
+    <p>With Python cap_setuid, one misplaced capability and your script becomes the wrong kind of root cause</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
