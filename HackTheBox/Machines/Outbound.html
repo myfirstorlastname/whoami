@@ -52,9 +52,9 @@
    </section>
 
    <section>
-    <h2>WWW - Initial Access via Command Injection via Insecure Deserialisation via Vulnerability Exploit</h2>
+    <h2>WWW - Initial Access via Command Injection via PHP object deserialization via Vulnerability Exploit</h2>
        <p>Vulnerability Exploit : find GitHub fearsoff repository about roundcube, clone exploit</p>
-       <p>Insecure Deserialisation : look for a file upload functionality, see the parameter _from, it isn't validated</p>
+       <p>PHP object deserialization : look for a file upload functionality, see the parameter _from, it isn't validated</p>
        <p>Command Injection : inject a command in _from parameter</p>
        <p>Initial Access : launch listener on port 1234 then run exploit by providing url, username, password and reverse shell to port 1234</p>
    </section>
@@ -81,7 +81,7 @@
    </section>
 
   <footer>
-    <p>With Insecure Deserialisation, attackers don’t craft payloads, they craft your downfall</p>
+    <p>With PHP Object Deserialization, a harmless object becomes the perfect object lesson in getting owned</p>
     <p>In a Sudo Privilege Escalation on /usr/bin/below, the real issue isn’t going below, it’s how fast an attacker can rise above</p>
   </footer>
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
