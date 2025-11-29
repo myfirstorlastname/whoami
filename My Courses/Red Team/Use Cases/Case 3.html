@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Case 3</h1>
+  </header>
+
+   <section>
+    <h2>Initial Data</h2>
+       <p>IP + account creds</p>
+   </section>
+  
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to network using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 22, 80</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>load IP in your browser -> 302 Found -> Redirection to domain</p>
+       <p>edit /etc/hosts</p>
+   </section>
+
+   <section>
+    <h2>Web App - Vulnerability Research via Information Disclosure</h2>
+       <p>login using the provided creds</p>
+       <p>Information Disclosure : navigate to about and discover the version Roundcube Webmail 1.6.10</p>
+       <p>Vulnerability Research : search for exploit on exploitDB -> fearsoff is mentioned</p>
+   </section>
+
+   <section>
+    <h2>WWW - Initial Access via Command Injection via Insecure Deserialisation via Vulnerability Exploit</h2>
+       <p>Vulnerability Exploit : find GitHub fearsoff repository about roundcube, clone exploit</p>
+       <p>Insecure Deserialisation : look for a file upload functionality, see the parameter _from, it isn't validated</p>
+       <p>Command Injection : inject a command in _from parameter</p>
+       <p>Initial Access : launch listener on port 1234 then run exploit by providing url, username, password and reverse shell to port 1234</p>
+   </section>
+
+   <section>
+    <h2>User - SSH Takeover via Crendentials Theft via Credentials Theft</h2>
+       <p>Credentials Theft : read config.inc.php file and capture the MySQL roundcube line mentioning the user:password to connect to database</p>
+       <p>Credentials Theft : MySQL into the database using the previous creds, select vars from session, base64decode user password, decrypt it</p>
+       <p>SSH Takeover : Login as user using the decrypted password, read emails `Remember to change your password when you next log into your account.`, ssh into the server as that user and the password that has never been changed</p>
+   </section>
+  
+   <section>
+    <h2>User - SSH Takeover via Credentials Theft</h2>
+       <p>Credentials Theft / Information Disclosure : read .env file to find DB username:password</p>
+       <p>SSH Takeover : connect to user@server using the DB password that is reused</p>
+   </section>
+
+   <section>
+    <h2>Root - Privileges Escalation via Vulnerability Exploit via Sudoers Misconfiguration</h2>
+       <p>Sudoers Misconfiguration : perform a simple sudo -l command -> (ALL : ALL) NOPASSWD: /usr/bin/below *</p>
+       <p>Vulnerability Exploit : find GitHub repository about CVE privesc /usr/bin/below, clone repo, copy exploit to server</p>
+       <p>Privileges Escalation : run exploit, [*] Done. Try: su dollarboysushil</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>With Insecure Deserialisation, attackers don’t craft payloads, they craft your downfall</p>
+    <p>In a Sudo Privilege Escalation on /usr/bin/below, the real issue isn’t going below, it’s how fast an attacker can rise above</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
