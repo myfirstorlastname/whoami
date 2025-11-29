@@ -14,6 +14,15 @@
   </header>
 
    <section>
+     <p>`Outbound` is an easy-difficulty Linux machine with provided assumed breach credentials.</p>
+     <p>The credentials provide access to a `Roundcube` instance, where the user can enumerate the version and utilize [CVE-2025-49113](https://nvd.nist.gov/vuln/detail/CVE-2025-49113), which demonstrates post-authenticated remote code execution via PHP object deserialization.</p>
+     <p>After initial access to the target, we enumerate the database and find a session for the Jacob user, which, when base64 decoded, provides an encrypted password.</p>
+     <p>Using an internal tool called `decrypt.sh`, we can extract the plaintext value of the password, which allows access to Roundcube as Jacob.</p>
+     <p>Jacob has two messages in his inbox: one provides him with a new, updated password for the system, and another informs him that they have been granted `sudo` privileges to monitor system resources with a utility called `below` which is vulnerable to [CVE-2025-27591](https://nvd.nist.gov/vuln/detail/CVE-2025-27591) that is a flaw that creates logs within the `/var/log/below` directory with excessive permissions allowing attackers to perform symlink attacks under certain conditions.</p>
+     <p>We symlink `/etc/passwd` to the `error_root.log` file and write our payload to the log file via parameter injection, thereby creating a new user with a UID of the root user.</p>
+   </section>
+
+   <section>
     <h2>Initial Data</h2>
        <p>IP + account creds</p>
    </section>
