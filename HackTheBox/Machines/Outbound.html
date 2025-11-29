@@ -14,6 +14,7 @@
   </header>
 
    <section>
+    <h2>🧠 About</h2>
      <p>`Outbound` is an easy-difficulty Linux machine with provided assumed breach credentials.</p>
      <p>The credentials provide access to a `Roundcube` instance, where the user can enumerate the version and utilize [CVE-2025-49113](https://nvd.nist.gov/vuln/detail/CVE-2025-49113), which demonstrates post-authenticated remote code execution via PHP object deserialization.</p>
      <p>After initial access to the target, we enumerate the database and find a session for the Jacob user, which, when base64 decoded, provides an encrypted password.</p>
