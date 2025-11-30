@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Strutted</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2> 
+     <p>`Strutted` is an medium-difficulty Linux machine featuring a website for a company offering image hosting solutions.</p>
+     <p>The website provides a Docker container with the version of Apache Struts that is vulnerable to `[CVE-2024-53677](https://nvd.nist.gov/vuln/detail/CVE-2024-53677)`, which is leveraged to gain a foothold on the system.</p>
+     <p>Further enumeration reveals the `tomcat-users.xml` file with a plaintext password used to authenticate as `james`.</p>
+     <p>For privilege escalation, we abuse `tcpdump` while being used with `sudo` to create a copy of the `bash` binary with the `SUID` bit set, allowing us to gain a `root` shell.</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 22, 80</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>load IP in your browser -> 302 Found -> Redirection to domain</p>
+       <p>edit /etc/hosts</p>
+   </section>
+
+   <section>
+    <h2>Web App - Vulnerability Research via Information Disclosure</h2>
+       <p>Information Disclosure : Download application -> open strutted folder -> default-compile mentions the flaw CVE-2024-53677-Docker</p>
+       <p>Vulnerability Research : https://github.com/advisories/GHSA-43mq-6xmg-29vm : we perform RCE via Path Traversal via File Upload</p>
+   </section>
+
+   <section>
+    <h2>Tomcat - Initial Access via Path Traversal via File Upload</h2>
+       <p>File Upload : We will use the polyglot file technique and embed JSP data in an Image data (https://github.com/tennc/webshell/blob/master/fuzzdb-webshell/jsp/cmd.jsp)</p>
+       <p>Path Traversal : In the upload request we'll perform a path traversal into the name of the file (Content-Disposition: form-data; name="top.FileName"	../../cmd.jsp)</p>
+       <p>Initial Access : Remote Command Execution happens if we upload an html page that allows us to inject commands</p>
+   </section>
+
+   <section>
+    <h2>User - SSH Takeover via User Enumeration + Information Disclosure</h2>
+       <p>Information Disclosure : read tomcat-users.xml using RCE, you'll get the password of a certain Administrator</p>
+       <p>User Enumeration : read /etc/password using RCE, you'll find a user corresponds to the description of Network Administrator</p>
+       <p>SSH Takeover : ssh into the user using his username:password pair</p>
+   </section>
+
+   <section>
+    <h2>Root - PrivEsc /usr/sbin/tcpdump via Vulnerability Research via Sudoers Misconfiguration</h2>
+       <p>Sudoers Misconfiguration : perform a simple sudo -l command -> (ALL) NOPASSWD: /usr/sbin/tcpdump</p>
+       <p>Vulnerability Research : https://gtfobins.github.io/gtfobins/tcpdump/?source=post_page-----31bd09097eb0---------------------------------------#sudo</p>
+       <p>PrivEsc /usr/sbin/tcpdump : run exploit, bash-5.1# whoami</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>In an RCE Path-Traversal Upload, the app checked the file : but not where you told it to go</p>
+    <p>In a tcpdump PrivEsc, it’s not the sniffing that kills : it’s when the command inhales as root</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
