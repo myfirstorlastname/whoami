@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Era</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>Era is a medium difficulty Linux machine that features an insecure PHP web application alongside a weakly protected system service.</p>
+     <p>First, web enumeration reveals insecure file handling and authentication logic, which can be leveraged to obtain an administrator session.</p>
+     <p>Further inspection of the application's source code reveals a vulnerable file-preview mechanism that enables remote code execution through PHP stream wrappers.</p>
+     <p>Finally, upon gaining remote access, a root-executed scheduled task reveals a monitoring binary with an easily bypassed ELF signature check that can be overwritten to achieve full system compromise.</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 21, 80 and domain</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>edit /etc/hosts</p>
+   </section>
+
+   <section>
+    <h2>Web App</h2>
+       <p>Pure Front-End</p>
+   </section>
+
+   <section>
+    <h2>Subdomains</h2>
+       <p>Fuzz subdomains using the subdomains-top1million-110000.txt secList</p>
+       <p>found 1 subdomain</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>edit /ect/hosts with the found subdomain</p>
+   </section>
+
+   <section>
+    <h2>Web App - Account Takeover via Password Brute Force via User Enumeration</h2>
+       <p>User Enumeration : Login using security questions -> response being `User not found`</p>
+       <p>Password Brute Force : Login using creds -> response being `Invalid username or password.`</p>
+       <p>Account Takeover : Login using valid creds pair</p>
+   </section>
+
+   <section>
+    <h2>FTP - Initial Access via Hash Cracking via Information Disclosure via IDOR</h2>
+       <p>IDOR : Go to download page, see the id parameter corresponding to file, Fuzz the id and download the file found</p>
+       <p>Information Disclosure : unzip folder, open database file, read users table -> find a few username & hash pairs & adminxxx</p>
+       <p>Hash Cracking : store the hashes into a file and hashcat them using mode 3200, find another user's password</p>
+       <p>Initial Access : Log into the server on port 21 using ftp and user's creds pair</p>
+   </section>
+
+   <section>
+    <h2>User - SSH Takeover via RCE via SSRF through Stream Wrappers via Account Takeover via Code Analysis via Information Disclosure</h2>
+       <p>Information Disclosure : ls into php conf directory -> see that ssh2.so is enabled</p>
+       <p>Code Analysis : read download.php (from previously downloaded folder), there's a Beta version of the download action where we can specify parameters such as : show and format, but it works only when logged in as adminxxx</p>
+       <p>Account Takeover : on the WebApp, as any user, reset user questions to login for adminxxx user -> login using security question as adminxxx</p>
+       <p>SSRF through Stream Wrappers : perform SSRF on format parameter through SSH wrapper to ask access to localhost (the server), this allows us to bypass the ssh closed port</p>
+       <p>RCE : we can then inject a reverse shell on the SSRF payload url?format=ssh2.exec://user:pass@localhost:22/reverse-shell-payload</p>
+       <p>SSH Takeover : obtain ssh shell by listening on the same port you specified in the reverse-shell-payload</p>
+   </section>
+
+   <section>
+    <h2>Root - Privileges Escalation via Cron Job Hijacking via Insecure File Permissions + Misconfigured Scheduled Task</h2>
+       <p>Misconfigured Scheduled Task : launch linpeas, launch pspy64 -> find out that monitor is regularly launched with root privileges by cron</p>
+       <p>Insecure File Permissions : monitor file is readable by our user, we just need to replace it with a reverse shell</p>
+       <p>Cron Job Hijacking : bypass integrity check by copying the monitor original signature `.text_sig` section into malicious file, then replace the original file content with the malicious file (containing a reverse shell + the signature) content using the cat command (read-only permissions), as for echo -> it would corrupt binary data</p>
+       <p>Privileges Escalation : launch a listener of the same port you specified in the reverse shell</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>With User Enum + Brute-Force, attackers don’t guess accounts, you confirm every answer for them</p>
+    <p>In an IDOR Hash Leak, the hashes weren’t cracked, they were practically handed out</p>
+    <p>With SSRF through SSH wrappers, the server didn’t make a request, it made a friend in the wrong place</p>
+    <p>In Cron Hijacking, attackers don’t wait their turn, the system schedules their privilege for them</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
