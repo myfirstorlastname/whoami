@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Expressway</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>No Info : Seasonal machine</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 22</p>
+       <p>Scan IP with nmap via UDP</p>
+       <p>found ports open : 500/udp isakmp?</p>
+       <p>ISAKMP is a framework used to establish Security Associations (SAs) and negotiate key material for IPsec VPNs.</p>
+   </section>
+
+   <section>
+    <h2>Ike - SSH Takeover via Hash Cracking via Information Disclosure</h2>
+       <p>Information Disclosure : Scan the server using the ike-scan tool on mode aggressive -> get username and password hash</p>
+       <p>Hash Cracking : Crack the hash using hashcat on mode 5400 and rockyou list to discover the password</p>
+       <p>SSH Takeover : Connect to the server on port 22 using ssh and the valid credentials pair</p>
+   </section>
+
+   <section>
+    <h2>Root - Privileges Escalation via NSS Module Injection via Sudo Implementation Flaw</h2>
+       <p>Sudo Implementation Flaw : launch linpeas -> Writable file owned by me /tmp/sudowoot.stage.FASmx1/woot/etc/group, list running processes -> sudo-chwoot.sh, read that file -> CVE-2025-32463</p>
+       <p>NSS Module Injection : If no command is provided, default to an interactive root shell. This file is the key to become root.</p>
+       <p>Privileges Escalation : run that exploit sudo-chwoot.sh</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>In an IKE Hash Leak, the VPN didn’t fail, it simply introduced you to valid credentials</p>
+    <p>With a Sudo NSS Injection Privesc, one misplaced trust in the system libraries is all it takes to rewrite the hierarchy</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
