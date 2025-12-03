@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Imagery</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>No info : seasonal machine</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 22, 8000</p>
+   </section>
+
+   <section>
+    <h2>Web App</h2>
+       <p>Register then login</p>
+       <p>check the source code and find the four different pages</p>
+       <p>adminPanelPage</p>
+   </section>
+
+   <section>
+    <h2>Admin - Session Hijacking via Blind XSS</h2>
+       <p>Blind XSS : on the reportBug page, inject an XSS img payload to exfiltrate the admin session cookie</p>
+       <p>Session Hijacking : Replace your cookie with the admin's stolen cookie</p>
+   </section>
+
+   <section>
+    <h2>Web - Initial Access via Information Disclosure via Account Takeover via Hash Cracking via LFI</h2>
+       <p>LFI : Perform a Local File Inclusion in the download image request -> request the ../db.json file</p>
+       <p>Hash Cracking : In the db.json, find creds for user `testuser` as well as his hash, go to crackstation and get the password</p>
+       <p>Account Takeover : Login as testuser using the valid stolent creds pair -> some functionalities are unlocked `transform image`</p>
+       <p>Information Disclosure : Using the LFI vector, request the api_edit.py file -> RCE vuln in transform image {x,y} image size parameters</p>
+       <p>Initial Access : perform a Remote Code Execution on the transform image request by injecting a reverse shell in x parameter</p>
+   </section>
+
+   <section>
+    <h2>User - Privileges Escalation via Hash Cracking via Brute Force</h2>
+       <p>Brute Force : launch linpeas, find /var/backup/webxxx.zip.aes file -> exfiltrate it -> bruteforce password using pyAesCrypt and rockyou</p>
+       <p>Hash Cracking : unzip file and read it -> crackstation the hash and get `mark` password</p>
+       <p>Privileges Escalation : can't ssh into server, so use the RCE vector then su mark through the web shell`</p>
+   </section>
+
+   <section>
+    <h2>Root - Charcol privesc via Sudoers Misconfiguration</h2>
+       <p>Sudoers Misconfiguration : sudo -l and find out the charcol binary is executable using sudo</p>
+       <p>Charcol privesc : use the -R flag to reset the binary password to default, then use the shell action to privesc using mark's password</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>With a Blind XSS Session Takeover, the browser doesn’t click, it confesses</p>
+    <p>In an LFI Cascade to RCE, one misplaced file path becomes the first domino in a full compromise</p>
+    <p>With a Backup Crack to User Pivot, the weakest password isn’t guessed, it’s inherited</p>
+    <p>In a Sudo Charcol Escalation, one generous binary turns a user into the system’s new landlord</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
