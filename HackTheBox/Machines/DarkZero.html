@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : DarkZero</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>As is common in real life pentests, you will start the DarkZero box with credentials for the following account john.w / RFulUtONCOL!</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 53, 88, 135, 139, 389, 445, 464, 593, 636, 1433, 2179, 3268, 3269, 5985</p>
+       <p>we are facing a : Microsoft Windows Active Directory</p>
+       <p>DNS:DC01.darkzero.htb</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>edit /ect/hosts with the found domain</p>
+   </section>
+
+   <section>
+    <h2>Service Token Identity svc_sql - Reverse Shell via RCE via Trust Exploitation via Linked Server Credential Impersonation via Windows Integrated Authentication</h2>
+       <p>Windows Integrated Authentication : authenticate using SQL to the DC01 domain controller using the provided creds</p>
+       <p>Linked Server Credential Impersonation : Enumerate the links in order to perform lateral movement from provided user on dc01</p>
+       <p>Trust Exploitation : use the link to DC02 as svc_sql</p>
+       <p>RCE : enable cmdshell</p>
+       <p>Reverse shell : ask for a shell delivery to attacker's machine</p>
+   </section>
+
+   <section>
+    <h2>Authenticated User Identity svc_sql - Session Takeover via Change Password via GPO Enumeration via Hash theft via Certificate Forgery via Enumeration</h2>
+       <p>Enumeration : launch WinPEAS -> Client Authentication     [*] Certificate is used for client authentication!</p>
+       <p>Certificate Forgery : request for the User's certificate then convert it to pfx</p>
+       <p>Hash Theft : authenticate as svc_sql using the forged certificate, then you obtain both TGT ticket and NTLM hash</p>
+       <p>GPO Enumeration : enumerate the policies on password, see that password can be changed only once a day as well as 'User may change password'</p>
+       <p>Change Password : once the one day delay is passed, change the password for user svc_sql</p>
+       <p>Session Takeover : RunAs the svc_sql user to gain SeImpersonatePrivilege</p>
+   </section>
+
+   <section>
+    <h2>Administrator - Session Takeover via RPC Misconfiguration Abuse via Privilege Enumeration</h2>
+       <p>Privilege Enumeration : whoami /priv returns the privilege : SeImpersonatePrivilege</p>
+       <p>RPC Misconfiguration Abuse : SeImpersonatePrivilege indicates that potato-style impersonation attacks may be possible (GodPotato being one of them). Testing GodPotato is necessary because the privilege alone does not confirm an RPC/DCOM flaw. In this case, GodPotato succeeded, which means the system allowed the DCOM authentication callback behavior that enables token impersonation.</p>
+       <p>Session Takeover : RunAs the administrator to gain further privileges</p>
+   </section>
+
+   <section>
+    <h2>Root - Session Takeover via Hash Theft via Memory Ticket Injection via DC01 Ticket Theft via Delegation Enumeration</h2>
+       <p>Delegation Enumeration : Enumerate Computer Delegation to find a possible Trust Abuse toward DC01 -> TrustedForDelegation, then Enumerate DC01 Delegation -> TRUSTED_FOR_DELEGATION</p>
+       <p>DC01 Ticket Theft : from MSSQL enumerate a UNC directory path -> sql server tries to access the UNC share which triggers SMB negociation -> which in turns triggers Kerberos Authentication -> SQL server asks LSASS for credentials to access UNC share -> this may trigger a DC Kerberos reauthentication -> LSASS stores the new DC01$ TGT in memory -> Rubeus detects this new ticket</p>
+       <p>Memory Ticket Injection : on kali export the decoded & converted ticket into memory</p>
+       <p>Hash Theft : Impersonate DC01 and then ask it to replicate for us the NTDS database -> gives us the NTLM hash of the admin</p>
+       <p>Session Takeover : Login using evil-winrm and the stolen hash as the Administrator on DC01</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>With a Linked Server RCE, trusting the neighbor lets attackers move in without knocking</p>
+    <p>In a GPO Chain Session Hijack, the rules of the domain end up rewriting themselves, and the attacker gets first dibs</p>
+    <p>With an RPC Misconfig Session Hijack, a misaligned service is all the key an attacker needs</p>
+    <p>In a Kerberos Ticket Hijack, stealing the keys to the kingdom isn’t theft, it’s borrowing… permanently</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
