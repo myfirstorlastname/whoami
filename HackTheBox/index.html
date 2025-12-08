@@ -134,5 +134,30 @@
     HackTheBox is the real deal if you want to get experience.
   </footer>
   <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+  <script>
+    document.querySelectorAll('.htb-machines .card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+
+      let gradient = '';
+
+      if (text.includes('very easy')) {
+        gradient = 'linear-gradient(90deg, rgba(0,0,255,0.5), rgba(0,0,200,0.5))'; // blue
+      } else if (text.includes('easy')) {
+        gradient = 'linear-gradient(90deg, rgba(0,255,0,0.5), rgba(0,200,0,0.5))'; // green
+      } else if (text.includes('medium')) {
+        gradient = 'linear-gradient(90deg, rgba(255,255,0,0.5), rgba(200,200,0,0.5))'; // yellow
+      } else if (text.includes('hard')) {
+        gradient = 'linear-gradient(90deg, rgba(255,165,0,0.5), rgba(255,140,0,0.5))'; // orange
+      } else if (text.includes('insane')) {
+        gradient = 'linear-gradient(90deg, rgba(255,0,0,0.5), rgba(200,0,0,0.5))'; // red
+      }
+
+      if (gradient) {
+        card.style.setProperty('--border-gradient', gradient);
+        card.style.setProperty('border', '3px solid transparent');
+        card.style.setProperty('border-image', `var(--border-gradient) 1`);
+      }
+    });
+  </script>
 </body>
 </html>
