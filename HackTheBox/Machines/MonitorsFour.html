@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : MonitorsFour</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>MonitorsFour is the fourth Monitors machine</p>
+     <p>It's an Easy-difficulty Windows Windows machine</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 80, 5985</p>
+   </section>
+
+   <section>
+    <h2>DNS - Fuzzing</h2>
+       <p>Fuzzing : Fuzz for subdomains using ffuf</p>
+       <p>edit /etc/hosts with both the domain and subdomain</p>
+   </section>
+
+   <section>
+    <h2>Admin - Lateral Movement via Password Reuse via Hash Cracking via Error Abusing via Fuzzing</h2>
+       <p>Fuzzing : discover api -> fuzz for endpoints in and outside of the api -> you get the user endpoint and the user page</p>
+       <p>Error Abusing : send a GET request to user api endpoint -> returns that the token GET parameter is missing, user is handled by tokens</p>
+       <p>PHP Type Juggling : test the resilience of the php code (php_loose_comparison), and fuzz for a token that returns true, meaning the that instead of returning one user, the app will return all users</p>
+       <p>Hash Cracking : use crackstation to crack both hashes found -> login, no vuln on the main domain website</p>
+       <p>Password Reuse : Let's hope these creds are reused on the subdomain (which would be a flaw in the password policy)</p>
+       <p>Lateral Movement : Use the valid creds pair (with intelligence) to login in the subdomain website : hoping the creds are reused between websites</p>
+   </section>
+
+   <section>
+    <h2>User - Initial Access via RCE via Graph Creation Abuse via Information Disclosure</h2>
+       <p>Information Disclosure : Get the version of the tool on this subdomain website</p>
+       <p>Graph Creation Abuse : get the correct CVE for that tool's version, it abuses the lax permissions that a user has to create arbitrary PHP scripts in the web root of the application</p>
+       <p>RCE : perform the exploit (git clone and run it with the correct creds)</p>
+       <p>Initial Access : You get your initial access as www-data</p>
+   </section>
+
+   <section>
+    <h2>Root - Container Escape via Docker Engine API Exposure via Vulnerability Scanning via  Container's Network Discovery</h2>
+       <p>Container's Network Discovery : read the /etc/resolv.conf file -> we're inside a container and we know some IPs</p>
+       <p>Vulnerability Scanning : launch fscan in the container -> port 2375 is exposed -> poc-yaml-docker-api-unauthorized-rce</p>
+       <p>Docker Engine API Exposure : get /images/json through this port -> create a container (with a reverse shell within it) with the correct image -> format it the response</p>
+       <p>Container Escape : start a listener then start the container</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>With Subdomain Discovery Fuzzing, the biggest secret is usually just a forgotten hostname</p>
+    <p>In an API Enumeration to Admin Pivot, one loose comparison is all it takes for the application to overshare its entire user base</p>
+    <p>With a Graph Abuse RCE, a simple version leak becomes the breadcrumb trail to a foothold</p>
+    <p>In a Docker API Escape, the container doesn’t break out, the host holds the door open</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
