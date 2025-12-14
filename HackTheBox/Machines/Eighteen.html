@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Eighteen</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>Eighteen is an easy difficulty Windows machine.</p>
+     <p>As is common in real life Windows penetration tests, you will start the Eighteen box with credentials for the following account: kevin / iNa2we6haRj2gaw!</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open or filtered : 80, 135, 139, 445, 1433, 5985</p>
+       <p>DNS_Domain_Name: eighteen.htb</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>edit /etc/hosts</p>
+   </section>
+
+   <section>
+    <h2>User - Initial Access via Password Spraying via User Enumeration via Password Reuse via Hash Cracking via SQL Data Exfiltration via IMPERSONATE abuse</h2>
+       <p>IMPERSONATE abuse : Use the provided account to authenticate to mssql, enumerate, impersonate app_dev</p>
+       <p>SQL Data Exfiltration : with new privs, attacker reads the content of one table and gets passwords for the website users</p>
+       <p>Hash Cracking : The hash is pbkdf2, so write your own script to crack it using hashlib, rockyou.txt and the admin's hash</p>
+       <p>Password Reuse : attacker has the admin:password creds, but the admin account exists only at the application level and does not correspond to an Active Directory principal, however we can hope this user uses the same password to access the website and to login to his AD account.</p>
+       <p>User Enumeration : find the true Identity of the web admin in the AD by enumerating users using nxc mssql (with your creds)</p>
+       <p>Password Spraying : Spray the password for a list a credible users (found in previous step) using crackmapexec winrm</p>
+       <p>Initial Access : Authenticate through winrm with the creds found using evil-winrm</p>
+   </section>
+
+   <section>
+    <h2>Root - Lateral Movement via Kerberos Ticket Abuse + DCSync via Tunnel and Sync + dMSA Abuse via BadSuccessor via Vulnerability Research via Enumerate Active Directory</h2>
+       <p>Enumerate Active Directory : in order to privesc we first need to identify flaws using winpeas -> a recent Server version 2025 -> No traditional memory corruption CVE applies; misconfiguration must be identified instead -> enumerate deeper and manually : in which group do you belong + what OUs do exist + what are your group's permissions</p>
+       <p>Vulnerability Research : You'll have found a createChild right Active Directory and you look for an exploit current 2025 -> this internet research lead you to "BadSuccessor"</p>
+       <p>BadSuccessor : upload the Invoke-BadSuccessor.ps1 from b5null and find the vulnerable OU for your user -> returns "Staff"</p>
+       <p>dMSA Abuse : use the SharpSuccessor exploit to create a dMSA with Admin as the Predecessor and YOU as the "allowed the read password" which will link the created service to Admin and you'll have the right to read the service password (which you can't retrieve, your read-right's only use is to fool the AD)</p>
+       <p>Tunnel and Sync : Since Kerberos services were only accessible internally, a SOCKS tunnel was required to relay traffic through the compromised host, config files (hosts, resolv, krb5, proxychains4), use faketime to sync kali to DC01 time</p>
+       <p>Kerberos Ticket Abuse + DCSync : get your own ticket using rubeus or impacket-getTGT, then impersonate the created dMSA service using impacket-getST and finally dump the LSASS using impacket-secretsdump with Admin rights</p>
+       <p>Lateral Movement : Authenticate as Administrator through winrm on the DC01 using evil-winrm and the admin's hash</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>In a SQL Impersonation to Domain Access chain, every vulnerability mattered, but password reuse was the one that made it work</p>
+    <p>With a BadSuccessor Domain Takeover, nothing is ‘broken’, Active Directory just does exactly what it was allowed to do</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
