@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Signed</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>Cap is a medium difficulty windows Machine. As is common in real life Windows penetration tests, you will start the Signed box with credentials for the following account which can be used to access the MSSQL service: scott / Sm230#C5NatH</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 1433</p>
+       <p>DNS_Computer_Name: DC01.SIGNED.HTB</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>edit /etc/hosts</p>
+   </section>
+
+   <section>
+    <h2>MSSQLSVC - Forced NTLM authentication attack</h2>
+       <p>Forced NTLM authentication attack : Authenticate with provided creds, then request your kali's fake-share. There'll be a SMB Authentication so capture the ntlmv2 hash on kali then crack it offline and loggin using the stolen creds and gain the Identity of the service.</p>
+   </section>
+
+   <section>
+    <h2>Root - Bulk Abuse via MSSQL Silver Ticket</h2>
+       <p>MSSQL Silver Ticket : Enumerate the Domain (SID, SPN, RID) forge your ntlm hash from the service's password, then finally perform the Silver Ticket Attack against the service (SPN, RID) with both the IT and Domain Admins SIDs using impacket ticketer. This create a TGS for the service that we'll use to authenticate while bypassing the lack of TGT since we don't communicate with the KDC, but directly with the service : this is the Silver Ticket !</p>
+       <p>Bulk Abuse : Once authenticated using mssqlclient, you are considered dbo but also Domain Admin, meaning you can now use Bulk (which wasn't the case as mssqlsvc. Use Bulk to exfiltrate both the user and root flags.</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>In a Forced NTLM Authentication Attack, the real flaw isn’t weak credentials, it’s a service that authenticates wherever it’s told</p>
+    <p>With an MSSQL Silver Ticket, the database doesn’t check with the domain, it just trusts the badge you forged</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
