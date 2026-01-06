@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Conversor</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>Conversor is an easy difficulty Linux machine.</p>
+     <p>This machine is from the 9th Season of HackTheBox.</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 22, 80</p>
+       <p>Domain found</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>Edit your /etc/hosts file with the Domain name</p>
+   </section>
+
+   <section>
+    <h2>WWW - RCE via Path Traversal on File Upload</h2>
+       <p>File Upload : There is a convert functionality that allows you to upload two files (XML & XSLT) in one request</p>
+       <p>Path Traversal : On the File Upload request, you can perform Path Traversal and write arbitrary files in /tmp/</p>
+       <p>RCE : You can now write a reverse shell and listen for it using netcat</p>
+   </section>
+
+   <section>
+    <h2>User - SSH Takeover via Password Reuse via Hash Cracking via Insecure Hashes</h2>
+       <p>Insecure Hashes : Connect to the SQLite database and query the users table, you'll see weakly hashed credentials</p>
+       <p>Hash Cracking : Using Crackstation you can retrieve the password for the most intersesting user</p>
+       <p>Password Reuse : Login on the website using the stolen creds, now let's hope it works as well on the server</p>
+       <p>SSH Takeover : Connect to the server through SSH using the stolen creds, there is effectively Password Reuse</p>
+   </section>
+
+   <section>
+    <h2>Root - Privilege Escalation via Sudo needrestart Python Module Hijacking</h2>
+       <p>Sudo needrestart Python Module Hijacking : Check for your sudo rights and see you can run needrestart as root, needrestart checks which daemons need to be restarted after library upgrades and most importantly -> For Python processes, needrestart inspects loaded Python modules however needrestart does not properly sanitize Python import paths when inspecting Python processes</p>
+       <p>Privilege Escalation : To run neerestart we need set a daemon that uses an old python module so when needrestart checks which .so files are in use -> The exploit launches automatically as it is the .so file combined with the controlled PYTHONPATH -> You get root code execution</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>In an Upload Path Traversal RCE, the application validates the file, but never questions where it’s written</p>
+    <p>With a Password Reuse SSH Takeover, strong perimeter security collapses under the weight of a reused password</p>
+    <p>In a Sudo needrestart Python Hijack, a maintenance check becomes a root-level execution path</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
