@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Giveback</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>Giveback is a medium difficulty Linux machine</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 22,80,30686</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>We didn't find a domain name, but let's say it is giveback.htb.</p>
+       <p>Ffuf for subdomains : you'll find jkim.</p>
+       <p>edit /etc/hosts</p>
+   </section>
+
+   <section>
+    <h2>Admin - Initial Access via PHP Object Injection</h2>
+       <p>PHP Object Injection : launch a short and aggressive wpscan : look for the version of GiveWP -> vulnerability = PHP input injection in donation processing</p>
+       <p>Initial Access : Find the correct exploit (CVE-2024-5932), the vulnerable url (donation) and the command you want to run (reverse shell) & start a listener</p>
+   </section>
+
+   <section>
+    <h2>User - SSH Takeover via Certificate Abuse via PHP-CGI RCE</h2>
+       <p>PHP-CGI RCE : test with curl for a CGI vuln on target, then exploit it using CVE-2012-1823</p>
+       <p>Certificate Abuse : using curl --cacert, find the valid credentials pair</p>
+       <p>SSH Takeover : Authenticate to the target through SSH with the retrieved creds.</p>
+       <p>USER</p>
+   </section>
+
+   <section>
+    <h2>Wasn't able to become ROOT - issue with the machine that forbids mounts even when using advanced runc/OCI trickery</h2>
+   </section>
+
+  <footer>
+    <p>With PHP Object Injection, user input doesn’t get processed, it gets executed</p>
+    <p>In a PHP‑CGI RCE, the web server hands out code execution, the credentials are just a bonus</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
