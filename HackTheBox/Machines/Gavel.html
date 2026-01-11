@@ -44,8 +44,8 @@
 
    <section>
     <h2>Admin - Hash Cracking via PHP PDO Confusion + ORDER BY SQL Injection</h2>
-       <p>SQL Injection : The vulnerability is string interpolation of $col into the SQL query, this line is the root cause
-         $col = "`" . str_replace("`", "", $sortItem) . "`"; 
+       <p>SQL Injection : The vulnerability is string interpolation of $col into the SQL query, this line is the root cause<br>
+         $col = "`" . str_replace("`", "", $sortItem) . "`";<br>
          Escape SELECT and perform a ORDER BY SQLi, then manage the backstick, confuse the PDO Parser and finally exfiltrate the passwords from users table
        </p>
        <p>Hash Cracking : use hachcat, mode 3200, to crack the hash and get the password for the user</p>
@@ -53,13 +53,13 @@
 
    <section>
     <h2>User - Authenticated Second-Order PHP Code Injection</h2>
-       <p>Authenticated Second-Order PHP Code Injection : The vulnerability is dynamic rule evaluation that doesn't sanitize user input, this line is the root cause
-           runkit_funtion_add('ruleCheck', '$current_bid, $previous_bid, $bidder', $rule);
-           This is equivalent to 
-             eval("function ruleCheck(...) { USER_INPUT }");
-           To exploit it, you can simply inject php which is stored, then execute that code by triggering the rule
-           Your exploit needs to be a reverse shell (since the user's password isn't reused on ssh)
-           Once the connection is made (using a netcat listener), you are www-data !
+       <p>Authenticated Second-Order PHP Code Injection : The vulnerability is dynamic rule evaluation that doesn't sanitize user input, this line is the root cause<br>
+           runkit_funtion_add('ruleCheck', '$current_bid, $previous_bid, $bidder', $rule);<br>
+           This is equivalent to <br>
+             eval("function ruleCheck(...) { USER_INPUT }");<br>
+           To exploit it, you can simply inject php which is stored, then execute that code by triggering the rule<br>
+           Your exploit needs to be a reverse shell (since the user's password isn't reused on ssh)<br>
+           Once the connection is made (using a netcat listener), you are www-data !<br>
            Su as the user with the cracked password
        </p>
    </section>
@@ -67,11 +67,11 @@
    <section>
     <h2>Root - PrivEsc via Authenticated Second-Order PHP Code Injection</h2>
        <p>Authenticated Second-Order PHP Code Injection : look at the current running processes, then investigate the gavel-util. You'll get that you can execute php code as root using that process !</p>
-       <p>PrivEsc : You just need to prepare a rule yaml file containing your php exploit that gets the content of root.txt
-         Here's what happens :
-           User controls config
-           Config contains "rules"
-           Rules are executed later
+       <p>PrivEsc : You just need to prepare a rule yaml file containing your php exploit that gets the content of root.txt<br>
+         Here's what happens :<br>
+           User controls config<br>
+           Config contains "rules"<br>
+           Rules are executed later<br>
            Execution happens with higher privileges
        </p>
        <p>ROOT</p>
