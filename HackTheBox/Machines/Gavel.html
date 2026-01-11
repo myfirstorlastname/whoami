@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Gavel</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>Gavel is a medium difficulty Linux machine.</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 22, 80</p>
+       <p>1 domain found : gavel.htb</p>
+   </section>
+
+   <section>
+    <h2>DNS</h2>
+       <p>edit /etc/hosts</p>
+   </section>
+
+   <section>
+    <h2>Web App : Code Analysis vi Git dump via Fuzzing</h2>
+       <p>Fuzzing : Use ffuf to discover the pages accessibles using the SecList common list</p>
+       <p>Git dump : You find a .git page, dump it using git-dumper</p>
+       <p>Code Analysis : read the files and find two vulnerabilities (SQLi & PHPi)</p>
+   </section>
+
+   <section>
+    <h2>Admin - Hash Cracking via PHP PDO Confusion + ORDER BY SQL Injection</h2>
+       <p>SQL Injection : The vulnerability is string interpolation of $col into the SQL query, this line is the root cause
+         $col = "`" . str_replace("`", "", $sortItem) . "`"; 
+         Escape SELECT and perform a ORDER BY SQLi, then manage the backstick, confuse the PDO Parser and finally exfiltrate the passwords from users table
+       </p>
+       <p>Hash Cracking : use hachcat, mode 3200, to crack the hash and get the password for the user</p>
+   </section>
+
+   <section>
+    <h2>User - Authenticated Second-Order PHP Code Injection</h2>
+       <p>Authenticated Second-Order PHP Code Injection : The vulnerability is dynamic rule evaluation that doesn't sanitize user input, this line is the root cause
+           runkit_funtion_add('ruleCheck', '$current_bid, $previous_bid, $bidder', $rule);
+           This is equivalent to 
+             eval("function ruleCheck(...) { USER_INPUT }");
+           To exploit it, you can simply inject php which is stored, then execute that code by triggering the rule
+           Your exploit needs to be a reverse shell (since the user's password isn't reused on ssh)
+           Once the connection is made (using a netcat listener), you are www-data !
+           Su as the user with the cracked password
+       </p>
+   </section>
+
+   <section>
+    <h2>Root - PrivEsc via Authenticated Second-Order PHP Code Injection</h2>
+       <p>Authenticated Second-Order PHP Code Injection : look at the current running processes, then investigate the gavel-util. You'll get that you can execute php code as root using that process !</p>
+       <p>PrivEsc : You just need to prepare a rule yaml file containing your php exploit that gets the content of root.txt
+         Here's what happens :
+           User controls config
+           Config contains "rules"
+           Rules are executed later
+           Execution happens with higher privileges
+       </p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>With an Exposed Git Repository, the application’s secrets aren’t hacked, they’re exposed in the source code</p>
+    <p>In an ORDER BY SQL Injection, the query structure is trusted just long enough to betray the entire database</p>
+    <p>With a Second‑Order PHP Injection, the payload waits patiently, and executes when trust is highest</p>
+    <p>In a Privileged Second‑Order PHP Injection, yesterday’s user input becomes today’s root command</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
