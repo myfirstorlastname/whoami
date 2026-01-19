@@ -50,11 +50,11 @@
        <p>Kerberos Takeover : ask to krbtgt for web_svc TGT using impacket, then export it</p>
        <p>
          AD Enumeration : use bloodhound to enumerate the AD you'll discover a few things<br>
-         <span style="margin-left: 5em;">web_svc -> member of "Domain Users"</span>
-         <span style="margin-left: 5em;">web_svc -> add self "IT_Support"</span>
-         <span style="margin-left: 5em;">IT_SUPPORT -> force change password of "MONITORING_SVC@NANOCORP.HTB"</span>
-         <span style="margin-left: 5em;">monitoring_svc -> memberof "Domain Users"</span>
-         <span style="margin-left: 5em;">monitoring_svc -> memberof "Protected Users"</span>
+         <span style="margin-left: 5em;">web_svc -> member of "Domain Users"</span><br>
+         <span style="margin-left: 5em;">web_svc -> add self "IT_Support"</span><br>
+         <span style="margin-left: 5em;">IT_SUPPORT -> force change password of "MONITORING_SVC@NANOCORP.HTB"</span><br>
+         <span style="margin-left: 5em;">monitoring_svc -> memberof "Domain Users"</span><br>
+         <span style="margin-left: 5em;">monitoring_svc -> memberof "Protected Users"</span><br>
          <span style="margin-left: 5em;">monitoring_svc -> memberof "Remote Management Users"</span>
        </p>
        <p>ACL Abuse : Add WEB_SVC to the IT_SUPPORT group using bloodyAD</p>
