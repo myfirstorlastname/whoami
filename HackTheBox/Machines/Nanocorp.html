@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Nanocorp</h1>
+  </header>
+
+   <section>
+    <h2>🧠 About</h2>
+     <p>Nanocorp is a hard difficulty Windows machine.</p>
+   </section>
+
+   <section>
+    <h2>VPN</h2>
+       <p>Connect to vpn using openvpn</p>
+   </section>
+
+   <section>
+    <h2>Scan</h2>
+       <p>Scan IP with nmap</p>
+       <p>found ports open : 53, 80, 88, 135, 139, 389, 445, 464, 593, 636, 3268, 3269, 5986.</p>
+       <p>found domain : nanocorp.htb</p>
+       <p>found domain controller : dc01.nanocorp.htb</p>
+   </section>
+
+   <section>
+    <h2>Configuration - Kerberos, DNS</h2>
+       <p>DNS : edit your files /etc/hosts and /etc/resolv.conf</p>
+       <p>Kerberos : edit your file /etc/krb5.conf</p>
+   </section>
+
+   <section>
+    <h2>Web_svc - Hash Cracking via Hash Disclosure via Fuzzing via Subdomain Disclosure</h2>
+       <p>Subdomain Disclosure : on their website, on port 80, you'll find a custom subdomain : hire, add it to /etc/hosts</p>
+       <p>Fuzzing : using ffuf find all pages on that subdomain, you'll find uploads page</p>
+       <p>Hash Disclosure : Upload a ZIP file, then abuse the library-ms extraction mechanism to capture the ntlm hash (CVE-2025-24071)</p>
+       <p>Hash Cracking : use hashcat in mode 5600 with rockyou.txt list to discover web_svc password</p>
+   </section>
+
+   <section>
+    <h2>User - Kerberos-Based PSRemoting via Kerberos Service Ticket Abuse via Protected Users Constraint Bypass via ForceChangePassword Abuse via ACL Abuse via AD Enumeration via Kerberos Takeover</h2>
+       <p>Kerberos Takeover : ask to krbtgt for web_svc TGT using impacket, then export it</p>
+       <p>
+         AD Enumeration : use bloodhound to enumerate the AD you'll discover a few things<br>
+         <span style="margin-left: 5em;">web_svc -> member of "Domain Users"</span>
+         <span style="margin-left: 5em;">web_svc -> add self "IT_Support"</span>
+         <span style="margin-left: 5em;">IT_SUPPORT -> force change password of "MONITORING_SVC@NANOCORP.HTB"</span>
+         <span style="margin-left: 5em;">monitoring_svc -> memberof "Domain Users"</span>
+         <span style="margin-left: 5em;">monitoring_svc -> memberof "Protected Users"</span>
+         <span style="margin-left: 5em;">monitoring_svc -> memberof "Remote Management Users"</span>
+       </p>
+       <p>ACL Abuse : Add WEB_SVC to the IT_SUPPORT group using bloodyAD</p>
+       <p>ForceChangePassword Abuse : Force Change the password of MONITORING_SVC using bloodyAD</p>
+       <p>Protected Users Constraint Bypass : We can't use NTLM to authenticate, so we need to use Kerberos authentication</p>
+       <p>Kerberos Service Ticket Abuse : Get Moniroting_svc TGT, then get Winrms TGS both using impacket</p>
+       <p>Kerberos-Based PSRemoting : You need to find the tool that allows you to authenticate using Kerberos over Winrms to get a shell (winrmexec.py)</p>
+   </section>
+
+
+   <section>
+    <h2>Root - SYSTEM Reverse Shell Execution via MSI Repair Hijacking via File Planting in Writable Directory via MSI Repair Trigger Abuse via Installed Software Enumeration via RunAs Abuse</h2>
+       <p>RunAs Abuse : Download RunasCs on target and test it for web_svc, observe the permissions on some paths</p>
+       <p>Installed Software Enumeration : use Get-ItemProperty to find your targets (Check MK Agent 2.1 at C:\Windows\Installer\1e6f2.msi)</p>
+       <p>MSI Repair Trigger Abuse : use both runas and sc.exe to find the path at the center of the exploit : you'll find two child processes (that won't work statically because PIDs are dynamic: we'll do it during exploit)</p>
+       <p>File Planting in Writable Directory : use icacls on C:\Windows\Temp : you'll find that web_svc effectively has different rights(this will be our first target path, if it doesn't work with Temp we'll have to attempt all paths until success)</p>
+       <p>MSI Repair Hijacking : build an exploit that does all the above automatically and dynamically inside of which you search for the PID of the binary child of 1e6f2.msi</p>
+       <p>SYSTEM Reverse Shell Execution : Run that exploit as web_svc and listen for a connection from your machine using netcat</p>
+       <p>ROOT</p>
+   </section>
+
+  <footer>
+    <p>By extracting untrusted ZIP files, the server authenticates itself to the attacker</p>
+    <p>In Active Directory, excessive delegation turns routine account management into full domain access</p>
+    <p>When SYSTEM repairs software using writable paths, maintenance becomes privilege escalation</p>
+  </footer>
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
