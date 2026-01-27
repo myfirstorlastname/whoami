@@ -33,13 +33,10 @@
   </section>
 
   <section>
-    <h2>User - RCE via Untrusted Chrome Extension & Localhost Trust Bypass</h2>
-    <p>Untrusted File Upload: The web application extracts attacker-controlled ZIP files and loads them as Chrome extensions.</p>
-    <p>Client-Side Trust Abuse: The extension executes JavaScript across virtual hosts and accesses services bound to localhost.</p>
-    <p>Stored XSS: An internal Markdown application renders unsanitized user input as HTML.</p>
-    <p>Command Injection: A vulnerable routine endpoint allows arbitrary command execution.</p>
-    <p>Impact: Remote code execution as user <code>larry</code>.</p>
-    <p><strong>Weakest point:</strong> Executing Chrome on attacker-supplied ZIP archives.</p>
+    <h2>User - RCE via Manifest Abuse and Untrusted File Upload</h2>
+    <p>Untrusted File Upload: Upload a ZIP, it'll be automatically extracted and considered as a Chrome extension.</p>
+    <p>Manifest Abuse: Write your own Manifest.json file and refer your exploit in it.</p>
+    <p>RCE: A vulnerable routine endpoint allows arbitrary command execution [[ "$1" -eq 0 ]], so bash will execute your command before there is a comparison.</p>
   </section>
 
   <section>
@@ -48,8 +45,6 @@
     <p>Sudo Misconfiguration: The user can execute a Python script as root without a password.</p>
     <p>Insecure Python Import: The script imports a local module using cached bytecode.</p>
     <p>Bytecode Poisoning: A world-writable <code>__pycache__</code> directory allows execution of attacker-controlled code as root.</p>
-    <p><strong>Impact:</strong> Full system compromise.</p>
-    <p><strong>Weakest point:</strong> World-writable Python bytecode cache.</p>
     <p>ROOT</p>
   </section>
 
