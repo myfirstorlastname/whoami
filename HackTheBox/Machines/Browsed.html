@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Browsed</h1>
+  </header>
+
+  <section>
+    <h2>🧠 About</h2>
+    <p>Browsed is a medium difficulty Linux machine exposing a web application that processes user-supplied archives.</p>
+    <p>Improper handling of uploaded ZIP files results in arbitrary Chrome extension execution.</p>
+    <p>This allows bypassing localhost trust boundaries and leads to remote code execution as a local user.</p>
+    <p>A misconfigured sudo Python script is then abused to escalate privileges to root.</p>
+  </section>
+
+  <section>
+    <h2>VPN</h2>
+    <p>Connect to the VPN using openvpn.</p>
+  </section>
+
+  <section>
+    <h2>Scan</h2>
+    <p>Scan the target with nmap.</p>
+    <p>Open ports discovered: 22, 80.</p>
+  </section>
+
+  <section>
+    <h2>User - RCE via Untrusted Chrome Extension & Localhost Trust Bypass</h2>
+    <p>Untrusted File Upload: The web application extracts attacker-controlled ZIP files and loads them as Chrome extensions.</p>
+    <p>Client-Side Trust Abuse: The extension executes JavaScript across virtual hosts and accesses services bound to localhost.</p>
+    <p>Stored XSS: An internal Markdown application renders unsanitized user input as HTML.</p>
+    <p>Command Injection: A vulnerable routine endpoint allows arbitrary command execution.</p>
+    <p>Impact: Remote code execution as user <code>larry</code>.</p>
+    <p><strong>Weakest point:</strong> Executing Chrome on attacker-supplied ZIP archives.</p>
+  </section>
+
+  <section>
+    <h2>Root - Privilege Escalation via Python Bytecode Cache Poisoning</h2>
+    <p>Credential Access: SSH private keys are recovered from the compromised user account.</p>
+    <p>Sudo Misconfiguration: The user can execute a Python script as root without a password.</p>
+    <p>Insecure Python Import: The script imports a local module using cached bytecode.</p>
+    <p>Bytecode Poisoning: A world-writable <code>__pycache__</code> directory allows execution of attacker-controlled code as root.</p>
+    <p><strong>Impact:</strong> Full system compromise.</p>
+    <p><strong>Weakest point:</strong> World-writable Python bytecode cache.</p>
+    <p>ROOT</p>
+  </section>
+
+  <footer>
+    <p>Trusting client-side artifacts turns browsers into attack platforms.</p>
+    <p>When root trusts cached code, every user becomes a compiler.</p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
