@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Facts</h1>
+  </header>
+
+  <section>
+    <h2>🧠 About</h2>
+    <p>Facts is an easy difficulty Linux machine.</p>
+  </section>
+
+  <section>
+    <h2>VPN</h2>
+    <p>Connect to the VPN using openvpn.</p>
+  </section>
+
+  <section>
+    <h2>Scan</h2>
+    <p>Scan the target with nmap.</p>
+    <p>Open ports discovered: 22, 80.</p>
+    <p>Domain discovered : facts.htb</p>
+  </section>
+
+  <section>
+    <h2>DNS</h2>
+    <p>Edit your /etc/hosts file</p>
+  </section>
+
+  <section>
+    <h2>User - SSH Takeover via Password Cracking via Local File Inclusion via Access Control Vulnerability via Fuzzing</h2>
+    <p>Fuzzing : Using ffuf discover the a**** endpoint.</p>
+    <p>Access Control Vulnerability : Register and login as "Client Admin". See "Cameleon CMS 2.9.0" ! On your profile see that you can change your password, the request uses AJAX. Find a CVE about some Mass Assignment to PrivEsc. Then add to your password change request the POST parameter password[role]=admin</p>
+    <p>Local File Inclusion : I feel in some rabbit holes and so found out some strange behaviors : some IDOR and some path traversal, but nothing exploitable. Then I looked for a CVE about that on Cameleon cms 2.9.0 and found some hidden endpoint : download_private_file. I applied the previous findings to that endpoint and exploited a LFI.</p>
+    <p>Password Cracking : With LFI, I discovered /etc/passwd and the private key : .ssh/id_ed25519 for one of the users. Tried to ssh using that key, but a passphrase was asked... I cracked it using john+key.</p>
+    <p>SSH Takeover : Once the passphrase retrieved, I connected through ssh to the server as trivia.</p>
+  </section>
+
+    <section>
+    <h2>Root - Privilege Escalation via Sudo Misconfiguration & Facter abuse</h2>
+    <p>Sudo Misconfiguration : Check your rights, then see that you can execute facter as root.</p>
+    <p>Facter abuse : Facter accepts the parameter : "--custom-dir=". It means three things : Loads Ruby files from writable directories ; No validation ; No restriction on file ownership or permissions. </p>
+    <p>Privilege Escalation : Create a maliscious custom Facter that gives you a bash file with root privileges. Launch that file with a simple "bash -p".</p>
+    <p>Password Cracking : With LFI, I discovered /etc/passwd and the private key : .ssh/id_ed25519 for one of the users. Tried to ssh using that key, but a passphrase was asked... I cracked it using john+key.</p>
+    <p>ROOT</p>
+  </section>
+
+  <footer>
+    <p>In a SSH Takeover via LFI the server handed over its own SSH keys</p>
+    <p>In an unrestricted Facter custom facts loading, privilege separation becomes optional</p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
