@@ -2,63 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/HackTheBox/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/HackTheBox/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/HackTheBox/Machines/DarkZero</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/TryHackMe/Red%20Team/Red%20Teaming/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/TryHackMe/Red%20Team/Red%20Teaming/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/TryHackMe/Blue%20Team/SOC%20L1/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/TryHackMe/Blue%20Team/SOC%20L1/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/TryHackMe/Badges.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/TryHackMe/Badges</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/PortSwigger/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/PortSwigger/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Yellow%20Team/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Yellow%20Team/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Green%20Team/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Green%20Team/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Blue%20Team/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Blue%20Team/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Red%20Team/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Learning%20Path/Red%20Team/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Red%20Team/Web%20Hacking/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Red%20Team/Web%20Hacking/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Red%20Team/System/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Red%20Team/System/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Red%20Team/Active%20Directory/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Red%20Team/Active%20Directory/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Blue%20Team/Active%20Directory/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Blue%20Team/Active%20Directory/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Blue%20Team/Cloud/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Blue%20Team/Cloud/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Methodologies/Reporting%20%26%20Communicating/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Methodologies/Reporting%20%26%20Communicating/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Methodologies/Research/index.html</loc>
   </url>
   <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Methodologies/Research/</loc>
-  </url>
-  <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Engineering/Network/</loc>
-  </url>
-  <url>
-    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Engineering/Network/</loc>
+    <loc>https://myfirstorlastname.github.io/whoami/My%20Courses/Engineering/Network/index.html</loc>
   </url>
 </urlset>
