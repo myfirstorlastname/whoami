@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://myfirstorlastname.github.io/whoami/sitemap.xml
