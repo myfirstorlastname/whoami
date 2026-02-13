@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black-box Penetration Test</title>
+  <link rel="stylesheet" href="https://myfirstorlastname.github.io/whoami/style.css" />
+</head>
+<body>
+  <div id="toc-container"></div>
+
+  <header>
+    <h1>Black-box Penetration Test : Pterodactyl</h1>
+  </header>
+
+  <section>
+    <h2>🧠 About</h2>
+    <p>Pterodactyl is a medium difficulty Linux machine.</p>
+  </section>
+
+  <section>
+    <h2>VPN</h2>
+    <p>Connect to the VPN using openvpn.</p>
+  </section>
+
+  <section>
+    <h2>Scan</h2>
+    <p>Scan the target with nmap.</p>
+    <p>Open ports discovered: 22, 80.</p>
+    <p>Domain discovered : pterodactyl.htb</p>
+  </section>
+
+  <section>
+    <h2>DNS - Configure via Fuzzing</h2>
+    <p>Fuzzing : Ffuf the subdomains of pterodactyl and discover panel (which is a known subdomain of pterodactyl software)</p>
+    <p>Configure : edit your hosts file</p>
+  </section>
+
+  <section>
+    <h2>User - SSH Takeover via Hash Cracking via Hash Theft via Reverse Shell via PEAR RCE via Unauthenticated LFI</h2>
+    <p>Unauthenticated LFI : Copy the public repository for the Pterodactyl project and discover endpoints (ex: locale.json). From there note that you control url parameters</p>
+    <p>PEAR RCE : From main domain, enumerate the phpinfo content (ex: PEAR). Use the LFI to access the PEAR directory. From there note that you can write and read files but can't execute them because of serialization</p>
+    <p>Reverse Shell : Deploy a reverse shell by performing your automated exploit which needs to deserialize your inputs</p>
+    <p>Hash Theft : Connect to the database using mariadb and the creds found in .env, then steal the hashes from the users table</p>
+    <p>Hash Cracking : Use hashcat with GPU (not CPU) to increase efficiency, in the mode 3200</p>
+    <p>SSH Takeover : Once the password retrieved, I connected through ssh to the server as phileasfogg3</p>
+  </section>
+
+    <section>
+    <h2>Root - Privilege Escalation via Protected Disk Operation Abuse via Policy Abuse</h2>
+    <p>Policy Abuse : Enumerate using linpeas and manual enumeration to comprehend the env. We have an old version of Polkit that manages policies. One of those policies being about remote ssh which is treated as an actual session. This is CVE-2025-6018</p>
+    <p>Protected Disk Operation Abuse : Mount filesystems you controll (SUID bash), prepare your PAM config. This is CVE-2025-6019</p>
+    <p>Privilege Escalation : Perform an exploit that couples 6018 and 6019 to execute commands as root</p>
+    <p>ROOT</p>
+  </section>
+
+  <footer>
+    <p>One unauthenticated LFI was enough to turn file reads into full SSH access.</p>
+    <p>When policy enforcement fails, protected operations become root commands.</p>
+  </footer>
+
+  <script src="https://myfirstorlastname.github.io/whoami/call_for_toc.js"></script>
+</body>
+</html>
